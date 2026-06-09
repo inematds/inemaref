@@ -46,8 +46,11 @@ def build_folder(ficha, template_dir, arte, out_dir, modo, foto_origem=None,
     images_rel = {"retrato": "assets/retrato.png",
                   "focos": [f"assets/foco{i}.png" for i in range(1, 6)]}
     html = fill(template_dir, ficha, images_rel)
-    # rewrite css href to absolute so chromium finds it from the out dir
-    html = html.replace('href="style.css"', f'href="file://{os.path.join(template_dir, "style.css")}"')
+    # rewrite css href to an ABSOLUTE file:// url so chromium loads it from the
+    # output dir (template_dir may be relative -> abspath is required, else the
+    # href becomes file://<relative> which chromium reads as an invalid host).
+    css_abs = os.path.abspath(os.path.join(template_dir, "style.css"))
+    html = html.replace('href="style.css"', f'href="file://{css_abs}"')
     html_path = os.path.join(base, "folder.html")
     with open(html_path, "w") as f:
         f.write(html)

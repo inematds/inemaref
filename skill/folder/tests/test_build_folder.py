@@ -18,6 +18,11 @@ def test_build_produces_all_artifacts(out="/tmp/_build_folder_test"):
                        modo="texto", foto_origem=None, generate_fn=fake_generate)
     base = os.path.join(out, FICHA["id"])
     assert os.path.exists(os.path.join(base, "folder.html"))
+    # css href must be rewritten to an ABSOLUTE file:// url, else chromium
+    # silently drops the stylesheet and the layout collapses (regression guard).
+    html = open(os.path.join(base, "folder.html")).read()
+    assert 'href="file:///' in html, "css href not rewritten to absolute file:// url"
+    assert 'href="style.css"' not in html, "relative style.css href left in html"
     assert os.path.exists(os.path.join(base, "folder.png"))
     assert png_size(os.path.join(base, "folder.png")) == (1200, 1600)
     assert os.path.exists(os.path.join(base, "assets", "retrato.png"))
