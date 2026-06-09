@@ -1,0 +1,36 @@
+{
+  "id": "visionario-manga",
+  "titulo": "O VISIONARIO",
+  "personagem_aparencia": "a man, short greying hair, full beard, glasses; shown across his life from curious boy to elderly tech entrepreneur",
+  "paineis": [
+    {
+      "prompt": "a curious little boy in his father's crowded toy shop, taking a tin toy apart with a screwdriver, gears and springs scattered on the counter, wide-eyed wonder",
+      "narracao": "Na loja do pai, ele desmontava cada brinquedo so pra ver como funcionava.",
+      "sfx": "CLICK!"
+    },
+    {
+      "prompt": "the same boy a bit older as a hustling street kid, selling popsicles fruit and newspapers from a small cart, a tiny backyard circus tent behind him",
+      "narracao": "Ainda crianca, ja vendia de tudo — e ate montou circo e cassino no quintal.",
+      "fala": "Vai um picole?!"
+    },
+    {
+      "prompt": "split scene: a young man in military uniform training an attentive german shepherd, and the same young man as a long-haired hippie hand-painting colorful t-shirts at a market stall",
+      "narracao": "No quartel, adestrou caes. Depois virou pintor e hippie de camisetas."
+    },
+    {
+      "prompt": "a determined young man before dawn boarding a packed city bus, books under his arm, exhausted but focused, neon city lights",
+      "narracao": "Na cidade grande: madrugada, onibus lotado, estudar e trabalhar sem parar.",
+      "sfx": "VRRRM"
+    },
+    {
+      "prompt": "the man now a confident tech entrepreneur standing in a modern office full of glowing screens and code, city skyline through the window",
+      "narracao": "O esforco virou jogo: nascia o empresario de tecnologia.",
+      "fala": "Deu certo."
+    },
+    {
+      "prompt": "epic montage splash: an older man riding waves of technology — vintage PCs, the internet, smartphones, crypto coins, AI neural networks, and humanoid robots looming in 2027",
+      "narracao": "PC nos 90, internet nos 2000, redes e celular, cripto, IA... e agora, 2027: os humanoides.",
+      "sfx": "2027"
+    }
+  ]
+}

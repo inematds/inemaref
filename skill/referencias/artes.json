@@ -6,5 +6,9 @@
   "cartoon": {
     "positivo": "illustrated cartoon style, watercolor and gouache, clean confident lineart, vivid saturated colors, soft cel shading, storybook illustration",
     "negativo": "text, letters, words, watermark, logo, caption, signature, photorealistic, 3d render, lowres, deformed"
+  },
+  "manga": {
+    "positivo": "black and white manga panel, dynamic ink linework, screentone shading, cross-hatching, high contrast, expressive shonen manga art, dramatic composition",
+    "negativo": "text, speech bubble, words, letters, caption, watermark, signature, color, colored, lowres, deformed, extra fingers"
   }
 }
