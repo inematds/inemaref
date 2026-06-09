@@ -18,15 +18,20 @@ def build_prompts(ficha, arte):
     portrait. Without it, the foco is a detail shot derived from `legenda`,
     anchored to `aparencia` for maximum identity consistency."""
     a = load_arte(arte)
+    art = a["positivo"]
     aparencia = ficha["aparencia"].strip().rstrip(".")
-    base = f"{aparencia}, {a['positivo']}, plain neutral background, no text"
-    retrato = f"{base}, head-and-shoulders portrait, looking at camera"
+    # environmental portrait (rich background) so the page reads dense like a
+    # magazine cover instead of an empty studio headshot. `cenario` overrides
+    # the setting; without it a sensible default keeps the frame full.
+    cenario = (ficha.get("cenario") or "in an environment that reflects who they are").strip().rstrip(".")
+    retrato = (f"{aparencia}, {cenario}, {art}, environmental three-quarter portrait, "
+               f"rich detailed background, cinematic lighting, no text")
     focos = []
     for foco in ficha["focos"][:5]:
         if foco.get("prompt"):
             scene = foco["prompt"].strip().rstrip(".")
-            focos.append(f"{scene}, {a['positivo']}, no text")
+            focos.append(f"{scene}, {art}, no text")
         else:
             scene = foco["legenda"].strip().lower()
-            focos.append(f"{base}, {scene}, candid close detail")
+            focos.append(f"{aparencia}, {art}, {scene}, candid close detail, no text")
     return {"retrato": retrato, "focos": focos, "negativo": a["negativo"]}
