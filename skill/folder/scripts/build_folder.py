@@ -9,10 +9,12 @@ def _meta(template_dir):
     with open(os.path.join(template_dir, "meta.json")) as f:
         return json.load(f)
 
-def build_folder(ficha, template_dir, arte, out_dir, modo, foto_origem=None,
-                 model="flux2-klein", generate_fn=None, render_fn=None):
+def build_folder(ficha, template_dir, arte, modo, out_dir="output",
+                 foto_origem=None, model="flux2-klein", generate_fn=None, render_fn=None):
     """Run the full pipeline. Returns the referencia dict (also written to disk).
 
+    Artifacts land in `<out_dir>/<id>/` — default `output/` (relative to the repo
+    root, where the skill runs; gitignored so generated images don't pollute git).
     generate_fn(prompt, out_path, model, width, height, images, negative_prompt)
     render_fn(html_path, png_path, width, height)
     Both default to the real imgclient / chromium implementations."""
@@ -27,7 +29,12 @@ def build_folder(ficha, template_dir, arte, out_dir, modo, foto_origem=None,
     prompts = build_prompts(ficha, arte)
     neg = prompts["negativo"]
     rslot, fslot = meta["slots"]["retrato"], meta["slots"]["foco"]
-    ref_imgs = [foto_origem] if (modo == "foto" and foto_origem) else None
+    # The reference photo only goes to EDIT models (qwen-edit). flux2-klein is
+    # pure text-to-image and raises HTTP 500 if given `images`, so we never send
+    # the photo to it — modo foto on flux falls back to identity-via-`aparencia`.
+    ref_imgs = ([foto_origem]
+                if (modo == "foto" and foto_origem and model != "flux2-klein")
+                else None)
 
     # 1 portrait
     retrato_path = os.path.join(assets, "retrato.png")

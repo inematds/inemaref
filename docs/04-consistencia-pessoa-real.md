@@ -46,10 +46,18 @@ em ~28s):
   cartoon): ✅ todos rodam e o personagem sai **consistente nos 6 shots** (retrato + 5 "detalhes em
   foco"). A consistência vem do campo `aparencia` (prompt de identidade compartilhado) injetado em
   todos os prompts — flux2-klein puro (T2I) já segura bem nesse modo.
-- **Modo foto** (pessoa real travada): **ainda não avaliado** — precisa de 1 foto real de entrada.
-  Como flux2-klein é T2I e ignora `images`, a expectativa é que o rosto **não** fixe; nesse caso o
-  caminho é trocar `model="qwen-edit-2511"` (face-swap, usa `images`) — troca de 1 linha em
-  `build_folder.py`, ponto de seam isolado (ver `../skill/referencias/consistencia.md`).
+- **Modo foto** (pessoa real travada): **testado, e o achado é claro** — o flux2-klein **não aceita
+  imagem**: chamar `/generate` com `images=[...]` no flux retorna **HTTP 500** (ele é T2I puro,
+  confirmado: sem imagem roda em ~4s, com imagem quebra). Por isso o `build_folder` agora **nunca
+  manda a foto pro flux** (guard por `model`); modo foto no flux cai pra identidade-via-`aparencia`.
+  Para travar o rosto de verdade é preciso um **modelo de edição** (`qwen-edit-2511`, tarefas
+  face-swap/multiple-angles, que de fato usam `images`).
+- **Estado do `qwen-edit-2511`**: numa primeira geração ele **travou o rosto muito bem** (resultado
+  bateu com a foto), mas em chamadas seguintes o servidor `inemaimg` retornou **HTTP 500 não-tratado**
+  (provável OOM/instabilidade na troca de modelo). → **pendência no lado do `inemaimg`** (não da
+  skill): estabilizar a edição com `images` antes do modo foto ser confiável.
 
-Decisão prática: **flux2-klein é o motor padrão** e basta para o folder em modo texto. O veredito de
-modo foto fica pendente do teste com foto real (não bloqueia a V1 de personagens inventados).
+Decisão prática: **flux2-klein é o motor padrão** e entrega o folder em **modo texto** (ou modo foto
+sem travar rosto, via `aparencia`) — 4 cruzamentos validados, personagem consistente nos 6 shots,
+inclusive com **focos por fase da vida** (campo `prompt` por foco). O **modo foto travado** fica
+pendente da estabilização do `qwen-edit-2511` no `inemaimg`. Não bloqueia a V1.

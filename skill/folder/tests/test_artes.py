@@ -18,5 +18,19 @@ def test_build_prompts_shape():
     assert len(p["focos"]) == 5
     assert "setup de confianca" in p["focos"][0].lower()
 
+def test_foco_prompt_override_used_as_scene():
+    # a foco with its own `prompt` uses that scene verbatim, NOT the aparencia anchor
+    ficha = {"aparencia": "an 84yo woman with short white hair",
+             "focos": [{"legenda": "Mini", "prompt": "a child taking apart a toy robot"}]
+                      + [{"legenda": f"L{i}"} for i in range(4)]}
+    p = build_prompts(ficha, "foto")
+    assert "a child taking apart a toy robot" in p["focos"][0]
+    assert "an 84yo woman" not in p["focos"][0]   # override is not anchored to aparencia
+    assert "no text" in p["focos"][0]
+    # focos without a prompt still fall back to the legenda-derived detail shot
+    assert "an 84yo woman" in p["focos"][1]
+
 if __name__ == "__main__":
-    test_load_arte(); test_build_prompts_shape(); print("OK")
+    test_load_arte(); test_build_prompts_shape()
+    test_foco_prompt_override_used_as_scene()
+    print("OK")

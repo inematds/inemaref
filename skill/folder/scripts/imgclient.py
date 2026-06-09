@@ -1,8 +1,9 @@
 # skill/folder/scripts/imgclient.py
-import base64, json, urllib.request
+import base64, json, time, urllib.error, urllib.request
 
 BASE_URL = "http://localhost:8000"
 _urlopen = urllib.request.urlopen  # seam for tests
+_RETRIES = 3  # the inemaimg server throws transient 5xx during model hot-swaps
 
 def _b64_file(path):
     with open(path, "rb") as f:
@@ -27,8 +28,18 @@ def generate(prompt, out_path, model="flux2-klein", width=None, height=None,
         headers={"Content-Type": "application/json"},
         method="POST",
     )
-    with _urlopen(req, timeout=600) as resp:
-        data = json.loads(resp.read().decode())
+    last_err = None
+    for attempt in range(_RETRIES):
+        try:
+            with _urlopen(req, timeout=600) as resp:
+                data = json.loads(resp.read().decode())
+            break
+        except urllib.error.HTTPError as e:
+            # retry only transient server errors (5xx); re-raise client errors (4xx)
+            if e.code < 500 or attempt == _RETRIES - 1:
+                raise
+            last_err = e
+            time.sleep(2 * (attempt + 1))
     with open(out_path, "wb") as f:
         f.write(base64.b64decode(data["image"]))
     return out_path

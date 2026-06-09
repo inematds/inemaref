@@ -31,14 +31,15 @@ HTML/CSS renderizada pra PNG. Detalhes em `docs/superpowers/specs/2026-06-09-fol
    build_folder(ficha,
        template_dir="skill/folder/templates/<layout>",
        arte="<foto|cartoon>",
-       out_dir="<pasta de saida>",
        modo="<texto|foto>",
        foto_origem="<caminho da foto ou None>")
+       # out_dir default = "output" (raiz do repo, gitignorado); passe out_dir= p/ mudar
    PY
    ```
    (Pre-requisito: servidor `inemaimg` em `http://localhost:8000`.)
-3. **Mostre** o `folder.png` ao usuario. Para ajustes de texto, edite `folder.html` e re-renderize
-   com `skill/folder/scripts/render.py`. As imagens ficam em `assets/`; a referencia travada em
+3. **Mostre** o `folder.png` ao usuario. A saida fica em `output/<id>/` (relativo a raiz do repo;
+   `output/` e gitignorado). Para ajustes de texto, edite `folder.html` e re-renderize com
+   `skill/folder/scripts/render.py`. As imagens ficam em `assets/`; a referencia travada em
    `referencia.json` (consumida depois pela skill `quadrinho`).
 
 ## Estilos

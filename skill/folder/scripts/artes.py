@@ -10,13 +10,23 @@ def load_arte(arte):
     return data[arte]
 
 def build_prompts(ficha, arte):
-    """Build textless prompts: 1 big portrait + 5 'detalhes em foco' shots."""
+    """Build textless prompts: 1 big portrait + 5 'detalhes em foco' shots.
+
+    Each foco may carry an optional `prompt` field — a full scene description
+    (e.g. a life-stage vignette). When present it is used as-is (only the art
+    style is appended), giving real scene variation instead of a repeated
+    portrait. Without it, the foco is a detail shot derived from `legenda`,
+    anchored to `aparencia` for maximum identity consistency."""
     a = load_arte(arte)
     aparencia = ficha["aparencia"].strip().rstrip(".")
     base = f"{aparencia}, {a['positivo']}, plain neutral background, no text"
     retrato = f"{base}, head-and-shoulders portrait, looking at camera"
     focos = []
     for foco in ficha["focos"][:5]:
-        scene = foco["legenda"].strip().lower()
-        focos.append(f"{base}, {scene}, candid close detail")
+        if foco.get("prompt"):
+            scene = foco["prompt"].strip().rstrip(".")
+            focos.append(f"{scene}, {a['positivo']}, no text")
+        else:
+            scene = foco["legenda"].strip().lower()
+            focos.append(f"{base}, {scene}, candid close detail")
     return {"retrato": retrato, "focos": focos, "negativo": a["negativo"]}
