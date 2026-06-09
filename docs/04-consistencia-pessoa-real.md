@@ -36,3 +36,20 @@ Nano Banana quando precisa de fidelidade de rosto difícil), e o método de refe
 - Modelo padrão por estilo (foto vs cartoon podem querer modelos diferentes).
 - Método de travamento do rosto (IP-adapter vs LoRA por pessoa vs referência simples).
 - Quanto do folder vira "prompt de identidade" reutilizável nos quadros.
+
+## Resultado (folder) — 2026-06-09
+
+Primeiro e2e da skill `folder` com **flux2-klein local** (servidor `inemaimg`, 6 imagens + render
+em ~28s):
+
+- **Modo texto** (personagem inventado), **4 cruzamentos** (editorial-revista × dossiê) × (foto ×
+  cartoon): ✅ todos rodam e o personagem sai **consistente nos 6 shots** (retrato + 5 "detalhes em
+  foco"). A consistência vem do campo `aparencia` (prompt de identidade compartilhado) injetado em
+  todos os prompts — flux2-klein puro (T2I) já segura bem nesse modo.
+- **Modo foto** (pessoa real travada): **ainda não avaliado** — precisa de 1 foto real de entrada.
+  Como flux2-klein é T2I e ignora `images`, a expectativa é que o rosto **não** fixe; nesse caso o
+  caminho é trocar `model="qwen-edit-2511"` (face-swap, usa `images`) — troca de 1 linha em
+  `build_folder.py`, ponto de seam isolado (ver `../skill/referencias/consistencia.md`).
+
+Decisão prática: **flux2-klein é o motor padrão** e basta para o folder em modo texto. O veredito de
+modo foto fica pendente do teste com foto real (não bloqueia a V1 de personagens inventados).
