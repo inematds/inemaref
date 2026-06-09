@@ -24,5 +24,27 @@ def test_fill_rejects_wrong_foco_count():
     except ValueError:
         pass
 
+def test_user_text_with_braces_is_not_a_false_positive():
+    # a legenda containing a literal "{{" must NOT trip the leftover-placeholder guard
+    ficha = dict(FICHA)
+    ficha["focos"] = [dict(f) for f in FICHA["focos"]]
+    ficha["focos"][0] = {"legenda": "ANTES {{ DEPOIS"}
+    html = fill(TPL, ficha, IMAGES)
+    assert "ANTES {{ DEPOIS" in html  # preserved verbatim, no exception
+
+def test_fill_raises_when_template_slot_missing_value():
+    # the guard still catches a real unfilled template placeholder
+    tmpdir = "/tmp/_fill_missing_tpl"
+    os.makedirs(tmpdir, exist_ok=True)
+    with open(os.path.join(tmpdir, "template.html"), "w") as f:
+        f.write("<p>{{nome}}</p><p>{{nao_existe}}</p>")
+    try:
+        fill(tmpdir, FICHA, IMAGES); assert False, "should have raised"
+    except ValueError as e:
+        assert "nao_existe" in str(e)
+
 if __name__ == "__main__":
-    test_fill_replaces_all_placeholders(); test_fill_rejects_wrong_foco_count(); print("OK")
+    test_fill_replaces_all_placeholders(); test_fill_rejects_wrong_foco_count()
+    test_user_text_with_braces_is_not_a_false_positive()
+    test_fill_raises_when_template_slot_missing_value()
+    print("OK")

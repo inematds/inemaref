@@ -1,5 +1,5 @@
 import html as _html
-import json, os
+import json, os, re
 
 def _esc(s):
     return _html.escape(str(s))
@@ -36,10 +36,14 @@ def fill(template_dir, ficha, images):
         repl[f"foco{i}_img"] = img
         repl[f"foco{i}_legenda"] = _esc(foco["legenda"])
 
+    # Validate against the TEMPLATE's placeholders (before injecting user text):
+    # every {{slot}} in the template must have a value, and we never false-positive
+    # on a literal "{{" that happens to appear in user-supplied text.
+    expected = set(re.findall(r"{{(\w+)}}", tpl))
+    missing = expected - set(repl)
+    if missing:
+        raise ValueError(f"template has placeholders with no value: {sorted(missing)}")
+
     for key, val in repl.items():
         tpl = tpl.replace("{{" + key + "}}", str(val))
-
-    if "{{" in tpl:
-        leftover = tpl[tpl.index("{{"): tpl.index("{{") + 40]
-        raise ValueError(f"unreplaced placeholder near: {leftover!r}")
     return tpl
