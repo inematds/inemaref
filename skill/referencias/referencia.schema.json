@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "referencia",
+  "type": "object",
+  "required": ["id", "modo", "nome", "arte", "aparencia", "retrato_ancora", "ficha"],
+  "properties": {
+    "id": {"type": "string"},
+    "modo": {"enum": ["foto", "texto"]},
+    "nome": {"type": "string"},
+    "idade": {"type": ["integer", "null"]},
+    "arte": {"enum": ["foto", "cartoon"]},
+    "aparencia": {"type": "string", "minLength": 1},
+    "retrato_ancora": {"type": "string"},
+    "foto_origem": {"type": ["string", "null"]},
+    "ficha": {"type": "object"}
+  }
+}
