@@ -1,0 +1,10 @@
+{
+  "foto": {
+    "positivo": "photorealistic, editorial magazine photography, natural soft lighting, sharp focus, shallow depth of field, high detail skin texture",
+    "negativo": "text, letters, words, watermark, logo, caption, signature, lowres, blurry, deformed, extra fingers"
+  },
+  "cartoon": {
+    "positivo": "illustrated cartoon style, watercolor and gouache, clean confident lineart, vivid saturated colors, soft cel shading, storybook illustration",
+    "negativo": "text, letters, words, watermark, logo, caption, signature, photorealistic, 3d render, lowres, deformed"
+  }
+}
