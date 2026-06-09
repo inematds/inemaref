@@ -28,12 +28,11 @@ existe — motion comics narrados e filmes.
 
 ## Estado
 
-**Fase de base/arquitetura.** Ainda **não há skill construída** — só a decisão consolidada em `docs/` e o
-esqueleto das skills em `skill/`. Próximo passo é o experimento de consistência (`docs/04`) antes de codar.
+**Fase de base/arquitetura.** A skill `folder` está **construída e validada end-to-end** (modo texto, 2 layouts × 2 artes). `quadrinho`, série e filme permanecem à frente.
 
-## Skills (futuras)
+## Skills
 
-- `skill/folder/` — **cria a referência**: a ficha do personagem (retrato + bio + traços + grid), a partir de 1 foto.
+- `skill/folder/` — ✅ **construída** — **cria a referência**: a ficha do personagem (retrato + bio + traços + grid), a partir de 1 foto ou texto.
 - `skill/quadrinho/` — **consome a referência**: monta a página de HQ (quadro-a-quadro, texto em camada), 2 estilos.
 - `skill/referencias/` — núcleo comum: estilos (foto/cartoon), regra de consistência, mapa de quadros.
 
