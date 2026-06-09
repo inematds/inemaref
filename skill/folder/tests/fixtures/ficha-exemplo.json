@@ -1,0 +1,26 @@
+{
+  "id": "ideni-maldaner",
+  "kicker": "PERFIL DO PERSONAGEM",
+  "nome": "IDENI MALDANER",
+  "subtitulo": "RADICAL ATE NA ALMA",
+  "aparencia": "an 84-year-old woman, short white hair, warm smile, beige winter jacket",
+  "personalidade": ["Corajosa sob pressao.", "Energia que surpreende.", "Atitude com humor."],
+  "caracteristicas": [
+    {"icone": "⚡", "label": "Coragem radical"},
+    {"icone": "💎", "label": "Estilo atemporal"},
+    {"icone": "🌟", "label": "Energia contagiante"}
+  ],
+  "detalhes": [
+    {"k": "NOME", "v": "Ideni Maldaner"},
+    {"k": "IDADE", "v": "84"},
+    {"k": "ESTILO", "v": "Radical chique"}
+  ],
+  "frase": "Vamos sem medo.",
+  "focos": [
+    {"legenda": "SETUP DE CONFIANCA"},
+    {"legenda": "PE FIRME"},
+    {"legenda": "ATITUDE ASSINATURA"},
+    {"legenda": "ESTILO EM MOVIMENTO"},
+    {"legenda": "MARCAS DE AVENTURA"}
+  ]
+}
