@@ -28,7 +28,7 @@ existe — motion comics narrados e filmes.
 
 ## Estado
 
-**V1 construída.** As três skills da base — `folder`, `quadrinho` e `motioncomic` — estão **construídas e testadas** (suíte verde). Série (V2) e filme (V3) permanecem à frente. Página do projeto (landing + guia): [`index.html`](index.html).
+**V1 + V2 construídas.** As skills `folder`, `quadrinho`, `motioncomic` (V1) e `serie` (V2 — criador de série) estão **construídas e testadas** (suíte verde). Filme (V3) permanece à frente. Página do projeto (landing + guia): [`index.html`](index.html).
 
 ## Skills
 
@@ -37,6 +37,7 @@ existe — motion comics narrados e filmes.
 - `skill/motioncomic/` — ✅ **construída** — quadrinho em **vídeo** (TTS), em **duas formas**:
   - **Forma A — slideshow** (`build_motion`): uma imagem por vez com zoom + narração voz-off.
   - **Forma B — câmera sobre a página de papel** (`build_travel`): monta a prancha real (grade 2×3) e a câmera viaja sobre ela, mergulhando em cada quadro durante a narração, afastando e encaixando no próximo (`docs/02`). É o modo "quadrinho de verdade".
+- `skill/serie/` — ✅ **construída (V2)** — **criador de série ponta a ponta**: assunto → bíblia (folder + elenco + estilo + outline) → após aprovar, gera todos os episódios em texto/HQ/vídeo (reusa as skills acima) → arquivos nomeados + `manifesto.json` numa pasta de destino. Defaults em `config.yaml`; runner híbrido (inline | mkivideos).
 - `skill/referencias/` — núcleo comum: estilos (foto/cartoon/mangá), regra de consistência, schema da referência.
 
 ## Como usar
