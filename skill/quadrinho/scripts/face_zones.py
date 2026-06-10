@@ -31,7 +31,7 @@ FALLBACK_POS = {
 }
 
 
-def _face_quadrants(img_path):
+def face_quadrants(img_path):
     """Detecta rostos na imagem e retorna set de quadrantes ocupados.
     Ex: {'top-left', 'top-right'} = rostos na metade superior."""
     img = cv2.imread(img_path)
@@ -56,10 +56,13 @@ def _face_quadrants(img_path):
     return occupied
 
 
+_face_quadrants = face_quadrants  # compat
+
+
 def safe_positions(panel_path):
     """Retorna dict com posicao segura pra cada tipo de texto.
     Ex: {"narracao": "bottom-left", "fala": "bottom-right", "sfx": "top-right"}"""
-    occupied = _face_quadrants(panel_path)
+    occupied = face_quadrants(panel_path)
 
     result = {}
     used = set()

@@ -29,7 +29,7 @@ body { width: 1200px; height: 1600px; background: #fff; font-family: "Arial Blac
   font-size: 17px; line-height: 1.28; color: #111; box-shadow: 3px 3px 0 rgba(0,0,0,.55); z-index: 2; }
 
 /* FALA: default bottom-right, face_zones overrides via inline style */
-.fala { position: absolute; right: 14px; bottom: 18px; max-width: 60%; z-index: 2; }
+.fala { position: absolute; right: 14px; bottom: 18px; max-width: 60%; margin: 12px; z-index: 2; }
 .fala span { position: relative; display: inline-block; background: #fff; border: 2.5px solid #000;
   border-radius: 24px; padding: 10px 16px; font-family: Arial, sans-serif; font-weight: 700;
   font-size: 18px; color: #111; box-shadow: 2px 2px 0 rgba(0,0,0,.4); }
@@ -37,6 +37,6 @@ body { width: 1200px; height: 1600px; background: #fff; font-family: "Arial Blac
   border: 10px solid transparent; border-top-color: #000; }
 
 /* SFX: default top-right, face_zones overrides via inline style */
-.sfx { position: absolute; right: 10px; top: 10px; transform: rotate(-7deg);
+.sfx { position: absolute; right: 10px; top: 10px; margin: 10px; transform: rotate(-7deg);
   font-family: "Arial Black", sans-serif; font-weight: 900; font-size: 56px; color: #fff;
   -webkit-text-stroke: 3px #000; letter-spacing: .02em; text-shadow: 4px 4px 0 rgba(0,0,0,.6); z-index: 2; }
