@@ -92,10 +92,32 @@ def test_seg_clip_renders_16x9(tmp="/tmp/_travel_seg"):
     assert _probe(out) == "1280x720", _probe(out)
 
 
+def test_filter_actually_crops_tight(tmp="/tmp/_travel_seg"):
+    """Regressao: o crop precisa de fato APERTAR na janela, nao abrir pra
+    in_w. (Bug: clip()/virgula escapada faziam o crop cair pra a pagina
+    inteira; o scale final mascarava porque a saida fica 1280x720 igual.)
+    Renderiza so o crop (sem scale) e confere a largura."""
+    import subprocess
+    os.makedirs(tmp, exist_ok=True)
+    page = _solid_page(os.path.join(tmp, "page.png"))
+    win = (600, 800, 700)  # janela parada de 700px num page de 1200
+    crop_only = _filter(win, win, 0.5).split(",scale=")[0]
+    frame = os.path.join(tmp, "crop.png")
+    subprocess.run(["ffmpeg", "-nostdin", "-y", "-v", "error",
+                    "-framerate", "30", "-loop", "1", "-t", "0.5", "-i", page,
+                    "-filter_complex", f"[0:v]{crop_only}[v]", "-map", "[v]",
+                    "-ss", "0.2", "-frames:v", "1", frame], check=True)
+    from png_size import png_size
+    w, h = png_size(frame)
+    assert abs(w - 700) <= 2, f"crop largura {w} != ~700 (caiu pra in_w?)"
+    assert abs(w / h - AR) < 0.02, (w, h)
+
+
 if __name__ == "__main__":
     test_detect_rects_reading_order()
     test_frame_window_covers_and_16x9()
     test_window_at_endpoints_and_bump()
     test_filter_string_has_crop_and_scale()
     test_seg_clip_renders_16x9()
+    test_filter_actually_crops_tight()
     print("OK")

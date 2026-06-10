@@ -49,18 +49,18 @@ HOLD_OUT = 1.06    # quadro comeca 6% mais aberto e empurra (push-in suave)
 # ---------------------------------------------------------------------------
 # geometria da camera (puro)
 # ---------------------------------------------------------------------------
-def frame_window(rect, page_w, page_h, pad=0.06, ar=AR):
-    """Menor janela 16:9 que cobre o quadro `rect` (com folga `pad`), centrada
-    no quadro e contida na pagina. Retorna (cx, cy, cw) — a altura e cw/ar."""
+def frame_window(rect, page_w, page_h, hfill=0.96, ar=AR):
+    """Janela 16:9 do MERGULHO num quadro. Enquadra pela ALTURA do quadro
+    (mostra `hfill` dela, cortando uma fresta no topo/base) para que a camera
+    realmente afunde no quadro: a janela comeca DENTRO do quadro (sem pegar o
+    cabecalho/quadro de cima) e a largura 16:9 deixa so slivers dos vizinhos.
+    Centrada no quadro e contida na pagina. Retorna (cx, cy, cw)."""
     x, y, w, h = rect
     cx, cy = x + w / 2, y + h / 2
-    ew, eh = w * (1 + 2 * pad), h * (1 + 2 * pad)
-    cw = max(ew, eh * ar)
-    cw = min(cw, page_w)
-    ch = cw / ar
-    if ch > page_h:
-        ch = page_h
-        cw = min(ch * ar, page_w)
+    ch = min(h * hfill, page_h)
+    cw = ch * ar
+    if cw > page_w:                 # quadro alto demais p/ caber 16:9 -> limita largura
+        cw = page_w
         ch = cw / ar
     cx = min(max(cx, cw / 2), page_w - cw / 2)
     cy = min(max(cy, ch / 2), page_h - ch / 2)
@@ -96,15 +96,23 @@ def _filter(a, b, dur, bump=0.0):
     cx0, cy0, cw0 = a
     cx1, cy1, cw1 = b
     T = max(float(dur), 1e-3)
-    u = f"clip(t/{T:.4f},0,1)"
+    # u in [0,1]. NAO usar clip(): essa build do ffmpeg nao tem a funcao e o
+    # crop silenciosamente abre pra in_w. min(max(...)) faz o mesmo papel.
+    u = f"min(max(t/{T:.4f},0),1)"
     s = f"({u})*({u})*(3-2*({u}))"
     size = f"(({cw0:.2f})+(({cw1:.2f})-({cw0:.2f}))*{s})"
     if bump:
         size = f"({size}*(1+{bump:.3f}*sin(PI*({u}))))"
     cx = f"(({cx0:.2f})+(({cx1:.2f})-({cx0:.2f}))*{s})"
     cy = f"(({cy0:.2f})+(({cy1:.2f})-({cy0:.2f}))*{s})"
-    return (f"crop=w='min({size}\\,in_w)':h='ow/{AR:.6f}':"
-            f"x='clip({cx}-ow/2\\,0\\,in_w-ow)':y='clip({cy}-oh/2\\,0\\,in_h-oh)',"
+    # largura e altura auto-contidas (so iw/ih) — NAO usar ow/oh: dentro da
+    # propria expressao o ffmpeg da o valor antigo (in_w) e o crop sai errado.
+    # Virgulas ficam DENTRO de aspas simples -> nao escapar com backslash.
+    w = f"min({size},in_w)"
+    h = f"(({w})/{AR:.6f})"
+    return (f"crop=w='{w}':h='{h}':"
+            f"x='min(max({cx}-({w})/2,0),in_w-({w}))':"
+            f"y='min(max({cy}-({h})/2,0),in_h-({h}))',"
             f"scale={W}:{H},setsar=1,fps={FPS}")
 
 
