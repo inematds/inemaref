@@ -62,12 +62,19 @@ def _page_to_quadrinho(ep, pg):
     """Roteiro de 1 pagina -> roteiro do quadrinho (fala dict->str; dobra o
     personagem no prompt). Mesma ponte do motioncomic build_travel."""
     personagem = ep.get("personagem", "")
+    canon = {e["nome"].lower(): e["aparencia"] for e in ep.get("elementos", [])}
     paineis = []
     for panel in pg["paineis"]:
         who = panel.get("quem", personagem)
         who = (who or "").strip().rstrip(".")
         scene = panel["prompt"].strip().rstrip(".")
-        qp = {"prompt": f"{who}, {scene}" if who else scene}
+        prompt = f"{who}, {scene}" if who else scene
+        # canon visual: dobra a aparencia travada dos elementos que o quadro USA
+        for u in (panel.get("usa") or []):
+            ap = canon.get(str(u).lower())
+            if ap:
+                prompt = f"{prompt}, {ap}"
+        qp = {"prompt": prompt}
         if panel.get("narracao"):
             qp["narracao"] = panel["narracao"]
         if panel.get("sfx"):
@@ -173,8 +180,10 @@ def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
     modo = _runner.escolher(tipo, runner, _runner.mkivideos_disponivel(mkivideos_check))
     notify = notify_fn or (lambda msg: None)
 
+    elementos = biblia.get("elementos", [])
     entregas = []
     for ep in episodios:
+        ep.setdefault("elementos", elementos)   # canon visual disponivel p/ os renderers
         base = ep_base(serie_slug, ep["n"], ep.get("titulo", ""))
         # idempotente: so renderiza se ainda nao ha NENHUMA saida desse episodio.
         # `arquivos` vem sempre do estado final no disco -> identico entre rodadas

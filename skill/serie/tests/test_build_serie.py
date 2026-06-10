@@ -4,13 +4,14 @@ import build_serie as BS
 
 BIBLIA = {
     "id": "demo-serie", "assunto": "Serie Demo",
+    "objetivo": "Demonstrar a serie de ponta a ponta.",
     "premissa": {"logline": "logline", "sinopse": "sinopse"},
     "estilo": {"arte": "manga"},
     "formato": {"tipo": "texto", "n_episodios": 2, "destino": None},
     "protagonista": {"nome": "Lia", "aparencia": "jovem"},
     "episodios": [
-        {"n": 1, "titulo": "Um", "sinopse": "s1"},
-        {"n": 2, "titulo": "Dois", "sinopse": "s2"},
+        {"n": 1, "titulo": "Um", "sinopse": "s1", "contribuicao": "abre a serie"},
+        {"n": 2, "titulo": "Dois", "sinopse": "s2", "contribuicao": "fecha a serie"},
     ],
 }
 
@@ -78,8 +79,23 @@ def test_texto_manifest_idempotent(tmp="/tmp/_serie_texto_idem"):
     assert m1["episodios"] == m2["episodios"], "manifesto deve ser identico entre rodadas"
 
 
+def test_canon_visual_fold():
+    """Canon visual: um quadro que USA um elemento recebe a aparencia travada
+    dobrada no prompt (piramide igual em todo quadro)."""
+    ep = {"id": "e1", "n": 1, "titulo": "T", "personagem": "Lia",
+          "elementos": [{"nome": "Piramide", "aparencia": "pedra, 5 camadas, luz dourada"}]}
+    pg = {"n": 1, "titulo": "T", "paineis": [
+        {"prompt": "Lia diante da piramide", "usa": ["Piramide"]},
+        {"prompt": "Lia andando"},
+    ]}
+    q = BS._page_to_quadrinho(ep, pg)
+    assert "pedra, 5 camadas, luz dourada" in q["paineis"][0]["prompt"]
+    assert "pedra, 5 camadas" not in q["paineis"][1]["prompt"]   # quadro sem `usa` nao dobra
+
+
 if __name__ == "__main__":
     test_build_biblia_bundle()
     test_build_serie_batch_texto_and_manifest()
     test_texto_manifest_idempotent()
+    test_canon_visual_fold()
     print("OK")

@@ -15,11 +15,25 @@ ORQUESTRADOR determinista que renderiza reusando `folder`/`quadrinho`/`motioncom
 
 ## Passo 1 — escreva a biblia
 Produza `biblia.json` (ver schema no spec, secao 4.2). Campos: `id` (slug do assunto), `assunto`,
-`premissa{logline,sinopse}`, `estilo`/`formato` (so o que difere do default), `protagonista` (uma
-FICHA pronta pro `folder` — **`id`** (slug, obrigatorio), `nome`, `aparencia` reutilizavel,
-`personalidade[]`, `caracteristicas[]`, `detalhes[]` com IDADE, `frase`, 5 `focos`, `kicker`,
-`subtitulo`), `elenco[]` (cada um com
-`aparencia` travada), e `episodios[]` (exatamente `n_episodios`, cada um `{n,titulo,sinopse}`).
+**`objetivo`** (obrigatorio), `premissa{logline,sinopse}`, `estilo`/`formato` (so o que difere do
+default), `protagonista` (uma FICHA pronta pro `folder` — **`id`** (slug, obrigatorio), `nome`,
+`aparencia` reutilizavel, `personalidade[]`, `caracteristicas[]`, `detalhes[]` com IDADE, `frase`,
+5 `focos`, `kicker`, `subtitulo`), `elenco[]` (cada um com `aparencia` travada), **`elementos[]`**
+(canon visual) e `episodios[]` (exatamente `n_episodios`).
+
+**Tres regras de conteudo (o que torna a serie boa):**
+1. **Objetivo + contribuicao.** A serie tem um **`objetivo`** declarado (o que quer alcancar e PRA QUEM
+   — ensinar/convencer/emocionar/vender). E **cada episodio** tem **`contribuicao`** (1 frase: o que
+   ELE entrega rumo ao objetivo). Nenhum episodio e so cena solta — todo `{n,titulo,sinopse,contribuicao}`.
+2. **Canon visual (`elementos`).** Conceitos/objetos/cenarios recorrentes (ex.: a "Piramide de Maslow"
+   com 5 camadas) sao **definidos UMA vez** em `elementos[] = [{nome, aparencia travada}]` e
+   **referenciados** nos quadros que os usam, via `usa: ["Piramide"]` no painel — o motor **dobra** a
+   `aparencia` no prompt (como faz com o protagonista). Assim a piramide sai IGUAL em todo quadro/episodio.
+3. **Narracao fluente.** NAO escreva uma frase solta por quadro. Escreva a **locucao da pagina como um
+   texto corrido** (gancho -> desenvolvimento -> virada -> fecho, com conectivos "entao/mas/foi ai que")
+   e **segmente** esse texto nos 6 quadros — cada `narracao` e um pedaco de um todo coerente, nao uma
+   legenda isolada.
+
 Escreva tambem o roteiro da **pagina-piloto** (ep1/pag1, 6 paineis) p/ a aprovacao.
 
 ## Passo 2 — pacote de aprovacao
@@ -35,10 +49,14 @@ Mostre `biblia.md` + `folder.png` + a pagina-piloto. **Espere o "aprovado".** Se
 edite a `biblia.json` e re-rode. (`auto=True` no Passo 4 pula este portao.)
 
 ## Passo 3 — roteiros dos episodios
-Apos aprovar, escreva os roteiros de TODOS os episodios (guiado pela biblia). Cada episodio = roteiro
-no formato do `motioncomic`: `{id, n, titulo, sinopse, personagem:<aparencia do protagonista>,
-paginas:[{n,titulo,paineis:[6x {prompt, narracao?, fala?{quem,texto}, sfx?, quem?}]}]}`.
-Use a `aparencia` do protagonista/elenco em todo quadro (consistencia). `n_paginas` paginas por episodio.
+Apos aprovar, escreva os roteiros de TODOS os episodios (guiado pela biblia, **servindo a
+`contribuicao` de cada um**). Cada episodio = roteiro no formato do `motioncomic`:
+`{id, n, titulo, sinopse, personagem:<aparencia do protagonista>,
+paginas:[{n,titulo,paineis:[6x {prompt, narracao?, fala?{quem,texto}, sfx?, quem?, usa?:["Elemento"]}]}]}`.
+- **Consistencia:** use a `aparencia` do protagonista/elenco em todo quadro; e marque `usa:["Nome"]` nos
+  quadros que mostram um **elemento** do canon — o motor dobra a aparencia travada (piramide igual sempre).
+- **Narracao fluente:** escreva a locucao da pagina como texto corrido e **segmente** nos 6 quadros (ver
+  Passo 1, regra 3). `n_paginas` paginas por episodio.
 
 ## Passo 4 — rode o lote
 ```bash

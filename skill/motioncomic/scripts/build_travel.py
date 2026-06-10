@@ -301,12 +301,19 @@ def _page_roteiro(roteiro, pg):
     `quadrinho` espera. O personagem (`quem`/protagonista) e dobrado no prompt
     de cada quadro; a fala-dict vira string (so o texto vai pro balao)."""
     personagem = roteiro.get("personagem", "")
+    canon = {e["nome"].lower(): e["aparencia"] for e in roteiro.get("elementos", [])}
     paineis = []
     for panel in pg["paineis"]:
         who = panel["quem"] if "quem" in panel else personagem
         who = (who or "").strip().rstrip(".")
         scene = panel["prompt"].strip().rstrip(".")
-        qp = {"prompt": f"{who}, {scene}" if who else scene}
+        prompt = f"{who}, {scene}" if who else scene
+        # canon visual: dobra a aparencia travada dos elementos que o quadro USA
+        for u in (panel.get("usa") or []):
+            ap = canon.get(str(u).lower())
+            if ap:
+                prompt = f"{prompt}, {ap}"
+        qp = {"prompt": prompt}
         if panel.get("narracao"):
             qp["narracao"] = panel["narracao"]
         if panel.get("sfx"):

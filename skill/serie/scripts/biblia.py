@@ -1,8 +1,13 @@
-REQUIRED = ("id", "assunto", "premissa", "protagonista", "episodios")
+REQUIRED = ("id", "assunto", "objetivo", "premissa", "protagonista", "episodios")
 
 
 def validate(biblia):
-    """Valida a biblia. Levanta ValueError com mensagem acionavel."""
+    """Valida a biblia. Levanta ValueError com mensagem acionavel.
+
+    Exige: `objetivo` (o que a serie quer alcancar e pra quem) e, em CADA
+    episodio, `contribuicao` (o que aquele episodio entrega rumo ao objetivo) —
+    assim nenhum episodio e so cena solta. `elementos` (canon visual) e opcional;
+    quando presente, cada item precisa de `nome` e `aparencia` travada."""
     miss = [k for k in REQUIRED if not biblia.get(k)]
     if miss:
         raise ValueError(f"biblia faltando campos: {miss}")
@@ -14,6 +19,11 @@ def validate(biblia):
             raise ValueError(f"episodio {i} sem 'n'")
         if not e.get("titulo"):
             raise ValueError(f"episodio {i} sem 'titulo'")
+        if not e.get("contribuicao"):
+            raise ValueError(f"episodio {i} sem 'contribuicao' (o que entrega rumo ao objetivo)")
+    for j, el in enumerate(biblia.get("elementos", []), 1):
+        if not el.get("nome") or not el.get("aparencia"):
+            raise ValueError(f"elemento {j} precisa de 'nome' e 'aparencia' travada")
     n = biblia.get("formato", {}).get("n_episodios")
     if n is not None and len(eps) != n:
         raise ValueError(f"n_episodios={n} mas o outline tem {len(eps)} episodios")
@@ -25,6 +35,7 @@ def to_markdown(biblia):
     p = biblia.get("premissa", {})
     prot = biblia.get("protagonista", {})
     out = [f"# {biblia.get('assunto', '')}", "",
+           f"**Objetivo:** {biblia.get('objetivo', '')}", "",
            f"**Logline:** {p.get('logline', '')}", "",
            p.get("sinopse", ""), "",
            "## Protagonista", "",
@@ -33,7 +44,12 @@ def to_markdown(biblia):
     if elenco:
         out += ["", "## Elenco", ""]
         out += [f"- **{c.get('nome', '')}** — {c.get('aparencia', '')}" for c in elenco]
+    elementos = biblia.get("elementos", [])
+    if elementos:
+        out += ["", "## Elementos (canon visual — travados, referenciados nos quadros)", ""]
+        out += [f"- **{el.get('nome', '')}** — {el.get('aparencia', '')}" for el in elementos]
     out += ["", "## Episodios", ""]
-    out += [f"{e.get('n')}. **{e.get('titulo', '')}** — {e.get('sinopse', '')}"
-            for e in biblia["episodios"]]
+    for e in biblia["episodios"]:
+        out.append(f"{e.get('n')}. **{e.get('titulo', '')}** — {e.get('sinopse', '')}")
+        out.append(f"   ↳ _contribuicao:_ {e.get('contribuicao', '')}")
     return "\n".join(out) + "\n"
