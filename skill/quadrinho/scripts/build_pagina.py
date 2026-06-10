@@ -43,7 +43,7 @@ def build_pagina(roteiro, template_dir, arte="manga", out_dir="output",
                     width=slot["width"], height=slot["height"],
                     negative_prompt=a["negativo"])
 
-    html = fill(template_dir, roteiro)
+    html = fill(template_dir, roteiro, assets_dir=assets)
     css_abs = os.path.abspath(os.path.join(template_dir, "style.css"))
     html = html.replace('href="style.css"', f'href="file://{css_abs}"')
     html_path = os.path.join(base, "pagina.html")
