@@ -34,7 +34,13 @@ def _assign_positions(present, occupied=frozenset()):
     for elem in ("narracao", "fala", "sfx"):
         if elem not in present:
             continue
-        cands = [DEFAULT_POS[elem]] + [q for q in QUADRANTS if q != DEFAULT_POS[elem]]
+        if elem == "narracao":
+            # narracao SEMPRE no topo: a faixa de cima e a zona segura (acima do
+            # rosto, que o object-position empurra pra baixo). Nunca vai pro fundo
+            # — embaixo a legenda cai no queixo/boca em closes.
+            cands = ["top-left", "top-right"]
+        else:
+            cands = [DEFAULT_POS[elem]] + [q for q in QUADRANTS if q != DEFAULT_POS[elem]]
 
         def free(q, avoid_faces):
             if q in used or (avoid_faces and q in occupied):
