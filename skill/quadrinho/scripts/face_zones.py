@@ -41,9 +41,11 @@ def face_quadrants(img_path):
     h, w = gray.shape
 
     cascade = cv2.CascadeClassifier(_CASCADE_PATH)
-    # detectMultiScale com parametros ajustados pra cartoon/ilustracao
-    faces = cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=3,
-                                     minSize=(int(w * 0.08), int(h * 0.08)))
+    # Haar super-detecta em arte manga (falsos positivos por todo lado) -> texto
+    # acabava sem quadrante livre e caia no rosto. Parametros estritos contam so
+    # rostos grandes/confiaveis (minNeighbors alto + minSize grande).
+    faces = cascade.detectMultiScale(gray, scaleFactor=1.15, minNeighbors=8,
+                                     minSize=(int(w * 0.18), int(h * 0.18)))
 
     occupied = set()
     mid_x, mid_y = w // 2, h // 2

@@ -304,13 +304,8 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
                     + _h.escape(roteiro["titulo"]), tc, secs=2.2)
         clips.append(tc)
 
-    # abertura narrada — a narracao COMECA dizendo o assunto, sobre a prancha inteira
+    # abertura narrada — a narracao COMECA dizendo o assunto (entra na 1a chamada)
     abertura = (roteiro.get("abertura") or "").strip()
-    abertura_wav = None
-    if abertura:
-        abertura_wav = os.path.join(voz_dir, "abertura.wav")
-        if not os.path.exists(abertura_wav):
-            say(abertura, abertura_wav, voice=voice)
 
     pages = roteiro["paginas"]
     last_page_png = None
@@ -335,15 +330,23 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
             wavs.append(wav)
             durs.append(duration(wav))
 
-        # 3) ABRE mostrando a PRANCHA INTEIRA; na 1a pagina, narra o assunto
+        # 3) ABRE na PRANCHA INTEIRA com a CHAMADA narrada (o que vem nesta pagina);
+        #    na 1a pagina, a abertura (assunto da serie) entra antes da chamada.
+        chamada = (pg.get("chamada") or "").strip()
+        intro_txt = (f"{abertura} {chamada}".strip() if pgi == 0 else chamada)
         est = os.path.join(clips_dir, f"{pn:02d}0-prancha.mp4")
-        if pgi == 0 and abertura_wav:
-            _fullpage_clip(page_png, duration(abertura_wav) + 0.5, est, audio=abertura_wav)
+        if intro_txt:
+            cwav = os.path.join(voz_dir, f"chamada{pn:02d}.wav")
+            if not os.path.exists(cwav):
+                say(intro_txt, cwav, voice=voice)
+            _fullpage_clip(page_png, duration(cwav) + 0.5, est, audio=cwav)
         else:
             _fullpage_clip(page_png, T_FULL, est)
         clips.append(est)
 
-        # 4) mergulha em cada quadro; afasta e encaixa no proximo
+        # 4) mergulha em cada quadro; afasta e encaixa no proximo.
+        #    a transicao termina JA no ponto onde o proximo hold comeca
+        #    (zoom_window do proximo quadro) -> sem pulo entre trans e hold.
         for i in range(len(frames)):
             hold = os.path.join(clips_dir, f"{pn:02d}q{i+1}-hold.mp4")
             _seg_clip(page_png, zoom_window(frames[i], HOLD_OUT, PW), frames[i],
@@ -351,7 +354,8 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
             clips.append(hold)
             if i < len(frames) - 1:
                 tr = os.path.join(clips_dir, f"{pn:02d}q{i+1}-trans.mp4")
-                _seg_clip(page_png, frames[i], frames[i + 1], T_TRANS, tr, bump=TRANS_BUMP)
+                _seg_clip(page_png, frames[i], zoom_window(frames[i + 1], HOLD_OUT, PW),
+                          T_TRANS, tr, bump=TRANS_BUMP)
                 clips.append(tr)
 
     # 5) FECHA mostrando a PRANCHA INTEIRA da ultima pagina
