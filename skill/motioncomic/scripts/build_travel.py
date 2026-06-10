@@ -44,6 +44,8 @@ T_TRANS = 0.7  # troca de quadro: afasta e encaixa no proximo
 T_CLOSE = 0.9  # fecha a pagina: ultimo quadro -> pagina inteira
 TRANS_BUMP = 0.22  # quanto a camera "afasta" no meio da troca de quadro
 HOLD_OUT = 1.06    # quadro comeca 6% mais aberto e empurra (push-in suave)
+T_FULL = 1.7       # duracao do plano da PRANCHA INTEIRA (abre/fecha a pagina)
+CTA_NARR = "Aprenda mais em inema ponto clube."  # CTA padrao inema.club
 
 
 # ---------------------------------------------------------------------------
@@ -187,11 +189,65 @@ def _seg_clip(page_png, a, b, dur, out_mp4, bump=0.0, audio=None):
     return out_mp4
 
 
+def _fullpage_clip(page_png, dur, out_mp4, audio=None):
+    """Plano da PRANCHA INTEIRA (letterbox) — abre e fecha a pagina mostrando-a
+    por completo. Com `audio` (ex.: abertura narrada) usa a faixa."""
+    vf = (f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
+          f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fps={FPS}")
+    cmd = ["ffmpeg", "-nostdin", "-y", "-v", "error",
+           "-framerate", str(FPS), "-loop", "1", "-t", f"{dur:.3f}", "-i", page_png]
+    if audio:
+        cmd += ["-i", audio]
+    else:
+        cmd += ["-f", "lavfi", "-t", f"{dur:.3f}",
+                "-i", "anullsrc=channel_layout=stereo:sample_rate=44100"]
+    cmd += ["-filter_complex", f"[0:v]{vf}[v]", "-map", "[v]", "-map", "1:a",
+            "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
+            "-c:a", "aac", "-ar", "44100", "-ac", "2", "-shortest", out_mp4]
+    subprocess.run(cmd, check=True)
+    return out_mp4
+
+
+def _cta_clip(out_mp4, voice="bella", narr=CTA_NARR):
+    """Cartao final padrao INEMA.CLUB (dark premium ambar) + locucao."""
+    png = out_mp4 + ".png"
+    html = ('<!DOCTYPE html><html><head><meta charset="utf-8"><style>'
+            '*{margin:0;padding:0}body{width:1280px;height:720px;background:#0c0c10;'
+            'display:flex;flex-direction:column;align-items:center;justify-content:center;'
+            'font-family:"Arial Black",Arial,sans-serif}'
+            '.k{color:#9a9aa6;font-size:24px;letter-spacing:.32em;margin-bottom:16px}'
+            '.b{color:#E2A23B;font-size:96px;font-weight:900;letter-spacing:.01em}'
+            '.t{color:#e9e9ee;font-size:28px;margin-top:22px;letter-spacing:.04em}'
+            '</style></head><body>'
+            '<div class="k">INEMA</div><div class="b">inema.club</div>'
+            '<div class="t">aprenda &middot; crie &middot; compartilhe</div></body></html>')
+    hp = out_mp4 + ".html"
+    with open(hp, "w") as f:
+        f.write(html)
+    render_html_to_png(hp, png, W, H)
+    cmd = ["ffmpeg", "-nostdin", "-y", "-v", "error", "-framerate", str(FPS), "-loop", "1"]
+    if narr:
+        wav = out_mp4 + ".wav"
+        say(narr, wav, voice=voice)
+        dur = duration(wav) + 0.8
+        cmd += ["-t", f"{dur:.3f}", "-i", png, "-i", wav,
+                "-vf", f"scale={W}:{H},setsar=1,fps={FPS}", "-af", "apad"]
+    else:
+        dur = 3.0
+        cmd += ["-t", f"{dur:.3f}", "-i", png, "-f", "lavfi", "-t", f"{dur:.3f}",
+                "-i", "anullsrc=channel_layout=stereo:sample_rate=44100",
+                "-vf", f"scale={W}:{H},setsar=1,fps={FPS}"]
+    cmd += ["-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
+            "-c:a", "aac", "-ar", "44100", "-ac", "2", "-t", f"{dur:.3f}", out_mp4]
+    subprocess.run(cmd, check=True)
+    return out_mp4
+
+
 # ---------------------------------------------------------------------------
 # montagem da pagina de quadrinho (reusa a skill `quadrinho`)
 # ---------------------------------------------------------------------------
 _TEMPLATE_DIR = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..", "..", "quadrinho", "templates", "grade-uniforme"))
+    os.path.join(os.path.dirname(__file__), "..", "..", "quadrinho", "templates", "manga-dinamico"))
 
 
 def _page_roteiro(roteiro, pg):
@@ -219,10 +275,12 @@ def _page_roteiro(roteiro, pg):
 def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-klein",
                        arte="manga", intro=True, template_dir=None):
     """Forma B: pagina de papel + camera viajando. Cada pagina precisa de 6
-    paineis. `template_dir` escolhe o layout da prancha (default grade-uniforme
-    2x3; passe .../manga-dinamico p/ a grade assimetrica). A camera LE o layout
-    real (mascara) e se posiciona por quadro, entao qualquer grade de 6 funciona.
-    Saida em <out_dir>/<id>/<id>-travel.mp4."""
+    paineis. `template_dir` escolhe o layout da prancha (default **manga-dinamico**
+    — quadros de tamanhos/posicoes variaveis; passe .../grade-uniforme p/ a 2x3).
+    A camera LE o layout real (mascara) e se posiciona por quadro, entao qualquer
+    grade de 6 funciona. Cada pagina ABRE mostrando a prancha inteira; na 1a, a
+    narracao comeca dizendo o assunto (`roteiro['abertura']`); o video FECHA na
+    prancha inteira e num CTA inema.club. Saida em <out_dir>/<id>/<id>-travel.mp4."""
     import html as _h
     import json
     from build_pagina import build_pagina
@@ -246,18 +304,27 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
                     + _h.escape(roteiro["titulo"]), tc, secs=2.2)
         clips.append(tc)
 
+    # abertura narrada — a narracao COMECA dizendo o assunto, sobre a prancha inteira
+    abertura = (roteiro.get("abertura") or "").strip()
+    abertura_wav = None
+    if abertura:
+        abertura_wav = os.path.join(voz_dir, "abertura.wav")
+        if not os.path.exists(abertura_wav):
+            say(abertura, abertura_wav, voice=voice)
+
     pages = roteiro["paginas"]
+    last_page_png = None
     for pgi, pg in enumerate(pages):
         pn = pg["n"]
-        # 1) monta a pagina de papel (grade do template, narracao/balao/sfx impressos)
+        # 1) monta a pagina de papel (narracao/balao/sfx impressos)
         page_png = build_pagina(_page_roteiro(roteiro, pg), tdir,
                                 arte=arte, out_dir=pages_dir, model=model)
+        last_page_png = page_png
         page_html = os.path.join(os.path.dirname(page_png), "pagina.html")
         mask_png = os.path.join(os.path.dirname(page_png), "mask.png")
         render_mask(page_html, mask_png, PW, PH)
         rects = detect_rects(mask_png)
         frames = [frame_window(r, PW, PH) for r in rects]
-        wide = wide_window(PW, PH)
 
         # 2) narracao por quadro
         wavs, durs = [], []
@@ -268,13 +335,13 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
             wavs.append(wav)
             durs.append(duration(wav))
 
-        # 3) titulo + abertura da pagina
-        tc = os.path.join(clips_dir, f"{pn:02d}0-titulo.mp4")
-        _title_clip(f'<small>PAGINA {pn}</small>{_h.escape(pg.get("titulo", ""))}', tc, secs=1.6)
-        clips.append(tc)
-        opn = os.path.join(clips_dir, f"{pn:02d}1-abre.mp4")
-        _seg_clip(page_png, wide, frames[0], T_OPEN, opn)
-        clips.append(opn)
+        # 3) ABRE mostrando a PRANCHA INTEIRA; na 1a pagina, narra o assunto
+        est = os.path.join(clips_dir, f"{pn:02d}0-prancha.mp4")
+        if pgi == 0 and abertura_wav:
+            _fullpage_clip(page_png, duration(abertura_wav) + 0.5, est, audio=abertura_wav)
+        else:
+            _fullpage_clip(page_png, T_FULL, est)
+        clips.append(est)
 
         # 4) mergulha em cada quadro; afasta e encaixa no proximo
         for i in range(len(frames)):
@@ -287,11 +354,15 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
                 _seg_clip(page_png, frames[i], frames[i + 1], T_TRANS, tr, bump=TRANS_BUMP)
                 clips.append(tr)
 
-        # 5) fecha a pagina (zoom-out total) se houver proxima
-        if pgi < len(pages) - 1:
-            cl = os.path.join(clips_dir, f"{pn:02d}9-fecha.mp4")
-            _seg_clip(page_png, frames[-1], wide, T_CLOSE, cl)
-            clips.append(cl)
+    # 5) FECHA mostrando a PRANCHA INTEIRA da ultima pagina
+    if last_page_png:
+        fim = os.path.join(clips_dir, "zz8-prancha-fim.mp4")
+        _fullpage_clip(last_page_png, T_FULL, fim)
+        clips.append(fim)
+    # 6) CTA padrao inema.club (todos os nossos videos)
+    cta = os.path.join(clips_dir, "zz9-cta.mp4")
+    _cta_clip(cta, voice=voice)
+    clips.append(cta)
 
     listfile = os.path.join(base, "concat-travel.txt")
     with open(listfile, "w") as f:

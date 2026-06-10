@@ -1,7 +1,7 @@
 # serie — defaults da skill. Cada série sobrescreve na sua biblia.json.
 estilo:
   arte: manga                   # manga | cartoon | foto
-  modelo_pagina: grade-uniforme # grade-uniforme (2x3) | manga-dinamico (assimétrico)
+  modelo_pagina: manga-dinamico # manga-dinamico (assimétrico, DEFAULT) | grade-uniforme (2x3)
   voz: bella                    # bella | rachel  (só tipos de vídeo)
   intro: true                   # cartão de abertura no vídeo: true | false
 formato:

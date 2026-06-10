@@ -21,7 +21,7 @@ def test_resolve_biblia_overrides_config():
     assert s["arte"] == "cartoon"        # biblia wins
     assert s["tipo"] == "hq"             # biblia wins
     assert s["n_episodios"] == 5         # biblia wins
-    assert s["modelo_pagina"] == "grade-uniforme"  # falls to config default
+    assert s["modelo_pagina"] == "manga-dinamico"  # falls to config default
     assert s["auto"] is False            # runtime default present in flat result
 
 
