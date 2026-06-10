@@ -6,4 +6,7 @@ Caminho B (`../../docs/03`): layout de prancha (grid) → geração **textless p
 consistente → camada de texto/balões OU narração. Dois estilos (foto/cartoon). Saída estática ou **motion
 comic** (câmera viaja pelos quadros, `../../docs/02`).
 
-> Ainda não construída. Base de decisão em `../../docs/`. Motion comic/filme reusam fontefilm/pixflow (`docs/05`).
+> **Construída (V1 estático).** Entrada da skill: [`SKILL.md`](SKILL.md). Gera 6 quadros textless
+> (estilo mangá p&b) + camada de narração/balões/SFX, em 2 modelos de página (`grade-uniforme`,
+> `manga-dinamico`). Reusa os helpers do `folder` (`imgclient`/`render`/`png_size`/`artes`).
+> Motion comic/filme (`../../docs/02`, `docs/05`) ficam pra V2+.

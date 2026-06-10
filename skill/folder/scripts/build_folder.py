@@ -1,0 +1,74 @@
+import json, os
+from artes import build_prompts
+from fill_template import fill
+from referencia import build_referencia, validate_referencia
+import imgclient
+import render as _render
+
+def _meta(template_dir):
+    with open(os.path.join(template_dir, "meta.json")) as f:
+        return json.load(f)
+
+def build_folder(ficha, template_dir, arte, modo, out_dir="output",
+                 foto_origem=None, model="flux2-klein", generate_fn=None, render_fn=None):
+    """Run the full pipeline. Returns the referencia dict (also written to disk).
+
+    Artifacts land in `<out_dir>/<id>/` — default `output/` (relative to the repo
+    root, where the skill runs; gitignored so generated images don't pollute git).
+    generate_fn(prompt, out_path, model, width, height, images, negative_prompt)
+    render_fn(html_path, png_path, width, height)
+    Both default to the real imgclient / chromium implementations."""
+    generate_fn = generate_fn or imgclient.generate
+    render_fn = render_fn or _render.render_html_to_png
+
+    meta = _meta(template_dir)
+    base = os.path.join(out_dir, ficha["id"])
+    assets = os.path.join(base, "assets")
+    os.makedirs(assets, exist_ok=True)
+
+    prompts = build_prompts(ficha, arte)
+    neg = prompts["negativo"]
+    rslot, fslot = meta["slots"]["retrato"], meta["slots"]["foco"]
+    # The reference photo only goes to EDIT models (qwen-edit). flux2-klein is
+    # pure text-to-image and raises HTTP 500 if given `images`, so we never send
+    # the photo to it — modo foto on flux falls back to identity-via-`aparencia`.
+    ref_imgs = ([foto_origem]
+                if (modo == "foto" and foto_origem and model != "flux2-klein")
+                else None)
+
+    # 1 portrait
+    retrato_path = os.path.join(assets, "retrato.png")
+    generate_fn(prompts["retrato"], retrato_path, model=model,
+                width=rslot["width"], height=rslot["height"],
+                images=ref_imgs, negative_prompt=neg)
+    # 5 focos
+    foco_paths = []
+    for i, fp in enumerate(prompts["focos"], start=1):
+        p = os.path.join(assets, f"foco{i}.png")
+        generate_fn(fp, p, model=model, width=fslot["width"], height=fslot["height"],
+                    images=ref_imgs, negative_prompt=neg)
+        foco_paths.append(p)
+
+    # fill html (image src relative to the html file)
+    images_rel = {"retrato": "assets/retrato.png",
+                  "focos": [f"assets/foco{i}.png" for i in range(1, 6)]}
+    html = fill(template_dir, ficha, images_rel)
+    # rewrite css href to an ABSOLUTE file:// url so chromium loads it from the
+    # output dir (template_dir may be relative -> abspath is required, else the
+    # href becomes file://<relative> which chromium reads as an invalid host).
+    css_abs = os.path.abspath(os.path.join(template_dir, "style.css"))
+    html = html.replace('href="style.css"', f'href="file://{css_abs}"')
+    html_path = os.path.join(base, "folder.html")
+    with open(html_path, "w") as f:
+        f.write(html)
+
+    # render
+    render_fn(html_path, os.path.join(base, "folder.png"), meta["width"], meta["height"])
+
+    # referencia
+    ref = build_referencia(ficha, modo=modo, arte=arte,
+                           retrato_ancora="assets/retrato.png", foto_origem=foto_origem)
+    validate_referencia(ref)
+    with open(os.path.join(base, "referencia.json"), "w") as f:
+        json.dump(ref, f, ensure_ascii=False, indent=2)
+    return ref

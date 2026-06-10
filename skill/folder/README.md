@@ -6,4 +6,4 @@ Entrada: 1 foto + dados básicos. Saída: folder (retrato + personalidade + cara
 "detalhes em foco"), no padrão dos exemplos em `../../assets/exemplos/folder-*.png`. Esse folder vira a
 referência travada consumida pela skill `quadrinho`.
 
-> Ainda não construída. Base de decisão em `../../docs/`. Antes de codar: experimento de consistência (`docs/04`).
+> **Construída.** Entrada da skill: [`SKILL.md`](SKILL.md). Design: `../../docs/superpowers/specs/2026-06-09-folder-skill-design.md`; plano: `../../docs/superpowers/plans/2026-06-09-folder-skill.md`.

@@ -1,0 +1,3 @@
+{ "nome": "Manga Dinamico", "descricao": "Pagina de manga com 6 quadros de tamanhos diferentes (layout assimetrico).",
+  "width": 1200, "height": 1600, "n_paineis": 6,
+  "slots": { "painel": {"width": 1024, "height": 1024} } }

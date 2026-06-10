@@ -1,0 +1,3 @@
+{ "nome": "Editorial Revista", "descricao": "Layout de perfil estilo revista (look dos exemplos).",
+  "width": 1200, "height": 1600,
+  "slots": { "retrato": {"width": 1152, "height": 1536}, "foco": {"width": 1024, "height": 768} } }

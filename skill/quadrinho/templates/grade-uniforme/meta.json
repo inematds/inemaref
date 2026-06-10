@@ -1,0 +1,3 @@
+{ "nome": "Grade Uniforme", "descricao": "Pagina de manga com 6 quadros iguais (2x3).",
+  "width": 1200, "height": 1600, "n_paineis": 6,
+  "slots": { "painel": {"width": 1024, "height": 1024} } }
