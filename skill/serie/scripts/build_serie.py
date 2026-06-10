@@ -145,6 +145,13 @@ _REGISTRY = {"texto": _render_texto, "hq": _render_hq,
              "video-slideshow": _render_video, "video-pagina": _render_video}
 
 
+def _saidas(destdir, base):
+    """Saidas ja no disco de um episodio: primarias (<base>.*: .md/.json/.mp4) +
+    paginas de hq (<base>-pNN.*). Ordenado -> manifesto deterministico/idempotente."""
+    return sorted(glob.glob(os.path.join(destdir, base + ".*"))
+                  + glob.glob(os.path.join(destdir, base + "-p*.*")))
+
+
 # ---------------------------------------------------------------- lote
 def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
                 renderers=None, gerado_em=None, notify_fn=None, mkivideos_check=None):
@@ -169,12 +176,12 @@ def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
     entregas = []
     for ep in episodios:
         base = ep_base(serie_slug, ep["n"], ep.get("titulo", ""))
-        existentes = sorted(p for p in glob.glob(os.path.join(destdir, base + ".*"))
-                            if not p.endswith(".json"))
-        if existentes:
-            files = existentes               # idempotente: ja renderizado, reusa
-        else:
-            files = render(ep, s, destdir, base)
+        # idempotente: so renderiza se ainda nao ha NENHUMA saida desse episodio.
+        # `arquivos` vem sempre do estado final no disco -> identico entre rodadas
+        # e por tipo (texto: .md/.json; video: .mp4; hq: -pNN.png).
+        if not _saidas(destdir, base):
+            render(ep, s, destdir, base)
+        files = _saidas(destdir, base)
         entregas.append({"n": ep["n"], "arquivos": [os.path.basename(p) for p in files]})
         notify(f"[{biblia['id']}] episodio {ep['n']} ({modo}) ok")
 

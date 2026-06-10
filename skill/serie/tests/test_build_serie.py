@@ -60,7 +60,26 @@ def test_build_serie_batch_texto_and_manifest(tmp="/tmp/_serie_batch"):
     assert rendered == [], "nao deveria re-renderizar arquivos existentes"
 
 
+def test_texto_manifest_idempotent(tmp="/tmp/_serie_texto_idem"):
+    """Regressao: o tipo texto usa o renderer real (.md + .json, sem daemon).
+    O manifesto deve ser IDENTICO entre rodadas e listar os dois arquivos."""
+    import shutil
+    shutil.rmtree(tmp, ignore_errors=True)
+    episodios = [_fake_ep(1, "Um"), _fake_ep(2, "Dois")]
+    r1 = BS.build_serie(BIBLIA, episodios, out_dir=tmp, auto=True,
+                        gerado_em="2026-06-10", notify_fn=lambda m: None)
+    m1 = json.load(open(r1["manifesto"]))
+    arq1 = m1["episodios"][0]["arquivos"]
+    assert "serie-demo-ep01-um.md" in arq1
+    assert "serie-demo-ep01-um.json" in arq1
+    r2 = BS.build_serie(BIBLIA, episodios, out_dir=tmp, auto=True,
+                        gerado_em="2026-06-10", notify_fn=lambda m: None)
+    m2 = json.load(open(r2["manifesto"]))
+    assert m1["episodios"] == m2["episodios"], "manifesto deve ser identico entre rodadas"
+
+
 if __name__ == "__main__":
     test_build_biblia_bundle()
     test_build_serie_batch_texto_and_manifest()
+    test_texto_manifest_idempotent()
     print("OK")

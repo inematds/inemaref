@@ -16,8 +16,9 @@ ORQUESTRADOR determinista que renderiza reusando `folder`/`quadrinho`/`motioncom
 ## Passo 1 — escreva a biblia
 Produza `biblia.json` (ver schema no spec, secao 4.2). Campos: `id` (slug do assunto), `assunto`,
 `premissa{logline,sinopse}`, `estilo`/`formato` (so o que difere do default), `protagonista` (uma
-FICHA pronta pro `folder` — `nome`, `aparencia` reutilizavel, `personalidade[]`, `caracteristicas[]`,
-`detalhes[]` com IDADE, `frase`, 5 `focos`, `kicker`, `subtitulo`), `elenco[]` (cada um com
+FICHA pronta pro `folder` — **`id`** (slug, obrigatorio), `nome`, `aparencia` reutilizavel,
+`personalidade[]`, `caracteristicas[]`, `detalhes[]` com IDADE, `frase`, 5 `focos`, `kicker`,
+`subtitulo`), `elenco[]` (cada um com
 `aparencia` travada), e `episodios[]` (exatamente `n_episodios`, cada um `{n,titulo,sinopse}`).
 Escreva tambem o roteiro da **pagina-piloto** (ep1/pag1, 6 paineis) p/ a aprovacao.
 
