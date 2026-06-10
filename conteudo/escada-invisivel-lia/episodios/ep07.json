@@ -1,0 +1,431 @@
+{
+  "n": 7,
+  "titulo": "O chão firme",
+  "paginas": [
+    {
+      "n": 1,
+      "titulo": "A tarde de contas",
+      "chamada": "Lia encontra a vizinha Dona Rosa às voltas com papéis.",
+      "paineis": [
+        {
+          "prompt": "Lia caminhando por uma rua residencial tranquila ao fim da tarde",
+          "narracao": "Era tarde de terça-feira e Lia voltava pra casa sem pressa, observando a rua.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "uma mulher de meia-idade sentada na varanda, rodeada de papéis e contas sobre a mesa",
+          "narracao": "Foi quando viu a vizinha Dona Rosa na varanda, cercada de contas, com os óculos na ponta do nariz.",
+          "quem": ""
+        },
+        {
+          "prompt": "close nas mãos de Dona Rosa segurando uma fatura com valor alto em destaque",
+          "narracao": "Os papéis se empilhavam, e uma fatura em particular parecia pesar mais que as outras.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia parando no portão, olhando com atenção para a cena",
+          "narracao": "Lia parou no portão, e algo naquele cenário a prendeu — não era só preocupação com dinheiro."
+        },
+        {
+          "prompt": "close no rosto de Dona Rosa, expressão tensa, olhar distante",
+          "narracao": "Era outra coisa: o medo de perder o que levou anos para construir.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia apoiada no portão, pensativa, olhando para a varanda",
+          "narracao": "E, então, Lia reconheceu aquele olhar — já tinha visto antes, dentro de si mesma."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "titulo": "O que é segurança",
+      "chamada": "Lia tenta entender o que 'segurança' realmente significa.",
+      "paineis": [
+        {
+          "prompt": "Lia sentada no próprio quarto, caderninho aberto no colo, caneta na mão",
+          "narracao": "De volta ao quarto, Lia abriu o caderninho e escreveu a pergunta: o que é segurança?"
+        },
+        {
+          "prompt": "detalhe da página do caderninho com a palavra 'segurança' escrita e ponto de interrogação",
+          "narracao": "Ela ficou olhando pra palavra por um tempo — parecia simples demais para ser simples.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia riscando e reescrevendo no caderninho, concentrada",
+          "narracao": "Primeiro tentou: 'ter dinheiro'. Riscou. Tentou: 'ter emprego'. Riscou de novo."
+        },
+        {
+          "prompt": "close no caderninho com a frase 'não perder o que já tenho' sublinhada",
+          "narracao": "Então escreveu devagar: 'não perder o que já tenho'. Dessa vez não riscou.",
+          "quem": ""
+        },
+        {
+          "prompt": "a pirâmide de Maslow com o segundo nível — segurança — levemente iluminado",
+          "narracao": "Na pirâmide, o segundo degrau havia acendido: estava logo acima do corpo, logo abaixo do convívio.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia fechando o caderninho com expressão de quem chegou a algo importante",
+          "narracao": "Segurança não é acumular mais — é proteger o que já se conquistou."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "titulo": "O que cada um construiu",
+      "chamada": "A conquista é diferente para cada um — e o medo de perdê-la também.",
+      "paineis": [
+        {
+          "prompt": "uma casa humilde mas bem cuidada, com planta na janela e porta pintada",
+          "narracao": "Para uns, a conquista é uma casa simples, mas própria — um lugar no mundo.",
+          "quem": ""
+        },
+        {
+          "prompt": "um jovem com uniforme de trabalho olhando orgulhoso sua carteira de trabalho",
+          "narracao": "Para outros, é o primeiro emprego registrado, a prova de que há um chão firme sob os pés.",
+          "quem": ""
+        },
+        {
+          "prompt": "uma família em volta de uma mesa farta, simples mas completa",
+          "narracao": "Tem quem construiu o hábito de colocar comida na mesa todos os dias — e chama isso de estabilidade.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia na janela do quarto, olhando para a rua com expressão reflexiva",
+          "narracao": "Lia olhou pela janela e pensou: o básico de um pode ser o sonho de outro."
+        },
+        {
+          "prompt": "close numa mão apertando a chave de uma casa, sem rosto",
+          "narracao": "E, seja qual for o tamanho da conquista, o desejo de não perdê-la é idêntico em todo mundo.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia escrevendo no caderninho, olhar sereno",
+          "narracao": "A segurança não mede o tamanho do que se tem — mede o quanto aquilo representa para quem tem."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "titulo": "O segundo degrau",
+      "chamada": "Lia conversa com o Professor sobre o nível da segurança.",
+      "paineis": [
+        {
+          "prompt": "Lia e o Professor sentados numa sala com livros ao fundo, luz morna",
+          "narracao": "No dia seguinte, Lia foi até o Professor com a anotação do caderninho na cabeça.",
+          "quem": "Professor"
+        },
+        {
+          "prompt": "close no rosto do Professor, expressão atenta, dedos entrelaçados",
+          "narracao": "Ele ouviu a descrição da cena com Dona Rosa e assentiu devagar.",
+          "quem": "Professor",
+          "fala": {
+            "quem": "Professor",
+            "texto": "Você chegou lá sozinha, Lia. Segurança é isso: proteger a conquista."
+          }
+        },
+        {
+          "prompt": "a pirâmide de Maslow com os dois primeiros níveis iluminados, base e segundo degrau",
+          "narracao": "O Professor apontou para a pirâmide: o segundo degrau entra em cena logo que o corpo está satisfeito.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "o Professor gesticulando, explicando com calma",
+          "narracao": "Ele explicou que esse nível cuida do abrigo, da estabilidade, do patrimônio — tudo que dá continuidade à vida.",
+          "quem": "Professor",
+          "fala": {
+            "quem": "Professor",
+            "texto": "Não é ganância. É o instinto de manter o que já foi conquistado."
+          }
+        },
+        {
+          "prompt": "Lia ouvindo com atenção, caderninho aberto",
+          "narracao": "Lia anotava, e aquela ideia fazia um sentido novo: segurança não é ponto de chegada, é chão para continuar."
+        },
+        {
+          "prompt": "a escada de luz com os dois primeiros degraus acesos, o terceiro apagado acima",
+          "narracao": "Com o chão firme, a escada convida ao próximo passo — mas sem ele, nenhum outro se sustenta.",
+          "quem": "",
+          "usa": [
+            "Escada de luz"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "titulo": "Abrigo, estabilidade, patrimônio",
+      "chamada": "O Professor detalha o que compõe o degrau da segurança.",
+      "paineis": [
+        {
+          "prompt": "o Professor apontando para um caderno com três palavras escritas: abrigo, estabilidade, patrimônio",
+          "narracao": "O Professor listou em voz alta os três pilares do segundo degrau.",
+          "quem": "Professor",
+          "fala": {
+            "quem": "Professor",
+            "texto": "Abrigo: ter onde ficar. Estabilidade: saber que amanhã vai ter. Patrimônio: o que resguarda o futuro."
+          }
+        },
+        {
+          "prompt": "uma porta de apartamento fechada com luz saindo por baixo, atmosfera acolhedora",
+          "narracao": "O abrigo não precisa ser grande — precisa ser seu, um lugar onde você pode fechar a porta e respirar.",
+          "quem": ""
+        },
+        {
+          "prompt": "um calendário com dias marcados, representando uma rotina previsível",
+          "narracao": "A estabilidade é a previsibilidade: saber que haverá comida amanhã, que o aluguel está pago, que a rotina segura.",
+          "quem": ""
+        },
+        {
+          "prompt": "uma caixinha de poupança ou guardada embaixo da cama, simbólica",
+          "narracao": "Já o patrimônio é o que acumula para o depois — mesmo que seja pouco, ele diz que há um amanhã planejado.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia segurando o caderninho, olhar iluminado",
+          "narracao": "Lia olhou para o caderninho e viu que Dona Rosa buscava exatamente isso: os três pilares juntos."
+        },
+        {
+          "prompt": "a pirâmide de Maslow com o segundo nível destacado, os outros levemente apagados",
+          "narracao": "Quando um desses pilares balança, o degrau inteiro treme — e é difícil pensar em qualquer coisa além disso.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "titulo": "Relativo e individual",
+      "chamada": "O que é 'segurança' muda completamente de pessoa para pessoa.",
+      "paineis": [
+        {
+          "prompt": "dois jovens conversando animados, um com mochila de viagem, o outro com pasta de trabalho",
+          "narracao": "O Professor citou dois alunos seus: um estava planejando morar fora, o outro havia acabado de assinar o primeiro contrato de aluguel.",
+          "quem": ""
+        },
+        {
+          "prompt": "close no rosto do primeiro jovem, expressão leve e aventureira",
+          "narracao": "Para o primeiro, segurança era ter passagem de volta garantida — liberdade com rede de proteção.",
+          "quem": ""
+        },
+        {
+          "prompt": "close no rosto do segundo jovem, expressão aliviada e orgulhosa",
+          "narracao": "Para o segundo, era ter o seu próprio endereço pelo tempo que quisesse — permanência.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia com expressão de quem está relacionando o que ouve à própria vida",
+          "narracao": "Lia reconheceu que a sua segurança também era diferente das de Dona Rosa — e das de qualquer outra pessoa.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Então o que é básico pra um pode ser luxo pra outro também na segurança?"
+          }
+        },
+        {
+          "prompt": "o Professor confirmando com um sorriso, inclinando levemente a cabeça",
+          "narracao": "O Professor confirmou com um sorriso: o critério não é o tamanho do bem, mas o quanto ele protege aquela vida específica.",
+          "quem": "Professor",
+          "fala": {
+            "quem": "Professor",
+            "texto": "Exatamente. Não existe segurança universal — existe a sua e a de cada um."
+          }
+        },
+        {
+          "prompt": "Lia escrevendo no caderninho, expressão concentrada e satisfeita",
+          "narracao": "E, então, ela sublinhou no caderninho: segurança é individual, relativa — e só quem vive por dentro sabe o seu peso."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "titulo": "O chão que Lia tem",
+      "chamada": "Lia olha para a própria vida e mede o seu chão firme.",
+      "paineis": [
+        {
+          "prompt": "Lia no quarto à noite, luz de abajur, olhando ao redor com atenção",
+          "narracao": "Naquela noite, Lia fez o que sempre fazia quando uma ideia a tocava: virou o espelho para si mesma."
+        },
+        {
+          "prompt": "close nos objetos do quarto de Lia — livros, cadernos, abajur — atmosfera familiar",
+          "narracao": "O quarto era pequeno, mas era dela. A cama era velha, mas estava lá todas as noites.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia olhando para uma foto da família na parede",
+          "narracao": "A família por perto, o bolso apertado mas previsível — ela tinha um chão, ainda que estreito."
+        },
+        {
+          "prompt": "Lia sentada na beira da cama, pensativa, mãos no colo",
+          "narracao": "Mas entendeu que nem sempre foi assim — e que, se algo mudasse, aquele degrau poderia tremer.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Eu tenho o chão firme agora. Mas isso pode mudar."
+          }
+        },
+        {
+          "prompt": "a escada de luz com os dois primeiros degraus sólidos e brilhantes",
+          "narracao": "A escada de luz brilhava suave na imaginação dela: os dois primeiros degraus, firmes, sustentando tudo acima.",
+          "quem": "",
+          "usa": [
+            "Escada de luz"
+          ]
+        },
+        {
+          "prompt": "Lia deitada, olhos abertos, expressão serena e grata",
+          "narracao": "Pela primeira vez, ela sentiu gratidão não pelo que tinha, mas pelo que não estava perdendo."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "titulo": "Proteção, não acúmulo",
+      "chamada": "A diferença entre proteger o que se tem e querer sempre mais.",
+      "paineis": [
+        {
+          "prompt": "Lia e Teo caminhando pela praça, conversa leve",
+          "narracao": "No dia seguinte, Lia encontrou Teo na praça e contou o que havia pensado na noite anterior.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "Teo ouvindo com atenção, mãos nos bolsos da jaqueta verde-oliva",
+          "narracao": "Teo ouviu calado, e depois disse algo que ficou na cabeça dela:",
+          "quem": "Teo",
+          "fala": {
+            "quem": "Teo",
+            "texto": "Tem gente que já tem o chão firme e continua com medo. Aí não é segurança — é outra coisa."
+          }
+        },
+        {
+          "prompt": "Lia parando o passo, olhando para Teo com expressão de quem está processando",
+          "narracao": "Lia parou. Havia uma diferença importante ali — e ela precisava entender direito."
+        },
+        {
+          "prompt": "a pirâmide de Maslow com o segundo nível já aceso e o terceiro começando a brilhar acima",
+          "narracao": "Quando a segurança está satisfeita, a pirâmide convida para o próximo degrau — mas o medo pode travar a subida.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia e Teo sentados num banco, olhando para frente juntos",
+          "narracao": "Proteger o que se tem é saudável, natural. Mas acumular por medo, quando o chão já está firme, é outra necessidade disfarçada.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "close no rosto pensativo de Lia, meio sorriso no canto da boca",
+          "narracao": "Lia entendeu: o degrau da segurança tem um ponto de chegada — e, quando ele está preenchido, é hora de seguir."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "titulo": "Dona Rosa revisitada",
+      "chamada": "Com novos olhos, Lia volta a observar a vizinha.",
+      "paineis": [
+        {
+          "prompt": "Lia passando em frente à varanda de Dona Rosa no fim do dia",
+          "narracao": "Na tarde seguinte, Lia passou pela varanda de Dona Rosa de volta — e parou de novo."
+        },
+        {
+          "prompt": "Dona Rosa desta vez com os papéis organizados, expressão levemente mais tranquila",
+          "narracao": "As contas ainda estavam lá, mas Dona Rosa parecia um pouco mais ordenada, um pouco menos tensa.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia sorrindo de leve para a vizinha, acenando com a cabeça",
+          "narracao": "Lia acenou, e Dona Rosa acenou de volta — duas pessoas cada uma no seu degrau.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Tudo bem, Dona Rosa?"
+          }
+        },
+        {
+          "prompt": "Dona Rosa erguendo o polegar com um sorriso cansado mas aliviado",
+          "narracao": "A vizinha ergueu o polegar: não resolvido, mas mantido — e, por hoje, era o suficiente.",
+          "quem": "",
+          "fala": {
+            "quem": "Dona Rosa",
+            "texto": "Por hoje tá bom, minha filha. Consegui segurar."
+          }
+        },
+        {
+          "prompt": "Lia caminhando de costas para a câmera, sorrindo para si mesma",
+          "narracao": "Lia continuou caminhando e, desta vez, não havia julgamento — havia reconhecimento."
+        },
+        {
+          "prompt": "a praça ao entardecer, pessoas seguindo seus caminhos, luz dourada",
+          "narracao": "Cada pessoa ali carregava o seu próprio chão — e protegê-lo, na sua medida, era uma necessidade tão real quanto qualquer outra.",
+          "quem": "",
+          "usa": [
+            "A praça"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "titulo": "O chão sustenta a subida",
+      "chamada": "A segurança não é o destino — é o que permite continuar.",
+      "paineis": [
+        {
+          "prompt": "Lia sentada no banco da praça, caderninho fechado no colo, olhar calmo",
+          "narracao": "A praça estava quieta, e Lia ficou ali um tempo, sem anotar nada — só sentindo.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "a escada de luz com os dois primeiros degraus firmes iluminando levemente o terceiro acima",
+          "narracao": "Na imaginação dela, a escada brilhava: os dois primeiros degraus firmes abriam espaço para o terceiro.",
+          "quem": "",
+          "usa": [
+            "Escada de luz"
+          ]
+        },
+        {
+          "prompt": "close no rosto sereno de Lia, olhar para o horizonte",
+          "narracao": "Segurança, ela concluiu, não é um destino — é o chão que sustenta a subida."
+        },
+        {
+          "prompt": "a pirâmide de Maslow com os dois primeiros níveis preenchidos e os demais esperando acima",
+          "narracao": "Na pirâmide, quem ainda está no segundo degrau não é fraco — está construindo a base para tudo o que vem depois.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia abrindo o caderninho e escrevendo a última frase da tarde",
+          "narracao": "Ela escreveu a última frase do dia: 'Proteger o que se tem não é parar — é preparar o próximo passo'.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Proteger o que se tem não é parar. É preparar o próximo passo."
+          }
+        },
+        {
+          "prompt": "Lia de pé na praça ao entardecer, olhando para o horizonte com determinação tranquila",
+          "narracao": "E, com o chão firme sob os pés, ela já conseguia vislumbrar, ao longe, o degrau seguinte.",
+          "usa": [
+            "A praça"
+          ]
+        }
+      ]
+    }
+  ]
+}

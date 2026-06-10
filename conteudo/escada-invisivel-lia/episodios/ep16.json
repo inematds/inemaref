@@ -1,0 +1,394 @@
+{
+  "n": 16,
+  "titulo": "O topo",
+  "paginas": [
+    {
+      "n": 1,
+      "titulo": "O peso que sumiu",
+      "chamada": "Lia acorda diferente — sem o aperto dos outros dias.",
+      "paineis": [
+        {
+          "prompt": "Lia acordando na cama, olhos abrindo devagar, luz de manhã entrando pela janela",
+          "narracao": "Havia algo diferente naquela manhã — um peso que Lia não sabia nomear tinha simplesmente sumido."
+        },
+        {
+          "prompt": "close nas mãos de Lia relaxadas sobre o lençol",
+          "narracao": "As mãos, que tantas vezes ficaram tensas com contas, com medo, com o que os outros iam pensar, estavam soltas."
+        },
+        {
+          "prompt": "Lia sentada na beira da cama, olhando pela janela com calma",
+          "narracao": "Ela ficou só sentada, olhando a luz mudar — e percebeu que não havia urgência nenhuma empurrando ela para lugar nenhum."
+        },
+        {
+          "prompt": "xícara de café fumegando na mesinha de cabeceira, sem pessoas",
+          "quem": "",
+          "narracao": "O café esfriava ali do lado, e, pela primeira vez em muito tempo, ela não tinha pressa de beber."
+        },
+        {
+          "prompt": "Lia respirando fundo, olhos fechados, expressão tranquila",
+          "narracao": "Respirou fundo — e reconheceu aquela sensação estranha e boa:"
+        },
+        {
+          "prompt": "Lia de pé diante do espelho, sorrindo levemente para si mesma",
+          "narracao": "a base estava firme. E quando a base está firme, nasce espaço para outra coisa."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "titulo": "O caderno esquecido",
+      "chamada": "Um caderno velho revela o que Lia deixou parado.",
+      "paineis": [
+        {
+          "prompt": "Lia abrindo uma gaveta e encontrando um caderno antigo com capa desgastada",
+          "narracao": "Mexendo numa gaveta, Lia encontrou um caderno que havia esquecido — cheio de esboços, ideias, começos de histórias."
+        },
+        {
+          "prompt": "close nas páginas do caderno com desenhos e palavras rabiscadas, sem pessoas",
+          "quem": "",
+          "narracao": "Cada página era uma versão de si que tinha ficado para trás, deixada para depois, esperando o momento certo."
+        },
+        {
+          "prompt": "Lia passando os dedos pelas páginas com expressão nostálgica",
+          "narracao": "Ela passou o dedo pelas páginas devagar, e foi lembrando: aquilo era o que ela queria fazer, antes que a vida pedisse outras coisas."
+        },
+        {
+          "prompt": "close num esboço de personagem desenhado à mão, sem pessoas",
+          "quem": "",
+          "narracao": "Mas então — por que havia parado? A resposta chegou sem que ela precisasse procurar:"
+        },
+        {
+          "prompt": "Lia recordando, expressão pensativa, olhar distante",
+          "narracao": "antes, havia sempre algo mais urgente — a conta, o medo, o grupo, o elogio que faltava."
+        },
+        {
+          "prompt": "Lia fechando o caderno com cuidado, decisão no rosto",
+          "narracao": "Agora não. Agora a escada havia subido um degrau a mais — e ela estava de frente para algo que não conhecia direito ainda."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "titulo": "O que é o topo",
+      "chamada": "A pirâmide aparece, e o quinto nível se revela.",
+      "paineis": [
+        {
+          "prompt": "Lia sentada à mesa com o caderno aberto, olhar pensativo",
+          "narracao": "Sentada com o caderno na mesa, Lia deixou a mente viajar — e a pirâmide começou a se formar no ar diante dela."
+        },
+        {
+          "prompt": "visão da pirâmide completa com os quatro níveis inferiores iluminados, sem pessoas",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ],
+          "narracao": "Ela já conhecia os quatro degraus de baixo: o corpo, a segurança, o pertencer, o ser reconhecida."
+        },
+        {
+          "prompt": "close no topo da pirâmide acendendo com uma luz mais suave e difusa, sem pessoas",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ],
+          "narracao": "Mas o quinto — o mais alto — acendia com uma luz diferente, mais suave, mais ampla, como se não coubesse num único ponto."
+        },
+        {
+          "prompt": "Lia inclinando a cabeça, curiosa diante da pirâmide imaginada",
+          "usa": [
+            "Pirâmide de Maslow"
+          ],
+          "narracao": "Lia inclinou a cabeça. Aquele nível não pedia nada para fora — não pedia aprovação, nem proteção, nem comida."
+        },
+        {
+          "prompt": "a palavra 'autorrealização' surgindo em letras suaves acima do topo da pirâmide, sem pessoas",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ],
+          "narracao": "Pedia algo de dentro: a liberdade de ser o que se é, de crescer na direção do que faz sentido."
+        },
+        {
+          "prompt": "Lia olhando para o topo da pirâmide com expressão de reconhecimento",
+          "usa": [
+            "Pirâmide de Maslow"
+          ],
+          "narracao": "Autorrealização — a palavra soava grande, mas a sensação, Lia percebeu, ela já conhecia em pedaços."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "titulo": "A base que sustenta o topo",
+      "chamada": "O topo só é possível porque os degraus de baixo aguentam.",
+      "paineis": [
+        {
+          "prompt": "Lia olhando a escada de luz com os degraus inferiores firmes e brilhantes",
+          "usa": [
+            "Escada de luz"
+          ],
+          "narracao": "Era isso: o topo não flutua no ar. Ele existe porque há degraus embaixo sustentando o peso."
+        },
+        {
+          "prompt": "close na base larga da pirâmide, sólida e bem iluminada, sem pessoas",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ],
+          "narracao": "Sem comida, sem teto, sem vínculos, sem respeito — o topo some. Não porque a pessoa não queira, mas porque não há chão para ele pousar."
+        },
+        {
+          "prompt": "Lia tocando o primeiro degrau da escada de luz com a ponta dos dedos",
+          "usa": [
+            "Escada de luz"
+          ],
+          "narracao": "Lia tocou o primeiro degrau e sentiu o calor firme da base — aquele calor havia custado trabalho, às vezes dor."
+        },
+        {
+          "prompt": "flashback em miniatura: rosto de Lia preocupada, mão segurando conta — moldura pequena no canto do quadro",
+          "narracao": "Ela lembrou das noites em que a preocupação era outra — bem mais embaixo na escada — e como naquele tempo criar parecia frescura."
+        },
+        {
+          "prompt": "Lia subindo visualmente os degraus de luz, um por um",
+          "usa": [
+            "Escada de luz"
+          ],
+          "narracao": "Mas não era frescura: era simplesmente que a energia ia toda para o que ardia. Cada degrau consome o que tem."
+        },
+        {
+          "prompt": "Lia no topo da escada de luz, olhando para o horizonte aberto",
+          "usa": [
+            "Escada de luz"
+          ],
+          "narracao": "E agora, com os degraus de baixo firmes, havia sobrado energia — e esse excedente era justamente o combustível do topo."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "titulo": "Fazer como se quer",
+      "chamada": "Lia descobre que autorrealização é fazer do jeito próprio.",
+      "paineis": [
+        {
+          "prompt": "Lia abrindo o caderno antigo de novo, caneta na mão, pronta para escrever",
+          "narracao": "Ela abriu o caderno num ponto em branco — e ficou um momento parada, sem saber por onde começar."
+        },
+        {
+          "prompt": "close na página em branco do caderno, sem pessoas",
+          "quem": "",
+          "narracao": "Mas então notou: o silêncio não era bloqueio. Era liberdade. Ninguém esperava nada específico daquelas páginas."
+        },
+        {
+          "prompt": "Lia escrevendo e desenhando ao mesmo tempo, expressão absorta",
+          "narracao": "A caneta começou a mover sozinha — palavras, setas, esboços sem forma certa — e ela deixou."
+        },
+        {
+          "prompt": "close no caderno com mistura de texto e desenho surgindo, sem pessoas",
+          "quem": "",
+          "narracao": "Não era o resultado que importava ainda. Era o ato: fazer porque queria, do jeito que saía, sem nota, sem plateia."
+        },
+        {
+          "prompt": "Lia pausando e olhando o que criou, satisfação genuína no rosto",
+          "narracao": "Ela parou, olhou — e sentiu uma satisfação que não dependia de ninguém validar."
+        },
+        {
+          "prompt": "Lia sorrindo para o caderno, mão sobre a página",
+          "narracao": "Fazer como se quer, com o que se tem, sendo o que se é: isso era o topo. Era simples assim."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "titulo": "Teo e o propósito",
+      "chamada": "Teo aparece e revela como o topo se mostra diferente em cada um.",
+      "paineis": [
+        {
+          "prompt": "Teo chegando pela rua com uma mochila, acenando para Lia",
+          "quem": "Teo",
+          "narracao": "Foi então que Teo apareceu pela rua com a mochila grande, como quem voltava de alguma coisa importante."
+        },
+        {
+          "prompt": "Teo e Lia caminhando lado a lado na rua, conversa animada",
+          "narracao": "Lia perguntou onde ele havia ido — e Teo contou sobre um projeto voluntário que vinha fazendo nos fins de semana.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Onde você estava? Te vi pouco essa semana."
+          }
+        },
+        {
+          "prompt": "Teo gesticulando enquanto fala, olhos acesos, animado",
+          "quem": "Teo",
+          "narracao": "Ele falava de um jeito diferente do normal — mais leve, mais solto — como quem não está cumprindo obrigação, mas seguindo algo próprio.",
+          "fala": {
+            "quem": "Teo",
+            "texto": "Tô ajudando a montar uma horta comunitária. Não paga nada, mas é o que mais me dá energia."
+          }
+        },
+        {
+          "prompt": "Lia ouvindo Teo com expressão atenta, um sorriso surgindo",
+          "narracao": "Lia prestou atenção — e reconheceu naquele brilho o mesmo que havia sentido de manhã com o caderno."
+        },
+        {
+          "prompt": "close nos rostos de Teo e Lia, um espelhando o outro em entusiasmo",
+          "narracao": "O topo de Teo era uma horta. O dela, um caderno. Formas completamente diferentes — mas a mesma coisa por dentro:"
+        },
+        {
+          "prompt": "Lia e Teo parados na calçada, cada um com seu objeto — caderno e mochila — luz quente de fim de tarde",
+          "narracao": "a liberdade de agir de acordo com o que se é, sem precisar de permissão."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "titulo": "Talentos, propósito, criação",
+      "chamada": "Três faces do mesmo degrau — e Lia começa a entender a diferença.",
+      "paineis": [
+        {
+          "prompt": "Lia sentada na praça com o caderno, observando as pessoas ao redor",
+          "usa": [
+            "A praça"
+          ],
+          "narracao": "Na praça, Lia voltou a observar — mas agora com um filtro novo."
+        },
+        {
+          "prompt": "um homem mais velho consertando bicicleta com maestria, concentrado, sem pessoas jovens em foco",
+          "quem": "",
+          "narracao": "Ali perto, um homem consertava bicicletas com uma calma de quem domina o ofício — e sorria para si mesmo enquanto trabalhava."
+        },
+        {
+          "prompt": "uma jovem sentada num banco lendo em voz alta para crianças ao redor",
+          "quem": "",
+          "narracao": "Mais adiante, uma jovem lia em voz alta para um grupo de crianças — e as crianças prendiam a respiração a cada virada de página."
+        },
+        {
+          "prompt": "um senhor plantando flores nas bordas da praça com cuidado",
+          "quem": "",
+          "narracao": "E um senhor plantava flores nas bordas da praça devagar, como se aquele gesto fosse um presente para quem ainda ia passar."
+        },
+        {
+          "prompt": "Lia anotando no caderno: três colunas — 'talento', 'propósito', 'criação'",
+          "narracao": "Lia anotou: talento era o que cada um sabia fazer bem. Propósito era o porquê de fazer. E criação era o ato — colocar para fora o que estava dentro."
+        },
+        {
+          "prompt": "close no caderno com as três palavras escritas ligadas por setas formando um ciclo, sem pessoas",
+          "quem": "",
+          "narracao": "Três faces do mesmo degrau — e qualquer uma podia ser a porta de entrada para o topo."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "titulo": "Não é para todo mundo ao mesmo tempo",
+      "chamada": "O topo é real — mas só aparece quando os outros degraus permitem.",
+      "paineis": [
+        {
+          "prompt": "Lia observando uma mulher com sacolas de compras e criança no colo, expressão exausta",
+          "narracao": "Mas então Lia viu uma mulher passar carregando sacolas e uma criança no colo — rosto cansado, o tipo de cansaço que não é de um dia."
+        },
+        {
+          "prompt": "close no rosto da mulher, olhar distante e pesado, sem Lia no quadro",
+          "quem": "",
+          "narracao": "Aquela mulher certamente tinha talentos, certamente tinha algo que queria criar — mas agora não havia espaço para isso."
+        },
+        {
+          "prompt": "a pirâmide aparecendo no pensamento de Lia, com os degraus inferiores pulsando forte",
+          "usa": [
+            "Pirâmide de Maslow"
+          ],
+          "narracao": "A pirâmide veio à mente de Lia: os degraus de baixo pulsavam forte — e quando pulsam assim, eles pedem toda a atenção disponível."
+        },
+        {
+          "prompt": "Lia com expressão de compreensão, sem julgamento",
+          "narracao": "Não era falta de vontade, nem de talento. Era que a escada pede o que precisa, na ordem que precisa."
+        },
+        {
+          "prompt": "a mulher dobrando a esquina e sumindo de vista, sem Lia no quadro",
+          "quem": "",
+          "narracao": "A mulher dobrou a esquina e desapareceu — e Lia ficou com aquela cena na cabeça como um lembrete:"
+        },
+        {
+          "prompt": "Lia olhando para a própria mão com o caderno, grata e consciente",
+          "narracao": "quem está no topo não chegou lá por ser melhor — chegou porque, por ora, os degraus de baixo estão sustentando."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "titulo": "O que o topo não é",
+      "chamada": "Lia entende que autorrealização não é perfeição, nem chegada.",
+      "paineis": [
+        {
+          "prompt": "Lia relendo o que escreveu no caderno, franzindo a testa para algo",
+          "narracao": "Ao reler o caderno, Lia bateu num trecho que não ficara bom — e o velho impulso de jogar tudo fora sussurrou."
+        },
+        {
+          "prompt": "close na mão de Lia hesitando sobre a página, caneta parada",
+          "narracao": "A mão parou. Ela conhecia esse impulso: a sensação de que, se não é perfeito, não vale nada."
+        },
+        {
+          "prompt": "Lia olhando para o teto, pensando, expressão aberta",
+          "narracao": "Mas então ela pensou: o topo não é um troféu de chegada. Não é quando tudo ficou certo de vez."
+        },
+        {
+          "prompt": "a escada de luz com a Lia no meio — não no topo estático, mas em movimento subindo",
+          "usa": [
+            "Escada de luz"
+          ],
+          "narracao": "O topo é um estado de movimento — crescer, tentar, errar, tentar de novo — sempre apontando para o que faz sentido."
+        },
+        {
+          "prompt": "Lia riscando o trecho ruim do caderno e reescrevendo, determinada",
+          "narracao": "Ela riscou o trecho e reescreveu. Não porque era obrigada — mas porque queria que ficasse melhor, para ela mesma."
+        },
+        {
+          "prompt": "Lia fechando o caderno com um sorriso, satisfeita com o processo, não com a perfeição",
+          "narracao": "E foi aí que entendeu: autorrealização não é destino. É direção — e ela estava indo."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "titulo": "A escada que virou mapa",
+      "chamada": "No fim, o topo não está acima dos outros — está dentro.",
+      "paineis": [
+        {
+          "prompt": "Lia de volta à praça ao entardecer, sentada no banco habitual",
+          "usa": [
+            "A praça"
+          ],
+          "narracao": "A tarde caiu, e Lia foi para a praça — como tantas outras vezes — mas desta vez com o caderno cheio."
+        },
+        {
+          "prompt": "a escada de luz pairando suave acima da praça, atmosfera tranquila, sem pessoas",
+          "quem": "",
+          "usa": [
+            "Escada de luz"
+          ],
+          "narracao": "A escada invisível estava lá, como sempre — só que agora ela via o quinto degrau de um jeito diferente: não como um prêmio distante,"
+        },
+        {
+          "prompt": "Lia olhando para a pirâmide imaginada com os cinco níveis todos acesos",
+          "usa": [
+            "Pirâmide de Maslow"
+          ],
+          "narracao": "mas como uma possibilidade real, que surge quando os outros degraus fazem o trabalho deles. A pirâmide completa brilhava — cinco níveis, nenhum mais nobre que o outro,"
+        },
+        {
+          "prompt": "Lia escrevendo no caderno a última página, expressão serena",
+          "narracao": "cada um necessário no seu momento. Ela escreveu no caderno: o topo não está acima dos outros. Está dentro — esperando espaço."
+        },
+        {
+          "prompt": "close na página do caderno com a frase escrita à mão: 'fazer como se quer, ser o que se é'",
+          "quem": "",
+          "narracao": "E por baixo, menor, quase para si mesma: fazer como se quer, ser o que se é."
+        },
+        {
+          "prompt": "Lia fechando o caderno, olhando para a praça e para as pessoas com leveza",
+          "usa": [
+            "A praça"
+          ],
+          "narracao": "A praça seguia cheia de gente em seus próprios degraus. E Lia, no seu, finalmente sabia onde estava."
+        }
+      ]
+    }
+  ]
+}
