@@ -33,8 +33,9 @@ existe — motion comics narrados e filmes.
 ## Skills
 
 - `skill/folder/` — ✅ **construída** — **cria a referência**: a ficha do personagem (retrato + bio + traços + grid), a partir de 1 foto ou texto.
-- `skill/quadrinho/` — **consome a referência**: monta a página de HQ (quadro-a-quadro, texto em camada), 2 estilos.
-- `skill/referencias/` — núcleo comum: estilos (foto/cartoon), regra de consistência, mapa de quadros.
+- `skill/quadrinho/` — ✅ **construída** — monta a **página de HQ/mangá** (quadros textless + balão/SFX em camada, colocação de texto consciente de rosto), 2 modelos de página.
+- `skill/motioncomic/` — ✅ **construída** — quadrinho em **vídeo**: a câmera dá **zoom em cada quadro durante a narração** (TTS), MP4 16:9 (`docs/02`).
+- `skill/referencias/` — núcleo comum: estilos (foto/cartoon/mangá), regra de consistência, schema da referência.
 
 ## Documentos
 
