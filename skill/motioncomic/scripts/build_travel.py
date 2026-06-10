@@ -45,6 +45,8 @@ T_CLOSE = 0.9  # fecha a pagina: ultimo quadro -> pagina inteira
 TRANS_BUMP = 0.22  # quanto a camera "afasta" no meio da troca de quadro
 HOLD_OUT = 1.06    # quadro comeca 6% mais aberto e empurra (push-in suave)
 T_FULL = 1.7       # duracao do plano da PRANCHA INTEIRA (abre/fecha a pagina)
+FULLPAGE_FILL = 0.88  # a prancha inteira ocupa 88% do quadro -> margem ao redor
+                      # (sem a margem, a borda #111 da pagina some na tarja preta)
 CTA_NARR = "Aprenda mais em inema ponto clube."  # CTA padrao inema.club
 
 
@@ -192,7 +194,8 @@ def _seg_clip(page_png, a, b, dur, out_mp4, bump=0.0, audio=None):
 def _fullpage_clip(page_png, dur, out_mp4, audio=None):
     """Plano da PRANCHA INTEIRA (letterbox) — abre e fecha a pagina mostrando-a
     por completo. Com `audio` (ex.: abertura narrada) usa a faixa."""
-    vf = (f"scale={W}:{H}:force_original_aspect_ratio=decrease,"
+    bw, bh = int(W * FULLPAGE_FILL), int(H * FULLPAGE_FILL)
+    vf = (f"scale={bw}:{bh}:force_original_aspect_ratio=decrease,"
           f"pad={W}:{H}:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fps={FPS}")
     cmd = ["ffmpeg", "-nostdin", "-y", "-v", "error",
            "-framerate", str(FPS), "-loop", "1", "-t", f"{dur:.3f}", "-i", page_png]
