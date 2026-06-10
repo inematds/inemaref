@@ -78,5 +78,9 @@ Saida: `<id>.mp4`, `assets/`, `clips/`, `concat.txt`.
 - Voz: `voice="rachel"`. Arte da pagina: `arte="cartoon"` (default `manga`).
 - Ritmo da camera: `T_OPEN`/`T_TRANS`/`T_CLOSE` (duracao dos movimentos), `TRANS_BUMP` (quanto a
   camera afasta na troca de quadro), `HOLD_OUT` (push-in durante a narracao) em `build_travel.py`.
-- Template/grade: `_TEMPLATE_DIR` aponta pra `quadrinho/templates/grade-uniforme` (2x3). A medicao
-  por mascara funciona com qualquer template de 6 quadros.
+- **Layout flexivel:** passe `template_dir=` p/ escolher a grade — default
+  `quadrinho/templates/grade-uniforme` (2x3); use `.../manga-dinamico` p/ quadros de tamanhos e
+  posicoes variaveis. A camera **le o layout real** (`render_mask` pinta cada quadro de uma cor e
+  `detect_rects` mede a bounding box) e o `frame_window` **se posiciona por quadro**, cobrindo cada
+  um conforme a forma (largo → enquadra pela largura; alto → pela altura). Qualquer grade de 6
+  funciona sem mudar a camera.

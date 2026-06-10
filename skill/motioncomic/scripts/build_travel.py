@@ -49,18 +49,23 @@ HOLD_OUT = 1.06    # quadro comeca 6% mais aberto e empurra (push-in suave)
 # ---------------------------------------------------------------------------
 # geometria da camera (puro)
 # ---------------------------------------------------------------------------
-def frame_window(rect, page_w, page_h, hfill=0.96, ar=AR):
-    """Janela 16:9 do MERGULHO num quadro. Enquadra pela ALTURA do quadro
-    (mostra `hfill` dela, cortando uma fresta no topo/base) para que a camera
-    realmente afunde no quadro: a janela comeca DENTRO do quadro (sem pegar o
-    cabecalho/quadro de cima) e a largura 16:9 deixa so slivers dos vizinhos.
-    Centrada no quadro e contida na pagina. Retorna (cx, cy, cw)."""
+def frame_window(rect, page_w, page_h, pad=0.0, ar=AR):
+    """Janela 16:9 do MERGULHO num quadro — a MENOR que COBRE o quadro inteiro.
+    LE A FORMA de cada quadro e se posiciona: quadro largo-e-baixo e enquadrado
+    pela LARGURA (ganha contexto vertical); quadro estreito-e-alto, pela ALTURA
+    (ganha contexto lateral); quadro quase-quadrado fica justo, com so slivers
+    dos vizinhos. Isso torna a camera flexivel a layouts variaveis (ex.: a grade
+    assimetrica do manga-dinamico) sem cortar quadros largos. Centrada no quadro
+    e contida na pagina; quadro maior que a pagina e clampado (corte inevitavel).
+    Retorna (cx, cy, cw) — a altura e cw/ar."""
     x, y, w, h = rect
     cx, cy = x + w / 2, y + h / 2
-    ch = min(h * hfill, page_h)
-    cw = ch * ar
-    if cw > page_w:                 # quadro alto demais p/ caber 16:9 -> limita largura
-        cw = page_w
+    ew, eh = w * (1 + 2 * pad), h * (1 + 2 * pad)
+    cw = min(max(ew, eh * ar), page_w)   # cobre largura E altura, em 16:9
+    ch = cw / ar
+    if ch > page_h:
+        ch = page_h
+        cw = min(ch * ar, page_w)
         ch = cw / ar
     cx = min(max(cx, cw / 2), page_w - cw / 2)
     cy = min(max(cy, ch / 2), page_h - ch / 2)
@@ -212,14 +217,18 @@ def _page_roteiro(roteiro, pg):
 
 
 def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-klein",
-                       arte="manga", intro=True):
+                       arte="manga", intro=True, template_dir=None):
     """Forma B: pagina de papel + camera viajando. Cada pagina precisa de 6
-    paineis (grade 2x3). Saida em <out_dir>/<id>/<id>-travel.mp4."""
+    paineis. `template_dir` escolhe o layout da prancha (default grade-uniforme
+    2x3; passe .../manga-dinamico p/ a grade assimetrica). A camera LE o layout
+    real (mascara) e se posiciona por quadro, entao qualquer grade de 6 funciona.
+    Saida em <out_dir>/<id>/<id>-travel.mp4."""
     import html as _h
     import json
     from build_pagina import build_pagina
 
-    with open(os.path.join(_TEMPLATE_DIR, "meta.json")) as f:
+    tdir = template_dir or _TEMPLATE_DIR
+    with open(os.path.join(tdir, "meta.json")) as f:
         meta = json.load(f)
     PW, PH = meta["width"], meta["height"]
 
@@ -240,8 +249,8 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
     pages = roteiro["paginas"]
     for pgi, pg in enumerate(pages):
         pn = pg["n"]
-        # 1) monta a pagina de papel (grade 2x3, narracao/balao/sfx impressos)
-        page_png = build_pagina(_page_roteiro(roteiro, pg), _TEMPLATE_DIR,
+        # 1) monta a pagina de papel (grade do template, narracao/balao/sfx impressos)
+        page_png = build_pagina(_page_roteiro(roteiro, pg), tdir,
                                 arte=arte, out_dir=pages_dir, model=model)
         page_html = os.path.join(os.path.dirname(page_png), "pagina.html")
         mask_png = os.path.join(os.path.dirname(page_png), "mask.png")

@@ -67,6 +67,27 @@ def test_frame_window_covers_and_16x9(tmp="/tmp/_travel_mask.png"):
         assert cy - ch / 2 >= -1 and cy + ch / 2 <= PH + 1
 
 
+def test_frame_window_adapts_to_panel_shape():
+    """Forma B flexivel: a camera LE a forma de cada quadro. Quadro largo-e-baixo
+    e enquadrado pela LARGURA (nao corta as laterais); quadro estreito-e-alto,
+    pela ALTURA. Vale p/ grades assimetricas (manga-dinamico)."""
+    wide = (50, 100, 1000, 260)   # largo e baixo
+    tall = (60, 300, 360, 600)    # estreito e alto (cabe na pagina)
+    cxw, cyw, cww = frame_window(wide, PW, PH)
+    cxt, cyt, cwt = frame_window(tall, PW, PH)
+    # largo -> enquadrado pela largura: cw ~ largura do quadro, cobre os 1000px
+    assert abs(cww - 1000) <= 2, cww
+    # alto -> enquadrado pela altura: a ALTURA da janela ~ altura do quadro
+    assert abs((cwt / AR) - 600) <= 2, cwt / AR
+    # cobertura de largura + dentro da pagina, p/ ambos
+    for (cx, cy, cw), r in ((frame_window(wide, PW, PH), wide),
+                            (frame_window(tall, PW, PH), tall)):
+        ch = cw / AR
+        assert cx - cw / 2 <= r[0] + 1 and cx + cw / 2 >= r[0] + r[2] - 1
+        assert cx - cw / 2 >= -1 and cx + cw / 2 <= PW + 1
+        assert cy - ch / 2 >= -1 and cy + ch / 2 <= PH + 1
+
+
 def test_window_at_endpoints_and_bump():
     a, b = (100, 100, 400), (900, 1400, 600)
     assert window_at(a, b, 0.0) == a
@@ -116,6 +137,7 @@ def test_filter_actually_crops_tight(tmp="/tmp/_travel_seg"):
 if __name__ == "__main__":
     test_detect_rects_reading_order()
     test_frame_window_covers_and_16x9()
+    test_frame_window_adapts_to_panel_shape()
     test_window_at_endpoints_and_bump()
     test_filter_string_has_crop_and_scale()
     test_seg_clip_renders_16x9()
