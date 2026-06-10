@@ -1,0 +1,17 @@
+{
+  "id": "exemplo-pagina1",
+  "titulo": "A ESCADA INVISIVEL DE LIA",
+  "subtitulo": "MOTION COMIC",
+  "personagem": "Lia, a young woman about 20, shoulder-length dark wavy hair, mustard-yellow cardigan over a white tee",
+  "paginas": [
+    {"n": 1, "titulo": "O que e a Piramide de Maslow", "paineis": [
+      {"prompt": "Lia sitting on a bench in a town square watching people around her",
+       "narracao": "Todo mundo quer alguma coisa: comida, seguranca, amizade, reconhecimento, sonhos."},
+      {"prompt": "a friendly older male teacher at a whiteboard drawing a pyramid diagram",
+       "quem": "an older friendly male teacher, glasses, gray hair, knit sweater",
+       "fala": {"quem": "Professor", "texto": "Abraham Maslow criou uma ideia para explicar as necessidades humanas."}},
+      {"prompt": "a clean pyramid diagram divided into five glowing layers, no people",
+       "quem": "", "narracao": "Segundo Maslow, algumas necessidades costumam vir antes de outras."}
+    ]}
+  ]
+}
