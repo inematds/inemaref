@@ -28,14 +28,43 @@ existe — motion comics narrados e filmes.
 
 ## Estado
 
-**Fase de base/arquitetura.** A skill `folder` está **construída e validada end-to-end** (modo texto, 2 layouts × 2 artes). `quadrinho`, série e filme permanecem à frente.
+**V1 construída.** As três skills da base — `folder`, `quadrinho` e `motioncomic` — estão **construídas e testadas** (suíte verde). Série (V2) e filme (V3) permanecem à frente. Página do projeto (landing + guia): [`index.html`](index.html).
 
 ## Skills
 
-- `skill/folder/` — ✅ **construída** — **cria a referência**: a ficha do personagem (retrato + bio + traços + grid), a partir de 1 foto ou texto.
-- `skill/quadrinho/` — ✅ **construída** — monta a **página de HQ/mangá** (quadros textless + balão/SFX em camada, colocação de texto consciente de rosto), 2 modelos de página.
-- `skill/motioncomic/` — ✅ **construída** — quadrinho em **vídeo**: a câmera dá **zoom em cada quadro durante a narração** (TTS), MP4 16:9 (`docs/02`).
+- `skill/folder/` — ✅ **construída** — **cria a referência**: a ficha do personagem (retrato + bio + traços + grid), a partir de 1 foto ou texto. 2 layouts × 2 artes.
+- `skill/quadrinho/` — ✅ **construída** — monta a **página de HQ/mangá** (6 quadros textless + balão/SFX/legenda em camada, colocação de texto consciente de rosto), 2 modelos de página.
+- `skill/motioncomic/` — ✅ **construída** — quadrinho em **vídeo** (TTS), em **duas formas**:
+  - **Forma A — slideshow** (`build_motion`): uma imagem por vez com zoom + narração voz-off.
+  - **Forma B — câmera sobre a página de papel** (`build_travel`): monta a prancha real (grade 2×3) e a câmera viaja sobre ela, mergulhando em cada quadro durante a narração, afastando e encaixando no próximo (`docs/02`). É o modo "quadrinho de verdade".
 - `skill/referencias/` — núcleo comum: estilos (foto/cartoon/mangá), regra de consistência, schema da referência.
+
+## Como usar
+
+Cada skill é um pipeline Python rodado da raiz do repo; a saída cai em `output/<id>/` (gitignorado).
+Pré-requisitos: `inemaimg` (flux2-klein) em `localhost:8000`; para vídeo, `inemavox` em `127.0.0.1:7860`; e `ffmpeg`/Chromium.
+
+```python
+# 1) referência (folder)
+import sys, json; sys.path.insert(0, "skill/folder/scripts")
+from build_folder import build_folder
+build_folder(json.load(open("ficha.json")),
+             template_dir="skill/folder/templates/editorial-revista", arte="cartoon", modo="texto")
+
+# 2) página de HQ (quadrinho) — roteiro com exatamente 6 painéis
+sys.path.insert(0, "skill/quadrinho/scripts")
+from build_pagina import build_pagina
+build_pagina(json.load(open("roteiro.json")),
+             template_dir="skill/quadrinho/templates/grade-uniforme", arte="manga")
+
+# 3) vídeo — câmera sobre a página (motioncomic, Forma B); páginas de 6 quadros
+sys.path.insert(0, "skill/motioncomic/scripts")
+from build_travel import build_video_travel
+build_video_travel(json.load(open("roteiro.json")), voice="bella", arte="manga")
+```
+
+Guia completo, com exemplos e pré-requisitos: abra [`index.html`](index.html) (também publicável no GitHub Pages).
+Cada `skill/<nome>/SKILL.md` traz a entrada esperada (schema do JSON) e os detalhes.
 
 ## Documentos
 
