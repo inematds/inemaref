@@ -1,0 +1,68 @@
+{
+  "id": "escada-invisivel-lia",
+  "assunto": "A Escada Invisível de Lia — a Pirâmide de Maslow",
+  "objetivo": "Fazer o espectador entender a Pirâmide de Maslow — que o nível é INDIVIDUAL e RELATIVO (o 'básico' de um é ter carro, de outro é o ônibus, de outro é ir a pé) e DINÂMICO (um filho, uma mudança, perder estabilidade ou faltar tempo movem a pessoa pra cima e pra baixo) — e reconhecer em que nível ele (ou o outro) está tentando sobreviver, trocando julgamento por empatia. Público: leigos curiosos sobre comportamento e autoconhecimento. Resultado: ensinar + emocionar pela história da Lia, não por aula expositiva.",
+  "premissa": {
+    "logline": "Lia descobre que tudo que ela e as pessoas ao redor buscam segue uma escada invisível de necessidades — e que, quando um degrau treme, ele vira o mais importante de todos.",
+    "sinopse": "Em 20 episódios, a rotina de Lia ilustra os cinco níveis de Maslow. A série mostra que cada nível é relativo a cada pessoa e que a vida move a gente para cima e para baixo na escada — terminando com a pirâmide virada para fora, como ferramenta de empatia."
+  },
+  "estilo": { "arte": "manga", "modelo_pagina": "manga-dinamico", "voz": "bella", "intro": true },
+  "formato": { "tipo": "video-pagina", "n_episodios": 20, "n_paginas": 10, "destino": "output" },
+  "protagonista": {
+    "id": "lia",
+    "kicker": "MASLOW",
+    "nome": "Lia",
+    "subtitulo": "A Escada Invisível",
+    "aparencia": "jovem ~20 anos, cabelo escuro ondulado na altura dos ombros, olhos castanhos, sardas leves, cardigã mostarda sobre camiseta branca",
+    "personalidade": ["curiosa", "sensível", "honesta consigo"],
+    "caracteristicas": [
+      { "icone": "👀", "label": "Observadora" },
+      { "icone": "❤️", "label": "Empática" },
+      { "icone": "🪜", "label": "Em ascensão" }
+    ],
+    "detalhes": [
+      { "k": "Idade", "v": "20 anos" },
+      { "k": "Cidade", "v": "Interior" },
+      { "k": "Busca", "v": "Entender a si mesma e os outros" }
+    ],
+    "frase": "Cada um sobe um degrau por vez.",
+    "focos": [
+      { "legenda": "Retrato" },
+      { "legenda": "De corpo inteiro" },
+      { "legenda": "Pensativa" },
+      { "legenda": "Sorrindo" },
+      { "legenda": "De perfil" }
+    ]
+  },
+  "elenco": [
+    { "nome": "Teo", "aparencia": "jovem ~22, calmo, cabelo escuro curto, óculos redondos, jaqueta verde-oliva" },
+    { "nome": "Professor", "aparencia": "homem mais velho, simpático, óculos, cabelo grisalho, suéter de tricô" }
+  ],
+  "elementos": [
+    { "nome": "Pirâmide de Maslow", "aparencia": "pirâmide de pedra clara com 5 camadas horizontais distintas, base larga, contornos de luz dourada, fundo de céu suave, cada nível levemente rotulado" },
+    { "nome": "Escada de luz", "aparencia": "degraus luminosos ascendentes em luz dourada, mesma paleta da pirâmide, atmosfera mágica" },
+    { "nome": "A praça", "aparencia": "praça arborizada ao entardecer, banco de madeira, fonte de pedra ao fundo, luz quente" }
+  ],
+  "episodios": [
+    { "n": 1,  "titulo": "A escada invisível", "sinopse": "Lia observa a praça e percebe que cada pessoa busca algo diferente; surge a pirâmide.", "contribuicao": "Planta a pergunta central e apresenta a pirâmide como um mapa das necessidades." },
+    { "n": 2,  "titulo": "Quem foi Maslow", "sinopse": "A origem da ideia, com o Professor.", "contribuicao": "Dá credibilidade ao conceito e prepara a leitura dos níveis." },
+    { "n": 3,  "titulo": "Como ler a pirâmide", "sinopse": "Alguns degraus costumam vir antes de outros — mas o nível é individual e relativo: o mesmo 'básico' muda de pessoa para pessoa.", "contribuicao": "Ensina a regra de leitura E a relatividade/individualidade do nível (chave da série)." },
+    { "n": 4,  "titulo": "O corpo fala", "sinopse": "O básico é o que serve de BASE: comida, moradia, roupa, sono. E é relativo — pra um o básico é ter carro, pra outro o ônibus basta, outro vai a pé.", "contribuicao": "Define o nível fisiológico e mostra que o 'básico' é subjetivo." },
+    { "n": 5,  "titulo": "Quando a fome grita", "sinopse": "Sem o básico, ele vira o mais importante de todos, acima de social e reconhecimento.", "contribuicao": "Mostra o nível ameaçado dominando os demais." },
+    { "n": 6,  "titulo": "Descanso não é luxo", "sinopse": "Dormir e respirar também são base.", "contribuicao": "Corrige o erro comum de tratar descanso como preguiça." },
+    { "n": 7,  "titulo": "O chão firme", "sinopse": "Segurança é NÃO PERDER o que se conquistou: abrigo, estabilidade, patrimônio.", "contribuicao": "Define segurança como proteção da conquista, não como acúmulo." },
+    { "n": 8,  "titulo": "O medo de perder", "sinopse": "Uma ameaça à segurança puxa Lia de volta para o básico.", "contribuicao": "Mostra a regressão entre níveis." },
+    { "n": 9,  "titulo": "Quando segurança vira ansiedade", "sinopse": "É relativa: um emprego público é seguro para uns; outro, mesmo com patrimônio, ainda se sente inseguro. O medo, não a realidade, é o limitador.", "contribuicao": "Ensina a relatividade da segurança e o medo como limitador." },
+    { "n": 10, "titulo": "Pertencer", "sinopse": "Já seguro, a pessoa para de focar em proteger e passa a conquistar espaço na tribo: amizade, grupo, família.", "contribuicao": "Define o social como busca de espaço na tribo, depois da segurança." },
+    { "n": 11, "titulo": "Teo senta na mesa", "sinopse": "O vínculo que dá força para continuar subindo.", "contribuicao": "Humaniza o nível com a relação Lia–Teo." },
+    { "n": 12, "titulo": "Quando o social vira prisão", "sinopse": "Para ser aceita, Lia começa a aceitar o que não quer.", "contribuicao": "Mostra a distorção do nível social." },
+    { "n": 13, "titulo": "Ser reconhecida", "sinopse": "Depois do pertencer, vem o desejo de ser relevante — alguém que importa, respeitado e valorizado.", "contribuicao": "Define estima como relevância/reconhecimento." },
+    { "n": 14, "titulo": "O reconhecimento de si", "sinopse": "Não depender só do elogio dos outros.", "contribuicao": "Distingue estima externa de estima interna." },
+    { "n": 15, "titulo": "Quando a crítica machuca", "sinopse": "Uma crítica dura abre uma rachadura na confiança.", "contribuicao": "Mostra a fragilidade do nível de estima." },
+    { "n": 16, "titulo": "O topo", "sinopse": "Com a base firme, surge a liberdade de fazer como se quer: talentos, propósito, criação.", "contribuicao": "Define a autorrealização." },
+    { "n": 17, "titulo": "Criar e crescer", "sinopse": "O topo na prática, sustentado pelos degraus de baixo.", "contribuicao": "Mostra a autorrealização concreta." },
+    { "n": 18, "titulo": "Ninguém vive no topo pra sempre", "sinopse": "A vida move a pessoa pra baixo: nasce um filho e ela desce ao fisiológico; perde estabilidade e volta à segurança; falta tempo e larga o social.", "contribuicao": "Ensina a DINÂMICA — a pirâmide se move com a vida; desfaz o mito do 'cheguei lá'." },
+    { "n": 19, "titulo": "A pirâmide nos outros", "sinopse": "Como cada um está num nível diferente E móvel, Lia passa a perguntar: em que nível essa pessoa está tentando sobreviver?", "contribuicao": "Vira a ferramenta para fora (empatia) — o coração do objetivo." },
+    { "n": 20, "titulo": "Um degrau por vez", "sinopse": "Síntese: a escada é individual, relativa e dinâmica; cada necessidade tem seu tempo.", "contribuicao": "Consolida o objetivo e entrega o takeaway final." }
+  ]
+}
