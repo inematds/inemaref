@@ -246,6 +246,49 @@ def _cta_clip(out_mp4, voice="bella", narr=CTA_NARR):
     return out_mp4
 
 
+def _split_wav(wav, t, out_a, out_b):
+    """Corta `wav` em [0,t] (out_a) e [t,fim] (out_b) — p/ a narracao atravessar
+    o cartao da pagina e a prancha inteira (formato C)."""
+    subprocess.run(["ffmpeg", "-nostdin", "-y", "-v", "error", "-i", wav, "-t", f"{t:.3f}",
+                    "-ar", "44100", "-ac", "2", out_a], check=True)
+    subprocess.run(["ffmpeg", "-nostdin", "-y", "-v", "error", "-ss", f"{t:.3f}", "-i", wav,
+                    "-ar", "44100", "-ac", "2", out_b], check=True)
+    return out_a, out_b
+
+
+def _page_card_clip(pn, titulo, out_mp4, audio=None, secs=T_FULL):
+    """Cartao de entrada da pagina ('PAGINA n / titulo'), mesmo estilo do cartao
+    de episodio. Com `audio` toca a 1a parte da chamada narrada."""
+    import html as _h
+    png = out_mp4 + ".png"
+    html = ('<!DOCTYPE html><html><head><meta charset="utf-8"><style>'
+            '*{margin:0;padding:0}body{width:1280px;height:720px;background:#10141c;'
+            'display:flex;align-items:center;justify-content:center;'
+            'font-family:"Arial Black",Arial,sans-serif}'
+            '.t{color:#fff;font-size:56px;font-weight:900;text-align:center;max-width:84%;line-height:1.18}'
+            '.t small{display:block;color:#ffd23f;font-size:24px;letter-spacing:.2em;margin-bottom:18px}'
+            '</style></head><body><div class="t"><small>PAGINA __N__</small>__T__</div></body></html>'
+            ).replace("__N__", str(pn)).replace("__T__", _h.escape(titulo or ""))
+    hp = out_mp4 + ".html"
+    with open(hp, "w") as f:
+        f.write(html)
+    render_html_to_png(hp, png, W, H)
+    cmd = ["ffmpeg", "-nostdin", "-y", "-v", "error", "-framerate", str(FPS), "-loop", "1"]
+    if audio:
+        dur = duration(audio)
+        cmd += ["-t", f"{dur:.3f}", "-i", png, "-i", audio,
+                "-vf", f"scale={W}:{H},setsar=1,fps={FPS}", "-af", "apad"]
+    else:
+        dur = secs
+        cmd += ["-t", f"{dur:.3f}", "-i", png, "-f", "lavfi", "-t", f"{dur:.3f}",
+                "-i", "anullsrc=channel_layout=stereo:sample_rate=44100",
+                "-vf", f"scale={W}:{H},setsar=1,fps={FPS}"]
+    cmd += ["-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
+            "-c:a", "aac", "-ar", "44100", "-ac", "2", "-t", f"{dur:.3f}", out_mp4]
+    subprocess.run(cmd, check=True)
+    return out_mp4
+
+
 # ---------------------------------------------------------------------------
 # montagem da pagina de quadrinho (reusa a skill `quadrinho`)
 # ---------------------------------------------------------------------------
@@ -333,18 +376,32 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
             wavs.append(wav)
             durs.append(duration(wav))
 
-        # 3) ABRE na PRANCHA INTEIRA com a CHAMADA narrada (o que vem nesta pagina);
-        #    na 1a pagina, a abertura (assunto da serie) entra antes da chamada.
+        # 3) FORMATO C: a CHAMADA narrada COMECA no cartao "PAGINA n / titulo" e
+        #    TERMINA na PRANCHA INTEIRA — a mesma fala atravessa cartao -> prancha.
+        #    Na 1a pagina, a abertura (assunto da serie) entra antes da chamada.
         chamada = (pg.get("chamada") or "").strip()
         intro_txt = (f"{abertura} {chamada}".strip() if pgi == 0 else chamada)
-        est = os.path.join(clips_dir, f"{pn:02d}0-prancha.mp4")
+        card = os.path.join(clips_dir, f"{pn:02d}0-cartao.mp4")
+        est = os.path.join(clips_dir, f"{pn:02d}1-prancha.mp4")
         if intro_txt:
             cwav = os.path.join(voz_dir, f"chamada{pn:02d}.wav")
             if not os.path.exists(cwav):
                 say(intro_txt, cwav, voice=voice)
-            _fullpage_clip(page_png, duration(cwav) + 0.5, est, audio=cwav)
+            dtot = duration(cwav)
+            card_dur = min(2.2, dtot)
+            if dtot - card_dur > 0.2:          # divide a fala: cartao -> prancha
+                pa = os.path.join(voz_dir, f"chamada{pn:02d}a.wav")
+                pb = os.path.join(voz_dir, f"chamada{pn:02d}b.wav")
+                _split_wav(cwav, card_dur, pa, pb)
+                _page_card_clip(pn, pg.get("titulo", ""), card, audio=pa)
+                _fullpage_clip(page_png, duration(pb) + 0.4, est, audio=pb)
+            else:                               # fala curta: tudo no cartao
+                _page_card_clip(pn, pg.get("titulo", ""), card, audio=cwav)
+                _fullpage_clip(page_png, T_FULL, est)
         else:
+            _page_card_clip(pn, pg.get("titulo", ""), card)
             _fullpage_clip(page_png, T_FULL, est)
+        clips.append(card)
         clips.append(est)
 
         # 4) mergulha em cada quadro; afasta e encaixa no proximo.
