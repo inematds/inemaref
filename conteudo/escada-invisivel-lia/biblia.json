@@ -39,7 +39,7 @@
     { "nome": "Professor", "aparencia": "homem mais velho, simpático, óculos, cabelo grisalho, suéter de tricô" }
   ],
   "elementos": [
-    { "nome": "Pirâmide de Maslow", "aparencia": "pirâmide de pedra clara com 5 camadas horizontais distintas, base larga, contornos de luz dourada, fundo de céu suave, cada nível levemente rotulado" },
+    { "nome": "Pirâmide de Maslow", "aparencia": "pirâmide de pedra clara com 5 camadas horizontais distintas e bem separadas, base larga, contornos de luz dourada, fundo de céu suave, sem texto, sem rótulos, no text, no letters" },
     { "nome": "Escada de luz", "aparencia": "degraus luminosos ascendentes em luz dourada, mesma paleta da pirâmide, atmosfera mágica" },
     { "nome": "A praça", "aparencia": "praça arborizada ao entardecer, banco de madeira, fonte de pedra ao fundo, luz quente" }
   ],
