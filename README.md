@@ -69,14 +69,41 @@ Cada `skill/<nome>/SKILL.md` traz a entrada esperada (schema do JSON) e os detal
 
 ## Instalar como skills (Claude Code)
 
-As skills podem ser **instaladas individualmente** em `~/.claude/skills/` (symlink apontando pro `skill/<nome>` do repo). Duas regras:
+As skills são **instaladas individualmente** em `~/.claude/skills/` por **symlink** apontando pro `skill/<nome>` do repo, com **nome prefixado `inemaref-<nome>`** (evita conflito com skills de nome genérico; o diretório no repo continua `skill/<nome>`).
 
-- **Nomes prefixados `inemaref-<nome>`** (`inemaref-folder`, `inemaref-quadrinho`, `inemaref-motioncomic`, `inemaref-serie`, `inemaref-referencias`) — evita **conflito** com outras skills de nome genérico. (O diretório no repo continua `skill/<nome>`; só o nome instalado é prefixado.)
-- **Independência + dependências:** cada skill **localiza as irmãs por descoberta** (`$INEMAREF_HOME/skill/<x>` → `~/.claude/skills/inemaref-<x>` → repo via realpath), então instalar uma sozinha funciona desde que suas **dependências** estejam disponíveis. As dependências são declaradas no `SKILL.md` (ex.: `serie` requer `folder`/`quadrinho`/`motioncomic`; `quadrinho`/`motioncomic` requerem `folder` + `referencias`). Atalho: `export INEMAREF_HOME=<caminho-do-repo>`.
+### 1. Pré-requisitos
+- **Python 3.10+** com `pyyaml`, `opencv-python`, `numpy` (`pip install pyyaml opencv-python numpy`).
+- **ffmpeg** e **Chromium** (o render HTML→PNG acha o Chromium do Playwright/sistema; ou defina `CHROMIUM_BIN`).
+- **Serviços locais** (conforme o que for usar): `inemaimg` (flux2-klein) em `http://localhost:8000` para imagem; `inemavox` em `http://127.0.0.1:7860` para voz (TTS) nos tipos de vídeo.
+- O **repo clonado** em algum lugar — ex.: `~/projetos/inemaref`.
 
-Cada skill responde a **`/inemaref-<nome> help`** com o resumo de uso e opções.
+### 2. Instalar (symlinks)
+```bash
+REPO=~/projetos/inemaref            # caminho do repo clonado
+for x in referencias folder quadrinho motioncomic serie; do
+  ln -sfn "$REPO/skill/$x" ~/.claude/skills/inemaref-$x
+done
+# (opcional) atalho de descoberta — util se rodar fora da arvore do repo:
+export INEMAREF_HOME="$REPO"        # ponha no seu ~/.bashrc para persistir
+```
+Instale **só as que quiser** — mas respeite as **dependências** (cada skill acha as irmãs em `~/.claude/skills/inemaref-<x>` por descoberta):
 
-> Se aparecer **erro de referência** ao instalar/usar uma skill sozinha, é uma dependência não encontrada (ex.: `folder`/`referencias`): instale a skill irmã ou defina `INEMAREF_HOME`.
+| skill | depende de |
+|---|---|
+| `inemaref-folder` | `inemaref-referencias` |
+| `inemaref-quadrinho` | `inemaref-folder`, `inemaref-referencias` |
+| `inemaref-motioncomic` | `inemaref-folder`, `inemaref-quadrinho`, `inemaref-referencias` |
+| `inemaref-serie` | `inemaref-folder`, `inemaref-quadrinho`, `inemaref-motioncomic`, `inemaref-referencias` |
+
+### 3. Verificar
+```bash
+ls -la ~/.claude/skills/inemaref-*          # devem ser symlinks pro repo
+python3 -c "import sys; sys.path.insert(0,'$HOME/.claude/skills/inemaref-serie/scripts'); import build_serie; print('OK')"
+```
+
+Cada skill responde a **`/inemaref-<nome> help`** (folder, quadrinho, motioncomic, serie) com o resumo de uso e opções.
+
+> **Erro de referência** ao usar uma skill sozinha = uma dependência não encontrada (ex.: `folder`/`referencias`). Solução: instale a skill irmã (tabela acima) **ou** `export INEMAREF_HOME=<caminho-do-repo>`.
 
 ## Documentos
 
