@@ -1,0 +1,15 @@
+# serie — defaults da skill. Cada série sobrescreve na sua biblia.json.
+estilo:
+  arte: manga                   # manga | cartoon | foto
+  modelo_pagina: manga-dinamico # manga-dinamico (assimétrico, DEFAULT) | grade-uniforme (2x3)
+  voz: bella                    # bella | rachel  (só tipos de vídeo)
+  intro: true                   # cartão de abertura no vídeo: true | false
+formato:
+  tipo: video-pagina            # texto | hq | video-slideshow | video-pagina
+  n_episodios: 3                # quantos episódios
+  n_paginas: 3                  # páginas por episódio (cada página = 6 quadros)
+  destino: output               # pasta de saída -> <destino>/<serie-id>/ (+ manifesto.json)
+runtime:
+  auto: false                   # true = pula o portão de aprovação
+  runner: auto                  # auto (inline; mkivideos se de pé e tipo=vídeo) | inline | mkivideos
+  notificar: true               # progresso no openpcbot: true | false

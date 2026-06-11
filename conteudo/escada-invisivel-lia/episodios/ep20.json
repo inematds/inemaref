@@ -1,0 +1,375 @@
+{
+  "n": 20,
+  "titulo": "Um degrau por vez",
+  "paginas": [
+    {
+      "n": 1,
+      "titulo": "A praça, de novo",
+      "chamada": "Lia volta à praça onde tudo começou.",
+      "paineis": [
+        {
+          "prompt": "Lia sentada no banco da praça ao entardecer, olhar sereno, luz quente",
+          "narracao": "Era a mesma praça de sempre — o mesmo banco, a mesma luz dourada de fim de tarde.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "close no rosto tranquilo de Lia, sombra suave, ar nostálgico",
+          "narracao": "Mas Lia não era mais a mesma de quando sentou ali pela primeira vez, sem entender nada."
+        },
+        {
+          "prompt": "pessoas caminhando ao fundo, desfocadas, movimento de tarde comum",
+          "narracao": "À sua volta, a praça seguia fervendo de vidas — cada uma puxando para um lado diferente.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia olhando as pessoas com olhar tranquilo, quase sorrindo",
+          "narracao": "Ela observava, mas desta vez não havia mais confusão no peito — havia algo parecido com clareza."
+        },
+        {
+          "prompt": "banco de madeira vazio com folhas caídas ao redor, luz de entardecer",
+          "narracao": "Tinha sido uma jornada longa: cinco degraus, vinte episódios, incontáveis surpresas no caminho.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia respirando fundo, de olhos meio fechados, satisfeita",
+          "narracao": "E ali, naquele banco, ela decidiu rever tudo — do começo ao fim."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "titulo": "O mapa que ninguém ensina",
+      "chamada": "Lia recorda a pirâmide pela primeira vez.",
+      "paineis": [
+        {
+          "prompt": "Lia abrindo um caderninho antigo cheio de anotações e rascunhos",
+          "narracao": "No caderninho, estava o mapa — aquela pirâmide que o Professor tinha desenhado num dia de aula."
+        },
+        {
+          "prompt": "página do caderninho com esboço de pirâmide de cinco níveis, traços à mão",
+          "narracao": "Cinco degraus. Do mais básico ao mais alto. Uma ordem que ninguém ensina, mas que todo mundo sente.",
+          "quem": ""
+        },
+        {
+          "prompt": "visão da pirâmide plena, contornos de luz, base larga, céu suave ao fundo",
+          "narracao": "A pirâmide não era uma receita nem uma régua para medir os outros — era um mapa para entender.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ],
+          "quem": ""
+        },
+        {
+          "prompt": "Lia tocando o desenho do caderninho com a ponta do dedo",
+          "narracao": "Lia passou o dedo pelos degraus desenhados e lembrou de tudo que aprendeu enquanto subia."
+        },
+        {
+          "prompt": "Professor sorrindo, suéter de tricô, apontando para um quadro imaginário",
+          "narracao": "O Professor tinha avisado: cada nível é real, mas o que ele significa para cada pessoa é sempre diferente.",
+          "quem": "Professor, homem mais velho, simpático, óculos, cabelo grisalho, suéter de tricô"
+        },
+        {
+          "prompt": "Lia fechando o caderninho suavemente, pensativa",
+          "narracao": "Individual, relativa, dinâmica — essas três palavras tinham mudado a forma de Lia ver o mundo."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "titulo": "O básico não é o mesmo para todos",
+      "chamada": "Cada um carrega um 'básico' diferente — e isso muda tudo.",
+      "paineis": [
+        {
+          "prompt": "Lia olhando para um entregador de bicicleta passando pela praça",
+          "narracao": "Ela lembrou da lição do começo: o básico é o ponto de partida — mas ele não é igual para ninguém."
+        },
+        {
+          "prompt": "entregador pedalando firme, sacola nas costas, rosto focado",
+          "narracao": "Para aquele entregador, chegar ao fim do dia com o salário garantido já era o suficiente.",
+          "quem": ""
+        },
+        {
+          "prompt": "empresário de terno saindo de carro executivo, praça ao fundo",
+          "narracao": "Mais à frente, um executivo descia de um carro caro — e, para ele, o básico era outro universo.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia olhando os dois, um de cada lado, expressão reflexiva",
+          "narracao": "Lia olhava os dois ao mesmo tempo, e entendia: nenhum deles estava errado — estavam em bases diferentes."
+        },
+        {
+          "prompt": "dois pratos sobre uma mesa, um simples e um farto, lado a lado",
+          "narracao": "O 'básico' de um pode ser o sonho de outro — e julgar sem saber em que base a pessoa está é não enxergar a escada.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia sorrindo levemente, anotando no caderninho",
+          "narracao": "Era o primeiro ensinamento que ela carregaria para sempre: individual e relativo."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "titulo": "O chão que treme",
+      "chamada": "Um degrau pode tremer — e quando treme, vira o mais importante.",
+      "paineis": [
+        {
+          "prompt": "Lia recordando, imagem turva de si mesma mais nova parecendo preocupada",
+          "narracao": "Mas a vida não deixa ninguém parado num degrau para sempre — e Lia havia aprendido isso na própria pele."
+        },
+        {
+          "prompt": "close numa conta de luz com valor alto, sobre uma mesa, luz fria",
+          "narracao": "Quando a conta apertou, quando a segurança vacilou, tudo que parecia conquistado começou a pesar.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia mais nova de cabeça baixa, olhar preocupado, em quarto escuro",
+          "narracao": "Naquele momento, a autorrealização, o reconhecimento, até os amigos — tudo ficou em segundo plano."
+        },
+        {
+          "prompt": "degrau de pedra com rachadura, luz tremulando sobre ele",
+          "narracao": "Porque quando um degrau treme, ele se torna o mais importante de todos — não importa onde você estava antes.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia de agora olhando para longe, com serenidade no rosto",
+          "narracao": "Entender isso tirou o peso da culpa: regredir não era fraqueza — era a escada respondendo à vida."
+        },
+        {
+          "prompt": "escada de luz com um degrau pulsando mais forte que os outros",
+          "narracao": "Dinâmica. A pirâmide sempre foi dinâmica — ela respira junto com a gente.",
+          "usa": [
+            "Escada de luz"
+          ],
+          "quem": ""
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "titulo": "Teo, no degrau certo",
+      "chamada": "Lia recorda o que Teo ensinou sobre o nível social.",
+      "paineis": [
+        {
+          "prompt": "Teo sentado na mesma mesa de sempre, óculos redondos, sorriso calmo",
+          "narracao": "Mas a descida nunca foi solitária — e foi aí que Lia pensou em Teo.",
+          "quem": "Teo, jovem ~22, calmo, cabelo escuro curto, óculos redondos, jaqueta verde-oliva"
+        },
+        {
+          "prompt": "Teo e Lia sentados juntos na praça, lanche entre eles, tarde quente",
+          "narracao": "Teo tinha aparecido num momento em que ela precisava de pertencer — e ele simplesmente estava lá.",
+          "quem": "Teo, jovem ~22, calmo, cabelo escuro curto, óculos redondos, jaqueta verde-oliva"
+        },
+        {
+          "prompt": "close na mão de Teo passando um copo para Lia, gesto cotidiano",
+          "narracao": "Não foi um discurso, não foi um conselho grandioso — foi um gesto simples, no momento certo.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia olhando para Teo com gratidão sutil, expressão morna",
+          "narracao": "E Lia entendeu o que o nível social realmente significa: ter alguém que aparece quando o degrau treme."
+        },
+        {
+          "prompt": "Teo e Lia de costas, caminhando na praça, silêncio confortável",
+          "narracao": "Pertencer não era sobre festa e agitação — era sobre esse silêncio confortável que só uma pessoa certa produz.",
+          "quem": "Teo, jovem ~22, calmo, cabelo escuro curto, óculos redondos, jaqueta verde-oliva"
+        },
+        {
+          "prompt": "Lia sozinha no banco, sorrindo para a lembrança",
+          "narracao": "Ela sorriu para a memória, grata — o nível social tinha ganhado rosto, e esse rosto era o de Teo."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "titulo": "O espelho da estima",
+      "chamada": "Ser vista pelos outros e ser vista por si mesma — duas faces do mesmo degrau.",
+      "paineis": [
+        {
+          "prompt": "Lia de perfil, olhando sua própria reflexão numa poça d'água na praça",
+          "narracao": "Havia um degrau que Lia tinha subestimado no começo: o de ser reconhecida."
+        },
+        {
+          "prompt": "mãos aplaudindo, foco em luzes de palco ao fundo, sem rosto",
+          "narracao": "Ela também havia querido o elogio, querido o aplauso — e não havia vergonha nenhuma nisso.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia recolhida após uma crítica, abraçando os próprios braços",
+          "narracao": "Mas quando a crítica chegou dura demais, ela entendeu o quanto sua estima ainda dependia dos outros."
+        },
+        {
+          "prompt": "Lia de pé, olhar firme para frente, postura resoluta",
+          "narracao": "Foi então que ela começou a construir a outra estima — aquela que não espera aplauso para existir."
+        },
+        {
+          "prompt": "espelho simples refletindo apenas a silhueta de uma figura, luz suave",
+          "narracao": "Reconhecimento externo alimenta, mas é o interno que sustenta — sem ele, qualquer crítica vira terremoto.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia tocando o próprio peito com a mão, olhar sereno",
+          "narracao": "Ela aprendeu a ser sua própria primeira testemunha — e esse aprendizado ainda estava crescendo."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "titulo": "O topo que se move",
+      "chamada": "Chegar ao topo não é uma linha de chegada — é um estado que a vida reorganiza.",
+      "paineis": [
+        {
+          "prompt": "Lia escrevendo com intensidade à mesa, olhar aceso, pilha de folhas",
+          "narracao": "Houve dias em que Lia esteve no topo — dias em que criava, escrevia, e o mundo parecia alinhado."
+        },
+        {
+          "prompt": "topo da pirâmide cintilando, luz dourada irradiando para fora",
+          "narracao": "Aquele era o degrau da autorrealização: fazer o que você veio fazer, do jeito que só você faz.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ],
+          "quem": ""
+        },
+        {
+          "prompt": "Lia no mesmo posto de escrita, mas agora com expressão tensa, conta em cima das folhas",
+          "narracao": "Mas então a vida interveio — uma conta, uma notícia ruim, um telefonema que mudou tudo."
+        },
+        {
+          "prompt": "escada de luz com os degraus superiores apagando um a um, da ponta para baixo",
+          "narracao": "E os degraus de cima foram apagando, um por um, enquanto a atenção descia para onde doia.",
+          "usa": [
+            "Escada de luz"
+          ],
+          "quem": ""
+        },
+        {
+          "prompt": "Lia olhando para cima, respeitosa, como quem sabe que vai voltar",
+          "narracao": "Lia aprendeu a não chamar isso de fracasso — era só a escada sendo fiel à vida real."
+        },
+        {
+          "prompt": "Lia sorrindo de lado, confiante, olhar levantado",
+          "narracao": "Ninguém vive no topo para sempre — e saber disso, paradoxalmente, era o que permitia voltar."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "titulo": "A pirâmide nos outros",
+      "chamada": "A maior virada: usar a escada como ferramenta de empatia.",
+      "paineis": [
+        {
+          "prompt": "Lia observando uma mãe cansada com criança pequena no colo, na praça",
+          "narracao": "Com o tempo, Lia parou de perguntar 'por que essa pessoa age assim?' — e começou a perguntar outra coisa."
+        },
+        {
+          "prompt": "close nos olhos de Lia com expressão de compreensão, não de julgamento",
+          "narracao": "A pergunta nova era: em que degrau essa pessoa está tentando sobreviver agora?"
+        },
+        {
+          "prompt": "a mãe cansada de olhos fechados, bebê no colo, exaustão visível",
+          "narracao": "Aquela mãe não estava sendo grossa — estava no fisiológico, sem dormir há dias, no limite do básico.",
+          "quem": ""
+        },
+        {
+          "prompt": "pirâmide sobreposta levemente sobre a cena da praça, transparente, revelando o nível de cada pessoa",
+          "narracao": "Era como enxergar uma camada invisível sobre cada pessoa — e, de repente, tudo fazia mais sentido.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ],
+          "quem": ""
+        },
+        {
+          "prompt": "Lia estendendo a mão para a mãe, oferecendo ajuda simples",
+          "narracao": "Empatia não era concordar com tudo — era entender de onde a pessoa estava falando."
+        },
+        {
+          "prompt": "Lia e a mãe trocando um sorriso breve, conexão humana simples",
+          "narracao": "E bastou um gesto pequeno, nascido desse entendimento, para que a praça ficasse um pouco mais quente.",
+          "quem": ""
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "titulo": "Três palavras, uma escada",
+      "chamada": "Individual, relativa, dinâmica — a síntese que muda o olhar.",
+      "paineis": [
+        {
+          "prompt": "Lia de pé na praça, vento leve, postura aberta e confiante",
+          "narracao": "Lia ficou de pé por um momento, organizando tudo que aprendeu numa ideia só — simples o bastante para carregar."
+        },
+        {
+          "prompt": "caderninho aberto com as palavras 'individual', 'relativa', 'dinâmica' escritas em destaque",
+          "narracao": "Três palavras que caberiam em qualquer bolso: individual, relativa, dinâmica.",
+          "quem": ""
+        },
+        {
+          "prompt": "close na palavra 'individual' sublinhada no caderninho",
+          "narracao": "Individual: o mesmo nível vive de formas completamente diferentes em cada pessoa.",
+          "quem": ""
+        },
+        {
+          "prompt": "close na palavra 'relativa' com seta desenhada apontando para duas figuras diferentes",
+          "narracao": "Relativa: o básico de um não é o básico do outro — e nenhum dos dois está errado.",
+          "quem": ""
+        },
+        {
+          "prompt": "close na palavra 'dinâmica' com setas para cima e para baixo desenhadas",
+          "narracao": "Dinâmica: a vida empurra pra cima e puxa pra baixo — e a escada acompanha cada movimento.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia fechando o caderninho com gesto firme e decisivo, sorriso sutil",
+          "narracao": "Não era uma fórmula para julgar — era um mapa para entender. E ela finalmente sabia usá-lo."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "titulo": "Um degrau por vez",
+      "chamada": "A escada continua, e Lia segue — um degrau por vez.",
+      "paineis": [
+        {
+          "prompt": "Lia sentada no banco da praça ao entardecer, olhando o horizonte, luz dourada",
+          "narracao": "A tarde ia fechando e a praça ia esvaziando — mas Lia ficou um pouco mais, só para sentir o fim.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "escada de luz ascendente ao fundo da praça, suave, todos os degraus acesos",
+          "narracao": "A escada ainda estava lá, invisível para a maioria — mas agora Lia a via o tempo todo, em todo lugar.",
+          "usa": [
+            "Escada de luz"
+          ],
+          "quem": ""
+        },
+        {
+          "prompt": "pirâmide ao longe, contornos dourados, harmoniosa, inteira",
+          "narracao": "Cinco degraus que contam a história de qualquer ser humano — incluindo a dela.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ],
+          "quem": ""
+        },
+        {
+          "prompt": "Lia de pé, dando o primeiro passo para sair da praça, olhando para frente",
+          "narracao": "Ela se levantou, e entendeu que a jornada não havia terminado — havia apenas ficado mais consciente."
+        },
+        {
+          "prompt": "close nos pés de Lia dando um passo firme sobre o chão da praça",
+          "narracao": "Porque a escada não some quando você aprende sobre ela — ela continua, e você continua com ela.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia caminhando para longe na praça, de costas, luz do entardecer ao redor",
+          "narracao": "Cada necessidade tem seu tempo. Cada degrau, sua vez. E a vida, sempre, um degrau por vez.",
+          "usa": [
+            "A praça"
+          ]
+        }
+      ]
+    }
+  ]
+}

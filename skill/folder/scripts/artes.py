@@ -1,6 +1,8 @@
 import json, os
-
-_ARTES_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "referencias", "artes.json")
+import sys
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+import _deps  # noqa: E402
+_ARTES_PATH = os.path.join(_deps.referencias(), "artes.json")
 
 def load_arte(arte):
     with open(_ARTES_PATH) as f:

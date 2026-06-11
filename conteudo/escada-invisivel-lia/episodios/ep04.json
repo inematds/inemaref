@@ -1,0 +1,417 @@
+{
+  "n": 4,
+  "titulo": "O corpo fala",
+  "paginas": [
+    {
+      "n": 1,
+      "titulo": "O que sustenta tudo",
+      "chamada": "A base de tudo começa no corpo — e o corpo não pede, ele exige.",
+      "paineis": [
+        {
+          "prompt": "Lia olhando para baixo, pensativa, mãos no colo",
+          "narracao": "Lia tinha aprendido que a pirâmide começa de baixo — e quis entender o que, exatamente, ficava naquela base larga."
+        },
+        {
+          "prompt": "a base da pirâmide em destaque, larga e sólida",
+          "narracao": "Lá ficavam as necessidades do corpo: comida, água, abrigo, roupa, sono.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "close num prato de comida simples sobre mesa de madeira",
+          "narracao": "Eram as coisas mais concretas que existem — mas também as mais fáceis de ignorar quando não faltam.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia apontando mentalmente para a base da pirâmide imaginária",
+          "narracao": "Foi então que ela percebeu a lógica cruel da base: quando está garantida, vira invisível.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "close no rosto de Lia com expressão de descoberta",
+          "narracao": "Mas quando falta — mesmo que seja só um pouco — ela grita mais alto que qualquer coisa acima dela."
+        },
+        {
+          "prompt": "a pirâmide inteira com a base iluminada em primeiro plano",
+          "narracao": "O corpo fala antes da mente. Sempre.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "titulo": "O básico de cada um",
+      "chamada": "Básico é relativo — e Lia está prestes a entender isso.",
+      "paineis": [
+        {
+          "prompt": "Lia caminhando pela praça ao entardecer, olhando ao redor",
+          "narracao": "Saindo para a praça, Lia se perguntou o que seria, afinal, o básico de cada pessoa.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "um homem simples chegando de ônibus, sacola no braço",
+          "narracao": "Ali perto, um homem descia do ônibus com uma sacola — aquele transporte era a viagem certa para o dia certo.",
+          "quem": ""
+        },
+        {
+          "prompt": "um entregador de bicicleta passando rápido pela rua",
+          "narracao": "Mais à frente, um rapaz pedalava para o trabalho, leve, sem precisar de nada além das duas rodas.",
+          "quem": ""
+        },
+        {
+          "prompt": "uma mulher saindo de um carro parado em frente a uma loja",
+          "narracao": "Do outro lado da praça, uma mulher saía do carro como quem não concebe ir a pé — para ela, carro era o básico.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia parada, olhando os três ao mesmo tempo",
+          "narracao": "E Lia ficou parada olhando para os três, com a mesma rua, destinos parecidos — mas básicos completamente diferentes."
+        },
+        {
+          "prompt": "três caminhos diferentes convergindo para o mesmo ponto, sem pessoas",
+          "narracao": "O básico não tem um tamanho fixo. Ele tem o tamanho da vida de quem precisa.",
+          "quem": ""
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "titulo": "A régua de cada um",
+      "chamada": "O que é suficiente para um pode ser escasso para outro.",
+      "paineis": [
+        {
+          "prompt": "Lia sentada num banco da praça, caderninho aberto",
+          "narracao": "Lia abriu o caderninho e tentou escrever uma definição de básico — mas a caneta parou.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "página do caderninho com a palavra 'básico' e uma interrogação",
+          "narracao": "Porque básico para quem? O básico de Lia era diferente do básico daquele homem do ônibus, que era diferente do básico da mulher do carro.",
+          "quem": ""
+        },
+        {
+          "prompt": "Teo aparecendo pelo caminho com dois copos de café",
+          "narracao": "Foi então que Teo apareceu com dois cafés — bem na hora.",
+          "quem": "Teo, jovem ~22, calmo, cabelo escuro curto, óculos redondos, jaqueta verde-oliva"
+        },
+        {
+          "prompt": "Teo sentando ao lado de Lia, passando o copo",
+          "narracao": "Lia contou o que estava pensando, e Teo assentiu, curioso.",
+          "quem": "Teo, jovem ~22, calmo, cabelo escuro curto, óculos redondos, jaqueta verde-oliva",
+          "fala": {
+            "quem": "Lia",
+            "texto": "O básico de um é ter carro. O de outro é só chegar vivo no fim do dia."
+          }
+        },
+        {
+          "prompt": "Teo segurando o café, pensativo",
+          "narracao": "Teo deu um gole, devagar.",
+          "quem": "Teo, jovem ~22, calmo, cabelo escuro curto, óculos redondos, jaqueta verde-oliva",
+          "fala": {
+            "quem": "Teo",
+            "texto": "Então a régua muda dependendo de quem está medindo."
+          }
+        },
+        {
+          "prompt": "close nas mãos dos dois segurando copos de café, paralelo ao banco",
+          "narracao": "Exatamente isso. A mesma base, metros diferentes."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "titulo": "A casa de cada um",
+      "chamada": "Abrigo também é relativo — e o que protege muda de corpo para corpo.",
+      "paineis": [
+        {
+          "prompt": "um quarto pequeno mas organizado, cama arrumada, janela com luz",
+          "narracao": "Abrigo também estava na base — e Lia parou para pensar no que isso significava.",
+          "quem": ""
+        },
+        {
+          "prompt": "uma moradia simples de bairro periférico, portão de ferro, jardim singelo",
+          "narracao": "Para muita gente, ter um teto firme já era conquista suficiente, e dormir dentro de casa era tudo.",
+          "quem": ""
+        },
+        {
+          "prompt": "um apartamento moderno visto de fora, janelas iluminadas à noite",
+          "narracao": "Para outros, o apartamento precisava de internet estável, água quente, segurança — aquilo era o mínimo.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia imaginando as duas moradias sobrepostas na mente",
+          "narracao": "Lia se deu conta: as duas famílias estavam na mesma camada da pirâmide, mas em mundos completamente distintos.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "close no rosto de Lia com expressão de compreensão tranquila",
+          "narracao": "Nenhuma estava errada. Cada uma estava respondendo ao seu básico — o que o corpo e a história daquela pessoa exigiam."
+        },
+        {
+          "prompt": "a base da pirâmide com várias silhuetas pequenas dentro dela, em perspectiva",
+          "narracao": "Uma mesma camada, muitas vidas diferentes coexistindo.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "titulo": "Roupa e temperatura",
+      "chamada": "Até a roupa que cobre o corpo diz algo sobre o básico de cada um.",
+      "paineis": [
+        {
+          "prompt": "vitrine de loja de roupas com manequins, cidade ao fundo",
+          "narracao": "Passando por uma loja, Lia olhou para a vitrine e pensou na roupa — que também entrava na base.",
+          "quem": ""
+        },
+        {
+          "prompt": "uma criança com roupa simples mas limpa, brincando na calçada",
+          "narracao": "Uma criança passava de camiseta simples, descalça, absolutamente satisfeita.",
+          "quem": ""
+        },
+        {
+          "prompt": "um executivo de terno ajustado, passos firmes",
+          "narracao": "A poucos metros, um homem de terno ajustado cruzava a rua — o terno era parte do básico dele, da função que exercia no mundo.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia olhando para a própria roupa, o cardigã mostarda",
+          "narracao": "Lia olhou para o próprio cardigã mostarda e sorriu: ele era o conforto dela, o que a fazia sentir em casa no próprio corpo."
+        },
+        {
+          "prompt": "close num par de sapatos simples ao lado de um par elegante, no chão",
+          "narracao": "Básico não é pouco nem muito — é o que cada corpo precisa para funcionar e se sentir inteiro.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia sorrindo levemente, cardigã bem ajustado nos ombros",
+          "narracao": "E esse básico, ninguém de fora tem o direito de julgar como insuficiente ou exagerado."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "titulo": "O sono que restaura",
+      "chamada": "Dormir também é necessidade fisiológica — e nem todo mundo descansa do mesmo jeito.",
+      "paineis": [
+        {
+          "prompt": "a cidade à noite, janelas acesas e apagadas, silêncio visual",
+          "narracao": "À noite, Lia pensou no sono — a necessidade mais subestimada da base.",
+          "quem": ""
+        },
+        {
+          "prompt": "uma pessoa dormindo num sofá pequeno, posição desconfortável",
+          "narracao": "Em algum lugar da cidade, alguém dormia torto no sofá porque não havia outro espaço — e aquilo era o possível.",
+          "quem": ""
+        },
+        {
+          "prompt": "um médico cochilando entre plantões, cabeça na mesa",
+          "narracao": "Em outro ponto, um médico de plantão fechava os olhos por dez minutos entre chamados — e aqueles dez minutos valiam ouro.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia deitada na cama, olhos abertos no teto",
+          "narracao": "Lia estava deitada, mas o pensamento girava — e foi então que ela entendeu que descansar também é direito, não fraqueza."
+        },
+        {
+          "prompt": "close nos olhos de Lia fechando devagar",
+          "narracao": "O corpo tem seus próprios horários, e ignorá-los não é disciplina — é dívida que vai ser cobrada."
+        },
+        {
+          "prompt": "janela escura com lua ao fundo, quarto em paz",
+          "narracao": "O sono é a base da base. Sem ele, nada mais funciona direito.",
+          "quem": ""
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "titulo": "Quando o básico vira invisível",
+      "chamada": "Quem nunca passou falta esquece que o básico existe — até que ele some.",
+      "paineis": [
+        {
+          "prompt": "Lia tomando café da manhã tranquila, copo de suco na mesa",
+          "narracao": "De manhã, Lia tomou café sem pensar duas vezes — e percebeu que era exatamente esse o problema."
+        },
+        {
+          "prompt": "close no copo de suco, luz da manhã refletindo",
+          "narracao": "Quem tem o básico garantido para de ver o básico. Ele vira cenário, não necessidade.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia parando com o copo na mão, olhar contemplativo",
+          "narracao": "Mas, para milhões de pessoas, aquele mesmo copo de suco era um luxo — e pensar nisso mudou o gosto da fruta."
+        },
+        {
+          "prompt": "flashback em tom mais escuro: uma criança olhando para uma mesa vazia",
+          "narracao": "Ela imaginou uma criança olhando para uma mesa vazia, e sentiu o peso daquele nível silencioso.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia com o rosto mais sério, postura atenta",
+          "narracao": "O básico invisível de uns é o sonho distante de outros. Essa distância dói — e precisa ser nomeada."
+        },
+        {
+          "prompt": "a base da pirâmide em tom mais sombrio, como fundação de um edifício",
+          "narracao": "Sem reconhecer a base, não há como entender o que move as pessoas. Nenhum degrau acima faz sentido sem ela.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "titulo": "A conversa com o Professor",
+      "chamada": "O Professor confirma: o básico é a régua de cada história de vida.",
+      "paineis": [
+        {
+          "prompt": "Lia na sala do Professor, caderninho aberto sobre a mesa",
+          "narracao": "À tarde, Lia foi até o Professor com o caderninho cheio de perguntas.",
+          "quem": "Professor, homem mais velho, simpático, óculos, cabelo grisalho, suéter de tricô"
+        },
+        {
+          "prompt": "o Professor ouvindo Lia com atenção, cotovelos na mesa",
+          "narracao": "Ela contou o que tinha visto na praça — o ônibus, o carro, a bicicleta — e ele assentiu sem interromper.",
+          "quem": "Professor, homem mais velho, simpático, óculos, cabelo grisalho, suéter de tricô"
+        },
+        {
+          "prompt": "o Professor apontando para um livro aberto sobre a mesa",
+          "narracao": "Quando ela terminou, ele virou o livro.",
+          "quem": "Professor, homem mais velho, simpático, óculos, cabelo grisalho, suéter de tricô",
+          "fala": {
+            "quem": "Professor",
+            "texto": "Maslow não definiu um valor fixo para o fisiológico. Ele sabia que o corpo de cada pessoa tem sua própria conta a pagar."
+          }
+        },
+        {
+          "prompt": "Lia anotando no caderninho, concentrada",
+          "narracao": "Lia escreveu rápido, porque aquilo encaixava tudo.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Então não existe 'básico demais' ou 'básico de menos'?"
+          }
+        },
+        {
+          "prompt": "o Professor sorrindo, inclinando levemente a cabeça",
+          "narracao": "O Professor deu uma risada curta e gentil.",
+          "quem": "Professor, homem mais velho, simpático, óculos, cabelo grisalho, suéter de tricô",
+          "fala": {
+            "quem": "Professor",
+            "texto": "Existe apenas o que aquele corpo, naquela vida, precisa para funcionar. O julgamento é nosso — não é da pirâmide."
+          }
+        },
+        {
+          "prompt": "close no caderninho com a frase anotada: 'o julgamento é nosso'",
+          "narracao": "Lia sublinharia duas vezes aquela frase antes de dormir.",
+          "quem": ""
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "titulo": "Os três na praça",
+      "chamada": "Teo traz um exemplo que torna a relatividade concreta e inegável.",
+      "paineis": [
+        {
+          "prompt": "Lia e Teo caminhando juntos pela praça ao entardecer",
+          "narracao": "De volta à praça, Lia contou ao Teo o que o Professor tinha dito, e ele parou no meio do caminho.",
+          "usa": [
+            "A praça"
+          ],
+          "quem": "Teo, jovem ~22, calmo, cabelo escuro curto, óculos redondos, jaqueta verde-oliva"
+        },
+        {
+          "prompt": "Teo apontando para três pessoas diferentes na praça",
+          "narracao": "Ele apontou para três pessoas sentadas em lugares diferentes da praça.",
+          "quem": "Teo, jovem ~22, calmo, cabelo escuro curto, óculos redondos, jaqueta verde-oliva",
+          "fala": {
+            "quem": "Teo",
+            "texto": "Pra aquele senhor, básico é o remédio do mês. Pra aquela menina, é internet pra estudar. Pra quem dorme no banco — é ter o banco."
+          }
+        },
+        {
+          "prompt": "um senhor mais velho num banco, bolsa de remédios no colo",
+          "narracao": "O senhor apertava a bolsa de remédios como se ela fosse a âncora do dia.",
+          "quem": ""
+        },
+        {
+          "prompt": "uma jovem estudante com fone e celular, digitando",
+          "narracao": "A menina estudava com o fone nos ouvidos, dependente do sinal — aquele sinal era o caminho para o futuro dela.",
+          "quem": ""
+        },
+        {
+          "prompt": "um homem dormindo num banco de praça, cobertor fino",
+          "narracao": "E o homem do banco dormia, porque o banco era, por hora, o teto que ele tinha.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia olhando para os três em silêncio, algo mudando no rosto dela",
+          "narracao": "Três básicos. Três mundos. A mesma praça. Lia não seria mais a mesma depois disso."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "titulo": "O que Lia leva",
+      "chamada": "O fisiológico não é o nível dos pobres — é o fundamento de todo ser humano.",
+      "paineis": [
+        {
+          "prompt": "Lia sentada no banco da praça, caderninho fechado no colo",
+          "narracao": "Lia ficou um tempo só olhando a praça se esvaziar, com o caderninho fechado pela primeira vez.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "close no rosto de Lia, expressão serena e madura",
+          "narracao": "O fisiológico não era o nível dos que têm pouco — era o nível de todo ser humano, em algum momento da vida."
+        },
+        {
+          "prompt": "a pirâmide inteira com a base iluminada, os outros níveis em suave penumbra",
+          "narracao": "Sem aquela base, tudo o que fica acima perde o chão. Não há amizade que sustente a fome, não há reconhecimento que cure o cansaço.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia tocando o peito levemente, gesto introspectivo",
+          "narracao": "E cada pessoa tem o próprio básico — determinado pela história, pelo corpo, pelo que a vida ensinou a exigir."
+        },
+        {
+          "prompt": "a escada de luz com o primeiro degrau brilhando mais forte",
+          "narracao": "O primeiro degrau não é pequeno por estar embaixo. É o mais importante, porque é onde tudo começa.",
+          "quem": "",
+          "usa": [
+            "Escada de luz"
+          ]
+        },
+        {
+          "prompt": "Lia levantando e dando um passo, de costas, em direção à praça iluminada",
+          "narracao": "Ela levantou, guardou o caderninho e caminhou. Havia mais degraus. Mas esse — o primeiro — ela agora conhecia de verdade.",
+          "usa": [
+            "A praça"
+          ]
+        }
+      ]
+    }
+  ]
+}

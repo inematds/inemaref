@@ -28,7 +28,7 @@ existe — motion comics narrados e filmes.
 
 ## Estado
 
-**V1 construída.** As três skills da base — `folder`, `quadrinho` e `motioncomic` — estão **construídas e testadas** (suíte verde). Série (V2) e filme (V3) permanecem à frente. Página do projeto (landing + guia): [`index.html`](index.html).
+**V1 + V2 construídas; primeira série completa produzida.** As skills `folder`, `quadrinho`, `motioncomic` (V1) e `serie` (V2 — criador de série) estão **construídas e testadas** (suíte verde). A V2 já gerou uma **série inteira de exemplo** — *A Escada Invisível de Lia* (a Pirâmide de Maslow), 20 episódios × 10 páginas em vídeo (bíblia + roteiros versionados em [`conteudo/`](conteudo/)). Filme (V3) permanece à frente. Página do projeto (landing + guia): [`index.html`](index.html).
 
 ## Skills
 
@@ -37,6 +37,7 @@ existe — motion comics narrados e filmes.
 - `skill/motioncomic/` — ✅ **construída** — quadrinho em **vídeo** (TTS), em **duas formas**:
   - **Forma A — slideshow** (`build_motion`): uma imagem por vez com zoom + narração voz-off.
   - **Forma B — câmera sobre a página de papel** (`build_travel`): monta a prancha real (grade 2×3) e a câmera viaja sobre ela, mergulhando em cada quadro durante a narração, afastando e encaixando no próximo (`docs/02`). É o modo "quadrinho de verdade".
+- `skill/serie/` — ✅ **construída (V2)** — **criador de série ponta a ponta**: assunto → bíblia (folder + elenco + estilo + outline) → após aprovar, gera todos os episódios em texto/HQ/vídeo (reusa as skills acima) → arquivos nomeados + `manifesto.json` numa pasta de destino. Defaults em `config.yaml`; runner híbrido (inline | mkivideos).
 - `skill/referencias/` — núcleo comum: estilos (foto/cartoon/mangá), regra de consistência, schema da referência.
 
 ## Como usar
@@ -65,6 +66,17 @@ build_video_travel(json.load(open("roteiro.json")), voice="bella", arte="manga")
 
 Guia completo, com exemplos e pré-requisitos: abra [`index.html`](index.html) (também publicável no GitHub Pages).
 Cada `skill/<nome>/SKILL.md` traz a entrada esperada (schema do JSON) e os detalhes.
+
+## Instalar como skills (Claude Code)
+
+As skills podem ser **instaladas individualmente** em `~/.claude/skills/` (symlink apontando pro `skill/<nome>` do repo). Duas regras:
+
+- **Nomes prefixados `inemaref-<nome>`** (`inemaref-folder`, `inemaref-quadrinho`, `inemaref-motioncomic`, `inemaref-serie`, `inemaref-referencias`) — evita **conflito** com outras skills de nome genérico. (O diretório no repo continua `skill/<nome>`; só o nome instalado é prefixado.)
+- **Independência + dependências:** cada skill **localiza as irmãs por descoberta** (`$INEMAREF_HOME/skill/<x>` → `~/.claude/skills/inemaref-<x>` → repo via realpath), então instalar uma sozinha funciona desde que suas **dependências** estejam disponíveis. As dependências são declaradas no `SKILL.md` (ex.: `serie` requer `folder`/`quadrinho`/`motioncomic`; `quadrinho`/`motioncomic` requerem `folder` + `referencias`). Atalho: `export INEMAREF_HOME=<caminho-do-repo>`.
+
+Cada skill responde a **`/inemaref-<nome> help`** com o resumo de uso e opções.
+
+> Se aparecer **erro de referência** ao instalar/usar uma skill sozinha, é uma dependência não encontrada (ex.: `folder`/`referencias`): instale a skill irmã ou defina `INEMAREF_HOME`.
 
 ## Documentos
 

@@ -1,0 +1,407 @@
+{
+  "n": 12,
+  "titulo": "Quando o social vira prisão",
+  "paginas": [
+    {
+      "n": 1,
+      "titulo": "A roda",
+      "chamada": "Lia finalmente pertence — e isso a deixa feliz.",
+      "paineis": [
+        {
+          "prompt": "grupo de jovens rindo em torno de uma mesa de lanchonete, atmosfera quente",
+          "narracao": "Faz algumas semanas que Lia encontrou o seu grupo, e a sensação ainda é nova e boa.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia no meio do grupo, sorrindo, à vontade",
+          "narracao": "Ela ri com eles, ocupa espaço, sente que pertence — e isso aquece por dentro."
+        },
+        {
+          "prompt": "close nas mãos de Lia sobre a mesa, junto das mãos dos outros",
+          "narracao": "À sua volta, há companhia de verdade, e a escada parece firme sob os pés."
+        },
+        {
+          "prompt": "Teo ao lado de Lia, sorrindo tranquilo",
+          "narracao": "Teo está ali também, calmo como sempre — e Lia nota algo diferente surgindo.",
+          "quem": "Teo"
+        },
+        {
+          "prompt": "close no rosto sereno de Lia, olhos brilhando leve",
+          "narracao": "Por um instante, ela pensa: talvez isso seja tudo que precisava."
+        },
+        {
+          "prompt": "a praça ao entardecer vista de longe, cheia de pessoas",
+          "narracao": "Mas pertencer, quando vira a coisa mais importante do mundo, começa a cobrar um preço.",
+          "quem": "",
+          "usa": [
+            "A praça"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "titulo": "O convite",
+      "chamada": "Um convite simples, mas que Lia não quer aceitar.",
+      "paineis": [
+        {
+          "prompt": "jovem do grupo mostrando o celular para Lia com entusiasmo",
+          "narracao": "No dia seguinte, uma colega do grupo manda um convite — uma festa que promete ser a melhor da temporada.",
+          "quem": ""
+        },
+        {
+          "prompt": "close na tela do celular com o convite da festa",
+          "narracao": "Lia lê com cuidado, e algo dentro dela murcha.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia com expressão hesitante, olhando para o celular",
+          "narracao": "É um ambiente que ela não gosta, com pessoas que mal conhece e barulho que a cansa."
+        },
+        {
+          "prompt": "Lia olhando pela janela, pensativa, céu entardecendo",
+          "narracao": "Então, por um segundo, ela quase recusa — mas a imagem do grupo rindo sem ela passa pela cabeça."
+        },
+        {
+          "prompt": "close no rosto de Lia com expressão dividida, mordo do lábio inferior",
+          "narracao": "E aquela imagem é grande demais."
+        },
+        {
+          "prompt": "mãos de Lia digitando 'tô dentro!' no celular, hesitantes",
+          "narracao": "Ela digita 'tô dentro', mesmo sem querer ir.",
+          "quem": ""
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "titulo": "A festa",
+      "chamada": "Lia vai, mas não está lá de verdade.",
+      "paineis": [
+        {
+          "prompt": "cena de festa animada com luzes e pessoas dançando",
+          "narracao": "A festa é exatamente como ela imaginava — barulhenta, lotada, cansativa.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia no canto da festa, sorriso forçado, ombros tensos",
+          "narracao": "Ela está lá, mas não está presente — o corpo ocupa o espaço, a cabeça quer ir embora."
+        },
+        {
+          "prompt": "colega puxando Lia para o centro da festa animada",
+          "narracao": "Alguém a puxa para o meio da pista, e ela ri, porque era o que se espera dela.",
+          "quem": ""
+        },
+        {
+          "prompt": "close no rosto de Lia sorrindo de boca fechada, olhos ocos",
+          "narracao": "Mas o sorriso não chega nos olhos."
+        },
+        {
+          "prompt": "Lia olhando o relógio discretamente, rosto cansado",
+          "narracao": "Ela olha o relógio, conta os minutos, aguarda o momento certo para sumir."
+        },
+        {
+          "prompt": "Lia saindo discretamente pela porta dos fundos, aliviada e envergonhada ao mesmo tempo",
+          "narracao": "E quando finalmente vai embora, a mistura é estranha: alívio e culpa juntos."
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "titulo": "A opinião errada",
+      "chamada": "Lia concorda com o que não acredita, só para não ser diferente.",
+      "paineis": [
+        {
+          "prompt": "grupo discutindo em roda, expressões animadas",
+          "narracao": "Dias depois, o grupo debate um assunto qualquer — um filme, uma pessoa, uma escolha de vida.",
+          "quem": ""
+        },
+        {
+          "prompt": "close em vozes sobrepostas, balões de fala em cima uns dos outros",
+          "narracao": "As opiniões voam rápidas, e fica claro qual delas o grupo prefere.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia ouvindo, com expressão discordante mas contida",
+          "narracao": "Lia pensa diferente — mas sente a pressão invisível antes mesmo de abrir a boca."
+        },
+        {
+          "prompt": "close no rosto de Lia, boca entreaberta, hesitando antes de falar",
+          "narracao": "Ela começa uma frase, mede o peso dela, e troca a rota no meio do caminho."
+        },
+        {
+          "prompt": "Lia acenando com a cabeça concordando, expressão vazia",
+          "narracao": "A cabeça balança que sim — e as palavras dela ecoam o que os outros já disseram.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "É, acho que você tem razão..."
+          }
+        },
+        {
+          "prompt": "Lia olhando para o lado, expressão de desconforto interno",
+          "narracao": "Ela mesma não se reconhece na frase que acabou de dizer."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "titulo": "O padrão",
+      "chamada": "Lia percebe que isso se repete — mas não sabe como parar.",
+      "paineis": [
+        {
+          "prompt": "sequência de cenas sobrepostas: Lia sorrindo forçado em vários contextos",
+          "narracao": "Não foi uma vez. Lia começa a perceber que o padrão se repete.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia em casa, noite, sentada na beira da cama, exausta",
+          "narracao": "À noite, sozinha, há um cansaço que não é do corpo."
+        },
+        {
+          "prompt": "close nas mãos de Lia no colo, cabeça baixa",
+          "narracao": "É o cansaço de passar o dia inteiro sendo alguém que ela não é."
+        },
+        {
+          "prompt": "Lia olhando para o espelho, expressão de estranhamento consigo mesma",
+          "narracao": "Ela se olha no espelho e pergunta, baixinho, quem veio junto para casa."
+        },
+        {
+          "prompt": "reflexo de Lia no espelho levemente distorcido, sombrio",
+          "narracao": "Será que era necessário tudo isso para continuar na roda?",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia virando as costas para o espelho, abraçando os próprios ombros",
+          "narracao": "E, mais fundo ainda, surge a pergunta que ela preferia não fazer."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "titulo": "Teo nota",
+      "chamada": "Teo percebe antes que Lia consiga nomear o que sente.",
+      "paineis": [
+        {
+          "prompt": "Lia e Teo sentados num banco de praça, tarde quieta",
+          "narracao": "Num intervalo tranquilo, Teo e Lia estão sentados na praça, sem pressa.",
+          "usa": [
+            "A praça"
+          ],
+          "quem": "Teo"
+        },
+        {
+          "prompt": "Teo de perfil, olhando Lia com atenção cuidadosa",
+          "narracao": "Teo a olha com aquela atenção calma que ele tem — e ela sente o olhar antes de ele falar.",
+          "quem": "Teo"
+        },
+        {
+          "prompt": "Teo falando em tom gentil, óculos refletindo a luz da tarde",
+          "narracao": "A pergunta é simples, mas pesa.",
+          "fala": {
+            "quem": "Teo",
+            "texto": "Você tá indo em tudo que eles chamam, mas parece cada vez menos você."
+          },
+          "quem": "Teo"
+        },
+        {
+          "prompt": "Lia de olhos arregalados, surpresa com a precisão da observação",
+          "narracao": "Lia abre a boca para rebater — e não acha palavras."
+        },
+        {
+          "prompt": "close nas mãos de Lia apertadas sobre o banco de madeira",
+          "narracao": "Ele tinha nomeado algo que ela ainda estava tentando esconder de si mesma.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia olhando para longe, queixo tremendo levemente",
+          "narracao": "Então, as defesas caem — e ela engole seco."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "titulo": "A confissão",
+      "chamada": "Lia finalmente nomeia o que estava acontecendo.",
+      "paineis": [
+        {
+          "prompt": "Lia olhando para baixo, voz quieta, resignada",
+          "narracao": "As palavras vêm devagar, como quem as estava guardando há tempo.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Eu fico com medo de dizer que não. Parece que se eu não for, eles param de me chamar."
+          }
+        },
+        {
+          "prompt": "Teo ouvindo com atenção, sem julgamento no rosto",
+          "narracao": "Teo ouve tudo, sem interromper, sem corrigir.",
+          "quem": "Teo"
+        },
+        {
+          "prompt": "Lia gesticulando, mais intensa, como quem desamarra um nó",
+          "narracao": "Ela continua, e a voz ganha força.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Mas eu odeio quando faço isso. Saio me sentindo vazia."
+          }
+        },
+        {
+          "prompt": "close no rosto de Lia, olhos marejados mas determinados",
+          "narracao": "Vazia: a palavra certa para quem se apaga para caber."
+        },
+        {
+          "prompt": "Teo respondendo com calma, tom reflexivo",
+          "narracao": "Teo deixa o silêncio assentar antes de falar.",
+          "fala": {
+            "quem": "Teo",
+            "texto": "Pertencer é real. Mas se você some pra isso, o que é que pertence?"
+          },
+          "quem": "Teo"
+        },
+        {
+          "prompt": "Lia com a expressão de quem acabou de entender algo importante",
+          "narracao": "E aquela frase fica ali, suspensa no ar entre os dois."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "titulo": "A pirâmide explica",
+      "chamada": "O nível social, quando ameaçado, pode distorcer a pessoa.",
+      "paineis": [
+        {
+          "prompt": "Lia imaginando a pirâmide, terceiro nível iluminado com brilho intenso demais",
+          "narracao": "Na mente de Lia, a pirâmide surge — e o terceiro nível, o social, brilha forte demais.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "close no terceiro degrau da pirâmide, overpowering os demais",
+          "narracao": "Quando a gente sente o pertencer ameaçado, esse nível vira o centro do mundo.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "a pirâmide levemente inclinada, como se o peso do nível social a desequilibrasse",
+          "narracao": "E, assim como a fome apaga o resto quando o corpo precisa, o medo de ser excluído apaga o bom senso.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia olhando para a pirâmide imaginária com expressão de reconhecimento",
+          "narracao": "Lia vê na pirâmide o que estava acontecendo com ela — não era fraqueza, era mecanismo."
+        },
+        {
+          "prompt": "sombra de grades sobre o terceiro nível da pirâmide, ideia de prisão",
+          "narracao": "O social que deveria sustentar havia virado uma gaiola.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia apontando para o nível social na pirâmide, expressão pensativa",
+          "narracao": "E toda gaiola, ela percebe, começa por dentro — não por fora.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "titulo": "O que é aceitar de verdade",
+      "chamada": "Pertencer sem se apagar — essa é a diferença.",
+      "paineis": [
+        {
+          "prompt": "Lia e Teo lado a lado no banco, silêncio confortável",
+          "narracao": "O sol baixa na praça, e Lia e Teo ficam ali, num silêncio bom.",
+          "usa": [
+            "A praça"
+          ],
+          "quem": "Teo"
+        },
+        {
+          "prompt": "Lia com expressão de quem está pensando alto, olhos no horizonte",
+          "narracao": "Ela pensa em voz alta, juntando as peças.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Eu queria tanto que gostassem de mim que fui deixando de ser eu pra isso."
+          }
+        },
+        {
+          "prompt": "Teo assentindo com leveza, expressão acolhedora",
+          "narracao": "Teo assente, sem drama — como quem reconhece algo verdadeiro.",
+          "fala": {
+            "quem": "Teo",
+            "texto": "E o grupo que só aceita quem se apaga... será que é o grupo certo?"
+          },
+          "quem": "Teo"
+        },
+        {
+          "prompt": "close no rosto de Lia, a pergunta pousando nela com peso",
+          "narracao": "A pergunta pousa nela com uma leveza que dói."
+        },
+        {
+          "prompt": "Lia olhando as próprias mãos, expressão de cuidado consigo mesma surgindo",
+          "narracao": "Pertencer de verdade não exige desaparecer — exige aparecer inteira."
+        },
+        {
+          "prompt": "a escada de luz ao fundo, suave, degrau social aceso com brilho equilibrado",
+          "narracao": "E foi aí que ela entendeu: o social sustenta quando é construído sobre quem você é — não apesar de quem você é.",
+          "quem": "",
+          "usa": [
+            "Escada de luz"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "titulo": "Fecho",
+      "chamada": "Lia volta para o grupo — mas de um jeito diferente.",
+      "paineis": [
+        {
+          "prompt": "Lia no grupo novamente, mais calma, mais presente",
+          "narracao": "Na semana seguinte, Lia aparece para o grupo — mas carrega algo diferente no jeito de estar."
+        },
+        {
+          "prompt": "Lia respondendo com tranquilidade a um convite, sorriso leve e honesto",
+          "narracao": "Quando não pode ou não quer, diz que não — de modo gentil, mas real.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Hoje não consigo, mas na próxima eu tô junto."
+          }
+        },
+        {
+          "prompt": "colegas do grupo reagindo com naturalidade, sem drama",
+          "narracao": "E o grupo, na maioria das vezes, apenas segue em frente — sem o drama que ela tanto temia.",
+          "quem": ""
+        },
+        {
+          "prompt": "close no rosto de Lia surpresa e aliviada ao mesmo tempo",
+          "narracao": "O medo era maior que o perigo real."
+        },
+        {
+          "prompt": "Lia sentada na praça, sozinha mas serena, caderninho no colo",
+          "narracao": "De volta à praça, ela escreve: pertencer é bom; desaparecer por isso é o sinal de que algo está torto.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "a pirâmide de Maslow ao fundo, o terceiro nível brilhando no tom certo, equilibrado",
+          "narracao": "O social é um degrau que carrega — mas só quando a pessoa que sobe ele ainda é ela mesma.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,398 @@
+{
+  "n": 13,
+  "titulo": "Ser reconhecida",
+  "paginas": [
+    {
+      "n": 1,
+      "titulo": "Depois do pertencer",
+      "chamada": "Lia já pertence — mas agora quer algo a mais.",
+      "paineis": [
+        {
+          "prompt": "Lia sentada à mesa de um café com Teo e outros colegas, rindo",
+          "narracao": "Lia tinha conquistado seu lugar na roda.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "close no rosto sorridente de Lia entre os amigos",
+          "narracao": "Havia pessoas ao redor, calor humano, pertencimento — tudo o que ela buscava semanas atrás."
+        },
+        {
+          "prompt": "Lia olhando para o grupo, expressão levemente distante",
+          "narracao": "Mas, naquela tarde, algo diferente puxava sua atenção para dentro."
+        },
+        {
+          "prompt": "Teo animado contando uma história para o grupo",
+          "narracao": "Teo contava uma história e todos pendiam para ouvir, capturados pelo que ele dizia.",
+          "quem": "Teo"
+        },
+        {
+          "prompt": "close no rosto de Lia observando Teo com admiração e um fio de inquietação",
+          "narracao": "Lia o observou e sentiu algo que não era ciúme — era mais sutil, mais fundo."
+        },
+        {
+          "prompt": "Lia olhando para as próprias mãos sobre a mesa, pensativa",
+          "narracao": "Era o desejo de ser ouvida assim também: de importar, de ter peso, de ser lembrada."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "titulo": "O degrau que ninguém nomeia",
+      "chamada": "Pertencer e ser reconhecida não são a mesma coisa.",
+      "paineis": [
+        {
+          "prompt": "Lia caminhando sozinha na calçada ao final da tarde",
+          "narracao": "No caminho de volta, Lia tentava nomear aquela inquietação nova."
+        },
+        {
+          "prompt": "close no pensamento de Lia: balão imaginário com silhuetas aplaudindo",
+          "narracao": "Ela já tinha amigos, já não se sentia só — então por que ainda faltava alguma coisa?"
+        },
+        {
+          "prompt": "a pirâmide de Maslow flutuando na imaginação de Lia, com o quarto nível iluminado",
+          "narracao": "Foi aí que ela enxergou: acima do pertencer, havia mais um degrau.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "close no quarto nível da pirâmide, brilhando mais forte que os outros",
+          "narracao": "Um degrau que não pede só presença — pede relevância.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia parando no meio da calçada, olhos abertos com o reconhecimento da ideia",
+          "narracao": "Pertencer é estar na roda. Mas ser reconhecida é ter voz dentro dela."
+        },
+        {
+          "prompt": "a escada de luz com o quarto degrau acendendo suavemente",
+          "narracao": "Estima. É esse o nome daquele desejo que ela não sabia nomear.",
+          "quem": "",
+          "usa": [
+            "Escada de luz"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "titulo": "O que é estima, afinal",
+      "chamada": "Estima não é vaidade — é querer ser relevante.",
+      "paineis": [
+        {
+          "prompt": "Lia sentada no banco da praça com o caderninho aberto no colo",
+          "narracao": "Na praça, Lia abriu o caderninho e tentou escrever o que sentia.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "close na página do caderninho com as palavras 'respeito, valor, importar' escritas",
+          "narracao": "As palavras que saíram foram: respeito, valor, importar.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia mordendo o lápis, pensativa, olhando para longe",
+          "narracao": "Mas ela se perguntou: isso não era vaidade? Querer reconhecimento não seria frescura?"
+        },
+        {
+          "prompt": "a pirâmide de Maslow com o quarto nível destacado e os três abaixo visíveis como base",
+          "narracao": "Então ela relembrou: estima vem depois de segurança e pertencimento — não é capricho, é necessidade.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia escrevendo no caderninho com determinação",
+          "narracao": "Vaidade é querer mais do que precisa. Estima é simplesmente querer ser vista como alguém que tem valor."
+        },
+        {
+          "prompt": "close no caderninho com a frase: 'Estima = ser relevante, respeitada, lembrada'",
+          "narracao": "E todo ser humano, em algum momento, precisa disso.",
+          "quem": ""
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "titulo": "A voz que some",
+      "chamada": "Na aula, Lia fala — e ninguém nota.",
+      "paineis": [
+        {
+          "prompt": "sala de aula, Lia levantando a mão para falar",
+          "narracao": "No dia seguinte, em aula, Lia teve uma ideia e levantou a mão."
+        },
+        {
+          "prompt": "Lia falando com expressão animada, gesticulando",
+          "narracao": "Ela falou com cuidado, com entusiasmo — achava que tinha algo a oferecer."
+        },
+        {
+          "prompt": "colegas olhando para o celular ou conversando entre si, indiferentes",
+          "narracao": "Mas a sala continuou no seu próprio ritmo, como se a voz dela não tivesse chegado a lugar nenhum.",
+          "quem": ""
+        },
+        {
+          "prompt": "o Professor anotando algo no quadro, seguindo em frente sem comentar a fala de Lia",
+          "narracao": "O Professor agradeceu de passagem e seguiu em frente.",
+          "quem": "Professor"
+        },
+        {
+          "prompt": "Lia abaixando a mão devagar, olhar miúdo, encolhida na cadeira",
+          "narracao": "Lia abaixou a mão devagar. Não era raiva — era aquele aperto silencioso de quem falou e não foi ouvido."
+        },
+        {
+          "prompt": "close no rosto de Lia de perfil, olhar caindo para a mesa",
+          "narracao": "Foi então que ela entendeu, na pele, o que aquele degrau significa quando está em falta."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "titulo": "O sabor do reconhecimento",
+      "chamada": "Uma hora depois, o Professor cita a ideia de Lia — e tudo muda.",
+      "paineis": [
+        {
+          "prompt": "o Professor na frente da sala, apontando para o quadro com entusiasmo",
+          "narracao": "Mais tarde, o Professor voltou a um ponto da discussão — e citou a ideia de Lia pelo nome.",
+          "quem": "Professor",
+          "fala": {
+            "quem": "Professor",
+            "texto": "Como a Lia levantou antes — essa observação é exatamente o que faz a diferença aqui."
+          }
+        },
+        {
+          "prompt": "colegas virando para olhar para Lia com interesse genuíno",
+          "narracao": "As cabeças se viraram. Olhares curiosos, um sorriso de canto.",
+          "quem": ""
+        },
+        {
+          "prompt": "close no rosto de Lia: surpresa primeiro, depois um calor suave se abrindo no peito",
+          "narracao": "E Lia sentiu algo que é difícil de descrever — mas todo mundo já sentiu."
+        },
+        {
+          "prompt": "detalhe do peito de Lia com um brilho sutil irradiando de dentro, estilo manga",
+          "narracao": "Era calor. Era leveza. Era a sensação de ter importado."
+        },
+        {
+          "prompt": "Lia com os ombros soltos, a postura aberta, um sorriso verdadeiro",
+          "narracao": "Os ombros se soltaram, o peito se abriu, e ela entendeu por que o reconhecimento é uma necessidade real."
+        },
+        {
+          "prompt": "a escada de luz com o quarto degrau aceso e pulsando suavemente",
+          "narracao": "Não é frescura querer ser reconhecida. É o quarto degrau fazendo o que foi feito para fazer.",
+          "quem": "",
+          "usa": [
+            "Escada de luz"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "titulo": "Relevante para quem?",
+      "chamada": "Lia percebe que reconhecimento tem endereço — nem todos precisam nos ver.",
+      "paineis": [
+        {
+          "prompt": "Lia conversando com Teo na saída da aula, animada",
+          "narracao": "Na saída, Lia contou a Teo o que tinha sentido — e ele ouviu com atenção."
+        },
+        {
+          "prompt": "Teo pensativo, óculos brilhando suavemente, mão no queixo",
+          "narracao": "Teo parou um segundo antes de responder.",
+          "quem": "Teo",
+          "fala": {
+            "quem": "Teo",
+            "texto": "Mas você notou quem você queria que te ouvisse? Não era todo mundo — era alguém específico."
+          }
+        },
+        {
+          "prompt": "close no rosto de Lia abrindo os olhos com a percepção",
+          "narracao": "Lia piscou. Era verdade — ela não queria aplauso de toda a sala."
+        },
+        {
+          "prompt": "Lia e Teo caminhando lado a lado na calçada, luz de fim de tarde",
+          "narracao": "Ela queria que o Professor a visse. Que os colegas que ela respeitava a respeitassem de volta."
+        },
+        {
+          "prompt": "close nas mãos de Lia gesticulando enquanto fala, com expressão de descoberta",
+          "narracao": "O reconhecimento tem endereço: importa mais ser relevante para quem você respeita do que famosa para desconhecidos."
+        },
+        {
+          "prompt": "Lia parando na calçada, sorrindo para Teo com convicção",
+          "narracao": "Essa ideia mudou alguma coisa nela — o desejo era menos sobre quantidade e mais sobre qualidade."
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "titulo": "Cada um mede diferente",
+      "chamada": "Ser reconhecida é relativo: o que vale pra um não vale pra outro.",
+      "paineis": [
+        {
+          "prompt": "Lia na praça ao entardecer, observando pessoas passando",
+          "narracao": "De volta à praça, Lia voltou a fazer o que sabia: observar.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "um artesão exibindo seu trabalho para poucos clientes, satisfeito",
+          "narracao": "Um artesão mostrava sua peça a dois ou três pessoas — e o orgulho no rosto era enorme.",
+          "quem": ""
+        },
+        {
+          "prompt": "um jovem filmando a si mesmo com celular, empolgado, curtidas aparecendo na tela",
+          "narracao": "Ao lado, um jovem filmava tudo e contava curtidas com os olhos brilhando de satisfação.",
+          "quem": ""
+        },
+        {
+          "prompt": "um idoso sendo ouvido com atenção por um neto, sorrindo com dignidade",
+          "narracao": "Mais adiante, um senhor falava devagar para um neto que escutava — e aquilo parecia o mundo.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia com expressão de quem acabou de entender algo sólido",
+          "narracao": "Três formas de estima, três tamanhos de plateia — e as três eram igualmente reais para quem as vivia."
+        },
+        {
+          "prompt": "a pirâmide de Maslow com o quarto nível brilhando, mas ligeiramente diferente em cada lado",
+          "narracao": "O nível é o mesmo. A régua é de cada um.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "titulo": "Quando a estima some",
+      "chamada": "Sem reconhecimento, o degrau fica frouxo e balança tudo acima.",
+      "paineis": [
+        {
+          "prompt": "Lia lembrando de uma cena: ela entregando um trabalho caprichado para alguém",
+          "narracao": "Lia pensou numa vez em que tinha se dedicado muito a um trabalho."
+        },
+        {
+          "prompt": "flashback: a pessoa recebendo o trabalho sem nem olhar, jogando na mesa",
+          "narracao": "E a pessoa tinha recebido sem olhar, jogado sobre a mesa, seguido em frente.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia no flashback, ombros caindo, expressão murcha",
+          "narracao": "Ela se lembrou do vazio que ficou — não de tristeza comum, mas de uma leveza roubada."
+        },
+        {
+          "prompt": "a escada de luz com o quarto degrau apagado, os de cima vazios também",
+          "narracao": "Sem estima, o que fica acima também balança: é difícil sonhar quando você não se sente importante.",
+          "quem": "",
+          "usa": [
+            "Escada de luz"
+          ]
+        },
+        {
+          "prompt": "Lia de volta ao presente, olhar firme de quem transformou a memória em aprendizado",
+          "narracao": "Mas ela também aprendeu que aquela falta tinha um nome — e nomear já é metade do caminho."
+        },
+        {
+          "prompt": "close no rosto sereno de Lia na luz do entardecer",
+          "narracao": "Quem sente falta de reconhecimento não está sendo fraco. Está sentindo o degrau tremer."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "titulo": "Respeito, confiança, valor",
+      "chamada": "A estima tem dois lados: o que os outros veem e o que você se dá.",
+      "paineis": [
+        {
+          "prompt": "Lia e o Professor conversando após a aula, numa sala mais vazia",
+          "narracao": "Depois das aulas, Lia ficou para conversar com o Professor sobre o que tinha descoberto.",
+          "quem": "Professor"
+        },
+        {
+          "prompt": "o Professor gesticulando com calma, explicando algo com entusiasmo contido",
+          "narracao": "Ele escutou com atenção e depois disse algo que ela não esperava.",
+          "quem": "Professor",
+          "fala": {
+            "quem": "Professor",
+            "texto": "Maslow dizia que a estima tem dois lados: o que os outros nos dão e o que a gente se dá."
+          }
+        },
+        {
+          "prompt": "Lia inclinada para frente na cadeira, curiosa e atenta",
+          "narracao": "Lia franziu a testa, curiosa.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Quer dizer que depende dos dois?"
+          }
+        },
+        {
+          "prompt": "o Professor fazendo um gesto com as duas mãos, como se equilibrasse dois pratos",
+          "narracao": "O Professor equilibrou as mãos no ar.",
+          "quem": "Professor",
+          "fala": {
+            "quem": "Professor",
+            "texto": "O reconhecimento de fora alimenta. Mas o respeito que você tem por si mesma é a raiz."
+          }
+        },
+        {
+          "prompt": "close no rosto de Lia processando a ideia, os olhos percorrendo um pensamento",
+          "narracao": "Lia deixou aquilo pousar: receber respeito é bom — mas ser capaz de se respeitar é diferente."
+        },
+        {
+          "prompt": "Lia olhando pela janela da sala, luz dourada do fim de tarde entrando",
+          "narracao": "Dois lados do mesmo degrau. E ela ainda estava aprendendo a subir pelos dois."
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "titulo": "O quarto degrau acende",
+      "chamada": "Lia entende o que move quem busca reconhecimento — e olha ao redor com novos olhos.",
+      "paineis": [
+        {
+          "prompt": "Lia caminhando pela praça ao cair da noite, luz de postes acendendo",
+          "narracao": "Na praça já quase às escuras, Lia caminhou mais devagar do que de costume.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "ela observando pessoas ao redor com expressão calma e compreensiva",
+          "narracao": "Olhava para as pessoas de um jeito diferente — já não perguntava o que elas fazem, mas o que elas precisam."
+        },
+        {
+          "prompt": "a pirâmide de Maslow com o quarto nível iluminado, os três abaixo como alicerce firme",
+          "narracao": "E em cada rosto via aquele degrau: a necessidade de importar, de ser respeitado, de ter peso no mundo.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia abrindo o caderninho e escrevendo a última linha da página",
+          "narracao": "Ela abriu o caderninho uma última vez e escreveu o que aprendeu."
+        },
+        {
+          "prompt": "close no caderninho: 'Estima = querer ser relevante. É humano. É necessidade.'",
+          "narracao": "Estima não é ego. É o quarto degrau pedindo para ser visto.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia fechando o caderninho, olhando para cima, a escada de luz suave ao fundo do céu noturno",
+          "narracao": "E o próximo degrau ainda estava ali, esperando — mais sutil, mais interior, mais dela.",
+          "usa": [
+            "Escada de luz"
+          ]
+        }
+      ]
+    }
+  ]
+}

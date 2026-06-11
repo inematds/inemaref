@@ -1,0 +1,404 @@
+{
+  "n": 5,
+  "titulo": "Quando a fome grita",
+  "paginas": [
+    {
+      "n": 1,
+      "titulo": "A manhã normal",
+      "chamada": "Lia começa um dia como qualquer outro — até não ser.",
+      "paineis": [
+        {
+          "prompt": "Lia acordando, quarto simples, luz de manhã entrando pela janela",
+          "narracao": "Era uma manhã como tantas outras — Lia acordou, se espreguiçou, e o dia começou igual."
+        },
+        {
+          "prompt": "Lia na cozinha abrindo a geladeira com expressão tranquila",
+          "narracao": "Ela foi até a cozinha, abriu a geladeira, e foi aí que a rotina parou."
+        },
+        {
+          "prompt": "interior da geladeira quase vazia, uma garrafa e pouca coisa",
+          "narracao": "A geladeira estava quase vazia — mais espaço do que comida.",
+          "quem": ""
+        },
+        {
+          "prompt": "close no rosto de Lia, olhar fixo no interior vazio da geladeira",
+          "narracao": "Por um segundo, Lia ficou parada, olhando aquele vazio como quem ainda não acredita."
+        },
+        {
+          "prompt": "bolsa pendurada no cabide, dinheiro escasso na mão de Lia",
+          "narracao": "Ela foi à bolsa. Contou o que tinha. Não era muito."
+        },
+        {
+          "prompt": "Lia olhando pela janela, rua lá fora, expressão pensativa",
+          "narracao": "E, num instante, todo o resto do dia perdeu o peso — só uma coisa importava agora."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "titulo": "O plano que some",
+      "chamada": "O que ela tinha planejado vai ficando para depois.",
+      "paineis": [
+        {
+          "prompt": "caderno aberto com lista de tarefas, caneta ao lado",
+          "narracao": "No caderninho, havia uma lista: estudar, ligar pra amiga, dar uma volta na praça.",
+          "quem": ""
+        },
+        {
+          "prompt": "close na lista do caderno, itens riscados mentalmente, foco no primeiro",
+          "narracao": "Mas tudo aquilo foi sumindo do foco — como se a fome fosse apagando um item de cada vez.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia sentada à mesa com expressão distraída, caderno fechado",
+          "narracao": "Ela se sentou, fechou o caderno, e percebeu que não conseguia pensar em mais nada."
+        },
+        {
+          "prompt": "balão de pensamento de Lia com imagem de prato de comida",
+          "narracao": "Amizade, planos, metas — tudo recuou. Só o prato vazio insistia na mente."
+        },
+        {
+          "prompt": "relógio na parede, ponteiro marcando a hora, luz fria no quarto",
+          "narracao": "O tempo passava, e a concentração também.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia com a mão na barriga, expressão desconfortável",
+          "narracao": "Então o corpo entrou na conversa — e falou mais alto que qualquer pensamento."
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "titulo": "O grito do básico",
+      "chamada": "A fome não pede licença — ela comanda.",
+      "paineis": [
+        {
+          "prompt": "Lia de olhos fechados, expressão de desconforto físico, mão no estômago",
+          "narracao": "A fome não avisou — ela tomou conta."
+        },
+        {
+          "prompt": "pirâmide com base pulsando forte, camadas superiores apagadas",
+          "narracao": "Era como se a base da escada gritasse: enquanto eu não for resolvida, nada acima de mim acontece.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "close nas camadas superiores da pirâmide, escuras e apagadas",
+          "narracao": "Social, reconhecimento, sonhos — todos emudecidos, esperando a base se acalmar.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia olhando para a pirâmide imaginária, base acesa, topo escuro",
+          "narracao": "Lia encarou aquele mapa de luz apagada e sentiu o que ele queria dizer.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "close determinado no olhar de Lia",
+          "narracao": "Não era fraqueza, não era frescura — era ordem."
+        },
+        {
+          "prompt": "seta luminosa apontando para a base larga da pirâmide",
+          "narracao": "O nível ameaçado vira o mais importante de todos: é aí que a energia vai.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "titulo": "A praça ao meio-dia",
+      "chamada": "Lia sai e vê a mesma praça com olhos diferentes.",
+      "paineis": [
+        {
+          "prompt": "Lia caminhando pela praça ao meio-dia, luz intensa, poucos bancos à sombra",
+          "narracao": "Ela saiu. A praça estava ali, igual — mas o que Lia via nela era completamente diferente.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "bancas de comida na praça, pessoas comprando lanche, movimento",
+          "narracao": "Primeiro, os olhos foram direto para a banca de lanches. Só para ela.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia parada na frente da banca, calculando mentalmente, olhando o dinheiro",
+          "narracao": "Ela contou o dinheiro de novo, pesando cada opção, sem pressa para mais nada."
+        },
+        {
+          "prompt": "amiga de Lia passando pela praça, acenando animada",
+          "narracao": "Uma amiga passou acenando, animada, chamando para sentar.",
+          "quem": "jovem, expressão alegre, acenando"
+        },
+        {
+          "prompt": "Lia respondendo com sorriso rápido, mas olho voltando para a banca",
+          "narracao": "Lia sorriu de volta — mas o olhar voltou para a banca antes mesmo de terminar o gesto.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Já te procuro, tá?"
+          }
+        },
+        {
+          "prompt": "amiga saindo, Lia de costas focada no lanche à sua frente",
+          "narracao": "Depois: a amiga sumiu da atenção tão rápido quanto tinha aparecido.",
+          "quem": ""
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "titulo": "O social espera",
+      "chamada": "Nem a amizade consegue competir com o básico ameaçado.",
+      "paineis": [
+        {
+          "prompt": "Lia sentada sozinha num banco, comendo devagar, olhar no chão",
+          "narracao": "Ela comprou o que dava, sentou sozinha e comeu em silêncio."
+        },
+        {
+          "prompt": "grupo de amigos rindo ao longe, Lia de costas para eles",
+          "narracao": "Ao fundo, o grupo ria — e Lia ouvia sem conseguir entrar no clima.",
+          "quem": ""
+        },
+        {
+          "prompt": "close no rosto de Lia, sem culpa, apenas distante",
+          "narracao": "Não era falta de carinho. Era que o corpo ainda não havia descansado da urgência."
+        },
+        {
+          "prompt": "balão de pensamento de Lia com degraus da escada, base acesa, nível social apagado",
+          "narracao": "Ela pensou: o social não tinha ido embora — só estava esperando a sua vez.",
+          "usa": [
+            "Escada de luz"
+          ]
+        },
+        {
+          "prompt": "pirâmide com base se apagando gradualmente, segundo nível acendendo um pouco",
+          "narracao": "Cada mordida era um passo de volta. A base ia se acalmando.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia suspirando, ombros relaxando, expressão menos tensa",
+          "narracao": "E quando o básico foi atendido, ela sentiu o resto da vida voltando devagar."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "titulo": "A ordem que ninguém ensina",
+      "chamada": "Lia entende: não é falta de vontade, é hierarquia.",
+      "paineis": [
+        {
+          "prompt": "Lia recostada no banco, mais tranquila, olhando para a praça",
+          "narracao": "Com o estômago menos vazio, a cabeça voltou a funcionar — e uma clareza surgiu."
+        },
+        {
+          "prompt": "pirâmide completa, base acesa e demais camadas se reacendendo de baixo para cima",
+          "narracao": "Era como ver a pirâmide se remontar: base primeiro, depois tudo o mais.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia olhando para a pirâmide imaginária com expressão de quem compreende algo novo",
+          "narracao": "Não era falta de força de vontade que havia apagado os planos pela manhã.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "close no rosto de Lia, pensativa, leve sorriso",
+          "narracao": "Era a ordem das coisas, funcionando exatamente como deveria."
+        },
+        {
+          "prompt": "Lia abrindo o caderninho, escrevendo",
+          "narracao": "Ela abriu o caderninho e escreveu:",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Quando o básico some, ele vira o mais importante de todos."
+          }
+        },
+        {
+          "prompt": "close na frase escrita no caderninho, letra de Lia",
+          "narracao": "Aquela frase simples carregava tudo: hierarquia não é fraqueza, é natureza.",
+          "quem": ""
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "titulo": "O outro lado da praça",
+      "chamada": "Lia reconhece o mesmo padrão em quem passa.",
+      "paineis": [
+        {
+          "prompt": "Lia observando a praça com novo olhar, caneta na mão",
+          "narracao": "De lá do banco, Lia começou a olhar as pessoas com aquela lente nova."
+        },
+        {
+          "prompt": "entregador de bicicleta parando para comer rapidamente, sem descansar",
+          "narracao": "Um entregador parou rápido, comeu de pé, sem sentar — o básico no limite.",
+          "quem": ""
+        },
+        {
+          "prompt": "close no rosto do entregador, cansado mas focado no lanche",
+          "narracao": "Os olhos dele não estavam em lugar nenhum a não ser no prato. Era reconhecível.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia observando o entregador com expressão empática, sem julgamento",
+          "narracao": "Lia entendeu: ele não estava sendo antissocial, nem rude — estava sobrevivendo ao básico."
+        },
+        {
+          "prompt": "entregador terminando e voltando para a bicicleta, expressão determinada",
+          "narracao": "Assim que terminou, ele pegou a bicicleta e foi — o próximo nível poderia esperar.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia escrevendo no caderninho, olhar sereno",
+          "narracao": "E Lia escreveu mais uma linha: quando você vê alguém só no básico, não julgue — acompanhe."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "titulo": "Não é sempre assim",
+      "chamada": "O básico ameaçado não é para sempre — mas enquanto dura, domina.",
+      "paineis": [
+        {
+          "prompt": "Lia pensando, olhar para cima, luz de tarde na praça",
+          "narracao": "Mas Lia também se lembrou: aquilo não tinha que ser permanente."
+        },
+        {
+          "prompt": "escada de luz com degraus apagados embaixo se reacendendo gradualmente",
+          "narracao": "A escada não deixa de existir quando um degrau some — ela espera você voltar para ele.",
+          "quem": "",
+          "usa": [
+            "Escada de luz"
+          ]
+        },
+        {
+          "prompt": "pirâmide com base voltando a brilhar, camadas acima esperando, ordenadas",
+          "narracao": "Quando o básico é atendido, os outros degraus voltam a chamar — cada um na sua hora.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia olhando para a pirâmide com expressão de alívio",
+          "narracao": "Aquilo era quase reconfortante: havia uma ordem no caos.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "close nas mãos de Lia segurando o caderninho, relaxadas",
+          "narracao": "A mão tinha relaxado. O aperto da manhã já não estava lá."
+        },
+        {
+          "prompt": "Lia olhando para a praça com expressão mais leve, tarde dourada",
+          "narracao": "O básico ameaçado domina enquanto dura — mas ele passa, e a escada continua de pé.",
+          "usa": [
+            "A praça"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "titulo": "Maslow em cada um",
+      "chamada": "Cada pessoa na praça carrega seu próprio básico ameaçado.",
+      "paineis": [
+        {
+          "prompt": "Lia de pé, observando a praça inteira, sol baixo ao fundo",
+          "narracao": "Antes de ir, Lia ficou de pé um instante olhando para todos ao mesmo tempo.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "mãe preocupada ao telefone enquanto o filho brinca ao lado",
+          "narracao": "Uma mãe falava no telefone, tensa — o básico dela era outro: garantir o almoço do filho.",
+          "quem": ""
+        },
+        {
+          "prompt": "idoso sentado no banco com sacola de mercado, expressão cansada",
+          "narracao": "Um senhor sentou pesado, descansando as sacolas — o básico dele pesava literalmente.",
+          "quem": ""
+        },
+        {
+          "prompt": "estudante em pé com caderno, olhando o celular com semblante preocupado",
+          "narracao": "Um estudante verificava o celular ansioso — o básico dele talvez fosse a prova de amanhã.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia olhando para cada um com expressão de reconhecimento calmo",
+          "narracao": "Todos diferentes. Cada um com seu próprio andar na escada, cada um com seu básico ameaçado."
+        },
+        {
+          "prompt": "pirâmide transparente pairando sobre a praça, cada pessoa num nível diferente",
+          "narracao": "E a pirâmide estava ali, invisível sobre todos — individual, relativa, igual para cada um.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "titulo": "O básico que grita",
+      "chamada": "Quando o básico some, a escada inteira para e espera.",
+      "paineis": [
+        {
+          "prompt": "Lia caminhando para casa no fim da tarde, rua tranquila",
+          "narracao": "Lia foi embora com a tarde que fechava — e com algo novo guardado."
+        },
+        {
+          "prompt": "close no rosto sereno de Lia, luz dourada do entardecer",
+          "narracao": "Ela havia sentido na própria pele o que nenhum livro entregava tão direto:"
+        },
+        {
+          "prompt": "escada de luz com degrau inferior pulsando forte, degraus acima aguardando",
+          "narracao": "quando um degrau some, toda a energia desce para ele — e os de cima esperam, pacientes.",
+          "quem": "",
+          "usa": [
+            "Escada de luz"
+          ]
+        },
+        {
+          "prompt": "pirâmide com base brilhando e topo suave, ordem restaurada",
+          "narracao": "Não há moral nisso. É só a ordem: o básico primeiro, sempre.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia parando na calçada, olhando para cima, expressão contemplativa",
+          "narracao": "Ela parou um segundo e olhou para o céu, pensando em quantas pessoas, agora, estavam no mesmo degrau."
+        },
+        {
+          "prompt": "Lia retomando o caminho, passo firme, caderninho na mão",
+          "narracao": "Então seguiu — um degrau por vez, sabendo que a escada é de cada um.",
+          "fala": {
+            "quem": "Lia",
+            "texto": "Quando a fome grita, ela não pede licença para ninguém."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,371 @@
+{
+  "n": 14,
+  "titulo": "O reconhecimento de si",
+  "paginas": [
+    {
+      "n": 1,
+      "titulo": "O elogio que some",
+      "chamada": "Um elogio chega — e desaparece rápido demais.",
+      "paineis": [
+        {
+          "prompt": "Lia lendo uma mensagem no celular, sorrindo levemente",
+          "narracao": "Naquela tarde, uma mensagem apareceu no celular de Lia — e ela sorriu."
+        },
+        {
+          "prompt": "close na tela do celular com a mensagem: 'Você foi incrível hoje!'",
+          "narracao": "Era um elogio simples, mas chegou como um raio de luz.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia encostada na parede, olhar distante, sorriso já menor",
+          "narracao": "Só que, alguns minutos depois, o calor já havia esfriado."
+        },
+        {
+          "prompt": "Lia olhando para as próprias mãos, pensativa",
+          "narracao": "Ela ficou olhando para as próprias mãos, procurando aquele bom sentimento — mas ele tinha sumido."
+        },
+        {
+          "prompt": "janela com luz suave entrando, sem pessoas",
+          "narracao": "Por que um elogio vai embora tão rápido?",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia sentada, abraçando os joelhos, rosto inquieto",
+          "narracao": "Foi aí que ela percebeu que estava esperando o próximo — e que isso não podia ser o único jeito de se sentir bem consigo mesma."
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "titulo": "A voz de fora",
+      "chamada": "Lia percebe que passa o dia inteiro buscando aprovação.",
+      "paineis": [
+        {
+          "prompt": "Lia entregando um trabalho para alguém, olhar ansioso",
+          "narracao": "Durante dias, Lia havia reparado num padrão: ela entregava algo — e imediatamente procurava a reação dos outros."
+        },
+        {
+          "prompt": "close no rosto de Lia esperando, sobrancelhas levemente tensas",
+          "narracao": "Havia uma espera ansiosa antes da resposta, um silêncio cheio de perguntas."
+        },
+        {
+          "prompt": "pessoa acenando com aprovação, ao fundo, desfocada",
+          "narracao": "Quando a resposta era boa, ela respirava — como se tivesse passado num teste.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia soltando o ar, alívio no rosto",
+          "narracao": "Mas aquele alívio era emprestado: veio de fora, não surgiu dela."
+        },
+        {
+          "prompt": "espelho na parede refletindo Lia de costas, sem close no rosto",
+          "narracao": "Era como se ela precisasse do espelho dos outros para ver a própria imagem.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia franzindo o cenho, olhando para o espelho da parede",
+          "narracao": "E então ela se perguntou: o que acontece quando esse espelho some?"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "titulo": "Dois tipos de estima",
+      "chamada": "Teo explica a diferença entre ser aprovado e se aprovar.",
+      "paineis": [
+        {
+          "prompt": "Lia e Teo sentados numa escadaria, conversando",
+          "narracao": "Ela foi falar com Teo — e, como sempre, ele ouviu antes de responder.",
+          "quem": "Teo, jovem ~22, calmo, cabelo escuro curto, óculos redondos, jaqueta verde-oliva"
+        },
+        {
+          "prompt": "Teo falando com calma, gesticulando levemente",
+          "narracao": "Teo disse que a estima vive em dois andares: um de fora, outro de dentro.",
+          "quem": "Teo, jovem ~22, calmo, cabelo escuro curto, óculos redondos, jaqueta verde-oliva",
+          "fala": {
+            "quem": "Teo",
+            "texto": "O reconhecimento dos outros é real. Mas o de dentro é o que sustenta."
+          }
+        },
+        {
+          "prompt": "Lia inclinada, escutando com atenção",
+          "narracao": "Lia inclinou o corpo para frente, como quem quer absorver cada palavra."
+        },
+        {
+          "prompt": "Teo apontando para o próprio peito, sério mas gentil",
+          "narracao": "Ele explicou: quem depende só do elogio alheio vive numa montanha-russa — sobe quando aprovam, cai quando ignoram.",
+          "quem": "Teo, jovem ~22, calmo, cabelo escuro curto, óculos redondos, jaqueta verde-oliva",
+          "fala": {
+            "quem": "Teo",
+            "texto": "Quando o elogio vem de dentro, ninguém tira de você."
+          }
+        },
+        {
+          "prompt": "Lia pensando, olhar voltado para baixo",
+          "narracao": "Lia ficou quieta por um instante, deixando isso pousar."
+        },
+        {
+          "prompt": "Teo e Lia lado a lado em silêncio confortável na escadaria",
+          "narracao": "Havia dois andares, então. E ela havia passado muito tempo morando só no de fora.",
+          "quem": "Teo, jovem ~22, calmo, cabelo escuro curto, óculos redondos, jaqueta verde-oliva"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "titulo": "A montanha-russa",
+      "chamada": "Sem estima interna, cada opinião alheia vira altos e baixos.",
+      "paineis": [
+        {
+          "prompt": "Lia caminhando animada após receber elogio, postura erguida",
+          "narracao": "Nos dias seguintes, Lia começou a se observar: quando alguém a elogiava, ela andava mais leve, o mundo parecia mais fácil."
+        },
+        {
+          "prompt": "pessoa virando as costas para Lia sem comentar seu trabalho",
+          "narracao": "Mas quando alguém passava indiferente ao que ela havia feito, o ânimo despencava.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia de ombros caídos, olhar para o chão",
+          "narracao": "E ela ainda nem sabia se o trabalho era bom ou ruim — estava esperando a opinião dos outros para descobrir."
+        },
+        {
+          "prompt": "trilho de montanha-russa visto de cima, vazio, sem pessoas",
+          "narracao": "Era exatamente a montanha-russa que Teo havia descrito: sobe e desce conforme a aprovação chega.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia apertando as mãos, reconhecendo o padrão",
+          "narracao": "Ela reconheceu o padrão com desconforto — e esse desconforto já era um sinal."
+        },
+        {
+          "prompt": "Lia respirando fundo, postura levemente mais firme",
+          "narracao": "Porque quem percebe que está preso pode começar a se soltar."
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "titulo": "O que ela sabia sobre si",
+      "chamada": "Lia tenta ouvir a própria voz — e descobre que ela existe.",
+      "paineis": [
+        {
+          "prompt": "Lia sozinha num quarto simples, caderninho aberto no colo",
+          "narracao": "Naquela noite, Lia abriu o caderninho e tentou uma coisa diferente: escrever o que ela mesma achava do que havia feito."
+        },
+        {
+          "prompt": "close na página do caderninho com palavras escritas à mão: 'eu me esforcei', 'fiz bem a parte difícil'",
+          "narracao": "Devagar, as palavras foram aparecendo — não o que os outros pensavam, mas o que ela sabia que era verdade.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia olhando para o teto, como se pesando o que escreveu",
+          "narracao": "Havia uma voz ali. Pequena, mas presente — diferente da voz dos outros."
+        },
+        {
+          "prompt": "close no rosto de Lia, olhar de descoberta calma",
+          "narracao": "Essa voz não gritava como o elogio; não doía como o silêncio alheio."
+        },
+        {
+          "prompt": "luz de abajur no quarto, ambiente acolhedor, sem pessoas",
+          "narracao": "Era mais firme. Mais constante. Como uma chama que não oscilava com o vento.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia fechando o caderninho com cuidado, leve sorriso",
+          "narracao": "Ela fechou o caderninho com cuidado — como quem guarda algo que acabou de encontrar."
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "titulo": "A pirâmide por dentro",
+      "chamada": "A pirâmide mostra que estima tem duas faces.",
+      "paineis": [
+        {
+          "prompt": "Lia de pé diante da pirâmide imaginária, olhando para o quarto nível",
+          "narracao": "Lia imaginou a pirâmide novamente e pousou o olhar no quarto nível — a estima.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "close no quarto nível da pirâmide, iluminado, dois lados distintos",
+          "narracao": "E percebeu que esse nível tinha dois lados: o que vem de fora e o que vem de dentro.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "seta apontando de fora para dentro da pirâmide, símbolo de aprovação externa",
+          "narracao": "De fora chegam os elogios, os títulos, o respeito das pessoas — reais e importantes.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "seta brotando de dentro da pirâmide, símbolo de força interna",
+          "narracao": "De dentro vêm a confiança, o senso de competência, o valor que a pessoa enxerga em si mesma.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia com o dedo apontando para o próprio nível na pirâmide",
+          "narracao": "Ambos fazem parte do mesmo degrau — mas sem o de dentro, o de fora nunca é suficiente.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia afastando-se da pirâmide, olhar mais tranquilo",
+          "narracao": "Ela entendeu: não é sobre escolher um ou outro. É sobre não depender só de um.",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "titulo": "A armadilha do exterior",
+      "chamada": "Só buscar aprovação de fora cobra um preço alto.",
+      "paineis": [
+        {
+          "prompt": "Lia lembrando de uma cena: ela fazendo algo que não queria só para ser elogiada",
+          "narracao": "Ela se lembrou de algumas escolhas recentes — coisas que havia feito não porque queria, mas porque imaginava que seriam bem vistas."
+        },
+        {
+          "prompt": "mãos aplaudindo ao fundo, Lia com sorriso forçado na frente",
+          "narracao": "O aplauso vinha. Mas ela saía dali levemente vazia, como se tivesse negociado algo que não era para ser vendido."
+        },
+        {
+          "prompt": "close nas mãos de Lia, dedos entrelaçados, pensativa",
+          "narracao": "Esse era o preço: quanto mais ela buscava aprovação de fora, menos ela ouvia a própria opinião."
+        },
+        {
+          "prompt": "corredor com portas, Lia olhando para uma porta especificamente, hesitante",
+          "narracao": "Com o tempo, ficava mais difícil saber o que ela realmente queria — e o que ela apenas achava que os outros esperavam.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia encostada na parede do corredor, rosto cansado",
+          "narracao": "Era um cansaço diferente: não o cansaço de fazer, mas o de fingir."
+        },
+        {
+          "prompt": "Lia abrindo uma das portas com decisão, ombros levantados",
+          "narracao": "E então ela decidiu que não queria mais morar nesse cansaço."
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "titulo": "Aprender a se ver",
+      "chamada": "Cultivar estima interna é um hábito, não um dom.",
+      "paineis": [
+        {
+          "prompt": "Lia acordando de manhã, estirando-se, rosto sereno",
+          "narracao": "Nos dias seguintes, Lia começou a praticar uma coisa pequena: antes de perguntar o que os outros achavam, ela mesma avaliava."
+        },
+        {
+          "prompt": "Lia olhando o próprio trabalho com atenção, caneta na mão",
+          "narracao": "Não para ser rigorosa demais, nem leniente: apenas honesta."
+        },
+        {
+          "prompt": "Lia escrevendo no caderninho: 'o que eu fiz bem hoje'",
+          "narracao": "No caderninho, ela começou uma lista simples — o que havia feito bem, o que havia aprendido, o que podia melhorar."
+        },
+        {
+          "prompt": "Lia relendo o caderninho, leve sorriso de reconhecimento",
+          "narracao": "Não era arrogância; era atenção. Prestar atenção em si mesma como se prestaria atenção em alguém que importa."
+        },
+        {
+          "prompt": "planta pequena crescendo num vaso sobre mesa, sem pessoas",
+          "narracao": "Estima interna não é um dom que se tem ou não se tem — é uma planta que precisa ser regada.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia olhando pela janela, postura firme, semblante calmo",
+          "narracao": "E ela havia encontrado o regador."
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "titulo": "Os dois juntos",
+      "chamada": "Elogio de fora e valor de dentro não se excluem — se completam.",
+      "paineis": [
+        {
+          "prompt": "Lia recebendo elogio de alguém, desta vez com sorriso genuíno e tranquilo",
+          "narracao": "Certa tarde, alguém voltou a elogiá-la — e algo tinha mudado."
+        },
+        {
+          "prompt": "close no rosto de Lia, sorriso sem ansiedade, olhar estável",
+          "narracao": "O elogio chegou e foi bem-vindo. Mas, desta vez, ela não precisava dele para se sentir inteira."
+        },
+        {
+          "prompt": "Lia agradecendo com leveza, sem hesitação nem excesso",
+          "narracao": "Ela agradeceu com leveza — porque o elogio confirmava algo que ela já sabia sobre si."
+        },
+        {
+          "prompt": "Lia e a outra pessoa conversando de igual para igual, sem pessoas no foco",
+          "narracao": "Havia uma diferença enorme entre ser preenchida pelo elogio e ser confirmada por ele.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia caminhando depois da conversa, passos firmes",
+          "narracao": "Não era que a aprovação de fora deixava de importar — ela ainda importava. Só não era mais a única fonte."
+        },
+        {
+          "prompt": "Lia parando na escada de luz, olhando para cima com firmeza",
+          "narracao": "O degrau da estima estava mais firme — por dentro e por fora.",
+          "usa": [
+            "Escada de luz"
+          ]
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "titulo": "Um degrau mais sólido",
+      "chamada": "Com a estima mais inteira, a escada sustenta melhor.",
+      "paineis": [
+        {
+          "prompt": "Lia sentada na praça ao entardecer, caderninho no colo",
+          "narracao": "No fim daquele dia, Lia voltou à praça — e o banco de sempre a recebeu.",
+          "usa": [
+            "A praça"
+          ]
+        },
+        {
+          "prompt": "Lia observando as pessoas passando, olhar mais tranquilo que antes",
+          "narracao": "Ela olhou para as pessoas ao redor com outra qualidade de atenção: curiosidade, não comparação."
+        },
+        {
+          "prompt": "a pirâmide ao fundo, o quarto nível brilhando com luz estável",
+          "narracao": "Imaginou a pirâmide e viu o quarto degrau brilhando de forma diferente — mais constante, menos dependente do vento.",
+          "quem": "",
+          "usa": [
+            "Pirâmide de Maslow"
+          ]
+        },
+        {
+          "prompt": "Lia escrevendo a última linha no caderninho",
+          "narracao": "No caderninho, ela escreveu uma frase curta — a que ficaria daquela semana."
+        },
+        {
+          "prompt": "close na frase do caderninho: 'Não preciso esperar aprovação para saber o que valho.'",
+          "narracao": "Não preciso esperar aprovação para saber o que valho.",
+          "quem": ""
+        },
+        {
+          "prompt": "Lia guardando o caderninho e olhando para frente, serena",
+          "narracao": "O elogio dos outros ainda era gostoso de receber. Mas, a partir dali, o degrau era dela — e não tremia mais ao vento."
+        }
+      ]
+    }
+  ]
+}

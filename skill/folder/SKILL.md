@@ -1,5 +1,6 @@
 ---
-name: folder
+name: inemaref-folder
+requires: [inemaref-referencias]
 description: Cria a FICHA DE REFERENCIA (model sheet) de um personagem a partir de uma FOTO (pessoa real) ou de um TEXTO (descricao/historia). Saida = pagina editorial (folder.png) + folder.html editavel + assets/ (imagens cruas) + referencia.json travado. Use quando o usuario quiser "criar referencia", "ficha de personagem", "model sheet", "folder do personagem", ou der uma foto/historia e pedir a pagina de referencia do inemaref. Dois layouts (editorial-revista, dossie) x duas artes (foto, cartoon), combinaveis.
 ---
 
@@ -50,3 +51,11 @@ HTML/CSS renderizada pra PNG. Detalhes em `docs/superpowers/specs/2026-06-09-fol
 ## Motor de imagem
 Padrao `flux2-klein`. Se o rosto nao fixar no modo foto, troque para `qwen-edit-2511` (parametro
 `model=` em `build_folder`) — ver `skill/referencias/consistencia.md`.
+
+## Help
+Se o usuario digitar `/inemaref-folder help`, responda com este resumo:
+- **O que faz:** cria a ficha de referencia (model sheet) de um personagem a partir de uma foto ou de um texto — pagina editorial (folder.png) + folder.html + assets/ + referencia.json travado.
+- **Entrada:** uma foto (pessoa real) OU um texto (descricao/historia); opcionais nome, idade, arte (foto|cartoon), layout (editorial-revista|dossie).
+- **Uso:** monte um `ficha.json` e rode `build_folder(ficha, template_dir=..., arte=..., modo=..., foto_origem=...)` em `skill/folder/scripts`.
+- **Depende de:** inemaref-referencias.
+- **Pre-requisitos:** servidor `inemaimg` em `http://localhost:8000`.
