@@ -1,7 +1,26 @@
 import json, os, sys
 
-# reuse the folder skill's tested helpers (shared image engine + renderer)
-_FOLDER_SCRIPTS = os.path.join(os.path.dirname(__file__), "..", "..", "folder", "scripts")
+# reuse the folder skill's tested helpers (shared image engine + renderer).
+# resolve by DISCOVERY so quadrinho works even when symlinked ALONE into
+# ~/.claude/skills/ (never depend on the repo tree being alongside):
+#   1) $INEMAREF_HOME/skill/folder/scripts
+#   2) the installed sister skill  ~/.claude/skills/folder/scripts
+#   3) repo-relative fallback via realpath (resolves through the symlink back
+#      into the real repo, so a lone install still finds folder/ in the repo)
+def _find_folder_scripts():
+    here = os.path.dirname(os.path.realpath(__file__))
+    cands = []
+    home = os.environ.get("INEMAREF_HOME")
+    if home:
+        cands.append(os.path.join(home, "skill", "folder", "scripts"))
+    cands.append(os.path.expanduser("~/.claude/skills/folder/scripts"))
+    cands.append(os.path.join(here, "..", "..", "folder", "scripts"))
+    for c in cands:
+        if os.path.isdir(c):
+            return c
+    return cands[-1]
+
+_FOLDER_SCRIPTS = _find_folder_scripts()
 sys.path.insert(0, _FOLDER_SCRIPTS)
 import imgclient            # noqa: E402
 import render as _render    # noqa: E402
