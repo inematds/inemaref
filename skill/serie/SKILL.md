@@ -1,5 +1,6 @@
 ---
-name: serie
+name: inemaref-serie
+requires: [inemaref-folder, inemaref-quadrinho, inemaref-motioncomic, inemaref-referencias]
 description: Cria uma SERIE completa a partir de um ASSUNTO — escreve a BIBLIA (premissa, protagonista com folder, elenco, estilo, outline de episodios), e apos aprovacao gera todos os EPISODIOS e suas paginas em texto / HQ / video, reusando folder, quadrinho e motioncomic, largando os arquivos nomeados + manifesto.json numa pasta de destino. Use quando o usuario quiser "criar uma serie", "transformar um assunto numa serie", "episodios de um canal", "biblia da serie", "serie de quadrinhos/HQ/video sobre X". Portao de aprovacao na biblia (flag auto pula). V2 do inemaref.
 ---
 
@@ -78,3 +79,11 @@ Idempotente (re-rodar continua de onde parou). Progresso no openpcbot quando `no
 ## Tipos -> entrega
 `texto` -> `.md`/`.json` por episodio · `hq` -> PNGs por pagina · `video-slideshow`/`video-pagina`
 -> 1 MP4 por episodio. (pixflow/animabook: adiados — ver spec secao 10.)
+
+## Help
+Se o usuario digitar `/inemaref-serie help`, responda com este resumo:
+- **O que faz:** cria uma serie completa a partir de um assunto — escreve a biblia (premissa, protagonista, elenco, estilo, outline), e apos aprovacao gera todos os episodios em texto/HQ/video + manifesto.json.
+- **Entrada:** um assunto (obrigatorio) + config opcional (`tipo`, `arte`, `modelo_pagina`, `n_episodios`, `n_paginas`, `destino`, `auto`); o que faltar cai no `config.yaml`.
+- **Uso:** monte `biblia.json` (+ piloto), rode `build_biblia(b, piloto=...)` para aprovacao, depois `build_serie(b, eps, auto=True)` em `skill/serie/scripts`.
+- **Depende de:** inemaref-folder, inemaref-quadrinho, inemaref-motioncomic, inemaref-referencias.
+- **Pre-requisitos:** `inemaimg` em `localhost:8000`; para `video-*` tambem `inemavox` em `127.0.0.1:7860` (TTS) + ffmpeg.

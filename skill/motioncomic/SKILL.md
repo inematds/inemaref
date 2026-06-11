@@ -1,5 +1,6 @@
 ---
-name: motioncomic
+name: inemaref-motioncomic
+requires: [inemaref-folder, inemaref-quadrinho, inemaref-referencias]
 description: Transforma uma HISTORIA em quadros num VIDEO de motion comic (16:9) — a camera da ZOOM em cada quadro durante a sua narracao (push-in), com voz (TTS inemavox) e balao/SFX como camada. Use quando o usuario quiser "video de quadrinhos", "motion comic", "quadrinho narrado em video", "dar zoom no quadro quando narra", "transformar a HQ em video", "camera viajando sobre a pagina". Arte cartoon/manga, narracao voz-off, balao so com fala/expressao.
 ---
 
@@ -84,3 +85,11 @@ Saida: `<id>.mp4`, `assets/`, `clips/`, `concat.txt`.
   `detect_rects` mede a bounding box) e o `frame_window` **se posiciona por quadro**, cobrindo cada
   um conforme a forma (largo → enquadra pela largura; alto → pela altura). Qualquer grade de 6
   funciona sem mudar a camera.
+
+## Help
+Se o usuario digitar `/inemaref-motioncomic help`, responda com este resumo:
+- **O que faz:** transforma uma historia em quadros num video motion comic (16:9) — a camera zooma/viaja por cada quadro durante sua narracao (voz TTS), com balao/SFX como camada.
+- **Entrada:** um roteiro (dict com `id`, `titulo`, `personagem`, `paginas[]` de 6 paineis cada; ver `tests/fixtures/roteiro-exemplo.json`).
+- **Uso:** Forma B (padrao) `build_video_travel(rot, out_dir=..., voice="bella", arte="manga")`; Forma A `build_video(rot, ...)` — em `skill/motioncomic/scripts`.
+- **Depende de:** inemaref-folder, inemaref-quadrinho, inemaref-referencias.
+- **Pre-requisitos:** `inemaimg` em `http://localhost:8000`, daemon `inemavox` em `http://127.0.0.1:7860` e ffmpeg.

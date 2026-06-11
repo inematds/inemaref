@@ -3,7 +3,9 @@ A narracao NAO entra na imagem — ela e so voz. Renderiza 1280x720 via chromium
 import html as _h
 import os, sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "folder", "scripts"))
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+import _deps  # noqa: E402
+sys.path.insert(0, _deps.scripts("folder"))
 from render import render_html_to_png  # noqa: E402
 
 _TPL = """<!DOCTYPE html><html><head><meta charset="utf-8"><style>

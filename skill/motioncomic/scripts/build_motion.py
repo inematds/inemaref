@@ -4,7 +4,9 @@ zoompan). Junta tudo num MP4 16:9. (docs/02 — a camera viaja pelos quadros.)""
 import html as _h
 import json, os, subprocess, sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "folder", "scripts"))
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+import _deps  # noqa: E402
+sys.path.insert(0, _deps.scripts("folder"))
 import imgclient            # noqa: E402
 from artes import load_arte  # noqa: E402
 sys.path.insert(0, os.path.dirname(__file__))

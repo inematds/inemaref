@@ -10,9 +10,11 @@ import json
 import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "folder", "scripts"))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "quadrinho", "scripts"))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "motioncomic", "scripts"))
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+import _deps  # noqa: E402
+sys.path.insert(0, _deps.scripts("folder"))
+sys.path.insert(0, _deps.scripts("quadrinho"))
+sys.path.insert(0, _deps.scripts("motioncomic"))
 sys.path.insert(0, os.path.dirname(__file__))
 from config import resolve            # noqa: E402
 from naming import slug, ep_base      # noqa: E402
@@ -20,8 +22,8 @@ import biblia as _biblia              # noqa: E402
 import manifesto as _manifesto        # noqa: E402
 import runner as _runner              # noqa: E402
 
-_Q = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "quadrinho", "templates"))
-_F = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "folder", "templates"))
+_Q = _deps.templates("quadrinho")
+_F = _deps.templates("folder")
 _TEMPLATES = {"grade-uniforme": os.path.join(_Q, "grade-uniforme"),
               "manga-dinamico": os.path.join(_Q, "manga-dinamico")}
 

@@ -23,8 +23,10 @@ import os
 import subprocess
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "folder", "scripts"))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "quadrinho", "scripts"))
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+import _deps  # noqa: E402
+sys.path.insert(0, _deps.scripts("folder"))
+sys.path.insert(0, _deps.scripts("quadrinho"))
 sys.path.insert(0, os.path.dirname(__file__))
 from render import render_html_to_png  # noqa: E402
 from tts import say, duration          # noqa: E402
@@ -292,8 +294,7 @@ def _page_card_clip(pn, titulo, out_mp4, audio=None, secs=T_FULL):
 # ---------------------------------------------------------------------------
 # montagem da pagina de quadrinho (reusa a skill `quadrinho`)
 # ---------------------------------------------------------------------------
-_TEMPLATE_DIR = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..", "..", "quadrinho", "templates", "manga-dinamico"))
+_TEMPLATE_DIR = os.path.join(_deps.templates("quadrinho"), "manga-dinamico")
 
 
 def _page_roteiro(roteiro, pg):

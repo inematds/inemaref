@@ -7,20 +7,9 @@ import json, os, sys
 #   2) the installed sister skill  ~/.claude/skills/folder/scripts
 #   3) repo-relative fallback via realpath (resolves through the symlink back
 #      into the real repo, so a lone install still finds folder/ in the repo)
-def _find_folder_scripts():
-    here = os.path.dirname(os.path.realpath(__file__))
-    cands = []
-    home = os.environ.get("INEMAREF_HOME")
-    if home:
-        cands.append(os.path.join(home, "skill", "folder", "scripts"))
-    cands.append(os.path.expanduser("~/.claude/skills/folder/scripts"))
-    cands.append(os.path.join(here, "..", "..", "folder", "scripts"))
-    for c in cands:
-        if os.path.isdir(c):
-            return c
-    return cands[-1]
-
-_FOLDER_SCRIPTS = _find_folder_scripts()
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+import _deps  # noqa: E402
+_FOLDER_SCRIPTS = _deps.scripts("folder")
 sys.path.insert(0, _FOLDER_SCRIPTS)
 import imgclient            # noqa: E402
 import render as _render    # noqa: E402

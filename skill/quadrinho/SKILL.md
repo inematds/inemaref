@@ -1,5 +1,6 @@
 ---
-name: quadrinho
+name: inemaref-quadrinho
+requires: [inemaref-folder, inemaref-referencias]
 description: Monta uma PAGINA de quadrinho/manga a partir de uma HISTORIA (e, opcionalmente, da referencia.json de um personagem do folder). Gera 6 quadros textless (estilo manga p&b) e poe narracao, baloes de fala e SFX como camada por cima, renderizando pra PNG. Use quando o usuario quiser "fazer quadrinho", "pagina de manga", "transformar a historia em HQ", "quadrinizar", "comic page". Dois modelos de pagina: grade-uniforme (todos os quadros iguais) e manga-dinamico (tamanhos diferentes).
 ---
 
@@ -48,3 +49,11 @@ testados do folder (`imgclient`, `render`, `png_size`, `artes`).
 ## Arte / motor
 Estilo `manga` (p&b, screentone) em `skill/referencias/artes.json`. Motor padrao `flux2-klein`
 (mesmo seam do folder; troca por `model=` em `build_pagina`).
+
+## Help
+Se o usuario digitar `/inemaref-quadrinho help`, responda com este resumo:
+- **O que faz:** monta uma pagina de quadrinho/manga a partir de uma historia — 6 quadros textless (p&b) + narracao/baloes/SFX como camada, renderizado pra pagina.png.
+- **Entrada:** uma historia (texto, obrigatorio); opcionais a `referencia.json` de um personagem do folder, modelo de pagina (grade-uniforme|manga-dinamico) e arte (default manga).
+- **Uso:** monte um `roteiro.json` (6 paineis) e rode `build_pagina(rot, template_dir=..., arte="manga")` em `skill/quadrinho/scripts`.
+- **Depende de:** inemaref-folder, inemaref-referencias.
+- **Pre-requisitos:** servidor `inemaimg` em `http://localhost:8000`.
