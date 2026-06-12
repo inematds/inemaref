@@ -40,6 +40,21 @@ existe — motion comics narrados e filmes.
 - `skill/serie/` — ✅ **construída (V2)** — **criador de série ponta a ponta**: assunto → bíblia (folder + elenco + estilo + outline) → após aprovar, gera todos os episódios em texto/HQ/vídeo (reusa as skills acima) → arquivos nomeados + `manifesto.json` numa pasta de destino. Defaults em `config.yaml`; runner híbrido (inline | mkivideos).
 - `skill/referencias/` — núcleo comum: estilos (foto/cartoon/mangá), regra de consistência, schema da referência.
 
+## Formatos de vídeo e o ecossistema (A / B / C)
+
+O `motioncomic` entrega vídeo em **formas**, nomeadas no arquivo como `<serie>-a/-b/-c-epNN-…mp4` (a letra vem antes do `epNN`; A e B convivem na mesma pasta da série):
+
+- **Forma A — slideshow** (✅): uma imagem (textless) por vez, push-in + narração voz-off; balão/SFX opcionais na imagem.
+- **Forma B — câmera sobre a página** (✅): monta a prancha real e a câmera viaja sobre a cópia **textless** (voz-off), mergulhando em cada quadro.
+- **Forma C — filme cinematográfico** (🔜 planejada): a versão "filme" dos painéis. **Reusa o skill externo `diretor-animacao` como MOTOR** — não reinventamos a direção nem falamos com o pixflow na mão.
+
+**Como a Forma C funciona (decisão registrada):** reaproveita os **painéis textless + as narrações** já gerados pela Forma A (sem regerar imagem nem voz) e os entrega ao `diretor-animacao`, que **VÊ** cada imagem, **DECIDE** a câmera por quadro seguindo gramática cinematográfica (18 movimentos + framing `from/to`, transições **não-uniformes**, curva de 3 atos, multi-shot em imagens ricas), aplica **look/grain/vinheta** e renderiza via **pixflow**. Para **desenho/ilustração** (nosso caso), **`parallax = 0`** (regra de ouro do diretor) — o "filme" vem da **câmera dirigida + transições + look**, não do 2.5D. Numa série, roda **direto** (sem portão de decupagem) episódio a episódio.
+
+**Por que NÃO os outros skills de vídeo do ecossistema, aqui:**
+- **`videoprodutor`** — orquestrador amplo (link/assunto → vídeo do zero: plano + imagem + voz + render). Redundante para a Forma C: já temos painéis textless e voz prontos; falta só a **direção** — papel do `diretor-animacao`.
+- **`video-plan-editor`** (plano de cena) — plano de vídeo viral/estratégia (beat sheet, presets). Propósito diferente; não dirige imagens prontas.
+- **`pixflow`** — é o **motor de render de baixo nível** (parallax/efeitos/câmera via spec YAML `pixflow.movie/v1`). A Forma C **não** fala com ele direto: fala com o `diretor-animacao`, que decide a decupagem e gera o spec.
+
 ## Como usar
 
 Cada skill é um pipeline Python rodado da raiz do repo; a saída cai em `output/<id>/` (gitignorado).
