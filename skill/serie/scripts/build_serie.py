@@ -34,7 +34,7 @@ def build_biblia(biblia, piloto=None, out_dir=None, folder_fn=None, pagina_fn=No
     (se `piloto` — um roteiro de 1 pagina, 6 paineis). Retorna os caminhos."""
     _biblia.validate(biblia)
     s = resolve(biblia)
-    base_out = os.path.join(out_dir or "output", biblia["id"], "biblia")
+    base_out = os.path.join(os.path.expanduser(out_dir or "~/projetos/output"), biblia["id"], "biblia")
     os.makedirs(base_out, exist_ok=True)
 
     md_path = os.path.join(base_out, "biblia.md")
@@ -170,7 +170,7 @@ def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
     decidido por quem chama). Retorna {dest, manifesto, episodios}."""
     s = resolve(biblia)
     tipo = s["tipo"]
-    destino = out_dir or s["destino"] or "output"
+    destino = os.path.expanduser(out_dir or s["destino"] or "~/projetos/output")
     serie_slug = slug(biblia.get("assunto") or biblia["id"])
     destdir = os.path.join(destino, biblia["id"])
     os.makedirs(destdir, exist_ok=True)

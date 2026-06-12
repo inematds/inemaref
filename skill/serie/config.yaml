@@ -5,10 +5,10 @@ estilo:
   voz: bella                    # bella | rachel  (só tipos de vídeo)
   intro: true                   # cartão de abertura no vídeo: true | false
 formato:
-  tipo: video-pagina            # texto | hq | video-slideshow | video-pagina
+  tipo: video-pagina            # texto | hq | video-slideshow (Forma A: zoom quadro-a-quadro) | video-pagina (Forma B: câmera sobrevoa a página)
   n_episodios: 3                # quantos episódios
   n_paginas: 3                  # páginas por episódio (cada página = 6 quadros)
-  destino: output               # pasta de saída -> <destino>/<serie-id>/ (+ manifesto.json)
+  destino: ~/projetos/output    # pasta de saída -> <destino>/<serie-id>/ (+ manifesto.json)
 runtime:
   auto: false                   # true = pula o portão de aprovação
   runner: auto                  # auto (inline; mkivideos se de pé e tipo=vídeo) | inline | mkivideos

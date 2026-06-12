@@ -9,7 +9,7 @@ CONFIG_PATH = os.path.join(_SERIE_DIR, "config.yaml")
 
 FALLBACK = {
     "estilo": {"arte": "manga", "modelo_pagina": "manga-dinamico", "voz": "bella", "intro": True},
-    "formato": {"tipo": "video-pagina", "n_episodios": 3, "n_paginas": 3, "destino": "output"},
+    "formato": {"tipo": "video-pagina", "n_episodios": 3, "n_paginas": 3, "destino": "~/projetos/output"},
     "runtime": {"auto": False, "runner": "auto", "notificar": True},
 }
 
