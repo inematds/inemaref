@@ -358,14 +358,15 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
         os.makedirs(d, exist_ok=True)
     clips = []
 
+    abertura = (roteiro.get("abertura") or "").strip()
     if intro:
         tc = os.path.join(clips_dir, "000-intro.mp4")
+        # o card do assunto JA narra o gancho em t=0 (abertura). Sem abertura,
+        # fica o card silencioso de 2.2s como antes.
         _title_clip(f'<small>{_h.escape(roteiro.get("subtitulo", "MOTION COMIC"))}</small>'
-                    + _h.escape(roteiro["titulo"]), tc, secs=2.2)
+                    + _h.escape(roteiro["titulo"]), tc, secs=2.2,
+                    audio=(abertura or None), voice=voice)
         clips.append(tc)
-
-    # abertura narrada — a narracao COMECA dizendo o assunto (entra na 1a chamada)
-    abertura = (roteiro.get("abertura") or "").strip()
 
     pages = roteiro["paginas"]
     last_page_png = None
@@ -395,9 +396,10 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
 
         # 3) FORMATO C: a CHAMADA narrada COMECA no cartao "PAGINA n / titulo" e
         #    TERMINA na PRANCHA INTEIRA — a mesma fala atravessa cartao -> prancha.
-        #    Na 1a pagina, a abertura (assunto da serie) entra antes da chamada.
+        #    (abertura ja foi narrada no card de intro em t=0; aqui so a chamada da pagina)
         chamada = (pg.get("chamada") or "").strip()
-        intro_txt = (f"{abertura} {chamada}".strip() if pgi == 0 else chamada)
+        # abertura ja foi narrada no card de intro (t=0); aqui so a chamada da pagina
+        intro_txt = chamada
         card = os.path.join(clips_dir, f"{pn:02d}0-cartao.mp4")
         est = os.path.join(clips_dir, f"{pn:02d}1-prancha.mp4")
         if intro_txt:

@@ -46,7 +46,7 @@ def _panel_clip(panel_png, wav, dur, out_mp4):
                     "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
                     "-c:a", "aac", "-ar", "44100", "-ac", "2", "-shortest", out_mp4], check=True)
 
-def _title_clip(text, out_mp4, secs=1.8):
+def _title_clip(text, out_mp4, secs=1.8, audio=None, voice="bella"):
     png = out_mp4 + ".png"
     html = ('<!DOCTYPE html><html><head><meta charset="utf-8"><style>'
             '*{margin:0;padding:0}body{width:1280px;height:720px;background:#10141c;'
@@ -59,12 +59,23 @@ def _title_clip(text, out_mp4, secs=1.8):
     with open(hp, "w") as f:
         f.write(html)
     render_html_to_png(hp, png, W, H)
-    subprocess.run(["ffmpeg", "-nostdin", "-y", "-v", "error",
-                    "-loop", "1", "-t", str(secs), "-i", png,
-                    "-f", "lavfi", "-t", str(secs), "-i",
-                    "anullsrc=channel_layout=stereo:sample_rate=44100",
-                    "-vf", f"scale={W}:{H}", "-c:v", "libx264", "-pix_fmt", "yuv420p",
-                    "-r", str(FPS), "-c:a", "aac", "-shortest", out_mp4], check=True)
+    cmd = ["ffmpeg", "-nostdin", "-y", "-v", "error", "-loop", "1"]
+    if audio:
+        wav = audio if os.path.exists(str(audio)) else out_mp4 + ".wav"
+        if not os.path.exists(wav):
+            say(audio, wav, voice=voice)
+        dur = duration(wav) + 0.4
+        cmd += ["-t", f"{dur:.3f}", "-i", png, "-i", wav,
+                "-vf", f"scale={W}:{H},setsar=1,fps={FPS}", "-af", "apad"]
+    else:
+        dur = secs
+        cmd += ["-t", f"{dur:.3f}", "-i", png, "-f", "lavfi", "-t", f"{dur:.3f}",
+                "-i", "anullsrc=channel_layout=stereo:sample_rate=44100",
+                "-vf", f"scale={W}:{H},setsar=1,fps={FPS}"]
+    cmd += ["-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
+            "-c:a", "aac", "-ar", "44100", "-ac", "2", "-t", f"{dur:.3f}", out_mp4]
+    subprocess.run(cmd, check=True)
+    return out_mp4
 
 def build_video(roteiro, out_dir="output", voice="bella", model="flux2-klein", intro=True):
     base = os.path.join(out_dir, roteiro["id"])
