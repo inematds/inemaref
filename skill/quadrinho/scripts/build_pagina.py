@@ -24,8 +24,11 @@ def _meta(template_dir):
         return json.load(f)
 
 
+_GUTTER = {"dark": "#1b1b1b", "white": "#ffffff"}
+
 def build_pagina(roteiro, template_dir, arte="manga", out_dir="output",
-                 model="flux2-klein", generate_fn=None, render_fn=None):
+                 model="flux2-klein", generate_fn=None, render_fn=None,
+                 moldura="dark", kicker=None, accent="#b08900"):
     """Render one comic page: generate 6 textless panels, fill the page template
     (narration/balloons/SFX as an HTML layer), screenshot to PNG.
 
@@ -51,7 +54,11 @@ def build_pagina(roteiro, template_dir, arte="manga", out_dir="output",
                     width=slot["width"], height=slot["height"],
                     negative_prompt=a["negativo"])
 
-    html = fill(template_dir, roteiro, assets_dir=assets)
+    html = fill(template_dir, roteiro, assets_dir=assets,
+                kicker=(kicker if kicker is not None else roteiro.get("kicker")))
+    root = (f"<style>:root{{--gutter:{_GUTTER.get(moldura, '#1b1b1b')};"
+            f"--accent:{accent}}}</style>")
+    html = html.replace("</head>", root + "</head>")
     css_abs = os.path.abspath(os.path.join(template_dir, "style.css"))
     html = html.replace('href="style.css"', f'href="file://{css_abs}"')
     html_path = os.path.join(base, "pagina.html")
