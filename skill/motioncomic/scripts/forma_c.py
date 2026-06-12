@@ -12,6 +12,15 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 from build_motion import _title_clip, FPS, W, H   # noqa: E402  (card de abertura)
 from build_travel import _cta_clip                # noqa: E402  (CTA inema.club)
+import _deps  # noqa: E402
+sys.path.insert(0, _deps.scripts("serie"))
+from naming import ep_base   # noqa: E402  (mesmo gerador de nome das Formas A/B)
+
+
+def forma_c_out_name(serie_slug, n, titulo):
+    """Nome do arquivo Forma C, no MESMO padrao das Formas A/B: a letra do
+    formato (c) vem ANTES do epNN -> <serie>-c-ep01-<titulo>.mp4."""
+    return ep_base(f"{serie_slug}-c", n, titulo) + ".mp4"
 
 
 def _paineis_em_ordem(roteiro):

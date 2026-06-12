@@ -50,7 +50,12 @@ def test_coletor_falta_wav_erro(tmp="/tmp/_forma_c_falta"):
     except FileNotFoundError as e:
         assert "p01q3" in str(e)
 
+def test_naming_letra_c_antes_do_ep():
+    nome = forma_c.forma_c_out_name("teo-e-o-guardiao-da-noite", 1, "A Noite do Susto")
+    assert nome == "teo-e-o-guardiao-da-noite-c-ep01-a-noite-do-susto.mp4"
+
 if __name__ == "__main__":
     test_coletor_encena_em_ordem()
     test_coletor_falta_wav_erro()
+    test_naming_letra_c_antes_do_ep()
     print("OK coletor")
