@@ -32,9 +32,17 @@ def test_build_serie_expands_destino():
     assert os.path.expanduser("~/projetos/output") in str(dest)
 
 
+def test_estilo_defaults_moldura_accent():
+    assert config.FALLBACK["estilo"]["moldura"] == "dark"
+    assert config.FALLBACK["estilo"]["cor_destaque"] == "#b08900"
+    flat = config.resolve({"id": "x"})
+    assert flat["moldura"] == "dark" and flat["cor_destaque"] == "#b08900"
+
+
 if __name__ == "__main__":
     test_fallback_destino_is_home_projetos_output()
     test_resolve_keeps_home_destino()
     test_expanduser_resolves_outside_repo()
     test_build_serie_expands_destino()
+    test_estilo_defaults_moldura_accent()
     print("OK")

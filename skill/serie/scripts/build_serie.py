@@ -127,7 +127,10 @@ def _render_hq(ep, settings, destdir, base):
     for pg in ep["paginas"]:
         dst = os.path.join(destdir, f"{base}-p{int(pg['n']):02d}.png")
         if not os.path.exists(dst):
-            png = build_pagina(_page_to_quadrinho(ep, pg), tdir, arte=settings["arte"], out_dir=work)
+            png = build_pagina(_page_to_quadrinho(ep, pg), tdir, arte=settings["arte"], out_dir=work,
+                               moldura=settings.get("moldura", "dark"),
+                               kicker=settings.get("kicker", ""),
+                               accent=settings.get("cor_destaque", "#b08900"))
             os.replace(png, dst)
         files.append(dst)
     return files
@@ -143,7 +146,10 @@ def _render_video(ep, settings, destdir, base):
     if settings["tipo"] == "video-pagina":
         from build_travel import build_video_travel  # noqa: E402
         mp4 = build_video_travel(rot, out_dir=work, voice=settings["voz"], arte=settings["arte"],
-                                 template_dir=_TEMPLATES[settings["modelo_pagina"]])
+                                 template_dir=_TEMPLATES[settings["modelo_pagina"]],
+                                 moldura=settings.get("moldura", "dark"),
+                                 kicker=settings.get("kicker", ""),
+                                 accent=settings.get("cor_destaque", "#b08900"))
     else:
         from build_motion import build_video  # noqa: E402
         mp4 = build_video(rot, out_dir=work, voice=settings["voz"])
@@ -170,6 +176,7 @@ def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
     `notify_fn(msg)` p/ progresso. `auto` aqui e informativo (o portao e
     decidido por quem chama). Retorna {dest, manifesto, episodios}."""
     s = resolve(biblia)
+    s["kicker"] = biblia.get("kicker") or biblia.get("assunto", "")
     tipo = s["tipo"]
     destino = os.path.expanduser(out_dir or s["destino"] or "~/projetos/output")
     serie_slug = slug(biblia.get("assunto") or biblia["id"])

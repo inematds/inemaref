@@ -50,6 +50,18 @@ testados do folder (`imgclient`, `render`, `png_size`, `artes`).
 Estilo `manga` (p&b, screentone) em `skill/referencias/artes.json`. Motor padrao `flux2-klein`
 (mesmo seam do folder; troca por `model=` em `build_pagina`).
 
+## Moldura, kicker e saidas
+`build_pagina` aceita tres params opcionais de visual:
+- **`moldura`** (`"dark"` | `"white"`) — frame da pagina: `dark` = borda fina escura (padrao);
+  `white` = gutters brancos, look de galeria.
+- **`kicker`** (string) — nome da serie exibido acima do titulo no cabecalho da pagina.
+- **`accent`** (hex, ex.: `"#b08900"`) — cor do kicker/realce no cabecalho.
+
+`build_pagina` emite **duas saidas**:
+- `pagina.png` — pagina completa com texto (narracao/baloes/SFX): versao para o **carrossel**.
+- `pagina-textless.png` — mesma arte, sem camada de texto: versao para o **video** (Forma B
+  viaja sobre esta imagem com a voz-off).
+
 ## Help
 Se o usuario digitar `/inemaref-quadrinho help`, responda com este resumo:
 - **O que faz:** monta uma pagina de quadrinho/manga a partir de uma historia — 6 quadros textless (p&b) + narracao/baloes/SFX como camada, renderizado pra pagina.png.

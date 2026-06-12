@@ -80,6 +80,29 @@ Idempotente (re-rodar continua de onde parou). Progresso no openpcbot quando `no
 `texto` -> `.md`/`.json` por episodio · `hq` -> PNGs por pagina · `video-slideshow`/`video-pagina`
 -> 1 MP4 por episodio. (pixflow/animabook: adiados — ver spec secao 10.)
 
+**Os dois formatos narrados (= "Forma A / Forma B" do motioncomic docs/02).** Quando o usuario
+pedir "versao narrada A e B", "as duas formas", "slideshow e pagina" — ele quer ESTES dois `tipo`s,
+NAO duas vozes:
+- **`video-slideshow` (Forma A)** — `build_motion`: cada quadro vira imagem textless, balao/SFX
+  sobrepostos, narra e da ZOOM no quadro durante a fala; a camera viaja **quadro a quadro**.
+- **`video-pagina` (Forma B)** — `build_travel`: monta a PAGINA real de quadrinho (grade, sarjetas,
+  baloes impressos) e a camera **sobrevoa a folha** como quem filma um papel.
+Voz (`bella`/`rachel`) e um eixo SEPARADO de A/B — nao confunda formato com voz.
+
+**A/B e FORMATO, nao narracao.** A narracao e uma faixa fluente UNICA, compartilhada por A e B.
+Nunca gere "duas narracoes" ou "duas vozes" por causa do formato.
+
+## Estilo — moldura e cor_destaque
+Dois campos de estilo novos (em `config.yaml` e `FALLBACK`):
+- **`moldura`** (`dark` | `white`) — frame da pagina HQ: `dark` = borda fina escura (padrao);
+  `white` = gutters brancos, look galeria.
+- **`cor_destaque`** (hex, default `"#b08900"`) — cor do kicker/realce no cabecalho de cada pagina.
+
+O campo **`kicker`** da biblia (string; se ausente, usa `assunto`) aparece acima do titulo em cada
+pagina — identifica a serie visualmente. O `build_serie` injeta `kicker` no `settings` resolvido
+e repassa `moldura`/`kicker`/`accent` para `build_pagina` (HQ) e `build_video_travel` (Forma B).
+Para sobrescrever numa biblia especifica: adicione `"estilo": {"moldura": "white", "cor_destaque": "#c04000"}` na `biblia.json`.
+
 ## Help
 Se o usuario digitar `/inemaref-serie help`, responda com este resumo:
 - **O que faz:** cria uma serie completa a partir de um assunto — escreve a biblia (premissa, protagonista, elenco, estilo, outline), e apos aprovacao gera todos os episodios em texto/HQ/video + manifesto.json.
