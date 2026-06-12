@@ -14,8 +14,27 @@ def test_expanduser_resolves_outside_repo():
     assert p == os.path.join(os.path.expanduser("~"), "projetos", "output")
     assert "~" not in p
 
+def test_build_serie_expands_destino():
+    import build_serie
+    biblia = {"id": "demo-x", "assunto": "demo", "formato": {"tipo": "texto"}}
+
+    def noop(ep, settings, destdir, base):
+        return []
+
+    res = build_serie.build_serie(
+        biblia,
+        [{"n": 1, "titulo": "t", "paginas": []}],
+        renderers={"texto": noop},
+        auto=True,
+    )
+    dest = res["dest"]
+    assert "~" not in str(dest)
+    assert os.path.expanduser("~/projetos/output") in str(dest)
+
+
 if __name__ == "__main__":
     test_fallback_destino_is_home_projetos_output()
     test_resolve_keeps_home_destino()
     test_expanduser_resolves_outside_repo()
+    test_build_serie_expands_destino()
     print("OK")

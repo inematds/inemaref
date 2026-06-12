@@ -34,7 +34,8 @@ def build_biblia(biblia, piloto=None, out_dir=None, folder_fn=None, pagina_fn=No
     (se `piloto` — um roteiro de 1 pagina, 6 paineis). Retorna os caminhos."""
     _biblia.validate(biblia)
     s = resolve(biblia)
-    base_out = os.path.join(os.path.expanduser(out_dir or "~/projetos/output"), biblia["id"], "biblia")
+    base_out = os.path.join(os.path.expanduser(out_dir or s["destino"] or "~/projetos/output"),
+                            biblia["id"], "biblia")
     os.makedirs(base_out, exist_ok=True)
 
     md_path = os.path.join(base_out, "biblia.md")
