@@ -1,11 +1,14 @@
+:root { --gut: 9px; --gutter: #1b1b1b; --mat: 56px; --accent: #b08900; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { width: 1200px; height: 1600px; background: #fff; font-family: "Arial Black", Arial, sans-serif; color: #111; }
-.pagina { width: 1200px; height: 1600px; display: flex; flex-direction: column; background: #111; padding: 36px 40px 40px; }
-.cabecalho { flex: 0 0 auto; padding: 0 0 16px; }
-.titulo { font-family: "Arial Black", sans-serif; font-weight: 900; font-size: 42px; letter-spacing: .04em; color: #fff; text-transform: uppercase; }
+.pagina { width: 1200px; height: 1600px; display: flex; flex-direction: column; background: #fff; padding: var(--mat); }
+.cabecalho { flex: 0 0 auto; padding: 0 0 28px; text-align: center; }
+.kicker { font: 700 18px Arial, sans-serif; letter-spacing: .28em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+.kicker:empty { display: none; }
+.titulo { font: 900 50px Georgia, "Times New Roman", serif; color: #111; }
 
 /* dynamic manga layout — 6 panels, varied sizes */
-.quadros { flex: 1; display: grid; gap: 14px;
+.quadros { flex: 1; display: grid; gap: var(--gut); padding: var(--gut); background: var(--gutter);
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1.35fr 1fr 1fr 1fr;
   grid-template-areas:
@@ -20,7 +23,7 @@ body { width: 1200px; height: 1600px; background: #fff; font-family: "Arial Blac
 .panel:nth-child(5) { grid-area: p5; }
 .panel:nth-child(6) { grid-area: p6; }
 
-.panel { position: relative; overflow: hidden; background: #000; border: 3px solid #000; }
+.panel { position: relative; overflow: hidden; background: #000; }
 .panel-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 28%; }
 
 /* NARRACAO: default top-left, face_zones overrides via inline style */

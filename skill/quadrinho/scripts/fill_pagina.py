@@ -125,7 +125,9 @@ def fill(template_dir, roteiro, assets_dir=None):
                          f'{_esc(p["fala"])}</span></div>')
         frags.append(f'<figure class="panel">{"".join(parts)}</figure>')
 
-    repl = {"titulo": _esc(roteiro.get("titulo", "")), "paineis_html": "".join(frags)}
+    repl = {"titulo": _esc(roteiro.get("titulo", "")),
+            "kicker": _esc(roteiro.get("kicker", "")),
+            "paineis_html": "".join(frags)}
 
     expected = set(re.findall(r"{{(\w+)}}", tpl))
     missing = expected - set(repl)
