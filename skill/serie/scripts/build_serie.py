@@ -56,7 +56,10 @@ def build_biblia(biblia, piloto=None, out_dir=None, folder_fn=None, pagina_fn=No
                "personagem": biblia["protagonista"].get("aparencia", "")}
         result["piloto"] = pagina_fn(
             _page_to_quadrinho(ep0, piloto), _TEMPLATES[s["modelo_pagina"]],
-            arte=s["arte"], out_dir=base_out)
+            arte=s["arte"], out_dir=base_out,
+            moldura=s.get("moldura", "dark"),
+            kicker=biblia.get("kicker") or biblia.get("assunto", ""),
+            accent=s.get("cor_destaque", "#b08900"))
     return result
 
 
@@ -149,7 +152,8 @@ def _render_video(ep, settings, destdir, base):
                                  template_dir=_TEMPLATES[settings["modelo_pagina"]],
                                  moldura=settings.get("moldura", "dark"),
                                  kicker=settings.get("kicker", ""),
-                                 accent=settings.get("cor_destaque", "#b08900"))
+                                 accent=settings.get("cor_destaque", "#b08900"),
+                                 intro=settings.get("intro", True))
     else:
         from build_motion import build_video  # noqa: E402
         mp4 = build_video(rot, out_dir=work, voice=settings["voz"])

@@ -398,7 +398,6 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
         #    TERMINA na PRANCHA INTEIRA — a mesma fala atravessa cartao -> prancha.
         #    (abertura ja foi narrada no card de intro em t=0; aqui so a chamada da pagina)
         chamada = (pg.get("chamada") or "").strip()
-        # abertura ja foi narrada no card de intro (t=0); aqui so a chamada da pagina
         intro_txt = chamada
         card = os.path.join(clips_dir, f"{pn:02d}0-cartao.mp4")
         est = os.path.join(clips_dir, f"{pn:02d}1-prancha.mp4")
