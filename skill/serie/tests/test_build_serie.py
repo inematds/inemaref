@@ -93,11 +93,12 @@ def test_canon_visual_fold():
     assert "pedra, 5 camadas" not in q["paineis"][1]["prompt"]   # quadro sem `usa` nao dobra
 
 
-def test_video_format_suffix(tmp="/tmp/_serie_suffix"):
-    """Forma A (slideshow) e B (pagina) convivem na MESMA pasta: o base do video
-    leva o sufixo do formato (-slideshow / -pagina); texto NAO leva sufixo."""
+def test_video_format_letter(tmp="/tmp/_serie_forma"):
+    """Forma A (slideshow) e B (pagina) convivem na MESMA pasta: a LETRA do
+    formato vem ANTES do epNN no nome (<serie>-a-ep01 / <serie>-b-ep01); texto
+    NAO leva letra de formato."""
     import shutil
-    for tipo, suf in [("video-pagina", "-pagina"), ("video-slideshow", "-slideshow")]:
+    for tipo, mark in [("video-pagina", "-b-ep"), ("video-slideshow", "-a-ep")]:
         shutil.rmtree(tmp, ignore_errors=True)
         b = json.loads(json.dumps(BIBLIA)); b["formato"] = {"tipo": tipo, "destino": None}
         seen = []
@@ -105,15 +106,15 @@ def test_video_format_suffix(tmp="/tmp/_serie_suffix"):
             seen.append(base); p = os.path.join(destdir, base + ".mp4"); open(p, "w").close(); return [p]
         BS.build_serie(b, [_fake_ep(1, "Um")], out_dir=tmp, auto=True,
                        renderers={tipo: fake}, gerado_em="2026-06-10", notify_fn=lambda m: None)
-        assert seen and all(x.endswith(suf) for x in seen), (tipo, seen)
-    # texto: sem sufixo de formato
+        assert seen and all(mark in x for x in seen), (tipo, seen)
+    # texto: sem letra de formato
     shutil.rmtree(tmp, ignore_errors=True)
     seen = []
     def faketxt(ep, settings, destdir, base):
         seen.append(base); p = os.path.join(destdir, base + ".md"); open(p, "w").close(); return [p]
     BS.build_serie(BIBLIA, [_fake_ep(1, "Um")], out_dir=tmp, auto=True,
                    renderers={"texto": faketxt}, gerado_em="2026-06-10", notify_fn=lambda m: None)
-    assert seen and all(not x.endswith(("-pagina", "-slideshow")) for x in seen), seen
+    assert seen and all("-a-ep" not in x and "-b-ep" not in x for x in seen), seen
 
 
 if __name__ == "__main__":
@@ -121,5 +122,5 @@ if __name__ == "__main__":
     test_build_serie_batch_texto_and_manifest()
     test_texto_manifest_idempotent()
     test_canon_visual_fold()
-    test_video_format_suffix()
+    test_video_format_letter()
     print("OK")

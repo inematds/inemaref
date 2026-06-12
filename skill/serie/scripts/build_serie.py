@@ -164,9 +164,12 @@ def _render_video(ep, settings, destdir, base):
 _REGISTRY = {"texto": _render_texto, "hq": _render_hq,
              "video-slideshow": _render_video, "video-pagina": _render_video}
 
-# sufixo do formato no nome do arquivo de video -> Forma A (slideshow) e B
-# (pagina) convivem na MESMA pasta da serie, com nomes distintos.
-_VIDEO_SUFFIX = {"video-slideshow": "-slideshow", "video-pagina": "-pagina"}
+# letra do formato no nome do arquivo de video -> Forma A (slideshow) e B
+# (pagina) convivem na MESMA pasta da serie, com nomes distintos. A letra vem
+# ANTES do epNN: <serie>-a-ep01-<titulo>.mp4 / <serie>-b-ep01-<titulo>.mp4
+# (c reservado p/ um 3o formato FUTURO = Forma A + recurso de FILME, "a+filme":
+#  slideshow com tratamento cinematografico/parallax estilo pixflow).
+_VIDEO_FORMA = {"video-slideshow": "a", "video-pagina": "b"}
 
 
 def _saidas(destdir, base):
@@ -202,7 +205,9 @@ def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
     entregas = []
     for ep in episodios:
         ep.setdefault("elementos", elementos)   # canon visual disponivel p/ os renderers
-        base = ep_base(serie_slug, ep["n"], ep.get("titulo", "")) + _VIDEO_SUFFIX.get(tipo, "")
+        forma = _VIDEO_FORMA.get(tipo)
+        sslug = f"{serie_slug}-{forma}" if forma else serie_slug   # <serie>-a/-b antes do epNN
+        base = ep_base(sslug, ep["n"], ep.get("titulo", ""))
         # idempotente: so renderiza se ainda nao ha NENHUMA saida desse episodio.
         # `arquivos` vem sempre do estado final no disco -> identico entre rodadas
         # e por tipo (texto: .md/.json; video: .mp4; hq: -pNN.png).
