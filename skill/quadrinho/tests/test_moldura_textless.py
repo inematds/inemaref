@@ -27,7 +27,18 @@ def test_moldura_white_injects_root(out="/tmp/_moldura_white"):
     html = open(os.path.join(out, ROT["id"], "pagina.html")).read()
     assert "--gutter:#ffffff" in html.replace(" ", "")
 
+def test_emits_textless_png(out="/tmp/_textless"):
+    if os.path.exists(out): shutil.rmtree(out)
+    png = build_pagina(ROT, DINAM, out_dir=out, generate_fn=fake_generate)
+    base = os.path.dirname(png)
+    tl_png = os.path.join(base, "pagina-textless.png")
+    tl_html = os.path.join(base, "pagina-textless.html")
+    assert os.path.exists(tl_png) and png_size(tl_png) == (1200, 1600)
+    h = open(tl_html).read().replace(" ", "")
+    assert ".narracao,.fala,.sfx{display:none" in h
+
 if __name__ == "__main__":
     test_moldura_dark_injects_root()
     test_moldura_white_injects_root()
+    test_emits_textless_png()
     print("OK moldura")

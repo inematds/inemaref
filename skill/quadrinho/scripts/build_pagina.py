@@ -67,6 +67,16 @@ def build_pagina(roteiro, template_dir, arte="manga", out_dir="output",
 
     render_fn(html_path, os.path.join(base, "pagina.png"), meta["width"], meta["height"])
 
+    # cópia TEXTLESS p/ o vídeo (carrossel usa pagina.png COM texto; o vídeo
+    # viaja sobre esta, só a arte dos painéis). Reusa o display:none do mask.
+    textless_html = html.replace(
+        "</head>", "<style>.narracao,.fala,.sfx{display:none!important}</style></head>")
+    textless_path = os.path.join(base, "pagina-textless.html")
+    with open(textless_path, "w") as f:
+        f.write(textless_html)
+    render_fn(textless_path, os.path.join(base, "pagina-textless.png"),
+              meta["width"], meta["height"])
+
     with open(os.path.join(base, "roteiro.json"), "w") as f:
         json.dump(roteiro, f, ensure_ascii=False, indent=2)
     return os.path.join(base, "pagina.png")
