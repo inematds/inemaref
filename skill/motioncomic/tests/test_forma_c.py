@@ -54,8 +54,41 @@ def test_naming_letra_c_antes_do_ep():
     nome = forma_c.forma_c_out_name("teo-e-o-guardiao-da-noite", 1, "A Noite do Susto")
     assert nome == "teo-e-o-guardiao-da-noite-c-ep01-a-noite-do-susto.mp4"
 
+def _fake_clip(path, secs):
+    import subprocess
+    subprocess.run(["ffmpeg", "-nostdin", "-y", "-v", "error",
+                    "-f", "lavfi", "-t", str(secs), "-i", "color=c=black:s=1280x720:r=30",
+                    "-f", "lavfi", "-t", str(secs),
+                    "-i", "anullsrc=channel_layout=stereo:sample_rate=44100",
+                    "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", "30",
+                    "-c:a", "aac", "-ar", "44100", "-ac", "2", "-shortest", path], check=True)
+
+def _dur(p):
+    import subprocess
+    return float(subprocess.run(["ffprobe", "-v", "error", "-show_entries",
+        "format=duration", "-of", "default=nk=1:nw=1", p],
+        capture_output=True, text=True).stdout.strip())
+
+def test_wrapper_envolve_miolo(tmp="/tmp/_forma_c_wrap"):
+    import shutil
+    shutil.rmtree(tmp, ignore_errors=True); os.makedirs(tmp)
+    miolo = os.path.join(tmp, "miolo.mp4"); _fake_clip(miolo, 4.0)
+    out = os.path.join(tmp, "final.mp4")
+    forma_c.wrap_forma_c(miolo, out, abertura="Gancho de teste.",
+                         titulo="Titulo", subtitulo="sub", voice="bella")
+    assert os.path.exists(out)
+    # final > miolo (ganhou intro + cta)
+    assert _dur(out) > _dur(miolo) + 1.0
+    # tem video E audio
+    import subprocess
+    streams = subprocess.run(["ffprobe", "-v", "error", "-show_entries",
+        "stream=codec_type", "-of", "default=nk=1:nw=1", out],
+        capture_output=True, text=True).stdout
+    assert "video" in streams and "audio" in streams
+
 if __name__ == "__main__":
     test_coletor_encena_em_ordem()
     test_coletor_falta_wav_erro()
     test_naming_letra_c_antes_do_ep()
+    test_wrapper_envolve_miolo()
     print("OK coletor")

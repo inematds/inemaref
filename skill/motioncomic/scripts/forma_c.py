@@ -77,3 +77,37 @@ def coletar_forma_c(roteiro, assets_dir, stage_dir):
     with open(os.path.join(stage_dir, "forma-c.json"), "w") as f:
         json.dump(manifesto, f, ensure_ascii=False, indent=2)
     return manifesto
+
+
+def wrap_forma_c(miolo_mp4, out_mp4, *, abertura, titulo, subtitulo="MOTION COMIC",
+                 voice="bella"):
+    """Envolve o filme dirigido (miolo) com o card de abertura narrando o gancho
+    (t=0) e o CTA inema.club — mesma identidade das Formas A/B. Concatena via
+    filtro `concat` (re-encoda), tolerante a diferenca de encode entre o pixflow
+    e os cards. Retorna out_mp4."""
+    import html as _h
+    base = os.path.dirname(os.path.abspath(out_mp4))
+    work = os.path.join(base, "_forma_c_cards")
+    os.makedirs(work, exist_ok=True)
+    abertura = (abertura or "").strip()
+
+    intro = os.path.join(work, "000-intro.mp4")
+    _title_clip(f'<small>{_h.escape(subtitulo or "MOTION COMIC")}</small>'
+                + _h.escape(titulo), intro, secs=2.2,
+                audio=(abertura or None), voice=voice)
+    cta = os.path.join(work, "zz9-cta.mp4")
+    _cta_clip(cta, voice=voice)
+
+    parts = [intro, miolo_mp4, cta]
+    # concat por FILTRO (re-encoda) -> tolera params diferentes entre pixflow e cards
+    inputs = []
+    for p in parts:
+        inputs += ["-i", p]
+    n = len(parts)
+    fc = "".join(f"[{i}:v:0][{i}:a:0]" for i in range(n)) + f"concat=n={n}:v=1:a=1[v][a]"
+    cmd = ["ffmpeg", "-nostdin", "-y", "-v", "error", *inputs,
+           "-filter_complex", fc, "-map", "[v]", "-map", "[a]",
+           "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
+           "-c:a", "aac", "-ar", "44100", "-ac", "2", out_mp4]
+    subprocess.run(cmd, check=True)
+    return out_mp4
