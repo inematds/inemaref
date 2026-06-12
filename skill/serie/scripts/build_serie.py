@@ -164,6 +164,10 @@ def _render_video(ep, settings, destdir, base):
 _REGISTRY = {"texto": _render_texto, "hq": _render_hq,
              "video-slideshow": _render_video, "video-pagina": _render_video}
 
+# sufixo do formato no nome do arquivo de video -> Forma A (slideshow) e B
+# (pagina) convivem na MESMA pasta da serie, com nomes distintos.
+_VIDEO_SUFFIX = {"video-slideshow": "-slideshow", "video-pagina": "-pagina"}
+
 
 def _saidas(destdir, base):
     """Saidas ja no disco de um episodio: primarias (<base>.*: .md/.json/.mp4) +
@@ -198,7 +202,7 @@ def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
     entregas = []
     for ep in episodios:
         ep.setdefault("elementos", elementos)   # canon visual disponivel p/ os renderers
-        base = ep_base(serie_slug, ep["n"], ep.get("titulo", ""))
+        base = ep_base(serie_slug, ep["n"], ep.get("titulo", "")) + _VIDEO_SUFFIX.get(tipo, "")
         # idempotente: so renderiza se ainda nao ha NENHUMA saida desse episodio.
         # `arquivos` vem sempre do estado final no disco -> identico entre rodadas
         # e por tipo (texto: .md/.json; video: .mp4; hq: -pNN.png).

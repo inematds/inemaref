@@ -86,10 +86,14 @@ def build_video(roteiro, out_dir="output", voice="bella", model="flux2-klein", i
     personagem = roteiro.get("personagem", "")
     clips = []
 
+    abertura = (roteiro.get("abertura") or "").strip()
     if intro:
         tc = os.path.join(clips_dir, "000-intro.mp4")
+        # o card do assunto JA narra o gancho em t=0 (abertura), igual a Forma B.
+        # Sem abertura, fica o card silencioso de 2.2s como antes.
         _title_clip(f'<small>{_h.escape(roteiro.get("subtitulo","MOTION COMIC"))}</small>'
-                    + _h.escape(roteiro["titulo"]), tc, secs=2.2)
+                    + _h.escape(roteiro["titulo"]), tc, secs=2.2,
+                    audio=(abertura or None), voice=voice)
         clips.append(tc)
 
     for pg in roteiro["paginas"]:
