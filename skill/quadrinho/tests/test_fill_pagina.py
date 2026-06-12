@@ -65,10 +65,22 @@ def test_inline_styles_no_html():
     assert 'class="narracao" style="top:0' in html
     assert 'class="sfx" style="bottom:0' in html
 
+def test_fill_emits_kicker_div():
+    rot = dict(ROT); rot["kicker"] = "A ESCADA INVISIVEL DE LIA"
+    html = fill(GRADE, rot)
+    assert 'class="kicker"' in html
+    assert "A ESCADA INVISIVEL DE LIA" in html
+
+def test_fill_kicker_empty_when_absent():
+    html = fill(DINAM, ROT)  # ROT sem kicker
+    assert 'class="kicker"' in html  # div existe, vazia
+    assert "{{" not in html
+
 if __name__ == "__main__":
     test_fill_grade_clean(); test_fill_dinamico_clean()
     test_requires_six_paineis(); test_optional_fields_omitted()
     test_narracao_sfx_em_metades_opostas(); test_sfx_sozinho_fica_no_topo()
     test_fonte_encolhe_com_texto_longo(); test_texto_longo_demais_levanta_erro()
     test_inline_styles_no_html()
+    test_fill_emits_kicker_div(); test_fill_kicker_empty_when_absent()
     print("OK")

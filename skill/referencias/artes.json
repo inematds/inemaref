@@ -1,14 +1,14 @@
 {
   "foto": {
-    "positivo": "photorealistic, editorial magazine photography, natural soft lighting, sharp focus, shallow depth of field, high detail skin texture",
-    "negativo": "text, letters, words, watermark, logo, caption, signature, lowres, blurry, deformed, extra fingers"
+    "positivo": "photorealistic, editorial magazine photography, natural soft lighting, sharp focus, shallow depth of field, high detail skin texture, correct anatomy, well-formed hands, natural body proportions",
+    "negativo": "text, letters, words, watermark, logo, caption, signature, lowres, blurry, deformed, bad anatomy, disfigured, extra limbs, extra arms, extra legs, extra fingers, fused fingers, malformed hands, mutated hands, missing limbs"
   },
   "cartoon": {
-    "positivo": "illustrated cartoon style, watercolor and gouache, clean confident lineart, vivid saturated colors, soft cel shading, storybook illustration",
-    "negativo": "text, letters, words, watermark, logo, caption, signature, photorealistic, 3d render, lowres, deformed"
+    "positivo": "illustrated cartoon style, watercolor and gouache, clean confident lineart, vivid saturated colors, soft cel shading, storybook illustration, correct anatomy, well-formed hands, natural body proportions",
+    "negativo": "text, letters, words, watermark, logo, caption, signature, photorealistic, 3d render, lowres, deformed, bad anatomy, disfigured, extra limbs, extra arms, extra legs, extra fingers, fused fingers, malformed hands, mutated hands, missing limbs"
   },
   "manga": {
-    "positivo": "black and white manga panel, dynamic ink linework, screentone shading, cross-hatching, high contrast, expressive shonen manga art, dramatic composition",
-    "negativo": "text, speech bubble, words, letters, caption, watermark, signature, color, colored, lowres, deformed, extra fingers"
+    "positivo": "black and white manga panel, dynamic ink linework, screentone shading, cross-hatching, high contrast, expressive shonen manga art, dramatic composition, correct anatomy, well-formed hands, natural body proportions",
+    "negativo": "text, speech bubble, words, letters, caption, watermark, signature, color, colored, lowres, deformed, bad anatomy, disfigured, extra limbs, extra arms, extra legs, extra fingers, fused fingers, malformed hands, mutated hands, missing limbs"
   }
 }

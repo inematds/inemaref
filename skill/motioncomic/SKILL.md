@@ -20,6 +20,19 @@ acontece durante a fala.
   durante a sua narracao, **afasta um pouco e encaixa** no proximo, e na troca de pagina da
   **zoom-out total** e abre a seguinte. **Este e o modo "quadrinho de verdade" (padrao recomendado).**
 
+> **A/B e FORMATO, nao narracao.** Forma A = `video-slideshow` (slideshow, paineis
+> direto). Forma B = `video-pagina` (camera sobre a pagina). A narracao e uma faixa
+> fluente UNICA que serve A e B — nunca gere "duas narracoes" para A/B.
+>
+> **Carrossel x video.** O carrossel sao as PAGINAS (`pagina.png`, com texto), lidas
+> como quadrinho — nao e video. O video (A e B) usa a arte SEM texto: a Forma A pega os
+> paineis direto; a Forma B viaja sobre `pagina-textless.png` (voz-off).
+>
+> **Gancho.** O video abre em t=0 com a narracao-gancho (`roteiro['abertura']`) sobre o
+> card do assunto.
+>
+> **Moldura.** A pagina tem duas molduras (`moldura=dark|white`) escolhidas por geracao.
+
 ## Como funciona (pipeline)
 **Forma B (padrao):** para cada pagina, gera os 6 quadros textless (flux2-klein) e monta a prancha com
 a skill `quadrinho` (narracao/balao/SFX ja impressos). Re-renderiza a mesma pagina pintando cada

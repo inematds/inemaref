@@ -34,7 +34,8 @@ def build_biblia(biblia, piloto=None, out_dir=None, folder_fn=None, pagina_fn=No
     (se `piloto` — um roteiro de 1 pagina, 6 paineis). Retorna os caminhos."""
     _biblia.validate(biblia)
     s = resolve(biblia)
-    base_out = os.path.join(out_dir or "output", biblia["id"], "biblia")
+    base_out = os.path.join(os.path.expanduser(out_dir or s["destino"] or "~/projetos/output"),
+                            biblia["id"], "biblia")
     os.makedirs(base_out, exist_ok=True)
 
     md_path = os.path.join(base_out, "biblia.md")
@@ -55,7 +56,10 @@ def build_biblia(biblia, piloto=None, out_dir=None, folder_fn=None, pagina_fn=No
                "personagem": biblia["protagonista"].get("aparencia", "")}
         result["piloto"] = pagina_fn(
             _page_to_quadrinho(ep0, piloto), _TEMPLATES[s["modelo_pagina"]],
-            arte=s["arte"], out_dir=base_out)
+            arte=s["arte"], out_dir=base_out,
+            moldura=s.get("moldura", "dark"),
+            kicker=biblia.get("kicker") or biblia.get("assunto", ""),
+            accent=s.get("cor_destaque", "#b08900"))
     return result
 
 
@@ -126,7 +130,10 @@ def _render_hq(ep, settings, destdir, base):
     for pg in ep["paginas"]:
         dst = os.path.join(destdir, f"{base}-p{int(pg['n']):02d}.png")
         if not os.path.exists(dst):
-            png = build_pagina(_page_to_quadrinho(ep, pg), tdir, arte=settings["arte"], out_dir=work)
+            png = build_pagina(_page_to_quadrinho(ep, pg), tdir, arte=settings["arte"], out_dir=work,
+                               moldura=settings.get("moldura", "dark"),
+                               kicker=settings.get("kicker", ""),
+                               accent=settings.get("cor_destaque", "#b08900"))
             os.replace(png, dst)
         files.append(dst)
     return files
@@ -142,7 +149,11 @@ def _render_video(ep, settings, destdir, base):
     if settings["tipo"] == "video-pagina":
         from build_travel import build_video_travel  # noqa: E402
         mp4 = build_video_travel(rot, out_dir=work, voice=settings["voz"], arte=settings["arte"],
-                                 template_dir=_TEMPLATES[settings["modelo_pagina"]])
+                                 template_dir=_TEMPLATES[settings["modelo_pagina"]],
+                                 moldura=settings.get("moldura", "dark"),
+                                 kicker=settings.get("kicker", ""),
+                                 accent=settings.get("cor_destaque", "#b08900"),
+                                 intro=settings.get("intro", True))
     else:
         from build_motion import build_video  # noqa: E402
         mp4 = build_video(rot, out_dir=work, voice=settings["voz"])
@@ -152,6 +163,13 @@ def _render_video(ep, settings, destdir, base):
 
 _REGISTRY = {"texto": _render_texto, "hq": _render_hq,
              "video-slideshow": _render_video, "video-pagina": _render_video}
+
+# letra do formato no nome do arquivo de video -> Forma A (slideshow) e B
+# (pagina) convivem na MESMA pasta da serie, com nomes distintos. A letra vem
+# ANTES do epNN: <serie>-a-ep01-<titulo>.mp4 / <serie>-b-ep01-<titulo>.mp4
+# (c reservado p/ um 3o formato FUTURO = Forma A + recurso de FILME, "a+filme":
+#  slideshow com tratamento cinematografico/parallax estilo pixflow).
+_VIDEO_FORMA = {"video-slideshow": "a", "video-pagina": "b"}
 
 
 def _saidas(destdir, base):
@@ -169,8 +187,9 @@ def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
     `notify_fn(msg)` p/ progresso. `auto` aqui e informativo (o portao e
     decidido por quem chama). Retorna {dest, manifesto, episodios}."""
     s = resolve(biblia)
+    s["kicker"] = biblia.get("kicker") or biblia.get("assunto", "")
     tipo = s["tipo"]
-    destino = out_dir or s["destino"] or "output"
+    destino = os.path.expanduser(out_dir or s["destino"] or "~/projetos/output")
     serie_slug = slug(biblia.get("assunto") or biblia["id"])
     destdir = os.path.join(destino, biblia["id"])
     os.makedirs(destdir, exist_ok=True)
@@ -186,7 +205,9 @@ def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
     entregas = []
     for ep in episodios:
         ep.setdefault("elementos", elementos)   # canon visual disponivel p/ os renderers
-        base = ep_base(serie_slug, ep["n"], ep.get("titulo", ""))
+        forma = _VIDEO_FORMA.get(tipo)
+        sslug = f"{serie_slug}-{forma}" if forma else serie_slug   # <serie>-a/-b antes do epNN
+        base = ep_base(sslug, ep["n"], ep.get("titulo", ""))
         # idempotente: so renderiza se ainda nao ha NENHUMA saida desse episodio.
         # `arquivos` vem sempre do estado final no disco -> identico entre rodadas
         # e por tipo (texto: .md/.json; video: .mp4; hq: -pNN.png).

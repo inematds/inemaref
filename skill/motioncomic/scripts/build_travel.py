@@ -297,6 +297,11 @@ def _page_card_clip(pn, titulo, out_mp4, audio=None, secs=T_FULL):
 _TEMPLATE_DIR = os.path.join(_deps.templates("quadrinho"), "manga-dinamico")
 
 
+def _textless(page_png):
+    """A cópia SEM texto, irmã do pagina.png (emitida pelo build_pagina)."""
+    return os.path.join(os.path.dirname(page_png), "pagina-textless.png")
+
+
 def _page_roteiro(roteiro, pg):
     """Converte uma pagina do roteiro de motioncomic no roteiro que a skill
     `quadrinho` espera. O personagem (`quem`/protagonista) e dobrado no prompt
@@ -327,7 +332,8 @@ def _page_roteiro(roteiro, pg):
 
 
 def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-klein",
-                       arte="manga", intro=True, template_dir=None):
+                       arte="manga", intro=True, template_dir=None,
+                       moldura="dark", kicker=None, accent="#b08900"):
     """Forma B: pagina de papel + camera viajando. Cada pagina precisa de 6
     paineis. `template_dir` escolhe o layout da prancha (default **manga-dinamico**
     — quadros de tamanhos/posicoes variaveis; passe .../grade-uniforme p/ a 2x3).
@@ -352,23 +358,27 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
         os.makedirs(d, exist_ok=True)
     clips = []
 
+    abertura = (roteiro.get("abertura") or "").strip()
     if intro:
         tc = os.path.join(clips_dir, "000-intro.mp4")
+        # o card do assunto JA narra o gancho em t=0 (abertura). Sem abertura,
+        # fica o card silencioso de 2.2s como antes.
         _title_clip(f'<small>{_h.escape(roteiro.get("subtitulo", "MOTION COMIC"))}</small>'
-                    + _h.escape(roteiro["titulo"]), tc, secs=2.2)
+                    + _h.escape(roteiro["titulo"]), tc, secs=2.2,
+                    audio=(abertura or None), voice=voice)
         clips.append(tc)
-
-    # abertura narrada — a narracao COMECA dizendo o assunto (entra na 1a chamada)
-    abertura = (roteiro.get("abertura") or "").strip()
 
     pages = roteiro["paginas"]
     last_page_png = None
     for pgi, pg in enumerate(pages):
         pn = pg["n"]
-        # 1) monta a pagina de papel (narracao/balao/sfx impressos)
+        # 1) monta a pagina de papel; pagina.png (COM texto) = carrossel,
+        #    pagina-textless.png = sobre a qual a CAMERA viaja (voz-off).
         page_png = build_pagina(_page_roteiro(roteiro, pg), tdir,
-                                arte=arte, out_dir=pages_dir, model=model)
-        last_page_png = page_png
+                                arte=arte, out_dir=pages_dir, model=model,
+                                moldura=moldura, kicker=kicker, accent=accent)
+        travel_png = _textless(page_png)
+        last_page_png = travel_png
         page_html = os.path.join(os.path.dirname(page_png), "pagina.html")
         mask_png = os.path.join(os.path.dirname(page_png), "mask.png")
         render_mask(page_html, mask_png, PW, PH)
@@ -386,9 +396,9 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
 
         # 3) FORMATO C: a CHAMADA narrada COMECA no cartao "PAGINA n / titulo" e
         #    TERMINA na PRANCHA INTEIRA — a mesma fala atravessa cartao -> prancha.
-        #    Na 1a pagina, a abertura (assunto da serie) entra antes da chamada.
+        #    (abertura ja foi narrada no card de intro em t=0; aqui so a chamada da pagina)
         chamada = (pg.get("chamada") or "").strip()
-        intro_txt = (f"{abertura} {chamada}".strip() if pgi == 0 else chamada)
+        intro_txt = chamada
         card = os.path.join(clips_dir, f"{pn:02d}0-cartao.mp4")
         est = os.path.join(clips_dir, f"{pn:02d}1-prancha.mp4")
         if intro_txt:
@@ -402,13 +412,13 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
                 pb = os.path.join(voz_dir, f"chamada{pn:02d}b.wav")
                 _split_wav(cwav, card_dur, pa, pb)
                 _page_card_clip(pn, pg.get("titulo", ""), card, audio=pa)
-                _fullpage_clip(page_png, duration(pb) + 0.4, est, audio=pb)
+                _fullpage_clip(travel_png, duration(pb) + 0.4, est, audio=pb)
             else:                               # fala curta: tudo no cartao
                 _page_card_clip(pn, pg.get("titulo", ""), card, audio=cwav)
-                _fullpage_clip(page_png, T_FULL, est)
+                _fullpage_clip(travel_png, T_FULL, est)
         else:
             _page_card_clip(pn, pg.get("titulo", ""), card)
-            _fullpage_clip(page_png, T_FULL, est)
+            _fullpage_clip(travel_png, T_FULL, est)
         clips.append(card)
         clips.append(est)
 
@@ -417,12 +427,12 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
         #    (zoom_window do proximo quadro) -> sem pulo entre trans e hold.
         for i in range(len(frames)):
             hold = os.path.join(clips_dir, f"{pn:02d}q{i+1}-hold.mp4")
-            _seg_clip(page_png, zoom_window(frames[i], HOLD_OUT, PW), frames[i],
+            _seg_clip(travel_png, zoom_window(frames[i], HOLD_OUT, PW), frames[i],
                       durs[i], hold, audio=wavs[i])
             clips.append(hold)
             if i < len(frames) - 1:
                 tr = os.path.join(clips_dir, f"{pn:02d}q{i+1}-trans.mp4")
-                _seg_clip(page_png, frames[i], zoom_window(frames[i + 1], HOLD_OUT, PW),
+                _seg_clip(travel_png, frames[i], zoom_window(frames[i + 1], HOLD_OUT, PW),
                           T_TRANS, tr, bump=TRANS_BUMP)
                 clips.append(tr)
 

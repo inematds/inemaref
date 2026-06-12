@@ -68,7 +68,7 @@ def _font_size(elem, text):
     return 56 if n <= 7 else 40 if n <= 11 else 30  # sfx
 
 
-def fill(template_dir, roteiro, assets_dir=None):
+def fill(template_dir, roteiro, assets_dir=None, kicker=None):
     """Build a comic page HTML from a roteiro. Panel art is textless; the
     narration boxes, speech balloons and SFX are this HTML layer on top.
 
@@ -125,7 +125,9 @@ def fill(template_dir, roteiro, assets_dir=None):
                          f'{_esc(p["fala"])}</span></div>')
         frags.append(f'<figure class="panel">{"".join(parts)}</figure>')
 
-    repl = {"titulo": _esc(roteiro.get("titulo", "")), "paineis_html": "".join(frags)}
+    repl = {"titulo": _esc(roteiro.get("titulo", "")),
+            "kicker": _esc(kicker if kicker is not None else roteiro.get("kicker", "")),
+            "paineis_html": "".join(frags)}
 
     expected = set(re.findall(r"{{(\w+)}}", tpl))
     missing = expected - set(repl)
