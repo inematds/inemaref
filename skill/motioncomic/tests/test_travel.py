@@ -88,6 +88,27 @@ def test_frame_window_adapts_to_panel_shape():
         assert cy - ch / 2 >= -1 and cy + ch / 2 <= PH + 1
 
 
+def test_frame_window_max_w_garante_mergulho():
+    """Quadro grande (2x2) gera janela ~ pagina inteira -> sem mergulho. O cap
+    max_w aperta no centro do quadro, garantindo um close legivel; quadro
+    pequeno (ja menor que o cap) passa intacto."""
+    cap = 0.82 * PW
+    grande = (50, 50, 1100, 700)   # cobre quase toda a largura
+    pequeno = (60, 300, 360, 300)  # ja dá um close natural
+    # sem cap: o quadro grande abre ~ pagina inteira
+    _, _, cw_livre = frame_window(grande, PW, PH)
+    assert cw_livre > cap + 1, cw_livre
+    # com cap: a janela do quadro grande encolhe pro cap (mergulho garantido)
+    cxg, cyg, cwg = frame_window(grande, PW, PH, max_w=cap)
+    assert abs(cwg - cap) < 1, cwg
+    # dentro da pagina e em 16:9
+    chg = cwg / AR
+    assert cxg - cwg / 2 >= -1 and cxg + cwg / 2 <= PW + 1
+    assert cyg - chg / 2 >= -1 and cyg + chg / 2 <= PH + 1
+    # o quadro pequeno nao e afetado pelo cap
+    assert frame_window(pequeno, PW, PH, max_w=cap) == frame_window(pequeno, PW, PH)
+
+
 def test_window_at_endpoints_and_bump():
     a, b = (100, 100, 400), (900, 1400, 600)
     assert window_at(a, b, 0.0) == a
@@ -138,6 +159,7 @@ if __name__ == "__main__":
     test_detect_rects_reading_order()
     test_frame_window_covers_and_16x9()
     test_frame_window_adapts_to_panel_shape()
+    test_frame_window_max_w_garante_mergulho()
     test_window_at_endpoints_and_bump()
     test_filter_string_has_crop_and_scale()
     test_seg_clip_renders_16x9()

@@ -92,12 +92,46 @@ Saida: `<id>.mp4`, `assets/`, `clips/`, `concat.txt`.
 - Voz: `voice="rachel"`. Arte da pagina: `arte="cartoon"` (default `manga`).
 - Ritmo da camera: `T_OPEN`/`T_TRANS`/`T_CLOSE` (duracao dos movimentos), `TRANS_BUMP` (quanto a
   camera afasta na troca de quadro), `HOLD_OUT` (push-in durante a narracao) em `build_travel.py`.
+- **Mergulho minimo (navegacao clara):** `HOLD_FILL` (default 0.82) limita a janela de cada hold a
+  82% da pagina. Sem isso, quadro grande (ex.: p1/p2 2x2 do `manga-dinamico`) gera janela ~ pagina
+  inteira e o mergulho nele "nao anda" — a navegacao pula/embaralha. O cap aperta no centro do
+  quadro -> close legivel por quadro. O build ainda **valida quadros×paineis** (mesma contagem/ordem)
+  antes de renderizar, falhando claro em layout incompativel.
 - **Layout flexivel:** passe `template_dir=` p/ escolher a grade — default
   `quadrinho/templates/grade-uniforme` (2x3); use `.../manga-dinamico` p/ quadros de tamanhos e
   posicoes variaveis. A camera **le o layout real** (`render_mask` pinta cada quadro de uma cor e
   `detect_rects` mede a bounding box) e o `frame_window` **se posiciona por quadro**, cobrindo cada
   um conforme a forma (largo → enquadra pela largura; alto → pela altura). Qualquer grade de 6
   funciona sem mudar a camera.
+
+## Narracao — revisao de escrita + pronuncia (antes do TTS)
+Vale para A, B e C (todas narram pelo `tts.say`). Antes de gerar a voz:
+- **Revise o roteiro ACENTUADO e PONTUADO.** Texto sem acento faz o `inemavox` pronunciar errado; a
+  raiz e o roteiro estar correto. Lint opcional `tts.revisar_ortografia(texto)` lista pontuacao
+  final ausente, espacos duplos e (se `pyspellchecker` pt instalado) palavras suspeitas de estar sem
+  acento — **nao corrige**, so sinaliza; rode antes de narrar.
+- **Termos em ingles/outra lingua:** `tts.say()` aplica automaticamente o lexico de pronuncia
+  `scripts/pronuncias.json` (`{termo: regravacao_fonetica_pt}`, ex.: `Maslow→Maslou`,
+  `design→dizain`) — palavra inteira, ignora caixa. **Edite o JSON** acrescentando os nomes proprios
+  e jargoes da sua serie. Override do caminho via `INEMAVOX_LEXICO`.
+- `tts.revisar_narracao` (chamada dentro do `say`) ainda colapsa espacos e garante pontuacao final
+  (entonacao). Funcoes puras testadas em `tests/test_tts_revisao.py`.
+
+## Forma C — filme dirigido dos paineis (acao)
+3º formato: a versao "filme" dos paineis, dirigida pelo skill `diretor-animacao` (que VE cada imagem
+e decide camera/cortes) + render `pixflow`, reusando os assets da Forma A (textless + narracao). Cola
+em `scripts/forma_c.py`: `coletar_forma_c(roteiro, assets_dir, stage_dir, energia=None)` encena os
+paineis em ordem e escreve `forma-c.json`; `wrap_forma_c` poe gancho (t=0) + CTA. Saida
+`<serie>-c-epNN-<titulo>.mp4`. Detalhe em `docs/superpowers/specs/2026-06-12-forma-c-design.md`.
+
+**Mais acao (evitar o "sutil"):** o `forma-c.json` carrega um bloco `meta.direcao` com `energia`
+(`alta|media|baixa`, derivada do `genero`/`tom` do roteiro — aventura/acao→`alta`) e uma `nota` que
+instrui o diretor. Em energia **alta**, dirija com:
+- **multi-shot 2–4 por painel** (a mesma imagem reusada): wide estabelece → `cut`/`whip` → **CLOSE
+  direto e preciso** no ponto de interesse (`framing.at`). A MESMA narracao atravessa os cortes.
+- **`crash_zoom`/`whip_pan`** nos beats de tensao; amplitude maior (o motor ja suporta tudo isso).
+- **imagens intermediarias** opcionais entre momentos quando a narracao pede mais beats.
+- desenho → `parallax 0` (a vida vem de camera/corte, nao do 2.5D).
 
 ## Help
 Se o usuario digitar `/inemaref-motioncomic help`, responda com este resumo:

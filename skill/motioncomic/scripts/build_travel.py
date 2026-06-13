@@ -46,6 +46,11 @@ T_TRANS = 0.7  # troca de quadro: afasta e encaixa no proximo
 T_CLOSE = 0.9  # fecha a pagina: ultimo quadro -> pagina inteira
 TRANS_BUMP = 0.22  # quanto a camera "afasta" no meio da troca de quadro
 HOLD_OUT = 1.06    # quadro comeca 6% mais aberto e empurra (push-in suave)
+HOLD_FILL = 0.82   # MERGULHO MINIMO: todo hold ocupa no maximo 82% da pagina.
+                   # Sem isso, quadro grande (ex.: p1/p2 2x2 do manga-dinamico)
+                   # gera janela ~ pagina inteira -> o "mergulho" nele nao tem
+                   # movimento e a navegacao "pula"/nao fica clara. O cap aperta
+                   # no centro do quadro, garantindo um close legivel por quadro.
 T_FULL = 1.7       # duracao do plano da PRANCHA INTEIRA (abre/fecha a pagina)
 FULLPAGE_FILL = 0.88  # a prancha inteira ocupa 88% do quadro -> margem ao redor
                       # (sem a margem, a borda #111 da pagina some na tarja preta)
@@ -55,7 +60,7 @@ CTA_NARR = "Aprenda mais em inema ponto clube."  # CTA padrao inema.club
 # ---------------------------------------------------------------------------
 # geometria da camera (puro)
 # ---------------------------------------------------------------------------
-def frame_window(rect, page_w, page_h, pad=0.0, ar=AR):
+def frame_window(rect, page_w, page_h, pad=0.0, ar=AR, max_w=None):
     """Janela 16:9 do MERGULHO num quadro — a MENOR que COBRE o quadro inteiro.
     LE A FORMA de cada quadro e se posiciona: quadro largo-e-baixo e enquadrado
     pela LARGURA (ganha contexto vertical); quadro estreito-e-alto, pela ALTURA
@@ -63,6 +68,9 @@ def frame_window(rect, page_w, page_h, pad=0.0, ar=AR):
     dos vizinhos. Isso torna a camera flexivel a layouts variaveis (ex.: a grade
     assimetrica do manga-dinamico) sem cortar quadros largos. Centrada no quadro
     e contida na pagina; quadro maior que a pagina e clampado (corte inevitavel).
+    `max_w` (opcional) limita a largura da janela -> garante um MERGULHO MINIMO:
+    quadros grandes (cuja janela cobriria ~ a pagina toda) sao apertados no
+    centro, virando um close legivel em vez de um plano quase parado.
     Retorna (cx, cy, cw) — a altura e cw/ar."""
     x, y, w, h = rect
     cx, cy = x + w / 2, y + h / 2
@@ -72,6 +80,9 @@ def frame_window(rect, page_w, page_h, pad=0.0, ar=AR):
     if ch > page_h:
         ch = page_h
         cw = min(ch * ar, page_w)
+        ch = cw / ar
+    if max_w is not None and cw > max_w:   # mergulho minimo: aperta no centro
+        cw = max_w
         ch = cw / ar
     cx = min(max(cx, cw / 2), page_w - cw / 2)
     cy = min(max(cy, ch / 2), page_h - ch / 2)
@@ -383,7 +394,14 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
         mask_png = os.path.join(os.path.dirname(page_png), "mask.png")
         render_mask(page_html, mask_png, PW, PH)
         rects = detect_rects(mask_png)
-        frames = [frame_window(r, PW, PH) for r in rects]
+        frames = [frame_window(r, PW, PH, max_w=HOLD_FILL * PW) for r in rects]
+        # mapeamento claro: cada quadro detectado casa 1:1 com um painel do
+        # roteiro (mesma ordem). Se divergir, a camera mergulharia no quadro
+        # errado durante a narracao errada -> falha antes de renderizar.
+        if len(frames) != len(pg["paineis"]):
+            raise ValueError(
+                f"pagina {pn}: {len(frames)} quadros detectados != "
+                f"{len(pg['paineis'])} paineis no roteiro — layout incompativel")
 
         # 2) narracao por quadro
         wavs, durs = [], []

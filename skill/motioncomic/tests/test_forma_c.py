@@ -38,6 +38,18 @@ def test_coletor_encena_em_ordem(tmp="/tmp/_forma_c_col"):
     assert saved["meta"]["titulo"] == "Um Titulo"
     assert saved["meta"]["abertura"] == "Gancho de abertura."
     assert saved["cenas"][6]["origem"] == "p02q1"      # rastreabilidade
+    # bloco de direcao p/ o diretor-animacao nao cair no default sutil
+    assert saved["meta"]["direcao"]["energia"] == "media"   # sem genero -> neutro
+    assert "multi-shot" in saved["meta"]["direcao"]["nota"]
+
+
+def test_direcao_energia_por_genero():
+    aventura = dict(ROT, genero="aventura")
+    contempl = dict(ROT, tom="contemplativo")
+    assert forma_c._energia_do_roteiro(aventura) == "alta"
+    assert forma_c._energia_do_roteiro(contempl) == "baixa"
+    # override explicito vence o genero
+    assert forma_c._energia_do_roteiro(aventura, energia="baixa") == "baixa"
 
 def test_coletor_falta_wav_erro(tmp="/tmp/_forma_c_falta"):
     shutil.rmtree(tmp, ignore_errors=True)
@@ -88,6 +100,7 @@ def test_wrapper_envolve_miolo(tmp="/tmp/_forma_c_wrap"):
 
 if __name__ == "__main__":
     test_coletor_encena_em_ordem()
+    test_direcao_energia_por_genero()
     test_coletor_falta_wav_erro()
     test_naming_letra_c_antes_do_ep()
     test_wrapper_envolve_miolo()
