@@ -17,6 +17,38 @@ sys.path.insert(0, _deps.scripts("serie"))
 from naming import ep_base   # noqa: E402  (mesmo gerador de nome das Formas A/B)
 
 
+# genero do episodio -> energia de direcao sugerida ao diretor-animacao.
+# Generos de ACAO pedem amplitude/cortes; contemplativos pedem respiro.
+GENERO_ENERGIA = {
+    "aventura": "alta", "acao": "alta", "ação": "alta", "terror": "alta",
+    "suspense": "alta", "thriller": "alta", "comedia": "media", "comédia": "media",
+    "drama": "media", "educativo": "media", "infantil": "media",
+    "contemplativo": "baixa", "poetico": "baixa", "poético": "baixa",
+}
+# Nota de direcao gravada no manifesto p/ o diretor-animacao NAO cair no default
+# sutil. O motor ja suporta tudo isto (multi-shot, crash_zoom, whip); aqui so
+# instruimos o uso conforme a energia do episodio.
+DIRECAO_NOTA = (
+    "Filme dos paineis: priorize ACAO e leitura clara. Energia ALTA "
+    "(aventura/acao/suspense): use multi-shot 2-4 por painel — wide estabelece "
+    "-> cut/whip -> CLOSE direto e preciso no ponto de interesse (framing.at); "
+    "crash_zoom/whip_pan nos beats de tensao; amplitude maior. A MESMA narracao "
+    "pode atravessar os cortes (montagem sobre fala continua). Reuse a mesma "
+    "imagem com enquadramentos/cortes diferentes; gere imagens intermediarias se "
+    "a narracao pede mais momentos. Energia BAIXA: push-in/parallax suave, planos "
+    "longos. Desenho -> parallax 0."
+)
+
+
+def _energia_do_roteiro(roteiro, energia=None):
+    """Energia de direcao: override explicito > campo do roteiro (genero/tom) >
+    'media' (default neutro)."""
+    if energia:
+        return energia
+    g = (roteiro.get("genero") or roteiro.get("tom") or "").strip().lower()
+    return GENERO_ENERGIA.get(g, "media")
+
+
 def forma_c_out_name(serie_slug, n, titulo):
     """Nome do arquivo Forma C, no MESMO padrao das Formas A/B: a letra do
     formato (c) vem ANTES do epNN -> <serie>-c-ep01-<titulo>.mp4."""
@@ -35,11 +67,13 @@ def _paineis_em_ordem(roteiro):
     return out
 
 
-def coletar_forma_c(roteiro, assets_dir, stage_dir):
+def coletar_forma_c(roteiro, assets_dir, stage_dir, energia=None):
     """Encena os paineis textless (assets/pNNqN.png) + narracoes (pNNqN.wav) da
     Forma A em `stage_dir/assets/{img,audio}/sNN.*` (na ORDEM de leitura), e
-    escreve `stage_dir/forma-c.json` (cenas + meta). Retorna o manifesto dict.
-    Levanta FileNotFoundError se faltar imagem ou narracao de algum painel."""
+    escreve `stage_dir/forma-c.json` (cenas + meta + direcao). Retorna o
+    manifesto dict. `energia` (alta|media|baixa) ajusta a intensidade sugerida
+    ao diretor; default vem do genero/tom do roteiro. Levanta FileNotFoundError
+    se faltar imagem ou narracao de algum painel."""
     img_dir = os.path.join(stage_dir, "assets", "img")
     aud_dir = os.path.join(stage_dir, "assets", "audio")
     os.makedirs(img_dir, exist_ok=True)
@@ -72,7 +106,9 @@ def coletar_forma_c(roteiro, assets_dir, stage_dir):
 
     meta = {"id": roteiro.get("id", ""), "n": roteiro.get("n"),
             "titulo": roteiro.get("titulo", ""), "subtitulo": roteiro.get("subtitulo", ""),
-            "abertura": (roteiro.get("abertura") or "").strip()}
+            "abertura": (roteiro.get("abertura") or "").strip(),
+            "direcao": {"energia": _energia_do_roteiro(roteiro, energia),
+                        "nota": DIRECAO_NOTA}}
     manifesto = {"meta": meta, "cenas": cenas, "imagens": imagens, "narracoes": narracoes}
     with open(os.path.join(stage_dir, "forma-c.json"), "w") as f:
         json.dump(manifesto, f, ensure_ascii=False, indent=2)
