@@ -59,6 +59,21 @@ paginas:[{n,titulo,paineis:[6x {prompt, narracao?, fala?{quem,texto}, sfx?, quem
 - **Narracao fluente:** escreva a locucao da pagina como texto corrido e **segmente** nos 6 quadros (ver
   Passo 1, regra 3). `n_paginas` paginas por episodio.
 
+## Coerencia por episodio (variacoes + QC)
+Quando um episodio **muda algo** de um personagem/objeto canonico, ou tem um cenario proprio, declare no
+**proprio episodio** (o lote deriva a `aparencia efetiva = canon da biblia + delta` e aplica em TODOS os
+paineis, sem perder o canon; o derivado fica em `<ep>-referencias.json`):
+- **`variacoes`**: `{ "<id|nome da entidade>": "<clausula da mudanca>" }` — ex.:
+  `{"lia": "vestindo uniforme escolar azul-marinho", "piramide de maslow": "parcialmente submersa"}`.
+  Casa por nome/id (ignora caixa) com protagonista, `elenco[]` e `elementos[]`. O `quem` de painel que
+  bate um nome vira a aparencia efetiva.
+- **`cenario_padrao`**: ancora de mundo do episodio (ex.: `"riacho na mata, luz dourada"`) — dobrada no
+  fim de cada `prompt` p/ travar o lugar (**riacho != praia**).
+- **QC da imagem (opcional, custo):** ligando **`INEMAREF_QC=1`** (+ `ANTHROPIC_API_KEY`), cada painel
+  e revisado por **visao** (bate personagem? cenario certo? anatomia ok?) e **regerado** ao reprovar
+  (ate `qc_tentativas`, default 3); reprovou tudo -> `flag` em `<img>.qc.json` e segue. **Desativado por
+  padrao** (sem custo, comportamento inalterado).
+
 ## Passo 4 — rode o lote
 ```bash
 python3 - <<'PY'
