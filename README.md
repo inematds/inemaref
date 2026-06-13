@@ -30,7 +30,7 @@ existe — motion comics narrados e filmes.
 
 **V1 + V2 construídas; primeira série completa produzida.** As skills `folder`, `quadrinho`, `motioncomic` (V1) e `serie` (V2 — criador de série) estão **construídas e testadas** (suíte verde). A V2 já gerou uma **série inteira de exemplo** — *A Escada Invisível de Lia* (a Pirâmide de Maslow), 20 episódios × 10 páginas em vídeo (bíblia + roteiros versionados em [`conteudo/`](conteudo/)). Filme (V3) permanece à frente. Página do projeto (landing + guia): [`index.html`](index.html).
 
-**Versão atual: `v1.05.001`** — esquema e histórico no [Changelog](#changelog).
+**Versão atual: `v1.06.002`** — esquema e histórico no [Changelog](#changelog).
 
 ## Skills
 
@@ -146,6 +146,9 @@ Esquema **`v1.<recurso>.<bug>`** — `major` fixo em **1** (linha V1 do produto)
 
 ## Changelog
 
+- **`v1.06.002`** — 2026-06-13 — Forma C dirigida (ação) + correção do canon na Forma A.
+  - `[recurso]` **Diretor determinístico da Forma C** (`skill/motioncomic/scripts/forma_c_direcao.py`) — gera `decupagem.json` + `miolo.movie.yaml` (spec pixflow) a partir do `forma-c.json`, **sem IA**: câmera variada por energia (look `acao-epico`, `crash_zoom`/`whip_pan`/`framing`, intensidade alta), `parallax 0`. Automatiza a Forma C com mais **ação** (atende o pedido de "menos sutil").
+  - `[bug]` **Canon na Forma A** — `build_motion.build_video` não dobrava a aparência travada dos elementos `usa:[...]` (só a Forma B dobrava), fazendo personagens/objetos canônicos (ex.: um cão são-bernardo) sofrerem *drift* (virar golden/urso). Agora dobra igual à Forma B → personagem recorrente consistente em A e C.
 - **`v1.05.001`** — 2026-06-13 — QC de imagem também no caminho de **vídeo**.
   - `[recurso]` `build_video_travel`/`build_video`/`_gen_image` passam a aceitar `generate_fn`; o `serie` injeta o QC (opt-in) também nos vídeos (Formas A/B), não só na HQ — fecha o follow-up de `v1.04.001`. Default off = inalterado.
 - **`v1.04.001`** — 2026-06-13 — coerência de imagem (personagem/bíblia + anatomia) e referência por episódio.
