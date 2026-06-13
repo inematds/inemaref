@@ -61,5 +61,5 @@ Hoje a imagem é gerada por `flux2-klein` (T2I puro) a partir de um prompt = `ap
 - Testes: `serie/tests/test_referencia_ep.py`, `folder/tests/test_qc_imagem.py` (85/85 verdes).
 
 ## Pendências / follow-up
-- Wire do QC nos caminhos de **vídeo** (`build_travel`/`build_motion`) — hoje o seam coberto é o `build_pagina` (HQ). Mesmo módulo, falta encaminhar `generate_fn`.
+- ✅ **(feito, v1.05.001)** QC nos caminhos de **vídeo**: `build_video_travel`/`build_video`/`_gen_image` aceitam `generate_fn`; o `serie._render_video` injeta o QC (Formas A/B), igual à HQ.
 - `judge_visao` (chamada real à API) é **opt-in e não testado ao vivo** — validar custo/latência num episódio quando o usuário ativar.

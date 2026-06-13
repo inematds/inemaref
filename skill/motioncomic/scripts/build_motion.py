@@ -17,14 +17,14 @@ from tts import say, duration         # noqa: E402
 W, H, FPS = 1280, 720, 30
 GEN_W, GEN_H = 1280, 704  # multiplos de 64 p/ o flux
 
-def _gen_image(prompt, personagem, out_png, model="flux2-klein"):
+def _gen_image(prompt, personagem, out_png, model="flux2-klein", generate_fn=None):
     a = load_arte("cartoon")
     who = (personagem or "").strip().rstrip(".")
     scene = prompt.strip().rstrip(".")
     full = (f"{who}, {scene}, {a['positivo']}, comic panel, no text"
             if who else f"{scene}, {a['positivo']}, comic panel, no text")
-    imgclient.generate(full, out_png, model=model, width=GEN_W, height=GEN_H,
-                       negative_prompt=a["negativo"])
+    (generate_fn or imgclient.generate)(full, out_png, model=model, width=GEN_W, height=GEN_H,
+                                        negative_prompt=a["negativo"])
 
 def _spoken(panel):
     parts = []
@@ -77,7 +77,8 @@ def _title_clip(text, out_mp4, secs=1.8, audio=None, voice="bella"):
     subprocess.run(cmd, check=True)
     return out_mp4
 
-def build_video(roteiro, out_dir="output", voice="bella", model="flux2-klein", intro=True):
+def build_video(roteiro, out_dir="output", voice="bella", model="flux2-klein", intro=True,
+                generate_fn=None):
     base = os.path.join(out_dir, roteiro["id"])
     panels_dir = os.path.join(base, "assets")
     clips_dir = os.path.join(base, "clips")
@@ -109,7 +110,7 @@ def build_video(roteiro, out_dir="output", voice="bella", model="flux2-klein", i
             clip = os.path.join(clips_dir, f"{pn:02d}{idx}-{tag}.mp4")
             # per-panel character: "quem" overrides the protagonist; "" = no person
             char = panel["quem"] if "quem" in panel else personagem
-            _gen_image(panel["prompt"], char, img, model=model)
+            _gen_image(panel["prompt"], char, img, model=model, generate_fn=generate_fn)
             fala = panel["fala"]["texto"] if panel.get("fala") else None
             render_panel(img, framed, fala=fala, sfx=panel.get("sfx"))
             say(_spoken(panel), wav, voice=voice)

@@ -117,8 +117,23 @@ def test_video_format_letter(tmp="/tmp/_serie_forma"):
     assert seen and all("-a-ep" not in x and "-b-ep" not in x for x in seen), seen
 
 
+def test_qc_generate_fn_gating():
+    """QC e opt-in: _qc_generate_fn devolve None por padrao (comportamento
+    inalterado) e um callable quando ligado (env INEMAREF_QC ou settings.qc_imagem)."""
+    os.environ.pop("INEMAREF_QC", None)
+    ep = {"referencias_efetivas": {"protagonista": "Lia efetiva"}}
+    assert BS._qc_generate_fn(ep, {}) is None
+    assert callable(BS._qc_generate_fn(ep, {"qc_imagem": True}))
+    os.environ["INEMAREF_QC"] = "1"
+    try:
+        assert callable(BS._qc_generate_fn(ep, {}))
+    finally:
+        os.environ.pop("INEMAREF_QC", None)
+
+
 if __name__ == "__main__":
     test_build_biblia_bundle()
+    test_qc_generate_fn_gating()
     test_build_serie_batch_texto_and_manifest()
     test_texto_manifest_idempotent()
     test_canon_visual_fold()

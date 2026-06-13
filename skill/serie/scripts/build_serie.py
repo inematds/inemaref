@@ -165,6 +165,7 @@ def _render_video(ep, settings, destdir, base):
     work = os.path.join(destdir, "_work")
     rot = dict(ep)
     rot["id"] = base
+    gen = _qc_generate_fn(ep, settings)   # QC por visao (opt-in) tambem no video
     if settings["tipo"] == "video-pagina":
         from build_travel import build_video_travel  # noqa: E402
         mp4 = build_video_travel(rot, out_dir=work, voice=settings["voz"], arte=settings["arte"],
@@ -172,10 +173,10 @@ def _render_video(ep, settings, destdir, base):
                                  moldura=settings.get("moldura", "dark"),
                                  kicker=settings.get("kicker", ""),
                                  accent=settings.get("cor_destaque", "#b08900"),
-                                 intro=settings.get("intro", True))
+                                 intro=settings.get("intro", True), generate_fn=gen)
     else:
         from build_motion import build_video  # noqa: E402
-        mp4 = build_video(rot, out_dir=work, voice=settings["voz"])
+        mp4 = build_video(rot, out_dir=work, voice=settings["voz"], generate_fn=gen)
     os.replace(mp4, dst)
     return [dst]
 

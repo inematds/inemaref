@@ -30,7 +30,7 @@ existe — motion comics narrados e filmes.
 
 **V1 + V2 construídas; primeira série completa produzida.** As skills `folder`, `quadrinho`, `motioncomic` (V1) e `serie` (V2 — criador de série) estão **construídas e testadas** (suíte verde). A V2 já gerou uma **série inteira de exemplo** — *A Escada Invisível de Lia* (a Pirâmide de Maslow), 20 episódios × 10 páginas em vídeo (bíblia + roteiros versionados em [`conteudo/`](conteudo/)). Filme (V3) permanece à frente. Página do projeto (landing + guia): [`index.html`](index.html).
 
-**Versão atual: `v1.04.001`** — esquema e histórico no [Changelog](#changelog).
+**Versão atual: `v1.05.001`** — esquema e histórico no [Changelog](#changelog).
 
 ## Skills
 
@@ -146,6 +146,8 @@ Esquema **`v1.<recurso>.<bug>`** — `major` fixo em **1** (linha V1 do produto)
 
 ## Changelog
 
+- **`v1.05.001`** — 2026-06-13 — QC de imagem também no caminho de **vídeo**.
+  - `[recurso]` `build_video_travel`/`build_video`/`_gen_image` passam a aceitar `generate_fn`; o `serie` injeta o QC (opt-in) também nos vídeos (Formas A/B), não só na HQ — fecha o follow-up de `v1.04.001`. Default off = inalterado.
 - **`v1.04.001`** — 2026-06-13 — coerência de imagem (personagem/bíblia + anatomia) e referência por episódio.
   - `[recurso]` **Referência efetiva por episódio** — quando um episódio muda algo de um personagem/objeto canônico (outra roupa, **uniforme**, estado) ou define um cenário próprio (`cenario_padrao`: está no **riacho**, não na praia), o `serie` deriva `aparência efetiva = canon da bíblia + delta do episódio` (`variacoes`) e aplica em **todos** os painéis — mantendo o canon. Persistido em `<ep>-referencias.json`. Módulos: `folder/referencia.referencia_efetiva`, `serie/referencia_ep`.
   - `[recurso]` **QC da imagem por visão (DESATIVADO por padrão — custo)** — `folder/qc_imagem.gerar_revisado`: após gerar, **Claude vê** e checa **personagem/cenário/anatomia**; reprovou → regenera (nova seed, até N); reprovou tudo → `flag` + `<img>.qc.json` e segue. Ativar: `INEMAREF_QC=1` (+ `ANTHROPIC_API_KEY`). Default off = comportamento inalterado.
