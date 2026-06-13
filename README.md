@@ -30,6 +30,8 @@ existe — motion comics narrados e filmes.
 
 **V1 + V2 construídas; primeira série completa produzida.** As skills `folder`, `quadrinho`, `motioncomic` (V1) e `serie` (V2 — criador de série) estão **construídas e testadas** (suíte verde). A V2 já gerou uma **série inteira de exemplo** — *A Escada Invisível de Lia* (a Pirâmide de Maslow), 20 episódios × 10 páginas em vídeo (bíblia + roteiros versionados em [`conteudo/`](conteudo/)). Filme (V3) permanece à frente. Página do projeto (landing + guia): [`index.html`](index.html).
 
+**Versão atual: `v1.02.001`** — esquema e histórico no [Changelog](#changelog).
+
 ## Skills
 
 - `skill/folder/` — ✅ **construída** — **cria a referência**: a ficha do personagem (retrato + bio + traços + grid), a partir de 1 foto ou texto. 2 layouts × 2 artes.
@@ -133,3 +135,19 @@ Cada skill responde a **`/inemaref-<nome> help`** (folder, quadrinho, motioncomi
 
 `assets/exemplos/` — as 7 imagens de referência feitas no ChatGPT que originaram este projeto
 (3 folders, 1 página foto, 3 páginas cartoon).
+
+## Versionamento
+
+Esquema **`v1.<recurso>.<bug>`** — `major` fixo em **1** (linha V1 do produto); os outros dois são **contadores cumulativos**:
+
+- **`<recurso>`** (2 dígitos) — **+1 a cada novo recurso/capacidade** entregue.
+- **`<bug>`** (3 dígitos) — **+1 a cada correção de bug**.
+- O número **só muda quando há mudança real** de código; **toda mudança entra no Changelog** abaixo (e vira uma tag git `vX.YY.ZZZ`). Doc/refactor sem efeito não bumpa.
+
+## Changelog
+
+- **`v1.02.001`** — 2026-06-13 — revisão da `motioncomic` (Formas B/C + narração).
+  - `[recurso]` **Narração revisada antes do TTS** — léxico de pronúncia editável (`skill/motioncomic/scripts/pronuncias.json`: termo em inglês/outra língua → fonética PT) + normalização (espaços/pontuação) dentro de `tts.say`; lint opcional `tts.revisar_ortografia` (sinaliza acentuação/pontuação, não corrige).
+  - `[recurso]` **Forma C dirigida com ação** — `forma-c.json` passa a carregar `meta.direcao` (`energia` por gênero/tom + nota que instrui multi-shot 2–4 por painel, `crash_zoom`/`whip_pan`, closes diretos via `framing.at`, `parallax 0`).
+  - `[bug]` **Forma B — navegação clara** — `HOLD_FILL` garante mergulho mínimo por quadro (quadro grande do `manga-dinamico` não fica mais ~ página inteira/parado) + guarda `quadros × painéis` antes de renderizar.
+- **`v1.00.000`** — linha de base (início do versionamento): `folder`, `quadrinho`, `motioncomic` (Formas A/B) e `serie` (V2) construídas e testadas; Forma C (coletor + wrapper de cards).
