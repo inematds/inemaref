@@ -16,6 +16,20 @@ def build_referencia(ficha, modo, arte, retrato_ancora, foto_origem):
         "ficha": ficha,
     }
 
+def referencia_efetiva(aparencia, delta):
+    """Aparencia EFETIVA = canon (biblia) + delta do episodio. O `delta` descreve
+    a MUDANCA daquele episodio (outra roupa, uniforme, estado de um objeto); vem
+    DEPOIS do canon — mais especifico, domina a clausula correspondente no prompt.
+    Sem delta -> so o canon. Puro (sem rede), reusavel por todas as skills."""
+    base = (aparencia or "").strip().rstrip(".")
+    d = (delta or "").strip().rstrip(".")
+    if not d:
+        return base
+    if not base:
+        return d
+    return f"{base}, {d}"
+
+
 def validate_referencia(ref):
     """Minimal validator matching referencia.schema.json. Raises ValueError."""
     required = ["id", "modo", "nome", "arte", "aparencia", "retrato_ancora", "ficha"]

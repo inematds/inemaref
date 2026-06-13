@@ -21,6 +21,7 @@ from naming import slug, ep_base      # noqa: E402
 import biblia as _biblia              # noqa: E402
 import manifesto as _manifesto        # noqa: E402
 import runner as _runner              # noqa: E402
+import referencia_ep                  # noqa: E402  (Pilar A: canon + delta do ep)
 
 _Q = _deps.templates("quadrinho")
 _F = _deps.templates("folder")
@@ -122,15 +123,33 @@ def _render_texto(ep, settings, destdir, base):
     return [md, js]
 
 
+def _qc_ligado(settings):
+    """QC por visao e OPT-IN (custo): liga com INEMAREF_QC=1 ou settings.qc_imagem."""
+    return bool(os.environ.get("INEMAREF_QC") or settings.get("qc_imagem"))
+
+
+def _qc_generate_fn(ep, settings):
+    """generate_fn que revisa cada painel por visao (personagem/cenario/anatomia)
+    e regenera ao reprovar. None quando o QC esta desligado (default)."""
+    if not _qc_ligado(settings):
+        return None
+    from qc_imagem import make_generate_fn, judge_visao  # noqa: E402
+    ref = (ep.get("referencias_efetivas") or {}).get("protagonista") or ep.get("personagem")
+    return make_generate_fn(ref, tentativas=int(settings.get("qc_tentativas", 3)),
+                            judge=judge_visao)
+
+
 def _render_hq(ep, settings, destdir, base):
     from build_pagina import build_pagina  # noqa: E402
     tdir = _TEMPLATES[settings["modelo_pagina"]]
     work = os.path.join(destdir, "_work")
+    gen = _qc_generate_fn(ep, settings)
     files = []
     for pg in ep["paginas"]:
         dst = os.path.join(destdir, f"{base}-p{int(pg['n']):02d}.png")
         if not os.path.exists(dst):
             png = build_pagina(_page_to_quadrinho(ep, pg), tdir, arte=settings["arte"], out_dir=work,
+                               generate_fn=gen,
                                moldura=settings.get("moldura", "dark"),
                                kicker=settings.get("kicker", ""),
                                accent=settings.get("cor_destaque", "#b08900"))
@@ -205,14 +224,20 @@ def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
     entregas = []
     for ep in episodios:
         ep.setdefault("elementos", elementos)   # canon visual disponivel p/ os renderers
+        # Pilar A: aplica canon + delta do episodio (roupa/uniforme/cenario etc.)
+        # -> ep efetivo, coerente com a biblia E com o episodio. Persiste o
+        # derivado p/ rastreabilidade (nao entra em _saidas, nao afeta idempotencia).
+        ep_eff = referencia_ep.aplicar(ep, biblia)
         forma = _VIDEO_FORMA.get(tipo)
         sslug = f"{serie_slug}-{forma}" if forma else serie_slug   # <serie>-a/-b antes do epNN
         base = ep_base(sslug, ep["n"], ep.get("titulo", ""))
+        with open(os.path.join(destdir, base + "-referencias.json"), "w") as f:
+            json.dump(ep_eff.get("referencias_efetivas", {}), f, ensure_ascii=False, indent=2)
         # idempotente: so renderiza se ainda nao ha NENHUMA saida desse episodio.
         # `arquivos` vem sempre do estado final no disco -> identico entre rodadas
         # e por tipo (texto: .md/.json; video: .mp4; hq: -pNN.png).
         if not _saidas(destdir, base):
-            render(ep, s, destdir, base)
+            render(ep_eff, s, destdir, base)
         files = _saidas(destdir, base)
         entregas.append({"n": ep["n"], "arquivos": [os.path.basename(p) for p in files]})
         notify(f"[{biblia['id']}] episodio {ep['n']} ({modo}) ok")

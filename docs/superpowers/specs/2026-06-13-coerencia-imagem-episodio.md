@@ -1,7 +1,7 @@
 # Coerência de imagem + referência de episódio (design — RASCUNHO p/ revisão)
 
 Data: 2026-06-13
-Status: **rascunho** — captura os requisitos do usuário e propõe abordagem; decisões em aberto no fim.
+Status: **implementado** em `v1.04.001` (Pilar A on; Pilar B/C opt-in via `INEMAREF_QC=1`). Decisões resolvidas no fim.
 Skills tocadas (previsto): `folder` (referência), `serie` (bíblia/episódio), `quadrinho`/`motioncomic` (geração dos painéis).
 
 ## Problema (do usuário)
@@ -46,9 +46,20 @@ Hoje a imagem é gerada por `flux2-klein` (T2I puro) a partir de um prompt = `ap
 - **Não** bloquear a série inteira por 1 painel reprovado — **flag + segue**, com relatório.
 - Começar pelo **Pilar A** (determinístico, testável sem rede) e pelo **QC textualmente especificado**; a chamada de visão é o passo dirigido (Claude).
 
-## Decisões em aberto (preciso confirmar com o usuário)
-1. **Quem julga a adequação/anatomia?** Proposta: **Claude vê** (já fazemos no `diretor-animacao`). Alternativa: modelo local de embedding/anatomia (mais infra). → confirmar.
-2. **Política de regeneração:** quantas tentativas (proposta: 2–3), varia só `seed` ou também reforça o prompt? Reprovou tudo → flag e segue, certo?
-3. **Onde guardar a referência de episódio:** arquivo `referencia-ep.json` por episódio, ou um bloco dentro do `episodio.json`? Formato do **delta** (campos: `roupa`, `local`, `estado`, …)?
-4. **Bíblia precisa de novos campos?** (ex.: `local_canonico` por cena, lista de `objetos` com estado) — ou inferimos do `prompt` do painel?
-5. **Custo/tempo:** QC por visão em toda imagem (séries têm centenas de painéis) — rodar em todas, ou amostral/somente nas que “mais importam”?
+## Decisões (resolvidas 2026-06-13)
+1. **Quem julga** → **Claude vê** (`qc_imagem.judge_visao`, modelo de visão barato via `INEMAREF_QC_MODEL`, default `claude-haiku-4-5`).
+2. **Regeneração** → até `qc_tentativas` (default 3), varia `seed` a cada tentativa e **reforça o negativo de anatomia** quando a dimensão reprovada é anatomia; reprovou tudo → **flag** (`<img>.qc.json`) e segue.
+3. **Onde guardar** → **delta autoral no episódio** (`variacoes` + `cenario_padrao`); **efetivo derivado** persistido em `<ep>-referencias.json` (saída). Delta = clausula livre por entidade (não campos rígidos) — mais flexível.
+4. **Bíblia** → **sem novos campos** no canon; o delta e o cenário vivem no episódio. Inferência fica a cargo do prompt do painel + `cenario_padrao`.
+5. **Custo** → QC **desativado por padrão**; quando ligado (`INEMAREF_QC=1`), roda em **todas** as imagens do caminho HQ. (Amostragem/cobertura de vídeo: follow-up, se o custo pesar.)
+
+## Implementado (v1.04.001) — o que ficou
+- `folder/scripts/referencia.py::referencia_efetiva` (merge canon+delta, puro).
+- `serie/scripts/referencia_ep.py::resolver_referencias`/`aplicar` (efetivo por ep + dobra de cenário + resolve `quem`).
+- `folder/scripts/qc_imagem.py::gerar_revisado`/`make_generate_fn`/`judge_visao` (loop gerar→revisar→regerar/flag; backend de visão opt-in).
+- `serie/scripts/build_serie.py`: aplica refs efetivas no lote, persiste `<ep>-referencias.json`, e injeta o QC no `generate_fn` do `build_pagina` quando ligado.
+- Testes: `serie/tests/test_referencia_ep.py`, `folder/tests/test_qc_imagem.py` (85/85 verdes).
+
+## Pendências / follow-up
+- Wire do QC nos caminhos de **vídeo** (`build_travel`/`build_motion`) — hoje o seam coberto é o `build_pagina` (HQ). Mesmo módulo, falta encaminhar `generate_fn`.
+- `judge_visao` (chamada real à API) é **opt-in e não testado ao vivo** — validar custo/latência num episódio quando o usuário ativar.
