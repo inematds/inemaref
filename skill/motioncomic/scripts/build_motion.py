@@ -85,6 +85,10 @@ def build_video(roteiro, out_dir="output", voice="bella", model="flux2-klein", i
     os.makedirs(panels_dir, exist_ok=True)
     os.makedirs(clips_dir, exist_ok=True)
     personagem = roteiro.get("personagem", "")
+    # canon visual: aparencia travada dos elementos, dobrada nos quadros que os
+    # USAM (igual a Forma B / build_travel). Sem isto, um cao canonico (ex.: Urso)
+    # vira "um grande cao" generico e o flux faz drift (golden, urso...).
+    canon = {e["nome"].lower(): e["aparencia"] for e in roteiro.get("elementos", [])}
     clips = []
 
     abertura = (roteiro.get("abertura") or "").strip()
@@ -110,7 +114,12 @@ def build_video(roteiro, out_dir="output", voice="bella", model="flux2-klein", i
             clip = os.path.join(clips_dir, f"{pn:02d}{idx}-{tag}.mp4")
             # per-panel character: "quem" overrides the protagonist; "" = no person
             char = panel["quem"] if "quem" in panel else personagem
-            _gen_image(panel["prompt"], char, img, model=model, generate_fn=generate_fn)
+            scene = panel["prompt"].strip().rstrip(".")
+            for u in (panel.get("usa") or []):       # dobra o canon dos elementos usados
+                ap = canon.get(str(u).lower())
+                if ap:
+                    scene = f"{scene}, {ap}"
+            _gen_image(scene, char, img, model=model, generate_fn=generate_fn)
             fala = panel["fala"]["texto"] if panel.get("fala") else None
             render_panel(img, framed, fala=fala, sfx=panel.get("sfx"))
             say(_spoken(panel), wav, voice=voice)
