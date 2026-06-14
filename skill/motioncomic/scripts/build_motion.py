@@ -17,14 +17,14 @@ from tts import say, duration         # noqa: E402
 W, H, FPS = 1280, 720, 30
 GEN_W, GEN_H = 1280, 704  # multiplos de 64 p/ o flux
 
-def _gen_image(prompt, personagem, out_png, model="flux2-klein", generate_fn=None):
+def _gen_image(prompt, personagem, out_png, model="flux2-klein", generate_fn=None, images=None):
     a = load_arte("cartoon")
     who = (personagem or "").strip().rstrip(".")
     scene = prompt.strip().rstrip(".")
     full = (f"{who}, {scene}, {a['positivo']}, comic panel, no text"
             if who else f"{scene}, {a['positivo']}, comic panel, no text")
     (generate_fn or imgclient.generate)(full, out_png, model=model, width=GEN_W, height=GEN_H,
-                                        negative_prompt=a["negativo"])
+                                        images=images, negative_prompt=a["negativo"])
 
 def _spoken(panel):
     parts = []
@@ -78,7 +78,7 @@ def _title_clip(text, out_mp4, secs=1.8, audio=None, voice="bella"):
     return out_mp4
 
 def build_video(roteiro, out_dir="output", voice="bella", model="flux2-klein", intro=True,
-                generate_fn=None):
+                generate_fn=None, ancoras=None, protagonista_id=None):
     base = os.path.join(out_dir, roteiro["id"])
     panels_dir = os.path.join(base, "assets")
     clips_dir = os.path.join(base, "clips")
@@ -119,7 +119,19 @@ def build_video(roteiro, out_dir="output", voice="bella", model="flux2-klein", i
                 ap = canon.get(str(u).lower())
                 if ap:
                     scene = f"{scene}, {ap}"
-            _gen_image(scene, char, img, model=model, generate_fn=generate_fn)
+            # ancoras de imagem (opt-in): mapeia as entidades do quadro -> imagens de
+            # referencia (quem/protagonista + usa), teto de 4 (limite do flux2-klein).
+            imgs = None
+            if ancoras:
+                nomes = []
+                if "quem" in panel:
+                    if (panel["quem"] or "").strip():
+                        nomes.append(panel["quem"])
+                elif protagonista_id:
+                    nomes.append(protagonista_id)
+                nomes += [str(u) for u in (panel.get("usa") or [])]
+                imgs = [ancoras[n.lower()] for n in nomes if n.lower() in ancoras][:4] or None
+            _gen_image(scene, char, img, model=model, generate_fn=generate_fn, images=imgs)
             fala = panel["fala"]["texto"] if panel.get("fala") else None
             render_panel(img, framed, fala=fala, sfx=panel.get("sfx"))
             say(_spoken(panel), wav, voice=voice)

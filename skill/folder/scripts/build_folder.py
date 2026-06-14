@@ -29,12 +29,12 @@ def build_folder(ficha, template_dir, arte, modo, out_dir="output",
     prompts = build_prompts(ficha, arte)
     neg = prompts["negativo"]
     rslot, fslot = meta["slots"]["retrato"], meta["slots"]["foco"]
-    # The reference photo only goes to EDIT models (qwen-edit). flux2-klein is
-    # pure text-to-image and raises HTTP 500 if given `images`, so we never send
-    # the photo to it — modo foto on flux falls back to identity-via-`aparencia`.
-    ref_imgs = ([foto_origem]
-                if (modo == "foto" and foto_origem and model != "flux2-klein")
-                else None)
+    # Reference image goes to the generator whenever modo="foto" and we have one.
+    # Confirmed 2026-06-14: flux2-klein DOES accept and use `images` — it conditions
+    # identity/style on the reference (the old "klein 500s on images" belief was
+    # wrong). Edit models (qwen-edit) use them too; a t2i model that ignores them
+    # just drops the field harmlessly.
+    ref_imgs = [foto_origem] if (modo == "foto" and foto_origem) else None
 
     # 1 portrait
     retrato_path = os.path.join(assets, "retrato.png")

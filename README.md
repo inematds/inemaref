@@ -30,7 +30,7 @@ existe — motion comics narrados e filmes.
 
 **V1 + V2 construídas; primeira série completa produzida.** As skills `folder`, `quadrinho`, `motioncomic` (V1) e `serie` (V2 — criador de série) estão **construídas e testadas** (suíte verde). A V2 já gerou uma **série inteira de exemplo** — *A Escada Invisível de Lia* (a Pirâmide de Maslow), 20 episódios × 10 páginas em vídeo (bíblia + roteiros versionados em [`conteudo/`](conteudo/)). Filme (V3) permanece à frente. Página do projeto (landing + guia): [`index.html`](index.html).
 
-**Versão atual: `v1.06.002`** — esquema e histórico no [Changelog](#changelog).
+**Versão atual: `v1.07.001`** — esquema e histórico no [Changelog](#changelog).
 
 ## Skills
 
@@ -146,6 +146,10 @@ Esquema **`v1.<recurso>.<bug>`** — `major` fixo em **1** (linha V1 do produto)
 
 ## Changelog
 
+- **`v1.07.001`** — 2026-06-14 — geração **ancorada em imagem** (flux2-klein aceita 1–4 referências).
+  - `[recurso]` **Âncora de imagem no gerador** — validado que o `flux2-klein` **usa** `images=` (1–4 refs; acima de 4 dá erro): a referência carrega **identidade E estilo** do personagem, resolvendo o *drift* da geração só-texto. Removido o guard errado do `build_folder` (`model != "flux2-klein"`) — `modo="foto"` agora manda a imagem ao klein.
+  - `[recurso]` **Anchoring por quadro nos vídeos (opt-in)** — `build_motion.build_video`, `build_travel.build_video_travel` e `quadrinho.build_pagina` aceitam `ancoras={entidade(lower)->caminho}` + `protagonista_id`; por quadro, juntam as refs do `quem`/`usa` (teto 4) e mandam `images=` ao gerador. `serie.build_serie` recebe `ancoras=` e repassa às Formas A/B. Default `None` = comportamento inalterado (texto puro).
+  - `[nota]` `negative_prompt` é **ignorado** pelo flux2-klein (FLUX.2 não suporta); docstring do `imgclient` corrigida. *(Pendente p/ depois: derivar `ancoras` automaticamente da bíblia/folders no `serie` — hoje o mapa vem do chamador.)*
 - **`v1.06.002`** — 2026-06-13 — Forma C dirigida (ação) + correção do canon na Forma A.
   - `[recurso]` **Diretor determinístico da Forma C** (`skill/motioncomic/scripts/forma_c_direcao.py`) — gera `decupagem.json` + `miolo.movie.yaml` (spec pixflow) a partir do `forma-c.json`, **sem IA**: câmera variada por energia (look `acao-epico`, `crash_zoom`/`whip_pan`/`framing`, intensidade alta), `parallax 0`. Automatiza a Forma C com mais **ação** (atende o pedido de "menos sutil").
   - `[bug]` **Canon na Forma A** — `build_motion.build_video` não dobrava a aparência travada dos elementos `usa:[...]` (só a Forma B dobrava), fazendo personagens/objetos canônicos (ex.: um cão são-bernardo) sofrerem *drift* (virar golden/urso). Agora dobra igual à Forma B → personagem recorrente consistente em A e C.
