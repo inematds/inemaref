@@ -13,9 +13,10 @@ def generate(prompt, out_path, model="flux2-klein", width=None, height=None,
              images=None, negative_prompt=None, seed=None, base_url=BASE_URL):
     """POST inemaimg /generate and save the returned PNG to out_path.
 
-    images: optional list of reference image file paths (used by edit models
-    like qwen-edit-2511; flux2-klein may ignore them — that is the documented
-    fallback seam, see referencias/consistencia.md)."""
+    images: optional list of reference image file paths. flux2-klein DOES use
+    them (confirmed 2026-06-14 no loader): 1-4 imagens ancoram identidade E
+    estilo (>4 -> erro do servidor). Edit models (qwen-edit-2511) tambem usam.
+    negative_prompt: IGNORADO pelo flux2-klein (FLUX.2 nao tem negativo); inocuo."""
     payload = {"model": model, "prompt": prompt}
     if width:  payload["width"] = width
     if height: payload["height"] = height

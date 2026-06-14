@@ -166,6 +166,7 @@ def _render_video(ep, settings, destdir, base):
     rot = dict(ep)
     rot["id"] = base
     gen = _qc_generate_fn(ep, settings)   # QC por visao (opt-in) tambem no video
+    anc = settings.get("ancoras"); pid = settings.get("protagonista_id")  # ancoras de imagem (opt-in)
     if settings["tipo"] == "video-pagina":
         from build_travel import build_video_travel  # noqa: E402
         mp4 = build_video_travel(rot, out_dir=work, voice=settings["voz"], arte=settings["arte"],
@@ -173,10 +174,12 @@ def _render_video(ep, settings, destdir, base):
                                  moldura=settings.get("moldura", "dark"),
                                  kicker=settings.get("kicker", ""),
                                  accent=settings.get("cor_destaque", "#b08900"),
-                                 intro=settings.get("intro", True), generate_fn=gen)
+                                 intro=settings.get("intro", True), generate_fn=gen,
+                                 ancoras=anc, protagonista_id=pid)
     else:
         from build_motion import build_video  # noqa: E402
-        mp4 = build_video(rot, out_dir=work, voice=settings["voz"], generate_fn=gen)
+        mp4 = build_video(rot, out_dir=work, voice=settings["voz"], generate_fn=gen,
+                          ancoras=anc, protagonista_id=pid)
     os.replace(mp4, dst)
     return [dst]
 
@@ -201,13 +204,18 @@ def _saidas(destdir, base):
 
 # ---------------------------------------------------------------- lote
 def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
-                renderers=None, gerado_em=None, notify_fn=None, mkivideos_check=None):
+                renderers=None, gerado_em=None, notify_fn=None, mkivideos_check=None,
+                ancoras=None):
     """Renderiza todos os episodios por tipo e larga em <destino>/<id>/.
     Idempotente (pula arquivos existentes). `renderers` injetavel (teste);
     `notify_fn(msg)` p/ progresso. `auto` aqui e informativo (o portao e
     decidido por quem chama). Retorna {dest, manifesto, episodios}."""
     s = resolve(biblia)
     s["kicker"] = biblia.get("kicker") or biblia.get("assunto", "")
+    # ancoras de imagem (opt-in): mapa {entidade(lower) -> caminho de imagem} +
+    # id do protagonista; passados aos renderizadores de video (Formas A/B).
+    s["ancoras"] = ancoras
+    s["protagonista_id"] = (biblia.get("protagonista", {}) or {}).get("id")
     tipo = s["tipo"]
     destino = os.path.expanduser(out_dir or s["destino"] or "~/projetos/output")
     serie_slug = slug(biblia.get("assunto") or biblia["id"])

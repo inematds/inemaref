@@ -344,7 +344,8 @@ def _page_roteiro(roteiro, pg):
 
 def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-klein",
                        arte="manga", intro=True, template_dir=None,
-                       moldura="dark", kicker=None, accent="#b08900", generate_fn=None):
+                       moldura="dark", kicker=None, accent="#b08900", generate_fn=None,
+                       ancoras=None, protagonista_id=None):
     """Forma B: pagina de papel + camera viajando. Cada pagina precisa de 6
     paineis. `template_dir` escolhe o layout da prancha (default **manga-dinamico**
     — quadros de tamanhos/posicoes variaveis; passe .../grade-uniforme p/ a 2x3).
@@ -388,7 +389,8 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
         page_png = build_pagina(_page_roteiro(roteiro, pg), tdir,
                                 arte=arte, out_dir=pages_dir, model=model,
                                 moldura=moldura, kicker=kicker, accent=accent,
-                                generate_fn=generate_fn)
+                                generate_fn=generate_fn,
+                                ancoras=ancoras, protagonista_id=protagonista_id)
         travel_png = _textless(page_png)
         last_page_png = travel_png
         page_html = os.path.join(os.path.dirname(page_png), "pagina.html")

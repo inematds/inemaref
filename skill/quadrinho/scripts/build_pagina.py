@@ -28,7 +28,8 @@ _GUTTER = {"dark": "#1b1b1b", "white": "#ffffff"}
 
 def build_pagina(roteiro, template_dir, arte="manga", out_dir="output",
                  model="flux2-klein", generate_fn=None, render_fn=None,
-                 moldura="dark", kicker=None, accent="#b08900"):
+                 moldura="dark", kicker=None, accent="#b08900",
+                 ancoras=None, protagonista_id=None):
     """Render one comic page: generate 6 textless panels, fill the page template
     (narration/balloons/SFX as an HTML layer), screenshot to PNG.
 
@@ -50,9 +51,20 @@ def build_pagina(roteiro, template_dir, arte="manga", out_dir="output",
         scene = p["prompt"].strip().rstrip(".")
         prompt = (f"{aparencia}, {scene}, {a['positivo']}, no text" if aparencia
                   else f"{scene}, {a['positivo']}, no text")
+        # ancoras de imagem (opt-in): refs do quadro pelo quem/usa, teto 4 (flux2-klein)
+        imgs = None
+        if ancoras:
+            nomes = []
+            if "quem" in p:
+                if (p["quem"] or "").strip():
+                    nomes.append(p["quem"])
+            elif protagonista_id:
+                nomes.append(protagonista_id)
+            nomes += [str(u) for u in (p.get("usa") or [])]
+            imgs = [ancoras[n.lower()] for n in nomes if n.lower() in ancoras][:4] or None
         generate_fn(prompt, os.path.join(assets, f"panel{i}.png"), model=model,
                     width=slot["width"], height=slot["height"],
-                    negative_prompt=a["negativo"])
+                    images=imgs, negative_prompt=a["negativo"])
 
     html = fill(template_dir, roteiro, assets_dir=assets,
                 kicker=(kicker if kicker is not None else roteiro.get("kicker")))
