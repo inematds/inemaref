@@ -30,7 +30,7 @@ existe — motion comics narrados e filmes.
 
 **V1 + V2 construídas; primeira série completa produzida.** As skills `folder`, `quadrinho`, `motioncomic` (V1) e `serie` (V2 — criador de série) estão **construídas e testadas** (suíte verde). A V2 já gerou uma **série inteira de exemplo** — *A Escada Invisível de Lia* (a Pirâmide de Maslow), 20 episódios × 10 páginas em vídeo (bíblia + roteiros versionados em [`conteudo/`](conteudo/)). Filme (V3) permanece à frente. Página do projeto (landing + guia): [`index.html`](index.html).
 
-**Versão atual: `v1.07.001`** — esquema e histórico no [Changelog](#changelog).
+**Versão atual: `v1.08.002`** — esquema e histórico no [Changelog](#changelog).
 
 ## Skills
 
@@ -146,6 +146,14 @@ Esquema **`v1.<recurso>.<bug>`** — `major` fixo em **1** (linha V1 do produto)
 
 ## Changelog
 
+- **`v1.08.002`** — 2026-06-18 — Forma C **calma** + cobertura por **visão**; **casting** de fichas-âncora; **lint** de painéis; Forma B com pan **direcional**.
+  - `[recurso]` **Forma C calma por padrão** (`forma_c_direcao.py`) — conteúdo infantil pede suavidade: look `cinema-dramatico` (natural), **1 toma gentil por painel** (sem clone, `intensity ≤ 0.6`, framing `zoom ≤ 1.18`, nunca `crash_zoom`/`whip_pan`), variada por índice. As paletas energéticas (`alta`/`acao`) seguem disponíveis, mas deixaram de ser o default.
+  - `[recurso]` **Presets da Forma C** — `suave`/`dinamico`/`acao`/`epico` combinam energia (paleta de câmera), `cortes` (multi-shot por painel) e `slides`. A bíblia referencia por nome em `estilo.acao_c`; o episódio sobrescreve em `ep.acao_c`.
+  - `[recurso]` **Cobertura guiada por visão** (`visao_decupagem.py`) — schema/validador de *shots* (`wide`/`close`/`insert`/`pan`/`tilt`, `at`/`zoom`/`peso` clampados) + `contexto_do_painel`. `dirigir(..., visao_path=)` carrega o JSON de cobertura e gera **uma `mv_scene` por shot** (cortes = sequência de imagens/recortes da MESMA imagem guiados por visão), com as durações somando a do painel (narração não dessincroniza).
+  - `[recurso]` **Casting de fichas-âncora** (`serie/casting.py`) — gera **uma ficha-referência por elenco/elemento** do canon (subject isolado, model sheet) e persiste `casting/ancoras.json` (`nome→caminho`); reaproveita o retrato do protagonista sem regenerar.
+  - `[recurso]` **Autoload de âncoras no `serie`** — `build_serie` funde `casting/ancoras.json` com as âncoras explícitas (explícito vence) antes de gerar — o mapa de referências deixa de depender só do chamador (fecha o pendente do `v1.07.001`).
+  - `[recurso]` **Lint de painéis** (`serie/lint_paineis.py`) — aviso **não-bloqueante** por episódio quando um painel passa de **2 entidades** (protagonista/`quem` + `usa[]`), reduzindo *drift* de imagens superlotadas. Integrado ao `build_serie` (`notify`).
+  - `[bug]` **Forma B — transição direcional** (`build_travel.py`) — a troca de quadro afastava pra página no meio do trajeto (o "sbum"). Agora `TRANS_BUMP 0.22→0.0` e nova lei de largura (`window_at`/`_filter`): o `cx,cy` faz o **pan** no zoom apertado (largura aperta pro `min` no meio, endpoints exatos), sem voltar pra prancha.
 - **`v1.07.001`** — 2026-06-14 — geração **ancorada em imagem** (flux2-klein aceita 1–4 referências).
   - `[recurso]` **Âncora de imagem no gerador** — validado que o `flux2-klein` **usa** `images=` (1–4 refs; acima de 4 dá erro): a referência carrega **identidade E estilo** do personagem, resolvendo o *drift* da geração só-texto. Removido o guard errado do `build_folder` (`model != "flux2-klein"`) — `modo="foto"` agora manda a imagem ao klein.
   - `[recurso]` **Anchoring por quadro nos vídeos (opt-in)** — `build_motion.build_video`, `build_travel.build_video_travel` e `quadrinho.build_pagina` aceitam `ancoras={entidade(lower)->caminho}` + `protagonista_id`; por quadro, juntam as refs do `quem`/`usa` (teto 4) e mandam `images=` ao gerador. `serie.build_serie` recebe `ancoras=` e repassa às Formas A/B. Default `None` = comportamento inalterado (texto puro).

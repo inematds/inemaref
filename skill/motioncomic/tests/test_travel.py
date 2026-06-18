@@ -4,8 +4,8 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "folder", "scripts"))
-from build_travel import (PANEL_COLORS, detect_rects, frame_window, window_at,
-                          wide_window, _filter, _seg_clip, AR)
+from build_travel import (PANEL_COLORS, TRANS_BUMP, detect_rects, frame_window,
+                          window_at, wide_window, _filter, _seg_clip, AR)
 
 PW, PH = 1200, 1600
 
@@ -109,18 +109,38 @@ def test_frame_window_max_w_garante_mergulho():
     assert frame_window(pequeno, PW, PH, max_w=cap) == frame_window(pequeno, PW, PH)
 
 
-def test_window_at_endpoints_and_bump():
+def test_window_at_endpoints_exatos():
+    # a transicao tem que ENTRAR e SAIR exatamente nos quadros (sem pulo).
     a, b = (100, 100, 400), (900, 1400, 600)
     assert window_at(a, b, 0.0) == a
     assert window_at(a, b, 1.0) == b
-    # com bump, no meio a camera afasta (cw maior que a media linear)
-    mid = window_at(a, b, 0.5, bump=0.22)
-    assert mid[2] > (a[2] + b[2]) / 2
+
+
+def test_window_at_nunca_afasta():
+    """Transicao DIRECIONAL: pan no zoom apertado, sem 'sbum' (afastar pra
+    pagina e voltar). cw nunca passa de max(a_w, b_w) p/ nenhum u; no meio
+    fica no zoom MAIS apertado (min)."""
+    casos = [((100, 100, 400), (900, 1400, 600)),
+             ((900, 1400, 600), (100, 100, 400)),
+             ((100, 100, 500), (900, 1400, 500))]
+    for a, b in casos:
+        teto = max(a[2], b[2])
+        piso = min(a[2], b[2])
+        for k in range(0, 101):
+            cw = window_at(a, b, k / 100.0)[2]
+            assert cw <= teto + 1e-6, (a, b, k, cw)
+        # no meio fica no mais apertado (sem afastar)
+        assert abs(window_at(a, b, 0.5)[2] - piso) < 1e-6
+
+
+def test_trans_bump_zero():
+    # sem bump: a troca nao afasta pra mostrar a pagina inteira.
+    assert TRANS_BUMP == 0.0
 
 
 def test_filter_string_has_crop_and_scale():
-    vf = _filter((600, 800, 700), (300, 400, 500), 1.5, bump=0.2)
-    assert "crop=" in vf and "scale=1280:720" in vf and "sin(PI*" in vf
+    vf = _filter((600, 800, 700), (300, 400, 500), 1.5)
+    assert "crop=" in vf and "scale=1280:720" in vf
 
 
 def test_seg_clip_renders_16x9(tmp="/tmp/_travel_seg"):
@@ -160,7 +180,9 @@ if __name__ == "__main__":
     test_frame_window_covers_and_16x9()
     test_frame_window_adapts_to_panel_shape()
     test_frame_window_max_w_garante_mergulho()
-    test_window_at_endpoints_and_bump()
+    test_window_at_endpoints_exatos()
+    test_window_at_nunca_afasta()
+    test_trans_bump_zero()
     test_filter_string_has_crop_and_scale()
     test_seg_clip_renders_16x9()
     test_filter_actually_crops_tight()

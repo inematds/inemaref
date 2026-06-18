@@ -22,6 +22,7 @@ import biblia as _biblia              # noqa: E402
 import manifesto as _manifesto        # noqa: E402
 import runner as _runner              # noqa: E402
 import referencia_ep                  # noqa: E402  (Pilar A: canon + delta do ep)
+import lint_paineis                   # noqa: E402  (aviso nao-bloqueante de elementos)
 
 _Q = _deps.templates("quadrinho")
 _F = _deps.templates("folder")
@@ -202,6 +203,18 @@ def _saidas(destdir, base):
                   + glob.glob(os.path.join(destdir, base + "-p*.*")))
 
 
+# ---------------------------------------------------------------- autoload ancoras
+def _merge_ancoras(destdir, ancoras_explicitas):
+    """Funde ancoras do casting (casting/ancoras.json) com as explicitas.
+    Explicito vence. Se o arquivo nao existir, retorna so as explicitas."""
+    path = os.path.join(destdir, "casting", "ancoras.json")
+    auto = {}
+    if os.path.exists(path):
+        with open(path) as f:
+            auto = json.load(f)
+    return {**auto, **(ancoras_explicitas or {})}
+
+
 # ---------------------------------------------------------------- lote
 def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
                 renderers=None, gerado_em=None, notify_fn=None, mkivideos_check=None,
@@ -221,6 +234,7 @@ def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
     serie_slug = slug(biblia.get("assunto") or biblia["id"])
     destdir = os.path.join(destino, biblia["id"])
     os.makedirs(destdir, exist_ok=True)
+    s["ancoras"] = _merge_ancoras(destdir, s.get("ancoras"))
 
     reg = dict(_REGISTRY)
     if renderers:
@@ -237,6 +251,9 @@ def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
         # -> ep efetivo, coerente com a biblia E com o episodio. Persiste o
         # derivado p/ rastreabilidade (nao entra em _saidas, nao afeta idempotencia).
         ep_eff = referencia_ep.aplicar(ep, biblia)
+        probs = lint_paineis.lint_episodio(ep_eff)
+        if probs:
+            notify(f"[lint] ep{ep['n']}: {len(probs)} painel(eis) com >2 elementos")
         forma = _VIDEO_FORMA.get(tipo)
         sslug = f"{serie_slug}-{forma}" if forma else serie_slug   # <serie>-a/-b antes do epNN
         base = ep_base(sslug, ep["n"], ep.get("titulo", ""))

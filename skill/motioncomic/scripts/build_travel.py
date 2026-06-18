@@ -44,7 +44,7 @@ PANEL_COLORS = [
 T_OPEN = 0.9   # abre a pagina: pagina inteira -> 1o quadro
 T_TRANS = 0.7  # troca de quadro: afasta e encaixa no proximo
 T_CLOSE = 0.9  # fecha a pagina: ultimo quadro -> pagina inteira
-TRANS_BUMP = 0.22  # quanto a camera "afasta" no meio da troca de quadro
+TRANS_BUMP = 0.0   # troca DIRECIONAL: pan no zoom apertado, sem afastar (sbum)
 HOLD_OUT = 1.06    # quadro comeca 6% mais aberto e empurra (push-in suave)
 HOLD_FILL = 0.82   # MERGULHO MINIMO: todo hold ocupa no maximo 82% da pagina.
                    # Sem isso, quadro grande (ex.: p1/p2 2x2 do manga-dinamico)
@@ -104,11 +104,15 @@ def zoom_window(win, k, page_w):
 
 def window_at(a, b, u, bump=0.0):
     """Interpola a janela de `a`->`b` no instante u in [0,1] com smoothstep.
-    `bump` afasta a camera no meio do trajeto (sin) e volta — endpoints exatos."""
+    Troca DIRECIONAL: cx,cy fazem o pan; a LARGURA nunca afasta. No meio do
+    trajeto a janela fica no zoom MAIS apertado (min das larguras) e relaxa pros
+    endpoints exatos -> pan no close, sem o 'sbum' de voltar pra pagina. cw nunca
+    passa de max(a_w, b_w). `bump` mantido por compat (default 0, sem efeito)."""
     s = u * u * (3 - 2 * u)
     cx = a[0] + (b[0] - a[0]) * s
     cy = a[1] + (b[1] - a[1]) * s
-    cw = (a[2] + (b[2] - a[2]) * s) * (1 + bump * math.sin(math.pi * u))
+    lin = a[2] + (b[2] - a[2]) * s          # largura linear (endpoints exatos)
+    cw = min(a[2], b[2]) + (lin - min(a[2], b[2])) * (1 - math.sin(math.pi * u))
     return (cx, cy, cw)
 
 
@@ -122,9 +126,11 @@ def _filter(a, b, dur, bump=0.0):
     # crop silenciosamente abre pra in_w. min(max(...)) faz o mesmo papel.
     u = f"min(max(t/{T:.4f},0),1)"
     s = f"({u})*({u})*(3-2*({u}))"
-    size = f"(({cw0:.2f})+(({cw1:.2f})-({cw0:.2f}))*{s})"
-    if bump:
-        size = f"({size}*(1+{bump:.3f}*sin(PI*({u}))))"
+    # espelha window_at: largura linear, mas apertada pro min no meio do trajeto
+    # (pan no close, sem afastar). min(a_w,b_w) e constante.
+    wmin = min(cw0, cw1)
+    lin = f"(({cw0:.2f})+(({cw1:.2f})-({cw0:.2f}))*{s})"
+    size = f"(({wmin:.2f})+({lin}-({wmin:.2f}))*(1-sin(PI*({u}))))"
     cx = f"(({cx0:.2f})+(({cx1:.2f})-({cx0:.2f}))*{s})"
     cy = f"(({cy0:.2f})+(({cy1:.2f})-({cy0:.2f}))*{s})"
     # largura e altura auto-contidas (so iw/ih) — NAO usar ow/oh: dentro da
@@ -443,9 +449,9 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
         clips.append(card)
         clips.append(est)
 
-        # 4) mergulha em cada quadro; afasta e encaixa no proximo.
-        #    a transicao termina JA no ponto onde o proximo hold comeca
-        #    (zoom_window do proximo quadro) -> sem pulo entre trans e hold.
+        # 4) mergulha em cada quadro; faz um PAN no close ate o proximo (sem
+        #    afastar pra pagina). a transicao termina JA no ponto onde o proximo
+        #    hold comeca (zoom_window do proximo) -> sem pulo entre trans e hold.
         for i in range(len(frames)):
             hold = os.path.join(clips_dir, f"{pn:02d}q{i+1}-hold.mp4")
             _seg_clip(travel_png, zoom_window(frames[i], HOLD_OUT, PW), frames[i],
@@ -454,7 +460,7 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
             if i < len(frames) - 1:
                 tr = os.path.join(clips_dir, f"{pn:02d}q{i+1}-trans.mp4")
                 _seg_clip(travel_png, frames[i], zoom_window(frames[i + 1], HOLD_OUT, PW),
-                          T_TRANS, tr, bump=TRANS_BUMP)
+                          T_TRANS, tr)
                 clips.append(tr)
 
     # 5) FECHA mostrando a PRANCHA INTEIRA da ultima pagina
