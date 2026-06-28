@@ -13,6 +13,7 @@ import json
 import os
 import subprocess
 import sys
+import unicodedata
 
 import yaml
 
@@ -51,6 +52,124 @@ def _gentil(i):
         {"type": "pan", "direction": "left", "intensity": 0.4, "easing": "ease_in_out"},
         _framing(1.18, 0.40),
     ][i % 6]
+
+
+# --- camera por CONTEUDO (gramatica do pixflow-trailer/inteligencia-direcao) ---
+def _norm(s):
+    return unicodedata.normalize("NFKD", s or "").encode("ascii", "ignore").decode().lower()
+
+
+_KW_CLOSE = ("close", "rosto", "olho", "expressa", "sorriso", "lagrim", "bochech",
+             "primeiro plano", "detalhe", "perto do rosto")
+_KW_WIDE = ("amplo", "plano geral", "panorama", "ao longe", "paisagem", "vista",
+            "horizonte", "tudo branco", "sitio coberto", "ao redor", "estabelec", "campo nevado")
+_KW_ACAO = ("corre", "salta", "pula", "vento", "tempestade", "nevasca", "foge",
+            "dispara", "uiva", "rajada", "girando", "atira")
+_KW_MED = ("de corpo inteiro", "de pe", "os dois", "ao lado", "plano medio", "juntos")
+
+
+def _classificar(cena):
+    """Enquadramento do painel a partir do PROMPT (deterministico, sem IA):
+    close | wide | acao | medio — base da escolha de camera por CONTEUDO."""
+    t = _norm(cena)
+    if any(k in t for k in _KW_CLOSE):
+        return "close"
+    if any(k in t for k in _KW_WIDE):
+        return "wide"
+    if any(k in t for k in _KW_ACAO):
+        return "acao"
+    if any(k in t for k in _KW_MED):
+        return "medio"
+    return "medio"
+
+
+def _framing_at(z, pt):
+    """Recorte (framing) da MESMA imagem ate o ponto de interesse `pt`=(x,y) em 0..1."""
+    return {"type": "framing", "easing": "ease_out",
+            "from": {"zoom": 1.0, "at": [0.5, 0.5]},
+            "to": {"zoom": z, "at": [round(pt[0], 3), round(pt[1], 3)]}}
+
+
+# BEATS narrativos — lidos do PROMPT (visual) + NARRACAO (o que e dito). Cada beat
+# tem movimento, ritmo, look e efeito proprios (gramatica do pixflow-trailer).
+_BT_TENSAO = ("tremen", "frio", "gelad", "congel", "perigo", "sofre", "apert", "medo",
+              "escur", "ameac", "susto", "preocup", "aguenta", "nao aguenta", "doeu", "serio")
+_BT_MARAVILHA = ("encant", "lind", "brilhant", "sorri", "maravilh", "magic", "feliz",
+                 "gargalh", "riu", "deslumbr", "tapete branco", "bonequinho", "pra cima")
+_BT_ACAO = ("corre", "correndo", "girando", "salta", "pula", " vento", "nevasca", "foge",
+            "dispara", "atira", "rajada", "uiva", "batia as patas")
+_BT_DECISAO = ("decid", "vou dar um jeito", "determinad", "certeza", "promet", "ia inventar",
+               "vou esquentar", "rabisc", "ideia")
+# pontos de interesse alternados -> RECORTES variados (nao mira sempre o centro)
+_PONTOS = [(0.5, 0.40), (0.42, 0.46), (0.58, 0.43), (0.5, 0.50)]
+
+
+def _beat(prompt, narr):
+    """Beat narrativo do painel (le visual + narrativa). Prioriza o PROBLEMA
+    (tensao) — e nele que entra o close rapido — depois maravilha/acao/decisao."""
+    t = _norm((prompt or "") + " || " + (narr or ""))
+    if any(k in t for k in _BT_TENSAO):
+        return "tensao"
+    if any(k in t for k in _BT_MARAVILHA):
+        return "maravilha"
+    if any(k in t for k in _BT_ACAO):
+        return "acao"
+    if any(k in t for k in _BT_DECISAO):
+        return "decisao"
+    return "calmo"
+
+
+def _montagem(prompt, narr, dur, i):
+    """Mini-montagem DIRIGIDA pela narrativa (visual + o que e dito): cada BEAT tem
+    seu movimento, RITMO, look e EFEITO (gramatica do pixflow-trailer). Retorna uma
+    lista de shots {camera, look, effects} — recortes da MESMA imagem. So 2D.
+    - PROBLEMA/tensao: estabelece rapido -> CLOSE RAPIDO (crash/push forte) no detalhe,
+      cortes curtos, look tenso (vinheta/chroma/grain sobem).
+    - MARAVILHA: lento e etereo (sonho-etereo, bloom), poucos cortes longos.
+    - ACAO: pan acompanha + mergulho.
+    - DECISAO: push que cresce -> close firme.  - CALMO: estabelece -> recorte suave."""
+    beat = _beat(prompt, narr)
+    pt = _PONTOS[i % len(_PONTOS)]
+    pt2 = _PONTOS[(i + 2) % len(_PONTOS)]
+    d = "right" if i % 2 == 0 else "left"
+
+    def shots(seq, look, fx):
+        return [{"camera": c, "look": look, "effects": fx} for c in seq]
+
+    if beat == "tensao":
+        fx = {"vignette": 0.6, "chroma": 0.8, "grain": 0.13, "bloom": 0.1, "saturation": 0.85}
+        # alterna o "soco" (crash <-> push forte) e o estabelece -> sem repetir
+        punch = ({"type": "crash_zoom", "intensity": 0.95, "easing": "ease_in"} if i % 2 == 0
+                 else {"type": "push_in", "intensity": 1.05, "easing": "ease_in"})
+        estab = ({"type": "pull_out", "intensity": 0.85, "easing": "ease_out"} if i % 2 == 0
+                 else {"type": "pan", "direction": d, "intensity": 0.8, "easing": "ease_in_out"})
+        if dur >= 5.5:   # estabelece -> CLOSE RAPIDO no problema -> segura no detalhe
+            return shots([estab, punch, _framing_at(1.5, pt)], "cinema-dramatico", fx)
+        return shots([punch, _framing_at(1.5, pt)], "cinema-dramatico", fx)
+    if beat == "maravilha":
+        fx = {"bloom": 0.42, "exposure": 1.08, "grain": 0.04, "saturation": 0.95}
+        seq = [{"type": "push_in", "intensity": 0.5, "easing": "ease_in_out"}]
+        if dur >= 6:
+            seq.append(_framing_at(1.3, pt))
+        return shots(seq, "sonho-etereo", fx)
+    if beat == "acao":
+        fx = {"chroma": 0.6, "grain": 0.1}
+        seq = [{"type": "pan", "direction": d, "intensity": 1.0, "easing": "ease_in_out"},
+               {"type": "push_in", "intensity": 0.9, "easing": "ease_in"}]
+        if dur >= 7:
+            seq.append(_framing_at(1.45, pt2))
+        return shots(seq, "cinema-dramatico", fx)
+    if beat == "decisao":
+        fx = {"vignette": 0.55, "bloom": 0.16}
+        seq = [{"type": "push_in", "intensity": 0.85, "easing": "ease_in"}]
+        if dur >= 5:
+            seq.append(_framing_at(1.42, (0.5, 0.4)))
+        return shots(seq, "cinema-dramatico", fx)
+    # calmo: estabelece (variado) -> recorte suave
+    estab = ({"type": "pull_out", "intensity": 0.8, "easing": "ease_out"} if i % 2
+             else {"type": "pan", "direction": d, "intensity": 0.7, "easing": "ease_in_out"})
+    seq = [estab] + ([_framing_at(1.32, pt)] if dur >= 6 else [])
+    return shots(seq, "cinema-dramatico", {})
 
 
 def _paleta(energia):
@@ -170,18 +289,13 @@ def _seq_visao(shots, d):
     return result
 
 
-def _seq(i, n, energia, cortes):
-    """Sequencia de cameras pro MESMO painel. CALMO (energia "media"/"baixa" OU
-    cortes<=1): EXATAMENTE 1 tomada gentil por painel — uma imagem, uma camera,
-    sem clone e sem zoom forte. ENERGETICO (cortes>1): corte seco entre tomadas
-    (estabelece -> aproxima -> impacto), variando por indice. As duracoes somam a
-    duracao do painel, entao a narracao (faixa unica) nao desce."""
-    if cortes <= 1:
-        # 1 tomada por painel = SEMPRE gentil (mesmo em energia energetica): sem
-        # clone, sem zoom forte. Energia so volta a "pesar" com cortes>1.
-        return [_gentil(i)]
-    if energia in ("media", "baixa"):
-        return [_camera(i, n, energia)]
+def _seq(i, n, energia, cortes, prompt="", narr="", dur=4.0):
+    """SHOTS do painel {camera, look, effects}. CALMO/MEDIO: mini-montagem DIRIGIDA
+    pela narrativa (_montagem: beat -> movimento/ritmo/look/efeito). ENERGETICO
+    (alta/acao): corte seco estabelece -> aproxima -> impacto (crash/whip). As
+    duracoes (no dirigir) somam a do painel — a narracao nao desce."""
+    if cortes <= 1 or energia in ("media", "baixa"):
+        return _montagem(prompt, narr, dur, i)
     estabelece = [
         {"type": "pull_out", "intensity": 0.9, "easing": "ease_out"},
         {"type": "whip_pan", "direction": "right" if i % 2 else "left", "intensity": 1.1, "easing": "ease_in_out"},
@@ -189,17 +303,19 @@ def _seq(i, n, energia, cortes):
     ][i % 3]
     aproxima = {"type": "push_in", "intensity": 1.2, "easing": "ease_in"}
     impacto = _framing(1.5, 0.4) if i % 2 else {"type": "crash_zoom", "intensity": 1.3, "easing": "ease_in"}
-    seq = [estabelece, aproxima, impacto]
-    if cortes <= 3:
-        return seq[:cortes]
-    return seq + [aproxima] * (cortes - 3)
+    cams = [estabelece, aproxima, impacto]
+    cams = cams[:cortes] if cortes <= 3 else cams + [aproxima] * (cortes - 3)
+    look = "acao-epico" if energia == "acao" else LOOK_CALMO
+    return [{"camera": c, "look": look, "effects": {}} for c in cams]
 
 
-def dirigir(stage_dir, energia=None, look=LOOK_CALMO, lead=0.6, tail=0.7, cortes=None, visao=None, visao_path=None):
+def dirigir(stage_dir, energia=None, look=LOOK_CALMO, lead=0.6, tail=0.7, cortes=None,
+            visao=None, visao_path=None, parallax=0.0):
     """Le `stage_dir/forma-c.json`, escreve `decupagem.json` + `miolo.movie.yaml`.
     `energia` = paleta de camera; `cortes` = multi-shot por painel (None -> deriva
     da energia). `visao_path` = caminho para JSON de cobertura; carregado se `visao`
-    for None. Retorna (decupagem_path, movie_path, total_segundos)."""
+    for None. `parallax` (0 = arte chapada; >0 = profundidade 2.5D via Depth-Anything
+    no pixflow). Retorna (decupagem_path, movie_path, total_segundos)."""
     man = json.load(open(os.path.join(stage_dir, "forma-c.json")))
     if visao is None and visao_path and os.path.exists(visao_path):
         visao = json.load(open(visao_path))
@@ -227,17 +343,19 @@ def dirigir(stage_dir, energia=None, look=LOOK_CALMO, lead=0.6, tail=0.7, cortes
                 scene_id = sid if kk == 1 else f"{sid}_{k}"
                 mv_scenes.append({"id": scene_id, "image": sid,
                                   "duration": item["dur"], "camera": item["camera"],
-                                  "effects": {"parallax": 0},
+                                  "effects": {"parallax": parallax},
                                   "look": look, "transition_out": {"type": "cut"}})
         else:
-            cams = _seq(i, n, energia, cortes)
-            kk = len(cams)
+            shots = _seq(i, n, energia, cortes,
+                         prompt=c.get("cena", ""), narr=c.get("narr_txt", ""), dur=d)
+            kk = len(shots)
             base = round(d / kk, 2)
             durs = [base] * (kk - 1) + [round(d - base * (kk - 1), 2)]
-            for j, cam in enumerate(cams):
+            for j, sh in enumerate(shots):
+                eff = {"parallax": parallax, **(sh.get("effects") or {})}
                 mv_scenes.append({"id": sid if kk == 1 else f"{sid}_{j+1}", "image": sid,
-                                  "duration": durs[j], "camera": cam, "effects": {"parallax": 0},
-                                  "look": look, "transition_out": {"type": "cut"}})
+                                  "duration": durs[j], "camera": sh["camera"], "effects": eff,
+                                  "look": sh.get("look", look), "transition_out": {"type": "cut"}})
 
     decupagem = {"lead": lead, "scenes": dec_scenes}
     movie = {"schema": "pixflow.movie/v1",

@@ -30,7 +30,7 @@ existe — motion comics narrados e filmes.
 
 **V1 + V2 construídas; primeira série completa produzida.** As skills `folder`, `quadrinho`, `motioncomic` (V1) e `serie` (V2 — criador de série) estão **construídas e testadas** (suíte verde). A V2 já gerou uma **série inteira de exemplo** — *A Escada Invisível de Lia* (a Pirâmide de Maslow), 20 episódios × 10 páginas em vídeo (bíblia + roteiros versionados em [`conteudo/`](conteudo/)). Filme (V3) permanece à frente. Página do projeto (landing + guia): [`index.html`](index.html).
 
-**Versão atual: `v1.08.002`** — esquema e histórico no [Changelog](#changelog).
+**Versão atual: `v1.09.002`** — esquema e histórico no [Changelog](#changelog).
 
 ## Skills
 
@@ -146,6 +146,10 @@ Esquema **`v1.<recurso>.<bug>`** — `major` fixo em **1** (linha V1 do produto)
 
 ## Changelog
 
+- **`v1.09.002`** — 2026-06-28 — Forma B com **câmera de zoom lento contínuo**; Forma C dirigida também pela **narração**; **checagem de acentuação** sempre antes do TTS.
+  - `[recurso]` **Forma B — zoom lento contínuo** (`build_travel.py`) — novo modelo de câmera que **elimina os "pulos"**: por quadro um **push-in lento** durante toda a narração (sem congelar); entre quadros um **glide plano lento** (pan na linha / diagonal na troca de linha) **sem recuo**; a câmera **nunca vai à página inteira** (entra `ENTRY_OUT` mais aberta e assenta); **virada de página = dissolve em movimento, apertado** (`_pageturn_clip` reescrito + `_page_clips`). Removidos `estab`/`open-4×`/`close-5.8×`/`pend` (as fontes do salto). Knobs de ritmo no topo do arquivo. 59 testes verdes.
+  - `[recurso]` **Forma C — direção também pela narração** (`forma_c.py`, `forma_c_direcao.py`) — além do visual, o diretor passa a receber o **texto narrado** por painel (`narr_txt`); novas heurísticas (`_classificar`/`_beat`/`_montagem`, `_seq(prompt, narr, dur)`) usam visual **+** narrativa pra decidir os cortes.
+  - `[recurso]` **Checagem de acentuação sempre** (`serie/revisar_acentos.py`) — o `build_serie` **corrige a acentuação PT-BR do texto narrado** (`abertura`/`titulo`/`chamada`/`narracao`/`fala.texto`) **antes do TTS**, pois sem acento a voz pronuncia errado: auto-corrige o que é seguro (palavra inválida sem acento — preserva caixa, idempotente) e **avisa** formas ambíguas (`esta`/`está`); nunca toca em `prompt`/`quem`/`usa`/`sfx`. Determinístico, sem rede; integrado como o `lint_paineis`. `SKILL.md` instrui autoria já acentuada.
 - **`v1.08.002`** — 2026-06-18 — Forma C **calma** + cobertura por **visão**; **casting** de fichas-âncora; **lint** de painéis; Forma B com pan **direcional**.
   - `[recurso]` **Forma C calma por padrão** (`forma_c_direcao.py`) — conteúdo infantil pede suavidade: look `cinema-dramatico` (natural), **1 toma gentil por painel** (sem clone, `intensity ≤ 0.6`, framing `zoom ≤ 1.18`, nunca `crash_zoom`/`whip_pan`), variada por índice. As paletas energéticas (`alta`/`acao`) seguem disponíveis, mas deixaram de ser o default.
   - `[recurso]` **Presets da Forma C** — `suave`/`dinamico`/`acao`/`epico` combinam energia (paleta de câmera), `cortes` (multi-shot por painel) e `slides`. A bíblia referencia por nome em `estilo.acao_c`; o episódio sobrescreve em `ep.acao_c`.

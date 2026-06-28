@@ -54,6 +54,31 @@ HOLD_FILL = 0.82   # MERGULHO MINIMO: todo hold ocupa no maximo 82% da pagina.
 T_FULL = 1.7       # duracao do plano da PRANCHA INTEIRA (abre/fecha a pagina)
 FULLPAGE_FILL = 0.88  # a prancha inteira ocupa 88% do quadro -> margem ao redor
                       # (sem a margem, a borda #111 da pagina some na tarja preta)
+# --- viagem CONTINUA (sem cartao nem prancha-letterbox; tudo full-bleed) ---
+HOLD_EASE = 0.55   # ASSENTAR: o hold chega ao quadro nestes ~0.55s e ENTAO PARA
+                   # (camera estatica pelo resto da narracao). "chega e para".
+OPEN_OUT = 1.55    # abertura/fechamento full-bleed: enquadramento do quadro ~55%
+                   # mais aberto (estabelece o quadro sem sair pra pagina inteira).
+T_OPEN_MIN = 0.9   # duracao minima do mergulho de abertura de cada pagina
+T_TURN = 0.8       # VIRADA DE PAGINA: dissolve EM MOVIMENTO no enquadramento APERTADO
+                   # (cada prancha segue derivando durante o cross-dissolve; nao congela)
+# --- pagina inteira na "mesa" + ENQUADRAMENTO POR LINHA (camera de leitura) ---
+DESK_FILL = 0.9    # a folha ocupa 90% da altura do quadro 16:9; resto = mesa (margem)
+CLOSE_CAP = 0.62   # zoom da linha: largura <= 62% da pagina (close legivel por linha)
+ROW_PULL = 1.7     # recuo (zoom-out) na troca de LINHA: largura no meio do trajeto
+T_ROW = 1.0        # duracao da troca de linha (recuo + diagonal + mergulho, 1 clipe)
+T_DIVE = 2.4       # mergulho suave da PAGINA INTEIRA ate o 1o quadro (sem 'pulo')
+T_PAGE_END = 1.0   # segura na PAGINA INTEIRA no fim (titulo) antes de virar a pagina
+# --- MODELO ZOOM-LENTO-CONTINUO (v2) — substitui o "rajada + congela + dissolve parado" ---
+# A camera NUNCA vai a pagina inteira nem recua: ENTRA ~ENTRY_OUT mais aberta que o 1o quadro
+# e assenta; em cada quadro da um push-in MUITO lento durante TODA a narracao (jamais congela);
+# entre quadros faz um GLIDE lento e plano (pan na linha; diagonal SEM recuo na troca de linha).
+# As juncoes ficam em velocidade ~0 (eased) dos dois lados -> continuo, sem pulo e sem freeze.
+ENTRY_OUT = 1.16    # cada pagina ENTRA este tanto mais aberta que o 1o quadro e assenta nele
+DWELL_PUSH = 1.06   # push-in lento por quadro: comeca DWELL_PUSH x e fecha em 1.0x na narracao
+T_GLIDE = 1.4       # glide lento entre quadros da MESMA linha (pan puro, suavizado)
+T_GLIDE_ROW = 2.2   # glide da TROCA de linha (diagonal maior) — mais longo p/ manter calmo, SEM recuo
+TURN_DRIFT = 0.06   # deriva que cada prancha mantem DURANTE o dissolve da troca (nao congela)
 CTA_NARR = "Aprenda mais em inema ponto clube."  # CTA padrao inema.club
 
 
@@ -116,21 +141,33 @@ def window_at(a, b, u, bump=0.0):
     return (cx, cy, cw)
 
 
-def _filter(a, b, dur, bump=0.0):
+def _filter(a, b, dur, ease=None, straight=False, pull_cw=None):
     """String -vf: crop animado (a->b) + scale para 16:9. Espelha window_at em
-    sintaxe de expressao do ffmpeg (variavel de tempo `t`)."""
+    sintaxe de expressao do ffmpeg (variavel de tempo `t`). `ease` (s) conclui o
+    movimento ANTES do fim do clipe; para t>ease a janela fica PARADA em b (a
+    camera assenta no quadro). Default ease=dur -> move o clipe inteiro.
+    Largura: `pull_cw` = ABRE no meio ate `pull_cw` e fecha (recuo da troca de
+    linha, num movimento so); `straight` = MONOTONICA (abrir/fechar); default =
+    aperta no meio (pan colado, sem afastar)."""
     cx0, cy0, cw0 = a
     cx1, cy1, cw1 = b
-    T = max(float(dur), 1e-3)
-    # u in [0,1]. NAO usar clip(): essa build do ffmpeg nao tem a funcao e o
-    # crop silenciosamente abre pra in_w. min(max(...)) faz o mesmo papel.
+    T = max(float(ease if ease else dur), 1e-3)
+    # u in [0,1] em [0,T]; para t>T, u=1 -> janela ESTATICA em b (assenta).
+    # NAO usar clip(): essa build do ffmpeg nao tem a funcao e o crop
+    # silenciosamente abre pra in_w. min(max(...)) faz o mesmo papel.
     u = f"min(max(t/{T:.4f},0),1)"
     s = f"({u})*({u})*(3-2*({u}))"
     # espelha window_at: largura linear, mas apertada pro min no meio do trajeto
     # (pan no close, sem afastar). min(a_w,b_w) e constante.
     wmin = min(cw0, cw1)
     lin = f"(({cw0:.2f})+(({cw1:.2f})-({cw0:.2f}))*{s})"
-    size = f"(({wmin:.2f})+({lin}-({wmin:.2f}))*(1-sin(PI*({u}))))"
+    if pull_cw is not None:                       # recuo: abre no meio (pico=pull_cw) e fecha
+        mid = (cw0 + cw1) / 2.0
+        size = f"({lin}+({float(pull_cw) - mid:.2f})*sin(PI*({u})))"
+    elif straight:
+        size = lin                                # zoom monotonico (abrir/fechar)
+    else:                                         # pan colado: aperta no meio, sem afastar
+        size = f"(({wmin:.2f})+({lin}-({wmin:.2f}))*(1-sin(PI*({u}))))"
     cx = f"(({cx0:.2f})+(({cx1:.2f})-({cx0:.2f}))*{s})"
     cy = f"(({cy0:.2f})+(({cy1:.2f})-({cy0:.2f}))*{s})"
     # largura e altura auto-contidas (so iw/ih) — NAO usar ow/oh: dentro da
@@ -148,7 +185,11 @@ def _filter(a, b, dur, bump=0.0):
 # medicao dos quadros na pagina (mascara de cores)
 # ---------------------------------------------------------------------------
 def _mask_style():
+    # esconde overlays E o cabecalho (kicker/titulo). O cabecalho via
+    # `visibility:hidden` (NAO display:none) p/ NAO tirar o espaco dele e deslocar
+    # os quadros — so impede o kicker (cor do accent) de poluir a deteccao de cor.
     rules = [".panel-img,.narracao,.fala,.sfx{display:none!important}",
+             ".cabecalho{visibility:hidden!important}",
              ".panel{border:0!important}"]
     for i, (r, g, b) in enumerate(PANEL_COLORS, start=1):
         rules.append(f".quadros .panel:nth-child({i}){{background:rgb({r},{g},{b})!important}}")
@@ -191,11 +232,12 @@ def detect_rects(mask_png):
 # ---------------------------------------------------------------------------
 # renderizacao dos segmentos (ffmpeg)
 # ---------------------------------------------------------------------------
-def _seg_clip(page_png, a, b, dur, out_mp4, bump=0.0, audio=None):
+def _seg_clip(page_png, a, b, dur, out_mp4, ease=None, straight=False, pull_cw=None, audio=None):
     """Um segmento de camera sobre a pagina: anima a janela a->b por `dur` s.
-    Com `audio` (wav) usa a faixa; senao gera silencio. Encode identico ao
-    _title_clip para permitir concat -c copy."""
-    vf = _filter(a, b, dur, bump)
+    `ease` (s) faz a camera ASSENTAR (move ate `ease` e para parada). `straight`
+    = zoom monotonico; `pull_cw` = recuo que abre no meio (troca de linha, 1 clipe).
+    Com `audio` (wav) usa a faixa; senao silencio. Encode identico (concat -c copy)."""
+    vf = _filter(a, b, dur, ease=ease, straight=straight, pull_cw=pull_cw)
     cmd = ["ffmpeg", "-nostdin", "-y", "-v", "error",
            "-framerate", str(FPS), "-loop", "1", "-t", f"{dur:.3f}", "-i", page_png]
     if audio:
@@ -206,6 +248,32 @@ def _seg_clip(page_png, a, b, dur, out_mp4, bump=0.0, audio=None):
     cmd += ["-filter_complex", f"[0:v]{vf}[v]", "-map", "[v]", "-map", "1:a",
             "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
             "-c:a", "aac", "-ar", "44100", "-ac", "2", "-shortest", out_mp4]
+    subprocess.run(cmd, check=True)
+    return out_mp4
+
+
+def _pageturn_clip(plate_a, win_a, plate_b, win_b, dur, out_mp4, drift=TURN_DRIFT, page_w=None):
+    """VIRADA DE PAGINA: cross-dissolve EM MOVIMENTO no enquadramento APERTADO. `win_a`
+    e a janela final (ultimo quadro) da pagina i; `win_b` a janela de ENTRADA da i+1.
+    Cada prancha CONTINUA derivando durante o dissolve (a i fechando um tico, a i+1
+    assentando) -> a troca nunca 'congela'. Apertado (nao a pagina inteira) -> troca pouca
+    area de uma vez, le como fluido. Silenciosa. Encode identico aos demais (concat -c copy)."""
+    pw = page_w or max(win_a[2], win_b[2])
+    a0, a1 = win_a, zoom_window(win_a, 1 - drift, pw)     # i segue fechando um tico
+    b0, b1 = zoom_window(win_b, 1 + drift, pw), win_b     # i+1 segue assentando
+    va = _filter(a0, a1, dur, straight=True)              # prancha i deriva (nao estatica)
+    vb = _filter(b0, b1, dur, straight=True)              # prancha i+1 deriva
+    fc = (f"[0:v]{va}[a];[1:v]{vb}[b];"
+          f"[a][b]xfade=transition=fade:duration={dur:.3f}:offset=0,"
+          f"format=yuv420p[v]")
+    cmd = ["ffmpeg", "-nostdin", "-y", "-v", "error",
+           "-framerate", str(FPS), "-loop", "1", "-t", f"{dur:.3f}", "-i", plate_a,
+           "-framerate", str(FPS), "-loop", "1", "-t", f"{dur:.3f}", "-i", plate_b,
+           "-f", "lavfi", "-t", f"{dur:.3f}",
+           "-i", "anullsrc=channel_layout=stereo:sample_rate=44100",
+           "-filter_complex", fc, "-map", "[v]", "-map", "2:a",
+           "-c:v", "libx264", "-pix_fmt", "yuv420p", "-r", str(FPS),
+           "-c:a", "aac", "-ar", "44100", "-ac", "2", "-shortest", out_mp4]
     subprocess.run(cmd, check=True)
     return out_mp4
 
@@ -319,6 +387,78 @@ def _textless(page_png):
     return os.path.join(os.path.dirname(page_png), "pagina-textless.png")
 
 
+def _desk(plate_png, out_png, fill=DESK_FILL):
+    """Compoe a prancha numa 'mesa' (fundo escuro com brilho/sombra + margem) num
+    quadro 16:9, para a camera poder ABRIR na PAGINA INTEIRA e mergulhar nela com
+    zoom continuo — um crop nao mostra uma pagina retrato inteira em 16:9 sem isso.
+    Retorna (out_png, ox, oy, CW, CH): offset da pagina no composto e o tamanho."""
+    from PIL import Image, ImageDraw, ImageFilter
+    page = Image.open(plate_png).convert("RGB")
+    pw, ph = page.size
+    CH = int(round(ph / fill))
+    CW = int(round(CH * AR))
+    if CW < pw:                              # pagina larga demais: ajusta pela largura
+        CW = int(round(pw / fill)); CH = int(round(CW / AR))
+    ox, oy = (CW - pw) // 2, (CH - ph) // 2
+    canvas = Image.new("RGB", (CW, CH), (12, 12, 16))
+    glow = Image.new("L", (CW, CH), 0)       # brilho radial suave atras da pagina
+    ImageDraw.Draw(glow).ellipse(
+        [ox - pw * 0.12, oy - ph * 0.10, ox + pw * 1.12, oy + ph * 1.10], fill=80)
+    glow = glow.filter(ImageFilter.GaussianBlur(max(CW, CH) // 16))
+    canvas = Image.composite(Image.new("RGB", (CW, CH), (38, 38, 50)), canvas, glow)
+    sh = Image.new("L", (CW, CH), 0)         # sombra projetada da pagina
+    dy = int(ph * 0.012); m = int(ph * 0.02)
+    ImageDraw.Draw(sh).rectangle([ox - m, oy - m + dy, ox + pw + m, oy + ph + m + dy], fill=170)
+    sh = sh.filter(ImageFilter.GaussianBlur(int(ph * 0.022)))
+    canvas = Image.composite(Image.new("RGB", (CW, CH), (0, 0, 0)), canvas, sh)
+    canvas.paste(page, (ox, oy))             # cola a pagina + borda fina
+    ImageDraw.Draw(canvas).rectangle([ox, oy, ox + pw - 1, oy + ph - 1],
+                                     outline=(64, 64, 78), width=2)
+    canvas.save(out_png)
+    return out_png, ox, oy, CW, CH
+
+
+def _rows_of(rects):
+    """Indice de LINHA de cada quadro (agrupa pelos y dos centros): permite afastar
+    a camera SO na troca de linha (pulo vertical), mantendo pan colado na linha."""
+    avg_h = sum(h for _, _, _, h in rects) / max(len(rects), 1)
+    order = sorted(range(len(rects)), key=lambda i: rects[i][1] + rects[i][3] / 2)
+    row, r, last = {}, 0, None
+    for i in order:
+        yc = rects[i][1] + rects[i][3] / 2
+        if last is not None and yc - last > 0.4 * avg_h:
+            r += 1
+        row[i] = r; last = yc
+    return row
+
+
+def _row_windows(rects0, ox, oy, CW, CH, page_w, page_h):
+    """Enquadramento POR LINHA (camera de leitura): cada quadro vira uma janela na
+    MESMA altura/zoom da sua linha (cy e largura constantes na linha) -> deslize
+    lateral vira PAN PURO; o zoom so muda na TROCA de linha. As janelas de quadro
+    ficam CONTIDAS na pagina (nao na mesa) -> nunca mostram a margem preta no hold.
+    Retorna (hwin, rows)."""
+    rows = _rows_of(rects0)
+    cen = [(x + ox + w / 2, y + oy + h / 2) for (x, y, w, h) in rects0]
+    # area de ARTE (uniao dos quadros) no composto -> as janelas ficam contidas
+    # AQUI, nunca na borda/gutter da pagina nem na mesa preta.
+    ax0 = ox + min(x for x, y, w, h in rects0); ax1 = ox + max(x + w for x, y, w, h in rects0)
+    ay0 = oy + min(y for x, y, w, h in rects0); ay1 = oy + max(y + h for x, y, w, h in rects0)
+    row_cw, row_cy = {}, {}
+    for rid in sorted(set(rows.values())):
+        idxs = [i for i in range(len(rects0)) if rows[i] == rid]
+        rh = max(rects0[i][3] for i in idxs)                       # altura dos quadros da linha
+        row_cw[rid] = min(rh * AR, CLOSE_CAP * page_w, ax1 - ax0)  # zoom (largura) da linha
+        row_cy[rid] = sum(cen[i][1] for i in idxs) / len(idxs)     # cy CONSTANTE na linha
+
+    def clamp(cx, cy, cw):                       # contido na AREA DE ARTE
+        cw = min(cw, ax1 - ax0); ch = min(cw / AR, ay1 - ay0); cw = ch * AR
+        return (min(max(cx, ax0 + cw / 2), ax1 - cw / 2),
+                min(max(cy, ay0 + ch / 2), ay1 - ch / 2), cw)
+    hwin = [clamp(cen[i][0], row_cy[rows[i]], row_cw[rows[i]]) for i in range(len(rects0))]
+    return hwin, rows, (ax0, ay0, ax1, ay1)
+
+
 def _page_roteiro(roteiro, pg):
     """Converte uma pagina do roteiro de motioncomic no roteiro que a skill
     `quadrinho` espera. O personagem (`quem`/protagonista) e dobrado no prompt
@@ -346,6 +486,34 @@ def _page_roteiro(roteiro, pg):
         paineis.append(qp)
     return {"id": f"{roteiro['id']}-pg{pg['n']:02d}", "titulo": pg.get("titulo", ""),
             "personagem_aparencia": "", "paineis": paineis}
+
+
+def _page_clips(desk_png, hwin, rows, durs, wavs, chamada_wav, clips_dir, pn, CW):
+    """Camera de UMA pagina no modelo ZOOM-LENTO-CONTINUO. Retorna a lista de clipes:
+      - ENTRADA: assenta de ENTRY_OUT ate ~o 1o quadro, narrando a chamada (sem full-page);
+      - por quadro: push-in lento (DWELL_PUSH x -> 1.0x) durante TODA a narracao (sem freeze);
+      - entre quadros: GLIDE lento e plano (pan na mesma linha; diagonal SEM recuo na troca
+        de linha). As juncoes ficam em velocidade ~0 (eased) -> continuo, sem pulo."""
+    clips = []
+    n = len(hwin)
+    entry_a = zoom_window(hwin[0], ENTRY_OUT, CW)              # entra um tico mais aberta
+    entry_b = zoom_window(hwin[0], DWELL_PUSH, CW)             # e assenta no 1o quadro
+    entry_dur = max(T_GLIDE, duration(chamada_wav)) if chamada_wav else T_GLIDE
+    entry = os.path.join(clips_dir, f"{pn:02d}0-entra.mp4")
+    _seg_clip(desk_png, entry_a, entry_b, entry_dur, entry, straight=True, audio=chamada_wav)
+    clips.append(entry)
+    for i in range(n):
+        dwell = os.path.join(clips_dir, f"{pn:02d}q{i+1}-dwell.mp4")    # push-in lento na fala
+        _seg_clip(desk_png, zoom_window(hwin[i], DWELL_PUSH, CW), hwin[i],
+                  durs[i], dwell, straight=True, audio=wavs[i])         # ease=dur: move o clipe todo
+        clips.append(dwell)
+        if i < n - 1:
+            glide = os.path.join(clips_dir, f"{pn:02d}q{i+1}-glide.mp4")
+            tg = T_GLIDE if rows[i] == rows[i + 1] else T_GLIDE_ROW     # troca de linha = mais calma
+            _seg_clip(desk_png, hwin[i], zoom_window(hwin[i + 1], DWELL_PUSH, CW),
+                      tg, glide, straight=True)                         # pan/diagonal plana, SEM recuo
+            clips.append(glide)
+    return clips
 
 
 def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-klein",
@@ -387,32 +555,31 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
         clips.append(tc)
 
     pages = roteiro["paginas"]
-    last_page_png = None
+    prev_desk, prev_last = None, None    # virada: dissolve EM MOVIMENTO, apertado
     for pgi, pg in enumerate(pages):
         pn = pg["n"]
-        # 1) monta a pagina de papel; pagina.png (COM texto) = carrossel,
-        #    pagina-textless.png = sobre a qual a CAMERA viaja (voz-off).
+        # 1) monta a pagina e compoe na 'mesa' (folha + margem) p/ a camera viajar nela.
         page_png = build_pagina(_page_roteiro(roteiro, pg), tdir,
                                 arte=arte, out_dir=pages_dir, model=model,
                                 moldura=moldura, kicker=kicker, accent=accent,
                                 generate_fn=generate_fn,
                                 ancoras=ancoras, protagonista_id=protagonista_id)
-        travel_png = _textless(page_png)
-        last_page_png = travel_png
+        plate = _textless(page_png)
         page_html = os.path.join(os.path.dirname(page_png), "pagina.html")
         mask_png = os.path.join(os.path.dirname(page_png), "mask.png")
         render_mask(page_html, mask_png, PW, PH)
-        rects = detect_rects(mask_png)
-        frames = [frame_window(r, PW, PH, max_w=HOLD_FILL * PW) for r in rects]
-        # mapeamento claro: cada quadro detectado casa 1:1 com um painel do
-        # roteiro (mesma ordem). Se divergir, a camera mergulharia no quadro
-        # errado durante a narracao errada -> falha antes de renderizar.
-        if len(frames) != len(pg["paineis"]):
+        rects0 = detect_rects(mask_png)
+        # cada quadro detectado casa 1:1 com um painel do roteiro (mesma ordem).
+        if len(rects0) != len(pg["paineis"]):
             raise ValueError(
-                f"pagina {pn}: {len(frames)} quadros detectados != "
+                f"pagina {pn}: {len(rects0)} quadros detectados != "
                 f"{len(pg['paineis'])} paineis no roteiro — layout incompativel")
+        desk_png = os.path.join(os.path.dirname(plate), "desk.png")
+        desk_png, ox, oy, CW, CH = _desk(plate, desk_png)
+        # ENQUADRAMENTO POR LINHA: zoom/altura constantes na linha (deslize vira pan puro).
+        hwin, rows, _ = _row_windows(rects0, ox, oy, CW, CH, PW, PH)
 
-        # 2) narracao por quadro
+        # 2) narracao por quadro + chamada da pagina
         wavs, durs = [], []
         for idx, panel in enumerate(pg["paineis"], start=1):
             wav = os.path.join(voz_dir, f"p{pn:02d}q{idx}.wav")
@@ -420,55 +587,27 @@ def build_video_travel(roteiro, out_dir="output", voice="bella", model="flux2-kl
                 say(_spoken(panel), wav, voice=voice)
             wavs.append(wav)
             durs.append(duration(wav))
-
-        # 3) FORMATO C: a CHAMADA narrada COMECA no cartao "PAGINA n / titulo" e
-        #    TERMINA na PRANCHA INTEIRA — a mesma fala atravessa cartao -> prancha.
-        #    (abertura ja foi narrada no card de intro em t=0; aqui so a chamada da pagina)
         chamada = (pg.get("chamada") or "").strip()
-        intro_txt = chamada
-        card = os.path.join(clips_dir, f"{pn:02d}0-cartao.mp4")
-        est = os.path.join(clips_dir, f"{pn:02d}1-prancha.mp4")
-        if intro_txt:
+        cwav = None
+        if chamada:
             cwav = os.path.join(voz_dir, f"chamada{pn:02d}.wav")
             if not os.path.exists(cwav):
-                say(intro_txt, cwav, voice=voice)
-            dtot = duration(cwav)
-            card_dur = min(2.2, dtot)
-            if dtot - card_dur > 0.2:          # divide a fala: cartao -> prancha
-                pa = os.path.join(voz_dir, f"chamada{pn:02d}a.wav")
-                pb = os.path.join(voz_dir, f"chamada{pn:02d}b.wav")
-                _split_wav(cwav, card_dur, pa, pb)
-                _page_card_clip(pn, pg.get("titulo", ""), card, audio=pa)
-                _fullpage_clip(travel_png, duration(pb) + 0.4, est, audio=pb)
-            else:                               # fala curta: tudo no cartao
-                _page_card_clip(pn, pg.get("titulo", ""), card, audio=cwav)
-                _fullpage_clip(travel_png, T_FULL, est)
-        else:
-            _page_card_clip(pn, pg.get("titulo", ""), card)
-            _fullpage_clip(travel_png, T_FULL, est)
-        clips.append(card)
-        clips.append(est)
+                say(chamada, cwav, voice=voice)
 
-        # 4) mergulha em cada quadro; faz um PAN no close ate o proximo (sem
-        #    afastar pra pagina). a transicao termina JA no ponto onde o proximo
-        #    hold comeca (zoom_window do proximo) -> sem pulo entre trans e hold.
-        for i in range(len(frames)):
-            hold = os.path.join(clips_dir, f"{pn:02d}q{i+1}-hold.mp4")
-            _seg_clip(travel_png, zoom_window(frames[i], HOLD_OUT, PW), frames[i],
-                      durs[i], hold, audio=wavs[i])
-            clips.append(hold)
-            if i < len(frames) - 1:
-                tr = os.path.join(clips_dir, f"{pn:02d}q{i+1}-trans.mp4")
-                _seg_clip(travel_png, frames[i], zoom_window(frames[i + 1], HOLD_OUT, PW),
-                          T_TRANS, tr)
-                clips.append(tr)
+        # 3) VIRADA EM MOVIMENTO (apertada): ultimo quadro da pagina anterior -> a
+        #    ENTRADA desta, com as duas pranchas derivando durante o dissolve.
+        if prev_desk is not None:
+            turn = os.path.join(clips_dir, f"{pn:02d}t-turn.mp4")
+            _pageturn_clip(prev_desk, prev_last, desk_png,
+                           zoom_window(hwin[0], ENTRY_OUT, CW), T_TURN, turn, page_w=CW)
+            clips.append(turn)
 
-    # 5) FECHA mostrando a PRANCHA INTEIRA da ultima pagina
-    if last_page_png:
-        fim = os.path.join(clips_dir, "zz8-prancha-fim.mp4")
-        _fullpage_clip(last_page_png, T_FULL, fim)
-        clips.append(fim)
-    # 6) CTA padrao inema.club (todos os nossos videos)
+        # 4) CAMINHO CONTINUO da pagina (entrada que assenta + push-in lento por quadro
+        #    + glide lento ao proximo; sem full-page, sem freeze, sem recuo).
+        clips += _page_clips(desk_png, hwin, rows, durs, wavs, cwav, clips_dir, pn, CW)
+        prev_desk, prev_last = desk_png, hwin[-1]
+
+    # 7) CTA inema.club (o hold na pagina grande da ultima pagina ja fechou o video)
     cta = os.path.join(clips_dir, "zz9-cta.mp4")
     _cta_clip(cta, voice=voice)
     clips.append(cta)

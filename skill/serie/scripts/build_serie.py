@@ -23,6 +23,7 @@ import manifesto as _manifesto        # noqa: E402
 import runner as _runner              # noqa: E402
 import referencia_ep                  # noqa: E402  (Pilar A: canon + delta do ep)
 import lint_paineis                   # noqa: E402  (aviso nao-bloqueante de elementos)
+import revisar_acentos                # noqa: E402  (checagem de acentuacao PT-BR, sempre)
 
 _Q = _deps.templates("quadrinho")
 _F = _deps.templates("folder")
@@ -254,6 +255,15 @@ def build_serie(biblia, episodios, out_dir=None, auto=False, runner="auto",
         probs = lint_paineis.lint_episodio(ep_eff)
         if probs:
             notify(f"[lint] ep{ep['n']}: {len(probs)} painel(eis) com >2 elementos")
+        # ACENTUACAO (sempre): corrige o texto narrado ANTES do TTS — sem acento a
+        # voz do inemavox pronuncia errado. Auto-corrige o que e seguro; avisa o ambiguo.
+        rev = revisar_acentos.revisar_episodio(ep_eff)
+        if rev["trocas"]:
+            notify(f"[acentos] ep{ep['n']}: {len(rev['trocas'])} correcao(oes) automatica(s) "
+                   f"(ex.: {rev['trocas'][0][0]}->{rev['trocas'][0][1]})")
+        if rev["suspeitas"]:
+            notify(f"[acentos] ep{ep['n']}: {len(rev['suspeitas'])} palavra(s) ambigua(s) "
+                   f"p/ revisar (ex.: {rev['suspeitas'][0]})")
         forma = _VIDEO_FORMA.get(tipo)
         sslug = f"{serie_slug}-{forma}" if forma else serie_slug   # <serie>-a/-b antes do epNN
         base = ep_base(sslug, ep["n"], ep.get("titulo", ""))

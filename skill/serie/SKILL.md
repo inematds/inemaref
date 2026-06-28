@@ -34,6 +34,12 @@ default), `protagonista` (uma FICHA pronta pro `folder` — **`id`** (slug, obri
    texto corrido** (gancho -> desenvolvimento -> virada -> fecho, com conectivos "entao/mas/foi ai que")
    e **segmente** esse texto nos 6 quadros — cada `narracao` e um pedaco de um todo coerente, nao uma
    legenda isolada.
+4. **Acentuacao correta (a narracao e FALADA por TTS).** Escreva todo texto narrado/exibido — `abertura`,
+   `titulo`, `chamada`, `narracao` e `fala.texto` — **JA com a acentuacao do portugues** (nao, voce, ceu,
+   agua, tambem, vulcao, manha...). Sem acento o inemavox pronuncia errado. **O `build_serie` ja roda uma
+   checagem automatica** (`revisar_acentos`) que corrige o que e seguro antes do TTS e avisa formas
+   ambiguas (esta/esta) — mas o acerto na fonte e o que garante a voz certa; os campos de imagem
+   (`prompt`/`quem`/`usa`/`sfx`) NAO sao tocados.
 
 Escreva tambem o roteiro da **pagina-piloto** (ep1/pag1, 6 paineis) p/ a aprovacao.
 

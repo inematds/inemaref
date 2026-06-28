@@ -86,22 +86,26 @@ def _dirigir_calmo(tmp, energia="media", cortes=None, n=8):
 
 
 def _assert_calmo(m, n):
-    # 1) EXATAMENTE 1 camera por painel -> nenhuma imagem repetida (sem clone)
-    assert len(m["scenes"]) == n, (len(m["scenes"]), n)
-    imgs = [s["image"] for s in m["scenes"]]
-    assert len(imgs) == len(set(imgs)), imgs
-    cams = [s["camera"] for s in m["scenes"]]
+    from collections import Counter
+    scenes = m["scenes"]
+    # 1) MONTAGEM: 1-3 cortes por painel (recortes da MESMA imagem) -> scenes >= n,
+    #    cada um dos n paineis presente, no maximo 3 cortes por imagem.
+    assert len(scenes) >= n, (len(scenes), n)
+    porimg = Counter(s["image"] for s in scenes)
+    assert len(porimg) == n, (len(porimg), n)
+    assert all(1 <= c <= 3 for c in porimg.values()), porimg
+    cams = [s["camera"] for s in scenes]
     tipos = {c["type"] for c in cams}
-    # 2) sem crash_zoom / whip_pan em lugar nenhum
+    # 2) CALMO = sem crash_zoom / whip_pan em lugar nenhum
     assert not (tipos & {"crash_zoom", "whip_pan"}), tipos
-    # 3) framing com zoom suave (<= 1.2) e intensidades discretas (<= 0.6)
+    # 3) movimento VISIVEL mas nao violento: framing zoom <= 1.7, intensidade <= 1.2
     for c in cams:
         for nome, v in _intensidades(c):
             if nome == "zoom":
-                assert v <= 1.2, ("framing zoom", v)
+                assert v <= 1.7, ("framing zoom", v)
             else:
-                assert v <= 0.6, ("intensity", v)
-    # 4) paineis seguidos diferem (movimento variado, nao clonado)
+                assert v <= 1.2, ("intensity", v)
+    # 4) cortes seguidos diferem (montagem variada, nao clonada)
     assert any(cams[k] != cams[k + 1] for k in range(len(cams) - 1)), cams
 
 

@@ -81,11 +81,17 @@ def coletar_forma_c(roteiro, assets_dir, stage_dir, energia=None):
 
     tags = _paineis_em_ordem(roteiro)
     cenas, imagens, narracoes = [], [], []
-    # mapa origem -> prompt (dica de cena p/ o diretor VER)
-    prompt_de = {}
+    # mapas origem -> prompt (o que o diretor VE) e -> narracao (o que ele OUVE):
+    # o diretor da Forma C dirige a camera pelos DOIS (visual + narrativa).
+    prompt_de, narr_de = {}, {}
     for pg in roteiro["paginas"]:
         for idx, p in enumerate(pg["paineis"], start=1):
-            prompt_de[f"p{pg['n']:02d}q{idx}"] = p.get("prompt", "")
+            tag = f"p{pg['n']:02d}q{idx}"
+            prompt_de[tag] = p.get("prompt", "")
+            fala = p.get("fala") or ""
+            if isinstance(fala, dict):
+                fala = fala.get("texto", "")
+            narr_de[tag] = " ".join(x for x in (p.get("narracao", ""), fala) if x).strip()
 
     for i, tag in enumerate(tags, start=1):
         src_png = os.path.join(assets_dir, f"{tag}.png")
@@ -102,7 +108,8 @@ def coletar_forma_c(roteiro, assets_dir, stage_dir, energia=None):
         imagens.append(dst_png)
         narracoes.append(dst_wav)
         cenas.append({"sid": sid, "origem": tag, "img": f"assets/img/{sid}.png",
-                      "narr": f"assets/audio/{sid}.wav", "cena": prompt_de.get(tag, "")})
+                      "narr": f"assets/audio/{sid}.wav", "cena": prompt_de.get(tag, ""),
+                      "narr_txt": narr_de.get(tag, "")})
 
     meta = {"id": roteiro.get("id", ""), "n": roteiro.get("n"),
             "titulo": roteiro.get("titulo", ""), "subtitulo": roteiro.get("subtitulo", ""),
