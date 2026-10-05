@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>inemaref — uma foto vira história em quadrinhos</title>
-<meta content="Fábrica de conteúdo a partir de uma referência de pessoa real: foto/história → ficha de personagem → página de HQ → motion comic narrado. Tudo local e determinístico." name="description"/>
+<title>inemaref — one photo becomes a comic book</title>
+<meta content="Content factory based on a real person's reference: photo/story → character sheet → comic page → narrated motion comic. All local and deterministic." name="description"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
@@ -89,18 +89,18 @@
   .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
 </style>
 <link href="https://inematds.github.io/inemaref/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/inemaref/en/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/inemaref/es/" hreflang="es" rel="alternate"/></head>
-<body><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="./" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="en/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="es/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<body><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="../" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">PT</a><a href="./" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">EN</a><a href="../es/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
 <nav><div class="wrap">
 <a class="brand" href="#top"><span class="emoji">🎭</span> inemaref</a>
 <span class="sep">|</span>
 <a class="inema" href="https://inema.club" rel="noopener" target="_blank">INEMA.CLUB</a>
 <div class="links">
-<a class="sec" href="#oque">O que é</a>
-<a class="sec" href="#fluxo">Como funciona</a>
-<a class="sec" href="#guia">Guia de uso</a>
-<a class="sec" href="#exemplos">Exemplos</a>
+<a class="sec" href="#oque">What it is</a>
+<a class="sec" href="#fluxo">How it works</a>
+<a class="sec" href="#guia">User guide</a>
+<a class="sec" href="#exemplos">Examples</a>
 <a class="sec" href="#roadmap">Roadmap</a>
-<button aria-label="Alternar tema" class="tgl" id="themeToggle" title="Alternar tema">🌙</button>
+<button aria-label="Toggle theme" class="tgl" id="themeToggle" title="Toggle theme">🌙</button>
 <a class="btn" href="https://github.com/inematds/inemaref" rel="noopener" target="_blank">GitHub</a>
 </div>
 </div></nav>
@@ -108,71 +108,71 @@
 <div class="glow"></div>
 <div class="wrap">
 <div>
-<span class="chip">Fábrica de conteúdo · pessoa real</span>
-<h1>Uma foto vira <span class="amb">história em quadrinhos</span>.</h1>
-<p class="lead">Entro com uma foto (ou uma descrição) e uma história. Saem artefatos com a
-        <strong>mesma pessoa consistente</strong>: ficha de personagem → página de HQ → motion comic narrado. Tudo local.</p>
+<span class="chip">Content factory · real person</span>
+<h1>One photo becomes <span class="amb">comic book</span>.</h1>
+<p class="lead">I provide a photo (or a description) and a story. The artifacts come out with the
+        <strong>same consistent person</strong>: character sheet → comic page → narrated motion comic. All local.</p>
 <div class="cta">
-<a class="btn" href="#guia">Começar o guia</a>
-<a class="btn ghost" href="https://github.com/inematds/inemaref" rel="noopener" target="_blank">Ver no GitHub</a>
+<a class="btn" href="#guia">Start the guide</a>
+<a class="btn ghost" href="https://github.com/inematds/inemaref" rel="noopener" target="_blank">View on GitHub</a>
 </div>
 </div>
-<figure><img alt="Ficha de referência (model sheet) de um personagem gerada pelo inemaref" src="assets/site/hero.jpg"/></figure>
+<figure><img alt="Character reference sheet (model sheet) generated by inemaref" src="../assets/site/hero.jpg"/></figure>
 </div>
 </header>
 <section id="oque"><div class="wrap">
-<span class="chip">O que é</span>
-<h2>A referência é o ativo central</h2>
-<p class="sub">Fazer HQ com pessoas reais esbarra sempre no mesmo nó: manter o personagem igual entre quadros,
-    páginas e episódios. O inemaref trata a <strong>referência</strong> (o model sheet da pessoa) como o passo 0
-    que trava tudo — e a reusa em cada artefato seguinte.</p>
+<span class="chip">What it is</span>
+<h2>The reference is the central asset</h2>
+<p class="sub">Making comics with real people always runs into the same problem: keeping the character consistent across panels,
+    pages, and episodes. inemaref handles the <strong>reference</strong> (the person's model sheet) as step 0
+    that locks everything in — and reuse it in every subsequent artifact.</p>
 <div class="grid g3">
-<div class="card"><h3>🔒 Referência travada</h3><p>Uma ficha (retrato + bio + traços + grid) vira a fonte de verdade do personagem, atravessando página, vídeo e episódios.</p></div>
-<div class="card"><h3>🧱 Textless + camada</h3><p>O motor de imagem gera só a arte sem texto; narração, balões e SFX são camada HTML/CSS renderizada — editável e nítida.</p></div>
-<div class="card"><h3>🖥️ Local e determinístico</h3><p>Imagem no flux2-klein (inemaimg), voz no inemavox, montagem em ffmpeg/Chromium. Sem nuvem, sem assinatura.</p></div>
+<div class="card"><h3>🔒 Locked reference</h3><p>One sheet (portrait + bio + traits + grid) becomes the character’s source of truth across pages, video, and episodes.</p></div>
+<div class="card"><h3>🧱 Textless + layer</h3><p>The image engine generates artwork without text; narration, speech bubbles, and SFX are rendered as an HTML/CSS layer — editable and crisp.</p></div>
+<div class="card"><h3>🖥️ Local and deterministic</h3><p>Image with flux2-klein (inemaimg), voice with inemavox, editing with ffmpeg/Chromium. No cloud, no subscription.</p></div>
 </div>
 </div></section>
 <section id="fluxo"><div class="wrap">
-<span class="chip">Como funciona</span>
-<h2>O fluxo da fábrica</h2>
-<p class="sub">Três skills construídas hoje (folder → quadrinho → motioncomic). Série e filme vêm a seguir,
-    reusando o ecossistema de vídeo do INEMA.</p>
+<span class="chip">How it works</span>
+<h2>How the factory works</h2>
+<p class="sub">Three skills built so far (folder → comic → motioncomic). Series and film are next,
+    reusing INEMA’s video ecosystem.</p>
 <div class="flow">
-<span>📸 Foto / História</span><span class="arr">→</span>
+<span>📸 Photo / Story</span><span class="arr">→</span>
 <span>🪪 Folder</span><span class="arr">→</span>
-<span>🗯️ Quadrinho</span><span class="arr">→</span>
+<span>🗯️ Comic</span><span class="arr">→</span>
 <span>🎬 Motion comic</span><span class="arr">→</span>
-<span class="mut">📚 Série</span><span class="arr">→</span>
-<span class="mut">🎞️ Filme</span>
+<span class="mut">📚 Series</span><span class="arr">→</span>
+<span class="mut">🎞️ Film</span>
 </div>
 <div class="grid g3" style="margin-top:26px">
-<div class="card"><h3>🪪 folder</h3><p><strong>Cria a referência.</strong> A ficha do personagem (retrato + bio + traços + grid) a partir de 1 foto ou texto. 2 layouts × 2 artes.</p></div>
-<div class="card"><h3>🗯️ quadrinho</h3><p><strong>Monta a página.</strong> 6 quadros textless (mangá p&amp;b) + balão/SFX/legenda em camada, com posicionamento consciente de rosto. 2 modelos de grade.</p></div>
-<div class="card"><h3>🎬 motioncomic</h3><p><strong>Vira vídeo.</strong> Forma A: slideshow narrado. <strong>Forma B</strong>: a câmera filma a página de papel real, mergulhando quadro a quadro.</p></div>
+<div class="card"><h3>🪪 folder</h3><p><strong>Create the reference.</strong> The character sheet (portrait + bio + traits + grid) from 1 photo or text. 2 layouts × 2 artworks.</p></div>
+<div class="card"><h3>🗯️ quadrinho</h3><p><strong>Build the page.</strong> 6 textless panels (black-and-white manga) + speech bubbles/SFX/captions on a layer, with careful face-aware placement. 2 grid templates.</p></div>
+<div class="card"><h3>🎬 motioncomic</h3><p><strong>Becomes a video.</strong> Form A: narrated slideshow. <strong>Form B</strong>: the camera films the real paper page, diving into each panel.</p></div>
 </div>
 </div></section>
 <section id="pre"><div class="wrap">
-<span class="chip">Pré-requisitos</span>
-<h2>O que precisa estar de pé</h2>
-<p class="sub">Serviços locais do ecossistema INEMA. As skills falam com eles por HTTP; nada vai pra nuvem.</p>
+<span class="chip">Prerequisites</span>
+<h2>What needs to be up and running</h2>
+<p class="sub">Local services in the INEMA ecosystem. The skills communicate with them over HTTP; nothing goes to the cloud.</p>
 <div class="grid g3">
-<div class="card"><h3>🖼️ inemaimg (flux2-klein)</h3><p>Motor de imagem, em <code>localhost:8000</code>. Gera os quadros textless.</p><pre><span class="c"># checar</span>
+<div class="card"><h3>🖼️ inemaimg (flux2-klein)</h3><p>Image engine, in <code>localhost:8000</code>. Generates textless panels.</p><pre><span class="c"># check</span>
 <span class="k">curl</span> localhost:8000/health</pre></div>
-<div class="card"><h3>🔊 inemavox</h3><p>TTS local (voz clonada bella/rachel), em <code>127.0.0.1:7860</code>. Só no motion comic.</p><pre><span class="c"># checar</span>
+<div class="card"><h3>🔊 inemavox</h3><p>Local TTS (bella/rachel cloned voice), in <code>127.0.0.1:7860</code>. Only in the motion comic.</p><pre><span class="c"># check</span>
 <span class="k">curl</span> 127.0.0.1:7860/health</pre></div>
-<div class="card"><h3>🛠️ ffmpeg + Chromium</h3><p>Render do HTML pra PNG e montagem do MP4. Python 3 e OpenCV (rosto).</p><pre><span class="c"># rodar os testes</span>
+<div class="card"><h3>🛠️ ffmpeg + Chromium</h3><p>Render the HTML to PNG and assemble the MP4. Python 3 and OpenCV (face).</p><pre><span class="c"># run the tests</span>
 <span class="k">for</span> t <span class="k">in</span> skill/*/tests/test_*.py;
 <span class="k">do</span> python3 "$t"; <span class="k">done</span></pre></div>
 </div>
 </div></section>
 <section id="guia"><div class="wrap">
-<span class="chip">Guia de uso · passo a passo</span>
-<h2>Da foto ao motion comic</h2>
-<p class="sub">Cada skill é um pipeline Python que você roda da raiz do repo. A saída cai em
-    <code>output/&lt;id&gt;/</code> (gitignorado).</p>
+<span class="chip">User guide · step by step</span>
+<h2>From photo to motion comic</h2>
+<p class="sub">Each skill is a Python pipeline you run from the repo root. The output goes to
+    <code>output/&lt;id&gt;/</code> (gitignored).</p>
 <div class="step"><div class="b">1</div><div>
-<h3>Crie a referência (folder)</h3>
-<p>Monte uma <code>ficha.json</code> (nome, aparência reutilizável, 5 focos) e gere a ficha do personagem.</p>
+<h3>Create the reference (folder)</h3>
+<p>Build a <code>ficha.json</code> (name, reusable appearance, 5 focal points) and generate the character sheet.</p>
 <pre><span class="k">python3</span> - &lt;&lt;'PY'
 <span class="k">import</span> sys, json
 sys.path.insert(0, <span class="s">"skill/folder/scripts"</span>)
@@ -180,66 +180,66 @@ sys.path.insert(0, <span class="s">"skill/folder/scripts"</span>)
 ficha = json.load(open(<span class="s">"CAMINHO/ficha.json"</span>))
 build_folder(ficha,
     template_dir=<span class="s">"skill/folder/templates/editorial-revista"</span>,
-    arte=<span class="s">"cartoon"</span>, modo=<span class="s">"texto"</span>)   <span class="c"># saída: output/&lt;id&gt;/folder.png + referencia.json</span>
+    arte=<span class="s">"cartoon"</span>, modo=<span class="s">"texto"</span>)   <span class="c"># output: output/&lt;id&gt;/folder.png + referencia.json</span>
 PY</pre>
 </div></div>
 <div class="step"><div class="b">2</div><div>
-<h3>Monte a página de HQ (quadrinho)</h3>
-<p>Um <code>roteiro.json</code> com <strong>exatamente 6 painéis</strong> (cena textless + narração/fala/SFX opcionais).
-      Reuse a <code>aparência</code> da referência pra manter a pessoa.</p>
+<h3>Build the comic book page</h3>
+<p>One <code>roteiro.json</code> with <strong>exactly 6 panels</strong> (textless scene + optional narration/dialogue/SFX).
+      Reuse a <code>aparência</code> from the reference to keep the person.</p>
 <pre><span class="k">python3</span> - &lt;&lt;'PY'
 <span class="k">import</span> sys, json
 sys.path.insert(0, <span class="s">"skill/quadrinho/scripts"</span>)
 <span class="k">from</span> build_pagina <span class="k">import</span> build_pagina
 rot = json.load(open(<span class="s">"CAMINHO/roteiro.json"</span>))
 build_pagina(rot,
-    template_dir=<span class="s">"skill/quadrinho/templates/grade-uniforme"</span>,  <span class="c"># ou manga-dinamico</span>
-    arte=<span class="s">"manga"</span>)                                    <span class="c"># saída: output/&lt;id&gt;/pagina.png</span>
+    template_dir=<span class="s">"skill/quadrinho/templates/grade-uniforme"</span>,  <span class="c"># or manga-dinamico</span>
+    arte=<span class="s">"manga"</span>)                                    <span class="c"># output: output/&lt;id&gt;/pagina.png</span>
 PY</pre>
 </div></div>
 <div class="step"><div class="b">3</div><div>
-<h3>Vire vídeo — câmera sobre a página (motioncomic, Forma B)</h3>
-<p>Roteiro com páginas de <strong>6 quadros</strong>. A câmera abre na prancha, mergulha em cada quadro durante
-      a narração, afasta e encaixa no próximo. Precisa do inemavox de pé.</p>
+<h3>Turn it into a video — camera over the page (motioncomic, Forma B)</h3>
+<p>Script with pages of <strong>6 panels</strong>. The camera opens on the page, dives into each panel during
+      the narration, pulls back, and moves into the next one. Requires inemavox to be running.</p>
 <pre><span class="k">python3</span> - &lt;&lt;'PY'
 <span class="k">import</span> sys, json
 sys.path.insert(0, <span class="s">"skill/motioncomic/scripts"</span>)
 <span class="k">from</span> build_travel <span class="k">import</span> build_video_travel
 rot = json.load(open(<span class="s">"CAMINHO/roteiro.json"</span>))
-build_video_travel(rot, voice=<span class="s">"bella"</span>, arte=<span class="s">"manga"</span>)   <span class="c"># saída: output/&lt;id&gt;/&lt;id&gt;-travel.mp4</span>
+build_video_travel(rot, voice=<span class="s">"bella"</span>, arte=<span class="s">"manga"</span>)   <span class="c"># output: output/&lt;id&gt;/&lt;id&gt;-travel.mp4</span>
 PY</pre>
 </div></div>
 <div class="step"><div class="b">3b</div><div>
-<h3>Alternativa — slideshow narrado (Forma A)</h3>
-<p>Quando não precisa da página montada: uma imagem por vez, com zoom e narração voz-off.</p>
+<h3>Alternative — narrated slideshow (Form A)</h3>
+<p>When you don’t need the assembled page: one image at a time, with zoom and voice-over narration.</p>
 <pre><span class="k">from</span> build_motion <span class="k">import</span> build_video
-build_video(rot, voice=<span class="s">"bella"</span>)             <span class="c"># saída: output/&lt;id&gt;/&lt;id&gt;.mp4</span></pre>
+build_video(rot, voice=<span class="s">"bella"</span>)             <span class="c"># output: output/&lt;id&gt;/&lt;id&gt;.mp4</span></pre>
 </div></div>
 </div></section>
 <section id="exemplos"><div class="wrap">
-<span class="chip">Exemplos</span>
-<h2>O que sai de cada etapa</h2>
-<p class="sub">Fichas e páginas geradas no pipeline; o frame do motion comic é a câmera mergulhando num quadro da página de papel.</p>
+<span class="chip">Examples</span>
+<h2>What each step produces</h2>
+<p class="sub">Sheets and pages generated in the pipeline; the motion comic frame shows the camera diving into a panel on the paper page.</p>
 <div class="ex">
-<figure><img alt="Ficha de referência de personagem" src="assets/site/ex-folder.jpg"/><figcaption><strong>folder</strong> — a ficha de referência que trava a pessoa.</figcaption></figure>
-<figure><img alt="Página de quadrinho cartoon" src="assets/site/ex-quadrinho.jpg"/><figcaption><strong>quadrinho</strong> — página montada: quadros + balões/legendas em camada.</figcaption></figure>
-<figure><img alt="Frame do motion comic com a câmera dentro de um quadro" src="assets/site/ex-motioncomic.jpg"/><figcaption><strong>motioncomic (Forma B)</strong> — a câmera mergulha num quadro da prancha.</figcaption></figure>
-<figure><img alt="Prancha de quadrinho 2x3 completa" src="assets/site/ex-pagina.jpg"/><figcaption>A página de papel real (grade 2×3) sobre a qual a câmera viaja.</figcaption></figure>
+<figure><img alt="Character reference sheet" src="../assets/site/ex-folder.jpg"/><figcaption><strong>folder</strong> — the reference sheet that locks in the person.</figcaption></figure>
+<figure><img alt="Cartoon comic page" src="../assets/site/ex-quadrinho.jpg"/><figcaption><strong>comic</strong> — page assembled: panels + speech bubbles/captions on a layer.</figcaption></figure>
+<figure><img alt="Motion comic frame with the camera inside a panel" src="../assets/site/ex-motioncomic.jpg"/><figcaption><strong>motioncomic (Forma B)</strong> — the camera dives into a panel on the page.</figcaption></figure>
+<figure><img alt="Complete 2x3 comic page" src="../assets/site/ex-pagina.jpg"/><figcaption>The real paper page (2×3 grid) that the camera travels across.</figcaption></figure>
 </div>
 </div></section>
 <section id="roadmap"><div class="wrap">
 <span class="chip">Roadmap</span>
-<h2>V1 construída; série e filme à frente</h2>
-<p class="sub">A base (referência → página → vídeo) está pronta e testada. O que vem reaproveita o ecossistema de vídeo já existente.</p>
-<div class="phase"><div class="tag">V1 ✅</div><div class="d"><strong>Referência → página → motion comic</strong><span>As 3 skills construídas e validadas: folder, quadrinho e motioncomic (Forma A slideshow + Forma B câmera sobre a página).</span></div></div>
-<div class="phase"><div class="tag">Em aberto</div><div class="d"><strong>Modo foto fiel</strong><span>Travar o rosto da pessoa real na geração (qwen-edit) — hoje estável só no modo texto/descrição.</span></div></div>
-<div class="phase"><div class="tag">V2</div><div class="d"><strong>Série / episódios</strong><span>Várias páginas, carrossel e episódios de um canal, mantendo a mesma referência.</span></div></div>
-<div class="phase"><div class="tag">V3</div><div class="d"><strong>Filme</strong><span>Vira vídeo longo reusando o videoprodutor do INEMA.</span></div></div>
+<h2>V1 built; series and film up next</h2>
+<p class="sub">The foundation (reference → page → video) is ready and tested. What comes next reuses the existing video ecosystem.</p>
+<div class="phase"><div class="tag">V1 ✅</div><div class="d"><strong>Reference → page → motion comic</strong><span>The 3 skills built and validated: folder, quadrinho, and motioncomic (Form A slideshow + Form B camera over the page).</span></div></div>
+<div class="phase"><div class="tag">Open</div><div class="d"><strong>Faithful photo mode</strong><span>Lock the real person’s face in the generation (qwen-edit) — currently stable only in text/description mode.</span></div></div>
+<div class="phase"><div class="tag">V2</div><div class="d"><strong>Series / episodes</strong><span>Multiple pages, a carousel, and channel episodes, all keeping the same reference.</span></div></div>
+<div class="phase"><div class="tag">V3</div><div class="d"><strong>Movie</strong><span>Becomes a long video by reusing INEMA’s videoprodutor.</span></div></div>
 </div></section>
 <footer>
 <div class="wrap">
 <div class="pill">Python 3</div><div class="pill">flux2-klein · inemaimg</div><div class="pill">inemavox · TTS</div><div class="pill">ffmpeg + Chromium</div>
-<p style="margin-top:18px">inemaref · fábrica de conteúdo a partir de referência ·
+<p style="margin-top:18px">inemaref · content factory built from a reference ·
       <a href="https://github.com/inematds/inemaref">github.com/inematds/inemaref</a> ·
       <a href="https://inema.club">INEMA.CLUB</a></p>
 </div>
