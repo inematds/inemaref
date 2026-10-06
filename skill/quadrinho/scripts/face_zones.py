@@ -3,6 +3,8 @@
 # Divide o painel em 4 quadrantes (top-left, top-right, bottom-left, bottom-right).
 # Detecta faces com Haar cascade e marca os quadrantes ocupados.
 # Retorna as zonas livres de rosto pra posicionar narracao, fala e sfx.
+#
+# Dependencia externa: pip install opencv-python
 import cv2
 import os
 

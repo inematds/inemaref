@@ -17,6 +17,8 @@ aqui a camera nunca sai da pagina: ela viaja sobre uma unica prancha por pagina.
 
 Funcoes puras (detect_rects / frame_window / window_at / _filter) sao testaveis
 sem daemon; build_video_travel precisa de imgclient + inemavox.
+
+Dependencias externas: pip install opencv-python numpy pillow
 """
 import math
 import os

@@ -8,6 +8,8 @@ a energia/cortes pedem mais. parallax=0 (desenho). As transicoes ficam em `cut`
 energeticas ("alta"/"acao") seguem disponiveis, mas NAO sao o default.
 
 Uso: dirigir(stage_dir, energia="media")  ->  escreve os 2 arquivos no stage_dir.
+
+Dependencia externa: pip install pyyaml
 """
 import json
 import os
